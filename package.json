@@ -1,0 +1,27 @@
+{
+  "name": "ilya-nextlevel",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "tokens:sync": "node ./scripts/sync-figma-tokens.mjs"
+  },
+  "dependencies": {
+    "next": "^15.3.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "framer-motion": "^12.23.12"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^15.5.21",
+    "@types/node": "^22.15.29",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "eslint": "^9.25.0",
+    "typescript": "^5.8.3"
+  }
+}

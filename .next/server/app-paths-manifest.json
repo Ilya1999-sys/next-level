@@ -1,0 +1,5 @@
+{
+  "/page": "app/page.js",
+  "/(screens)/match/page": "app/(screens)/match/page.js",
+  "/(screens)/match/usa-vs-ghana-2010/page": "app/(screens)/match/usa-vs-ghana-2010/page.js"
+}

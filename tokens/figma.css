@@ -1,0 +1,50 @@
+:root {
+  --figma-font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --figma-line-height-normal: 1.2;
+  --figma-line-height-tight: 1.1;
+
+  --figma-font-size-xs: 0.5625rem;
+  --figma-font-size-sm: 0.6875rem;
+  --figma-font-size-md: 0.8125rem;
+  --figma-font-size-lg: 0.875rem;
+  --figma-font-size-xl: 1rem;
+  --figma-font-size-2xl: 1.375rem;
+  --figma-font-size-3xl: 3rem;
+  --figma-font-size-hero-score: 3.5rem;
+
+  --figma-space-1: 0.25rem;
+  --figma-space-2: 0.5rem;
+  --figma-space-3: 0.75rem;
+  --figma-space-4: 1rem;
+  --figma-space-5: 1.25rem;
+  --figma-space-6: 1.5rem;
+  --figma-space-8: 2rem;
+  --figma-space-10: 2.5rem;
+  --figma-space-12: 3rem;
+  --figma-space-20: 5rem;
+
+  --figma-radius-xs: 0.25rem;
+  --figma-radius-sm: 0.625rem;
+  --figma-radius-md: 0.75rem;
+  --figma-radius-lg: 1rem;
+  --figma-radius-xl: 1.5rem;
+  --figma-radius-pill: 999px;
+
+  --figma-layout-content-max-width: 120rem;
+
+  --figma-surface-background: #08080d;
+  --figma-surface-elevated: #111118;
+  --figma-surface-muted: rgba(255, 255, 255, 0.06);
+
+  --figma-text-primary: #ffffff;
+  --figma-text-secondary: rgba(255, 255, 255, 0.7);
+  --figma-text-tertiary: rgba(255, 255, 255, 0.5);
+  --figma-text-muted: rgba(255, 255, 255, 0.33);
+
+  --figma-accent-yellow: #f5c842;
+  --figma-accent-cyan: #3ecfcf;
+  --figma-accent-red: #ff453a;
+
+  --figma-border-subtle: rgba(255, 255, 255, 0.08);
+  --figma-border-strong: rgba(104, 104, 104, 0.8);
+}

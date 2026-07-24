@@ -1,0 +1,51 @@
+:root {
+  --font-family-base: var(--figma-font-family-base);
+
+  --font-size-xs: var(--figma-font-size-xs);
+  --font-size-sm: var(--figma-font-size-sm);
+  --font-size-md: var(--figma-font-size-md);
+  --font-size-lg: var(--figma-font-size-lg);
+  --font-size-xl: var(--figma-font-size-xl);
+  --font-size-2xl: var(--figma-font-size-2xl);
+  --font-size-3xl: var(--figma-font-size-3xl);
+  --font-size-hero-score: var(--figma-font-size-hero-score);
+
+  --line-height-normal: var(--figma-line-height-normal);
+  --line-height-tight: var(--figma-line-height-tight);
+
+  --space-1: var(--figma-space-1);
+  --space-2: var(--figma-space-2);
+  --space-3: var(--figma-space-3);
+  --space-4: var(--figma-space-4);
+  --space-5: var(--figma-space-5);
+  --space-6: var(--figma-space-6);
+  --space-8: var(--figma-space-8);
+  --space-10: var(--figma-space-10);
+  --space-12: var(--figma-space-12);
+  --space-20: var(--figma-space-20);
+
+  --radius-xs: var(--figma-radius-xs);
+  --radius-sm: var(--figma-radius-sm);
+  --radius-md: var(--figma-radius-md);
+  --radius-lg: var(--figma-radius-lg);
+  --radius-xl: var(--figma-radius-xl);
+  --radius-pill: var(--figma-radius-pill);
+
+  --layout-content-max-width: var(--figma-layout-content-max-width);
+
+  --surface-background: var(--figma-surface-background);
+  --surface-elevated: var(--figma-surface-elevated);
+  --surface-muted: var(--figma-surface-muted);
+
+  --text-primary: var(--figma-text-primary);
+  --text-secondary: var(--figma-text-secondary);
+  --text-tertiary: var(--figma-text-tertiary);
+  --text-muted: var(--figma-text-muted);
+
+  --accent-yellow: var(--figma-accent-yellow);
+  --accent-cyan: var(--figma-accent-cyan);
+  --accent-red: var(--figma-accent-red);
+
+  --border-subtle: var(--figma-border-subtle);
+  --border-strong: var(--figma-border-strong);
+}
