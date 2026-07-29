@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import { GlobalTopNav } from "@/components/navigation/global-top-nav";
 import { RouteTransition } from "@/components/motion/route-transition";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Ilya-NextLevel",
@@ -15,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
         <GlobalTopNav />
         <RouteTransition>{children}</RouteTransition>
       </body>
