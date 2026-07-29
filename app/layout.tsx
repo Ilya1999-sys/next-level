@@ -5,8 +5,10 @@ import { GlobalTopNav } from "@/components/navigation/global-top-nav";
 import { RouteTransition } from "@/components/motion/route-transition";
 
 const inter = Inter({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -21,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${inter.className}`}>
         <GlobalTopNav />
         <RouteTransition>{children}</RouteTransition>
       </body>
