@@ -1,5 +1,9 @@
 :root {
-  --font-family-base: var(--figma-font-family-base);
+  --font-family-base: var(--font-inter), var(--figma-font-family-base);
+  --font-weight-regular: var(--figma-font-weight-regular);
+  --font-weight-semibold: var(--figma-font-weight-semibold);
+  --font-weight-bold: var(--figma-font-weight-bold);
+  --font-weight-black: var(--figma-font-weight-black);
 
   --font-size-xs: var(--figma-font-size-xs);
   --font-size-sm: var(--figma-font-size-sm);
@@ -12,6 +16,23 @@
 
   --line-height-normal: var(--figma-line-height-normal);
   --line-height-tight: var(--figma-line-height-tight);
+  --line-height-h1: var(--figma-line-height-h1);
+  --line-height-h2: var(--figma-line-height-h2);
+  --line-height-h3: var(--figma-line-height-h3);
+  --line-height-t1: var(--figma-line-height-t1);
+  --line-height-t2: var(--figma-line-height-t2);
+  --line-height-t3: var(--figma-line-height-t3);
+  --line-height-button-1: var(--figma-line-height-button-1);
+  --line-height-button-2: var(--figma-line-height-button-2);
+
+  --letter-spacing-h1: var(--figma-letter-spacing-h1);
+  --letter-spacing-h2: var(--figma-letter-spacing-h2);
+  --letter-spacing-h3: var(--figma-letter-spacing-h3);
+  --letter-spacing-t1: var(--figma-letter-spacing-t1);
+  --letter-spacing-t2: var(--figma-letter-spacing-t2);
+  --letter-spacing-t3: var(--figma-letter-spacing-t3);
+  --letter-spacing-button-1: var(--figma-letter-spacing-button-1);
+  --letter-spacing-button-2: var(--figma-letter-spacing-button-2);
 
   --space-1: var(--figma-space-1);
   --space-2: var(--figma-space-2);
@@ -23,6 +44,7 @@
   --space-10: var(--figma-space-10);
   --space-12: var(--figma-space-12);
   --space-20: var(--figma-space-20);
+  --space-40: var(--figma-space-8);
 
   --radius-xs: var(--figma-radius-xs);
   --radius-sm: var(--figma-radius-sm);
@@ -34,18 +56,35 @@
   --layout-content-max-width: var(--figma-layout-content-max-width);
 
   --surface-background: var(--figma-surface-background);
+  --surface-secondary: var(--figma-surface-secondary);
   --surface-elevated: var(--figma-surface-elevated);
   --surface-muted: var(--figma-surface-muted);
+  --surface-medium: var(--figma-surface-medium);
+  --surface-heavy: var(--figma-surface-heavy);
+  --surface-overlay: var(--figma-surface-overlay);
 
   --text-primary: var(--figma-text-primary);
   --text-secondary: var(--figma-text-secondary);
   --text-tertiary: var(--figma-text-tertiary);
   --text-muted: var(--figma-text-muted);
+  --text-on-accent: var(--figma-text-on-accent);
 
-  --accent-yellow: var(--figma-accent-yellow);
-  --accent-cyan: var(--figma-accent-cyan);
-  --accent-red: var(--figma-accent-red);
+  --main-default: var(--figma-accent-yellow);
+  --main-hover: var(--figma-accent-yellow-hover);
+  --main-selected: var(--figma-accent-yellow-selected);
+  --main-subtle: var(--figma-accent-yellow-subtle);
+  --main-error: var(--figma-accent-red);
+  --main-error-subtle: var(--figma-accent-red-subtle);
+  --main-success: var(--figma-accent-cyan);
+  --accent-yellow: var(--main-default);
+  --accent-cyan: var(--main-success);
+  --accent-red: var(--main-error);
 
   --border-subtle: var(--figma-border-subtle);
+  --border-default: var(--figma-border-default);
+  --border-medium: var(--figma-border-medium);
   --border-strong: var(--figma-border-strong);
+
+  --shadow-card: var(--figma-shadow-card);
+  --glow-accent: var(--figma-glow-accent);
 }

@@ -1,6 +1,6 @@
-@import "@/tokens/figma.css";
-@import "@/tokens/semantic.css";
-@import "@/styles/screens.css";
+@import "../tokens/figma.css";
+@import "../tokens/semantic.css";
+@import "../styles/screens.css";
 
 *,
 *::before,
