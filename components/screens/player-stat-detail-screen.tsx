@@ -152,7 +152,7 @@ export function PlayerStatDetailScreen() {
       return MOMENTS;
     }
     const categoryMoments = MOMENTS.filter((moment) => moment.category === activeTag);
-    return categoryMoments.map((moment, index) => ({
+    return categoryMoments.map((moment, index): MomentCardData => ({
       ...moment,
       size: index === 0 ? "large" : "small",
     }));
