@@ -2,142 +2,80 @@ import Link from "next/link";
 import { FigmaButton } from "@/components/ui/figma-primitives";
 
 const ASSETS = {
-  domeBg: "https://www.figma.com/api/mcp/asset/7dffffb7-b139-4fa2-8f91-c6bdfa273342",
-  moodEmotional: "https://www.figma.com/api/mcp/asset/92704901-039f-4457-980f-a075cfe4320c",
-  moodFresh: "https://www.figma.com/api/mcp/asset/6463bcf5-6e70-43d0-8534-a40823beda3d",
-  moodGreat: "https://www.figma.com/api/mcp/asset/36c1d958-5e50-4654-ad7c-06ee5a519543",
-  moodNostalgia: "https://www.figma.com/api/mcp/asset/940c823b-6f3e-4d9f-81bb-cea539cdb0e6",
-  avatarPlayer:
-    "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=120&q=80",
-  avatarTeam:
-    "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=120&q=80",
-  stackedAvatars: "https://www.figma.com/api/mcp/asset/7ca86a80-4555-4c52-bb09-e5a0814553d0",
+  heroMain: "https://www.figma.com/api/mcp/asset/5db4c06f-08c8-449d-8a23-3679275d76b1",
+  hero1: "https://www.figma.com/api/mcp/asset/e883f266-24bb-4c8d-89e4-353c0ecc9fa6",
+  hero2: "https://www.figma.com/api/mcp/asset/66d85a9b-ab40-469e-8825-5c940e92655e",
+  hero3: "https://www.figma.com/api/mcp/asset/3d5ce26c-f340-466c-977f-0fb255487644",
+  hero4: "https://www.figma.com/api/mcp/asset/e883f266-24bb-4c8d-89e4-353c0ecc9fa6",
+  nostalgia1: "https://www.figma.com/api/mcp/asset/faaeaa88-a662-4aaa-b119-495e3e65f0dd",
+  nostalgia2: "https://www.figma.com/api/mcp/asset/0d930d18-15bf-4736-bedc-2c800f00a3db",
+  nostalgia3: "https://www.figma.com/api/mcp/asset/014142d5-41bd-4320-a1f6-b7c726fe27cc",
+  nostalgia4: "https://www.figma.com/api/mcp/asset/99c4c2e3-7213-4edb-97e1-7f774c8166ed",
+  emotional1: "https://www.figma.com/api/mcp/asset/1a1987d5-6f6b-48aa-8a24-0c973e304790",
+  emotional2: "https://www.figma.com/api/mcp/asset/4eaf143d-cc41-4bb6-b52b-7f52dc0ed9cd",
+  emotional3: "https://www.figma.com/api/mcp/asset/68b85103-cc03-433c-a3e8-1a76358410ed",
+  emotional4: "https://www.figma.com/api/mcp/asset/67285caf-cac8-49c9-9cb1-e8b9239a2f40",
+  avatarPlayer: "https://www.figma.com/api/mcp/asset/3136cbe5-2920-4a5d-867f-0d7b5f9cdc26",
+  avatarTeam: "https://www.figma.com/api/mcp/asset/3136cbe5-2920-4a5d-867f-0d7b5f9cdc26",
+  stackedAvatars: "https://www.figma.com/api/mcp/asset/c883b169-bf1f-42cf-b833-c78a77bf50d8",
 };
 
-const CATEGORY_IMAGES = [
-  "https://www.figma.com/api/mcp/asset/07ee2349-26fa-484a-8cef-15117939bd1b",
-  "https://www.figma.com/api/mcp/asset/913edf99-c3ce-4096-83dc-f0e1f329b7bf",
-  "https://www.figma.com/api/mcp/asset/1d7c5927-55ac-498f-b1a9-d8d4083a60ae",
-  "https://www.figma.com/api/mcp/asset/9ecafb2d-f529-4bb5-90b8-bc7e86db756b",
-  "https://www.figma.com/api/mcp/asset/8f7fc883-cc69-4ce6-a504-e26ffe13c6da",
-  "https://www.figma.com/api/mcp/asset/4bc672a5-a90b-4981-adaa-0fe6ef546052",
-  "https://www.figma.com/api/mcp/asset/394b2fa2-31b4-4a23-940c-851083e4dfdc",
-  "https://www.figma.com/api/mcp/asset/6ac60e64-dfb3-4405-8deb-831bd7ce41fb",
-  "https://www.figma.com/api/mcp/asset/7a17e472-1046-4d7e-8787-54521409af88",
-  "https://www.figma.com/api/mcp/asset/ef755f5e-e394-4d5f-9c3a-9275fe682289",
-  "https://www.figma.com/api/mcp/asset/4117ab50-98f9-43b8-b18a-6d41eec11aed",
-  "https://www.figma.com/api/mcp/asset/8edfe13d-b175-46c5-8aec-9eac593eac2d",
-  "https://www.figma.com/api/mcp/asset/44e39ad4-9db0-4d64-8f8e-77b6087eba92",
-  "https://www.figma.com/api/mcp/asset/ed668f05-8902-43db-821a-f0312d613537",
-  "https://www.figma.com/api/mcp/asset/270be296-bd12-412a-bf1f-9c0705d80464",
-];
+const HERO_CARDS = [
+  { title: "Comeback of the season", subtitle: "Comeback of the season", tag: "Emotional", image: ASSETS.hero1 },
+  { title: "Mbappe's legendary hat-trick", subtitle: "Comeback of the season", tag: "Great", image: ASSETS.hero2 },
+  { title: "PSG vs Monaco highlights", subtitle: "Comeback of the season", tag: "Fresh", image: ASSETS.hero3 },
+  { title: "Comeback of the season", subtitle: "Comeback of the season", tag: "Emotional", image: ASSETS.hero4 },
+] as const;
 
-type MoodCardProps = {
-  title: string;
-  tag: string;
-  imageUrl: string;
-  top: number;
-  left: number;
-  highlighted?: boolean;
-  cta: string;
-  href?: string;
-};
+const NOSTALGIA = [
+  { title: "Ghana 2010", image: ASSETS.nostalgia1 },
+  { title: "Brazil 2002", image: ASSETS.nostalgia2 },
+  { title: "Barca 2009", image: ASSETS.nostalgia3 },
+  { title: "Italy 2006", image: ASSETS.nostalgia4 },
+] as const;
 
-function MoodCard({ title, tag, imageUrl, top, left, highlighted, cta, href }: MoodCardProps) {
-  const inner = (
+const EMOTIONAL = [
+  { title: "Comeback of the season", image: ASSETS.emotional1 },
+  { title: "Last-minute winners", image: ASSETS.emotional2 },
+  { title: "Derby drama", image: ASSETS.emotional3 },
+  { title: "Champions League finals", image: ASSETS.emotional4 },
+] as const;
+
+function MiniMoodCard({ title, subtitle, tag, image }: { title: string; subtitle: string; tag: string; image: string }) {
+  return (
     <article
+      className="panel"
       style={{
-        position: "absolute",
-        top,
-        left,
-        width: 200,
-        padding: 12,
-        borderRadius: "var(--radius-xl)",
-        border: "1px solid var(--border-subtle)",
-        background: highlighted ? "var(--accent-yellow)" : "var(--surface-elevated)",
-        color: highlighted ? "var(--surface-background)" : "var(--text-primary)",
+        padding: "var(--space-3)",
         display: "grid",
-        gap: 10,
-        boxShadow: "0px 12px 12px rgba(0, 0, 0, 0.4)",
+        gap: "var(--space-3)",
+        height: 321,
       }}
     >
-      <img
-        src={imageUrl}
-        alt={title}
-        style={{ width: "100%", height: 110, objectFit: "cover", borderRadius: "var(--radius-md)" }}
-      />
-      <div style={{ display: "grid", gap: 6 }}>
-        <span
-          style={{
-            width: "fit-content",
-            borderRadius: "var(--radius-pill)",
-            border: `1px solid ${highlighted ? "var(--surface-background)" : "var(--accent-yellow)"}`,
-            padding: "4px 10px",
-            fontSize: "var(--font-size-sm)",
-            fontWeight: 700,
-            color: highlighted ? "var(--surface-background)" : "var(--accent-yellow)",
-          }}
-        >
+      <img src={image} alt={title} style={{ width: "100%", height: 201, objectFit: "cover", borderRadius: "var(--radius-md)" }} />
+      <div style={{ display: "grid", gap: "var(--space-2)" }}>
+        <span style={{ width: "fit-content", borderRadius: "var(--radius-pill)", border: "1px solid var(--main-default)", padding: "4px 10px", fontSize: "var(--font-size-xs)", color: "var(--main-default)" }}>
           {tag}
         </span>
-        <strong style={{ fontSize: "var(--font-size-lg)", lineHeight: 1.2 }}>{title}</strong>
-        <FigmaButton variant={highlighted ? "primary-black" : "secondary"} fullWidth element="span">
-          {cta}
-        </FigmaButton>
+        <strong style={{ fontSize: "var(--font-size-lg)", lineHeight: "var(--line-height-t1)" }}>{title}</strong>
+        <span style={{ color: "var(--text-secondary)", fontSize: "var(--font-size-sm)" }}>{subtitle}</span>
       </div>
     </article>
   );
-
-  if (href) {
-    return <Link href={href}>{inner}</Link>;
-  }
-
-  return inner;
 }
 
-type CategoryRowProps = {
-  title: string;
-  items: Array<{ title: string; imageUrl: string }>;
-};
-
-function CategoryRow({ title, items }: CategoryRowProps) {
+function CategoryRow({ title, items }: { title: string; items: Array<{ title: string; image: string }> }) {
   return (
-    <section
-      style={{
-        border: "1px solid #404046",
-        borderRadius: "var(--radius-xl)",
-        padding: 16,
-        display: "grid",
-        gap: 10,
-      }}
-    >
+    <section style={{ display: "grid", gap: "var(--space-5)" }}>
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span className="title-small" style={{ color: "var(--text-muted)" }}>
-          {title}
-        </span>
-        <FigmaButton variant="secondary">More</FigmaButton>
+        <h3 style={{ margin: 0, fontSize: "var(--font-size-xl)", lineHeight: "var(--line-height-h3)" }}>{title}</h3>
+        <span style={{ color: "var(--main-default)", fontSize: "var(--font-size-md)", fontWeight: "var(--font-weight-semibold)" }}>More</span>
       </header>
-      <div style={{ display: "flex", gap: 14, overflow: "hidden" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "var(--space-5)" }}>
         {items.map((item) => (
-          <article
-            key={item.title}
-            style={{
-              width: 220,
-              minWidth: 220,
-              height: 120,
-              borderRadius: 8,
-              padding: 12,
-              background: "var(--surface-elevated)",
-              display: "grid",
-              gap: 10,
-            }}
-          >
-            <img
-              src={item.imageUrl}
-              alt={item.title}
-              style={{ width: "100%", height: 70, objectFit: "cover", borderRadius: 4 }}
-            />
-            <strong style={{ fontSize: "var(--font-size-md)", lineHeight: 1.2 }}>{item.title}</strong>
+          <article key={item.title} className="panel" style={{ padding: "var(--space-3)", display: "grid", gap: "var(--space-3)", minHeight: 274 }}>
+            <img src={item.image} alt={item.title} style={{ width: "100%", height: 201, objectFit: "cover", borderRadius: "var(--radius-md)" }} />
+            <strong style={{ fontSize: "var(--font-size-lg)", lineHeight: "var(--line-height-t1)" }}>{item.title}</strong>
           </article>
         ))}
       </div>
@@ -155,20 +93,11 @@ type EditorialFactCardProps = {
 
 function EditorialFactCard({ title, subject, description, href, avatarUrl }: EditorialFactCardProps) {
   return (
-    <article
-      style={{
-        width: "100%",
-        borderRadius: "var(--radius-xl)",
-        padding: 22,
-        background: "var(--surface-elevated)",
-        display: "grid",
-        gap: 14,
-      }}
-    >
+    <article className="panel" style={{ width: "100%", padding: "var(--space-5)", display: "grid", gap: "var(--space-3)" }}>
       <h3 style={{ margin: 0, fontSize: "var(--font-size-md)", fontWeight: 600 }}>{title}</h3>
-      <div style={{ display: "grid", gridTemplateColumns: "60px 1fr", gap: 14, alignItems: "center" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "60px 1fr", gap: "var(--space-3)", alignItems: "center" }}>
         <img src={avatarUrl} alt={subject} style={{ width: 60, height: 60, borderRadius: 30, objectFit: "cover" }} />
-        <div style={{ display: "grid", gap: 4 }}>
+        <div style={{ display: "grid", gap: "var(--space-1)" }}>
           <strong style={{ fontSize: "var(--font-size-md)" }}>{subject}</strong>
           <p style={{ margin: 0, fontSize: "var(--font-size-sm)", color: "var(--text-tertiary)" }}>{description}</p>
         </div>
@@ -184,23 +113,14 @@ function EditorialFactCard({ title, subject, description, href, avatarUrl }: Edi
 
 function DiscussionCard() {
   return (
-    <article
-      style={{
-        width: "100%",
-        borderRadius: "var(--radius-xl)",
-        padding: 22,
-        background: "var(--surface-elevated)",
-        display: "grid",
-        gap: 14,
-      }}
-    >
+    <article className="panel" style={{ width: "100%", padding: "var(--space-5)", display: "grid", gap: "var(--space-3)" }}>
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h3 style={{ margin: 0, fontSize: "var(--font-size-md)", fontWeight: 700 }}>Match discussion</h3>
         <span style={{ fontSize: "var(--font-size-sm)", color: "var(--accent-yellow)", fontWeight: 700 }}>LIVE</span>
       </header>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <img src={ASSETS.stackedAvatars} alt="Fans avatars" style={{ width: 68, height: 28 }} />
-        <span style={{ fontSize: 12 }}>324 fans discussing</span>
+        <span style={{ fontSize: "var(--font-size-sm)" }}>324 fans discussing</span>
       </div>
       {[
         { user: "@PremierFan92", text: "What a second half! Mbappé was unstoppable..." },
@@ -209,15 +129,15 @@ function DiscussionCard() {
         <div
           key={comment.user}
           style={{
-            borderRadius: 10,
-            padding: 10,
+            borderRadius: "var(--radius-sm)",
+            padding: "var(--space-2)",
             background: "var(--surface-muted)",
             display: "grid",
             gap: 4,
           }}
         >
-          <strong style={{ fontSize: 11 }}>{comment.user}</strong>
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.8)" }}>{comment.text}</span>
+          <strong style={{ fontSize: "var(--font-size-xs)" }}>{comment.user}</strong>
+          <span style={{ fontSize: "var(--font-size-xs)", color: "var(--text-secondary)" }}>{comment.text}</span>
         </div>
       ))}
       <Link href="/forum/match-discussion">
@@ -230,109 +150,71 @@ function DiscussionCard() {
 }
 
 export function HomeScreen() {
-  const rails = [
-    {
-      title: "Nostalgia",
-      items: ["Ghana 2010", "Brazil 2002", "Ajax 1995", "Barça 2009", "Italy 2006"],
-    },
-    {
-      title: "Fresh",
-      items: ["PSG vs Monaco", "Arsenal vs City", "Madrid vs Barça", "Juventus vs Napoli", "Liverpool vs Chelsea"],
-    },
-    {
-      title: "Emotional",
-      items: ["Comeback of the season", "Last-minute winners", "Derby drama", "Champions League finals", "Cup upsets"],
-    },
-  ] as const;
-
   return (
-    <main style={{ display: "flex", alignItems: "flex-start", width: "100%", paddingLeft: 80 }}>
-      <section style={{ flex: 1, minWidth: 0, paddingTop: 20, paddingRight: 40, paddingBottom: 40, display: "grid", gap: 12 }}>
-        <header style={{ display: "grid", gap: 4, paddingBottom: 16 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.38)", letterSpacing: 3 }}>
+    <main
+      className="screen-root"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "minmax(0, 4fr) minmax(0, 1fr)",
+        gap: "var(--space-10)",
+        paddingTop: "var(--space-5)",
+        paddingBottom: "var(--space-5)",
+      }}
+    >
+      <section style={{ minWidth: 0, display: "grid", gap: "var(--space-10)" }}>
+        <header style={{ display: "grid", gap: "var(--space-1)" }}>
+          <span style={{ fontSize: "var(--font-size-xs)", fontWeight: "var(--font-weight-regular)", color: "var(--text-tertiary)" }}>
             CURATED FOR YOU
           </span>
-          <h1 style={{ margin: 0, fontSize: 48, fontWeight: 900, letterSpacing: -1 }}>YOUR MOOD, YOUR MATCH</h1>
-          <span style={{ fontSize: 13, fontWeight: 600, color: "var(--accent-yellow)", letterSpacing: 2 }}>
+          <h1 style={{ margin: 0, fontSize: "var(--font-size-3xl)", lineHeight: "var(--line-height-h1)", fontWeight: 900, letterSpacing: "var(--letter-spacing-h1)" }}>
+            YOUR MOOD, YOUR MATCH
+          </h1>
+          <span style={{ fontSize: "var(--font-size-sm)", fontWeight: 600, color: "var(--main-default)" }}>
             Choose your mood
           </span>
         </header>
 
-        <section
-          style={{
-            height: 580,
-            borderRadius: 30,
-            border: "1px solid var(--border-subtle)",
-            background: "rgba(255,255,255,0.02)",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <img
-            src={ASSETS.domeBg}
-            alt="Events dome"
-            style={{ position: "absolute", inset: -1, width: "calc(100% + 2px)", height: "calc(100% + 2px)", objectFit: "cover", opacity: 0.55 }}
-          />
+        <section className="panel" style={{ padding: "var(--space-5)", display: "grid", gridTemplateColumns: "minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr)", gap: "var(--space-3)" }}>
+          <Link href="/match/usa-vs-ghana-2010">
+            <article
+              style={{
+                background: "var(--main-default)",
+                borderRadius: "var(--radius-lg)",
+                padding: "var(--space-5)",
+                height: 661,
+                display: "grid",
+                gap: "var(--space-5)",
+              }}
+            >
+              <img src={ASSETS.heroMain} alt="Ghana 2010 documentary" style={{ width: "100%", height: 444, objectFit: "cover", borderRadius: "var(--radius-sm)" }} />
+              <div style={{ display: "grid", gap: "var(--space-2)" }}>
+                <span style={{ width: "fit-content", borderRadius: "var(--radius-pill)", border: "1px solid var(--text-on-accent)", padding: "4px 10px", fontSize: "var(--font-size-xs)", color: "var(--text-on-accent)" }}>
+                  Nostalgia
+                </span>
+                <strong style={{ color: "var(--text-on-accent)", fontSize: "var(--font-size-lg)", lineHeight: "var(--line-height-t1)" }}>Ghana 2010 documentary</strong>
+                <span style={{ color: "var(--text-on-accent)", fontSize: "var(--font-size-lg)", opacity: 0.8 }}>Comeback of the season</span>
+              </div>
+              <FigmaButton variant="primary-black" fullWidth element="span">
+                Watch
+              </FigmaButton>
+            </article>
+          </Link>
 
-          <MoodCard
-            title="Comeback of the season"
-            tag="Emotional"
-            imageUrl={ASSETS.moodEmotional}
-            top={77}
-            left={126}
-            cta="Watch"
-          />
-          <MoodCard
-            title="PSG vs Monaco highlights"
-            tag="Fresh"
-            imageUrl={ASSETS.moodFresh}
-            top={30}
-            left={1109}
-            cta="Watch highlights"
-          />
-          <MoodCard
-            title="Mbappé's legendary hat-trick"
-            tag="Great"
-            imageUrl={ASSETS.moodGreat}
-            top={305}
-            left={859}
-            cta="Watch highlights"
-          />
-          <MoodCard
-            title="Ghana 2010 documentary"
-            tag="Nostalgia"
-            imageUrl={ASSETS.moodNostalgia}
-            top={152}
-            left={535}
-            highlighted
-            cta="Watch"
-            href="/match/usa-vs-ghana-2010"
-          />
+          <div style={{ display: "grid", gap: "var(--space-5)" }}>
+            <MiniMoodCard {...HERO_CARDS[0]} />
+            <MiniMoodCard {...HERO_CARDS[2]} />
+          </div>
+          <div style={{ display: "grid", gap: "var(--space-5)" }}>
+            <MiniMoodCard {...HERO_CARDS[1]} />
+            <MiniMoodCard {...HERO_CARDS[3]} />
+          </div>
         </section>
 
-        <div style={{ display: "grid", gap: 16 }}>
-          {rails.map((rail, railIndex) => (
-            <CategoryRow
-              key={rail.title}
-              title={rail.title}
-              items={rail.items.map((title, itemIndex) => ({
-                title,
-                imageUrl: CATEGORY_IMAGES[railIndex * 5 + itemIndex],
-              }))}
-            />
-          ))}
-        </div>
+        <CategoryRow title="Nostalgia" items={NOSTALGIA.map((item) => ({ ...item }))} />
+        <CategoryRow title="Emotional" items={EMOTIONAL.map((item) => ({ ...item }))} />
       </section>
 
-      <aside
-        style={{
-          width: 380,
-          padding: "0 20px",
-          display: "grid",
-          gap: 14,
-          alignSelf: "flex-start",
-        }}
-      >
+      <aside style={{ width: "100%", display: "grid", gap: "var(--space-3)", alignContent: "start" }}>
         <EditorialFactCard
           title="Favorite player fact"
           subject="Kylian Mbappé"

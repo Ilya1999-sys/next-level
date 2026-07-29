@@ -18,7 +18,7 @@ export function GlobalTopNav() {
     <header
       style={{
         height: 72,
-        padding: "16px 80px",
+        padding: "20px 40px",
         display: "flex",
         alignItems: "center",
         gap: 12,
@@ -30,19 +30,19 @@ export function GlobalTopNav() {
           style={{
             width: 40,
             height: 40,
-            borderRadius: 12,
-            background: "var(--accent-yellow)",
-            color: "var(--surface-background)",
+            borderRadius: "var(--radius-md)",
+            background: "var(--main-default)",
+            color: "var(--text-on-accent)",
             display: "grid",
             placeItems: "center",
-            fontWeight: 900,
-            fontSize: 22,
+            fontWeight: "var(--font-weight-black)",
+            fontSize: "var(--font-size-xl)",
           }}
         >
           A
         </div>
         <div style={{ display: "grid", gap: 2 }}>
-          <strong style={{ fontSize: 18, letterSpacing: 0.02 }}>ANYWATCH</strong>
+          <strong style={{ fontSize: "var(--font-size-lg)", letterSpacing: "var(--letter-spacing-t1)" }}>ANYWATCH</strong>
           <span style={{ fontSize: "var(--font-size-xs)", color: "var(--text-tertiary)" }}>
             MATCH DOME
           </span>
