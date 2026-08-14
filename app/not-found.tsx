@@ -15,7 +15,7 @@ export default function NotFound() {
         <p style={{ margin: 0, color: "var(--text-secondary)" }}>
           This route is not mapped in the current screen registry.
         </p>
-        <Link href="/dashboard">Go to dashboard</Link>
+        <Link href="/">Go home</Link>
       </div>
     </main>
   );

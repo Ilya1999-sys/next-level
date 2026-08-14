@@ -131,7 +131,7 @@ function MatchCard({
           width: "100%",
           height: 138,
           borderRadius: "var(--radius-md)",
-          background: `linear-gradient(180deg, rgba(8,8,13,0.15), rgba(8,8,13,0.65)), url(${cover}) center/cover no-repeat`,
+          background: `linear-gradient(180deg, var(--surface-muted), rgba(8,8,13,0.65)), url(${cover}) center/cover no-repeat`,
           border: "1px solid var(--border-subtle)",
         }}
       />

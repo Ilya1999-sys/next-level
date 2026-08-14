@@ -22,15 +22,15 @@ export function MatchScreen() {
         overflow: "hidden",
         minHeight: "calc(100vh - 72px)",
         background:
-          "linear-gradient(150deg, rgba(8,8,13,0.8) 25%, rgba(8,8,13,0) 45%, rgba(8,8,13,0.65) 75%), url(https://www.figma.com/api/mcp/asset/1f214c1e-7aa3-48e6-82f0-52d8204a42ba) center/cover no-repeat",
+          "linear-gradient(150deg, rgba(8,8,13,0.8) 25%, var(--surface-muted) 45%, rgba(8,8,13,0.65) 75%), url(https://www.figma.com/api/mcp/asset/1f214c1e-7aa3-48e6-82f0-52d8204a42ba) center/cover no-repeat",
       }}
     >
       <div style={{ display: "grid", justifyItems: "center", gap: 20 }}>
         <div style={{ display: "grid", gap: 10, justifyItems: "center" }}>
           <span className="title-small">View from</span>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
+          <div style={{ display: "flex", gap: 8, flexWrap: "nowrap", justifyContent: "center" }}>
             {cameraModes.map((item) => (
-              <button key={item} type="button" onClick={() => setCamera(item)} style={{ border: 0, background: "none", padding: 0 }}>
+              <button key={item} type="button" onClick={() => setCamera(item)} style={{ border: 0, background: "none", padding: 0, cursor: "pointer" }}>
                 <FigmaPill active={camera === item}>{item}</FigmaPill>
               </button>
             ))}
@@ -40,22 +40,32 @@ export function MatchScreen() {
         <article className="panel" style={{ padding: "16px 32px", display: "grid", gap: 6, minWidth: 672 }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", gap: 20 }}>
             <div>
-              <strong style={{ fontSize: 20 }}>USA</strong>
+              <strong style={{ fontSize: "var(--font-size-xl)" }}>USA</strong>
               <div style={{ fontSize: "var(--font-size-sm)", color: "var(--text-tertiary)" }}>HOME</div>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
               <span style={{ color: "var(--accent-yellow)", fontWeight: 900, fontSize: "var(--font-size-hero-score)" }}>1</span>
-              <span style={{ fontSize: 36 }}>-</span>
+              <span style={{ fontSize: "var(--font-size-2xl)" }}>-</span>
               <span style={{ fontWeight: 900, fontSize: "var(--font-size-hero-score)" }}>2</span>
             </div>
             <div style={{ textAlign: "right" }}>
-              <strong style={{ fontSize: 20 }}>Ghana</strong>
+              <strong style={{ fontSize: "var(--font-size-xl)" }}>Ghana</strong>
               <div style={{ fontSize: "var(--font-size-sm)", color: "var(--text-tertiary)" }}>AWAY</div>
             </div>
           </div>
           <div style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "center" }}>
-            <span style={{ background: "var(--accent-red)", borderRadius: 4, fontSize: 10, fontWeight: 700, padding: "3px 10px" }}>REPLAY</span>
-            <strong style={{ fontSize: 22 }}>90:00+</strong>
+            <span
+              style={{
+                background: "var(--main-error)",
+                borderRadius: "var(--radius-xs)",
+                fontSize: "var(--font-size-xs)",
+                fontWeight: 700,
+                padding: "3px 10px",
+              }}
+            >
+              REPLAY
+            </span>
+            <strong style={{ fontSize: "var(--font-size-xl)" }}>90:00+</strong>
             <span style={{ color: "var(--text-tertiary)", fontSize: "var(--font-size-sm)" }}>World Cup 2010</span>
           </div>
         </article>
@@ -106,7 +116,7 @@ export function MatchScreen() {
 
         <div className="panel" style={{ padding: 6, borderRadius: "var(--radius-pill)", display: "flex", gap: 4 }}>
           {(["Chill", "Smart"] as const).map((item) => (
-            <button key={item} type="button" onClick={() => setMode(item)} style={{ border: 0, background: "none", padding: 0 }}>
+            <button key={item} type="button" onClick={() => setMode(item)} style={{ border: 0, background: "none", padding: 0, cursor: "pointer" }}>
               <FigmaPill active={mode === item}>{item}</FigmaPill>
             </button>
           ))}

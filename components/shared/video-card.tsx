@@ -33,7 +33,7 @@ export function VideoCard({
           aspectRatio: mediaAspectRatio,
           minHeight: mediaMinHeight,
           maxHeight: mediaMaxHeight,
-          background: "rgba(255,255,255,0.05)",
+          background: "var(--surface-muted)",
         }}
       >
         <video
@@ -45,7 +45,7 @@ export function VideoCard({
             height: "100%",
             display: "block",
             objectFit: "cover",
-            background: "#000",
+            background: "var(--surface-background)",
           }}
         >
           <source src={src} type="video/mp4" />

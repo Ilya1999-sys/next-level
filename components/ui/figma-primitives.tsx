@@ -14,7 +14,14 @@ export function FigmaButton({ children, variant = "primary", fullWidth, element 
       : variant === "primary-black"
         ? "button-primary-black"
         : "button-primary";
-  const style = { width: fullWidth ? "100%" : "fit-content", cursor: "pointer", display: "inline-flex", justifyContent: "center" } as const;
+  const style = {
+    width: fullWidth ? "100%" : "fit-content",
+    cursor: "pointer",
+    display: "inline-flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontFamily: "var(--font-family-base)",
+  } as const;
 
   if (element === "span") {
     return (

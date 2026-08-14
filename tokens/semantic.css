@@ -1,51 +1,83 @@
 :root {
-  --font-family-base: var(--figma-font-family-base);
+  --font-family-primary: var(--figma-type-font-family-primary);
+  --font-family-secondary: var(--figma-type-font-family-secondary);
+  --font-family-base: var(--font-family-primary);
 
-  --font-size-xs: var(--figma-font-size-xs);
-  --font-size-sm: var(--figma-font-size-sm);
-  --font-size-md: var(--figma-font-size-md);
-  --font-size-lg: var(--figma-font-size-lg);
-  --font-size-xl: var(--figma-font-size-xl);
-  --font-size-2xl: var(--figma-font-size-2xl);
-  --font-size-3xl: var(--figma-font-size-3xl);
-  --font-size-hero-score: var(--figma-font-size-hero-score);
+  --size-h1: var(--figma-size-h1);
+  --size-h2: var(--figma-size-h2);
+  --size-h3: var(--figma-size-h3);
+  --size-t1: var(--figma-size-t1);
+  --size-t2: var(--figma-size-t2);
+  --size-t3: var(--figma-size-t3);
+  --size-button-1: var(--figma-size-button-1);
 
-  --line-height-normal: var(--figma-line-height-normal);
-  --line-height-tight: var(--figma-line-height-tight);
+  --weight-h1: var(--figma-weight-h1);
+  --weight-h2: var(--figma-weight-h2);
+  --weight-h3: var(--figma-weight-h3);
+  --weight-t1: var(--figma-weight-t1);
+  --weight-t2: var(--figma-weight-t2);
+  --weight-t3: var(--figma-weight-t3);
+  --weight-button-1: var(--figma-weight-button-1);
 
-  --space-1: var(--figma-space-1);
-  --space-2: var(--figma-space-2);
-  --space-3: var(--figma-space-3);
-  --space-4: var(--figma-space-4);
-  --space-5: var(--figma-space-5);
-  --space-6: var(--figma-space-6);
-  --space-8: var(--figma-space-8);
-  --space-10: var(--figma-space-10);
-  --space-12: var(--figma-space-12);
-  --space-20: var(--figma-space-20);
+  --line-height-h1: var(--figma-line-height-h1);
+  --line-height-h2: var(--figma-line-height-h2);
+  --line-height-h3: var(--figma-line-height-h3);
+  --line-height-t1: var(--figma-line-height-t1);
+  --line-height-t2: var(--figma-line-height-t2);
+  --line-height-t3: var(--figma-line-height-t3);
+  --line-height-button-1: var(--figma-line-height-button-1);
+  --line-height-normal: var(--figma-line-height-t1);
+
+  --letter-spacing-h1: var(--figma-letter-spacing-h1);
+  --letter-spacing-h2: var(--figma-letter-spacing-h2);
+  --letter-spacing-h3: var(--figma-letter-spacing-h3);
+  --letter-spacing-t1: var(--figma-letter-spacing-t1);
+  --letter-spacing-t2: var(--figma-letter-spacing-t2);
+  --letter-spacing-t3: var(--figma-letter-spacing-t3);
+  --letter-spacing-button-1: var(--figma-letter-spacing-button-1);
+
+  --space-xs: var(--figma-space-xs);
+  --space-s: var(--figma-space-s);
+  --space-m: var(--figma-space-m);
+  --space-l: var(--figma-space-l);
+  --space-xl: var(--figma-space-xl);
 
   --radius-xs: var(--figma-radius-xs);
-  --radius-sm: var(--figma-radius-sm);
-  --radius-md: var(--figma-radius-md);
-  --radius-lg: var(--figma-radius-lg);
+  --radius-s: var(--figma-radius-s);
+  --radius-m: var(--figma-radius-m);
+  --radius-l: var(--figma-radius-l);
   --radius-xl: var(--figma-radius-xl);
-  --radius-pill: var(--figma-radius-pill);
 
-  --layout-content-max-width: var(--figma-layout-content-max-width);
-
-  --surface-background: var(--figma-surface-background);
-  --surface-elevated: var(--figma-surface-elevated);
-  --surface-muted: var(--figma-surface-muted);
-
+  --bg-page: var(--figma-bg-page);
+  --bg-cards: var(--figma-bg-cards);
+  --bg-cards-elements: var(--figma-bg-cards-elements);
+  --bg-cards-glass: var(--figma-bg-cards-glass);
+  --bg-accent-primary: var(--figma-bg-accent-primary);
+  --bg-accent-secondary: var(--figma-bg-accent-secondary);
+  --bg-accent-tretiary: var(--figma-bg-accent-tretiary);
   --text-primary: var(--figma-text-primary);
   --text-secondary: var(--figma-text-secondary);
-  --text-tertiary: var(--figma-text-tertiary);
-  --text-muted: var(--figma-text-muted);
+  --elements-icons: var(--figma-elements-icons);
+  --elements-accent: var(--figma-elements-accent);
+  --main-success: var(--figma-main-success);
+  --glass-frost: var(--figma-glass-frost);
 
-  --accent-yellow: var(--figma-accent-yellow);
-  --accent-cyan: var(--figma-accent-cyan);
-  --accent-red: var(--figma-accent-red);
+  --surface-background: var(--bg-page);
+  --surface-elevated: var(--bg-cards);
+  --surface-muted: var(--bg-cards-elements);
+  --text-on-accent: var(--text-secondary);
+  --main-default: var(--bg-accent-primary);
+}
 
-  --border-subtle: var(--figma-border-subtle);
-  --border-strong: var(--figma-border-strong);
+html[data-mood="drama"] {
+  --bg-accent-primary: #e10600;
+  --elements-accent: #e10600;
+  --main-default: #e10600;
+}
+
+html[data-mood="legends"] {
+  --bg-accent-primary: var(--figma-bg-accent-tretiary);
+  --elements-accent: var(--figma-bg-accent-tretiary);
+  --main-default: var(--figma-bg-accent-tretiary);
+  --text-on-accent: var(--figma-bg-accent-secondary);
 }

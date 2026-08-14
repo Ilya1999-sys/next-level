@@ -1,6 +1,6 @@
-@import "@/tokens/figma.css";
-@import "@/tokens/semantic.css";
-@import "@/styles/screens.css";
+@import "../tokens/figma.css";
+@import "../tokens/semantic.css";
+@import "../styles/screens.css";
 
 *,
 *::before,
@@ -15,14 +15,22 @@ body {
 }
 
 body {
-  background: var(--surface-background);
+  background: var(--bg-page);
   color: var(--text-primary);
-  font-family: var(--font-family-base);
+  font-family: var(--font-family-primary);
   min-height: 100vh;
-  line-height: var(--line-height-normal);
+  line-height: var(--line-height-t1);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
 }

@@ -12,14 +12,14 @@ const mainScreens: ScreenConfig[] = [
     title: "Home",
     route: "/",
     description: "Mood-based match discovery and editorial feed.",
-    figmaNodeId: "126:438",
+    figmaNodeId: "323:3871",
   },
   {
     id: "match",
     title: "Matches",
-    route: "/match",
-    description: "Replay-focused match watching with smart and chill modes.",
-    figmaNodeId: "126:505",
+    route: "/portugal-2016",
+    description: "Portugal Euro 2016 hub with match reviews.",
+    figmaNodeId: "323:3890",
   },
   {
     id: "stats",
