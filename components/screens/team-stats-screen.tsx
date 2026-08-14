@@ -28,7 +28,7 @@ export function TeamStatsScreen() {
               <span style={{ color: "var(--accent-yellow)", fontWeight: 700, fontSize: "var(--font-size-sm)" }}>
                 CLUB PROFILE
               </span>
-              <h1 style={{ margin: 0, fontSize: "2rem", lineHeight: 1 }}>Real Madrid</h1>
+              <h1 style={{ margin: 0, fontSize: "var(--font-size-2xl)", lineHeight: "var(--line-height-h2)" }}>Real Madrid</h1>
               <span style={{ color: "var(--text-tertiary)", fontSize: "var(--font-size-sm)" }}>
                 Santiago Bernabeu • La Liga
               </span>
@@ -46,8 +46,8 @@ export function TeamStatsScreen() {
               <span>Yes</span>
               <span style={{ color: "var(--accent-yellow)" }}>72% voted</span>
             </div>
-            <div style={{ height: 10, background: "var(--surface-muted)", borderRadius: 5 }}>
-              <div style={{ width: "72%", height: "100%", background: "var(--accent-yellow)", borderRadius: 5 }} />
+            <div style={{ height: 10, background: "var(--surface-muted)", borderRadius: "var(--radius-sm)" }}>
+              <div style={{ width: "72%", height: "100%", background: "var(--main-default)", borderRadius: "var(--radius-sm)" }} />
             </div>
           </div>
           <div>
@@ -55,8 +55,8 @@ export function TeamStatsScreen() {
               <span>No</span>
               <span style={{ color: "var(--text-secondary)" }}>28% voted</span>
             </div>
-            <div style={{ height: 10, background: "var(--surface-muted)", borderRadius: 5 }}>
-              <div style={{ width: "28%", height: "100%", background: "rgba(255,255,255,0.3)", borderRadius: 5 }} />
+            <div style={{ height: 10, background: "var(--surface-muted)", borderRadius: "var(--radius-sm)" }}>
+              <div style={{ width: "28%", height: "100%", background: "var(--surface-heavy)", borderRadius: "var(--radius-sm)" }} />
             </div>
           </div>
           <div style={{ display: "flex", gap: 12 }}>
@@ -85,7 +85,11 @@ export function TeamStatsScreen() {
               placeItems: "center",
             }}
           >
-            <button type="button" className="button-primary" style={{ borderRadius: 12, width: 64, height: 64, padding: 0, fontSize: 22 }}>
+            <button
+              type="button"
+              className="button-primary"
+              style={{ borderRadius: "var(--radius-md)", width: 64, height: 64, padding: 0, fontSize: "var(--font-size-xl)" }}
+            >
               ▶
             </button>
           </div>

@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
-import { FigmaButton, FigmaPill } from "@/components/ui/figma-primitives";
+import { useMemo, useState } from "react";
+import { FigmaPill } from "@/components/ui/figma-primitives";
 
 const cameraModes = ["Player", "Referee", "Behind goal", "Drone"] as const;
 
@@ -26,11 +25,8 @@ function defaultRatings() {
 }
 
 export function UsaGhanaMatchScreen() {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [camera, setCamera] = useState<(typeof cameraModes)[number]>("Behind goal");
   const [mode, setMode] = useState<"Chill" | "Smart">("Smart");
-  const [paused, setPaused] = useState(false);
-  const [showReplayOverlay, setShowReplayOverlay] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [ratings, setRatings] = useState<Record<PlayerName, number>>(defaultRatings);
 
@@ -49,23 +45,12 @@ export function UsaGhanaMatchScreen() {
     });
   }
 
-  function pauseMatch() {
-    videoRef.current?.pause();
-    setPaused(true);
-    setShowReplayOverlay(true);
-  }
-
-  function continueMatch() {
-    void videoRef.current?.play();
-    setPaused(false);
-    setShowReplayOverlay(false);
-  }
-
   return (
     <main
       className="screen-root"
       style={{
         minHeight: "calc(100vh - 72px)",
+        padding: 0,
         position: "relative",
         overflow: "hidden",
         display: "flex",
@@ -74,15 +59,10 @@ export function UsaGhanaMatchScreen() {
       }}
     >
       <video
-        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
-        onPlay={() => {
-          setPaused(false);
-          setShowReplayOverlay(false);
-        }}
         style={{
           position: "absolute",
           inset: 0,
@@ -99,16 +79,15 @@ export function UsaGhanaMatchScreen() {
         style={{
           position: "absolute",
           inset: 0,
-          background:
-            "linear-gradient(150deg, rgba(8,8,13,0.8) 24%, rgba(8,8,13,0.05) 40%, rgba(8,8,13,0.62) 72%)",
+          background: "linear-gradient(150deg, rgba(8,8,13,0.8) 25%, rgba(8,8,13,0) 33%, rgba(8,8,13,0.65) 50%)",
           zIndex: 1,
         }}
       />
 
-      <div style={{ position: "relative", zIndex: 2, display: "grid", gap: 20 }}>
-        <div style={{ display: "grid", justifyItems: "center", gap: 10 }}>
+      <div style={{ position: "relative", zIndex: 2, display: "grid", gap: 12 }}>
+        <div style={{ display: "grid", justifyItems: "center", gap: 12, paddingTop: "var(--space-5)", paddingBottom: "var(--space-5)" }}>
           <span className="title-small">View from</span>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
+          <div style={{ display: "flex", gap: 8, flexWrap: "nowrap", justifyContent: "center" }}>
             {cameraModes.map((item) => (
               <button
                 key={item}
@@ -122,145 +101,89 @@ export function UsaGhanaMatchScreen() {
           </div>
         </div>
 
-        <article className="panel" style={{ margin: "0 auto", padding: "16px 32px", display: "grid", gap: 6, minWidth: 672 }}>
+        <article className="panel" style={{ margin: "0 40px 0 auto", padding: "20px 40px", display: "grid", gap: 12, width: 630 }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", gap: 20 }}>
             <div>
-              <strong style={{ fontSize: 20 }}>USA</strong>
+              <strong style={{ fontSize: "var(--font-size-xl)" }}>USA</strong>
               <div style={{ fontSize: "var(--font-size-sm)", color: "var(--text-tertiary)" }}>HOME</div>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
               <span style={{ color: "var(--accent-yellow)", fontWeight: 900, fontSize: "var(--font-size-hero-score)" }}>1</span>
-              <span style={{ fontSize: 36 }}>-</span>
+              <span style={{ fontSize: "var(--font-size-2xl)" }}>-</span>
               <span style={{ fontWeight: 900, fontSize: "var(--font-size-hero-score)" }}>2</span>
             </div>
             <div style={{ textAlign: "right" }}>
-              <strong style={{ fontSize: 20 }}>Ghana</strong>
+              <strong style={{ fontSize: "var(--font-size-xl)" }}>Ghana</strong>
               <div style={{ fontSize: "var(--font-size-sm)", color: "var(--text-tertiary)" }}>AWAY</div>
             </div>
           </div>
           <div style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "center" }}>
-            <span style={{ background: "var(--accent-red)", borderRadius: 4, fontSize: 10, fontWeight: 700, padding: "3px 10px" }}>
+            <span
+              style={{
+                background: "var(--main-error)",
+                borderRadius: "var(--radius-xs)",
+                fontSize: "var(--font-size-xs)",
+                fontWeight: 700,
+                padding: "3px 10px",
+              }}
+            >
               REPLAY
             </span>
-            <strong style={{ fontSize: 22 }}>90:00+</strong>
+            <strong style={{ fontSize: "var(--font-size-xl)" }}>90:00+</strong>
             <span style={{ color: "var(--text-tertiary)", fontSize: "var(--font-size-sm)" }}>World Cup 2010</span>
           </div>
         </article>
       </div>
 
-      <div style={{ position: "relative", zIndex: 2, flex: 1, display: "grid", alignItems: "center" }}>
-        {showReplayOverlay && (
-          <article
-            className="panel"
-            style={{ position: "relative", width: 820, margin: "0 auto", padding: 32, display: "grid", gap: 16, textAlign: "center" }}
-          >
-            <button
-              type="button"
-              aria-label="Close replay panel"
-              onClick={continueMatch}
-              style={{
-                position: "absolute",
-                right: 16,
-                top: 12,
-                border: "none",
-                background: "transparent",
-                color: "var(--text-secondary)",
-                fontSize: 22,
-                cursor: "pointer",
-              }}
-            >
-              ×
-            </button>
-            <span
-              style={{
-                width: "fit-content",
-                margin: "0 auto",
-                background: "var(--accent-yellow)",
-                color: "var(--surface-background)",
-                padding: "4px 12px",
-                borderRadius: "var(--radius-pill)",
-                fontSize: "var(--font-size-sm)",
-                fontWeight: 700,
-              }}
-            >
-              GYAN'S WINNER • 82:00
-            </span>
-            <h1 style={{ margin: 0, fontSize: 40 }}>Replay Ghana&apos;s winning goal in FIFA</h1>
-            <p style={{ margin: 0, color: "var(--text-secondary)" }}>
-              Step into Gyan&apos;s boots. Can you score this legendary goal?
-            </p>
-            <Link
-              href="/match/usa-vs-ghana-2010/fifa"
-              className="button-primary"
-              style={{ width: "fit-content", margin: "0 auto", padding: "18px 40px", borderRadius: "var(--radius-pill)" }}
-            >
-              Start playing
-            </Link>
-          </article>
-        )}
-      </div>
+      <div style={{ position: "relative", zIndex: 2, flex: 1 }} />
 
-      <div style={{ position: "absolute", left: 26, bottom: 26, zIndex: 3 }}>
-        {!paused ? (
-          <button
-            type="button"
-            onClick={pauseMatch}
-            className="button-primary"
-            style={{ borderRadius: "var(--radius-pill)", padding: "12px 20px", display: "inline-flex", alignItems: "center", gap: 8 }}
-          >
-            ❚❚ Pause
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={continueMatch}
-            className="button-primary"
-            style={{ borderRadius: "var(--radius-pill)", padding: "12px 20px", display: "inline-flex", alignItems: "center", gap: 8 }}
-          >
-            ▶ Continue
-          </button>
-        )}
-      </div>
-
-      <div style={{ position: "relative", zIndex: 2, display: "grid", gap: 18 }}>
-        {mode === "Smart" && !showReplayOverlay && (
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 20 }}>
-            <div style={{ display: "flex", gap: 20 }}>
+      <div style={{ position: "relative", zIndex: 2, display: "grid", gap: 20, paddingBottom: "var(--space-5)" }}>
+        {mode === "Smart" && (
+          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 12, paddingRight: "var(--space-10)" }}>
+            <div style={{ display: "flex", gap: "var(--space-10)" }}>
               {facts.map((fact) => (
-                <article key={fact} className="panel" style={{ width: 420, padding: 14, display: "grid", gap: 8 }}>
+                <article key={fact} className="panel" style={{ width: 420, height: 118, padding: "12px 20px", display: "grid", gap: "var(--space-2)" }}>
                   <span
                     style={{
-                      background: "var(--accent-yellow)",
-                      color: "var(--surface-background)",
-                      borderRadius: 20,
+                      background: "var(--main-default)",
+                      color: "var(--text-on-accent)",
+                      borderRadius: "var(--radius-pill)",
                       width: "fit-content",
                       padding: "3px 8px",
-                      fontSize: 9,
+                      fontSize: "var(--font-size-xs)",
                       fontWeight: 700,
                     }}
                   >
                     SMART FACT
                   </span>
                   <strong style={{ fontSize: "var(--font-size-lg)" }}>{fact}</strong>
+                  <span style={{ fontSize: "var(--font-size-xs)", color: "var(--text-secondary)" }}>
+                    {fact.includes("quarter-finals") ? "World Cup History" : "South Africa 2010"}
+                  </span>
                 </article>
               ))}
             </div>
 
-            <article className="panel" style={{ width: 320, padding: 20, display: "grid", gap: 12 }}>
-              <header style={{ display: "flex", justifyContent: "space-between" }}>
-                <strong style={{ fontSize: "var(--font-size-md)" }}>Rate players</strong>
-                <span style={{ fontSize: "var(--font-size-sm)", color: "var(--text-tertiary)" }}>1-10 scale</span>
-              </header>
-
+            <article className="panel" style={{ width: 320, height: 485, padding: 0, display: "grid", gap: 0, alignContent: "start" }}>
+              <div style={{ padding: "20px 20px 12px", display: "flex", justifyContent: "space-between" }}>
+                <strong style={{ fontSize: "var(--font-size-sm)", color: "var(--text-primary)" }}>• RATE PLAYERS</strong>
+                <span style={{ fontSize: "var(--font-size-xs)", color: "var(--text-tertiary)" }}>1-10 SCALE</span>
+              </div>
+              <div style={{ padding: "12px 20px", display: "grid", gap: "var(--space-3)" }}>
               {(Object.keys(playersByTeam) as Array<keyof typeof playersByTeam>).map((team) => (
-                <div key={team} style={{ display: "grid", gap: 10 }}>
-                  <strong style={{ fontSize: "var(--font-size-sm)" }}>{team}</strong>
+                <div key={team} style={{ display: "grid", gap: "var(--space-2)" }}>
+                  <strong style={{ fontSize: "var(--font-size-xs)", color: "var(--text-secondary)" }}>• {team}</strong>
                   {playersByTeam[team].map((player) => (
                     <div
                       key={player}
                       style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: 8 }}
                     >
-                      <span style={{ fontSize: "var(--font-size-md)" }}>{player}</span>
+                      <div style={{ display: "grid", gap: "var(--space-1)" }}>
+                        <span style={{ fontSize: "var(--font-size-xs)", color: "var(--text-primary)" }}>{player}</span>
+                        <span style={{ fontSize: "var(--font-size-xs)", color: "var(--text-secondary)" }}>
+                          #{player.includes("Tim Howard") ? "1 • Goalkeeper" : player.includes("Donovan") ? "10 • Forward" : player.includes("Dempsey") ? "8 • Midfielder" : player.includes("Gyan") ? "3 • Forward" : player.includes("Boateng") ? "23 • Midfielder" : "11 • Midfielder"}
+                        </span>
+                      </div>
                       <div style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
                         <button
                           type="button"
@@ -268,9 +191,9 @@ export function UsaGhanaMatchScreen() {
                           style={{
                             width: 24,
                             height: 24,
-                            borderRadius: 6,
+                            borderRadius: "var(--radius-sm)",
                             border: "1px solid var(--border-subtle)",
-                            background: "rgba(255,255,255,0.06)",
+                            background: "var(--surface-muted)",
                             color: "var(--text-secondary)",
                             cursor: "pointer",
                           }}
@@ -278,14 +201,15 @@ export function UsaGhanaMatchScreen() {
                           -
                         </button>
                         <span
-                          className="panel"
                           style={{
                             minWidth: 36,
                             textAlign: "center",
-                            borderRadius: 10,
+                            borderRadius: "var(--radius-md)",
+                            border: "1px solid var(--main-subtle)",
+                            background: "var(--main-subtle)",
                             padding: "6px 8px",
-                            fontSize: "var(--font-size-sm)",
-                            color: "var(--accent-yellow)",
+                            fontSize: "var(--font-size-md)",
+                            color: "var(--main-default)",
                           }}
                         >
                           {ratings[player]}
@@ -296,9 +220,9 @@ export function UsaGhanaMatchScreen() {
                           style={{
                             width: 24,
                             height: 24,
-                            borderRadius: 6,
+                            borderRadius: "var(--radius-sm)",
                             border: "1px solid var(--border-subtle)",
-                            background: "rgba(255,255,255,0.06)",
+                            background: "var(--surface-muted)",
                             color: "var(--text-secondary)",
                             cursor: "pointer",
                           }}
@@ -314,16 +238,17 @@ export function UsaGhanaMatchScreen() {
               <button
                 type="button"
                 className="button-primary"
-                style={{ width: "100%" }}
+                style={{ width: "100%", marginTop: "var(--space-2)" }}
                 onClick={() => setSubmitted(true)}
               >
                 Submit ratings
               </button>
               {submitted && (
-                <span style={{ color: "var(--accent-yellow)", fontSize: "var(--font-size-sm)" }}>
+                <span style={{ color: "var(--main-default)", fontSize: "var(--font-size-sm)" }}>
                   Ratings submitted. Thanks for your match insight.
                 </span>
               )}
+              </div>
             </article>
           </div>
         )}

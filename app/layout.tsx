@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import "@/app/globals.css";
-import { GlobalTopNav } from "@/components/navigation/global-top-nav";
+import { MoodProvider } from "@/components/mood/mood-provider";
 import { RouteTransition } from "@/components/motion/route-transition";
 
-const inter = Inter({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+const cartographFallback = IBM_Plex_Mono({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-ibm-plex-mono",
 });
 
 export const metadata: Metadata = {
-  title: "Ilya-NextLevel",
-  description: "Next.js App Router foundation synced with Figma design system.",
+  title: "Your mood, your match",
+  description: "Next.js App Router foundation synced with Figma design variables.",
 };
 
 export default function RootLayout({
@@ -22,10 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${inter.className}`}>
-        <GlobalTopNav />
-        <RouteTransition>{children}</RouteTransition>
+    <html lang="en" data-mood="nostalgia">
+      <body className={cartographFallback.variable}>
+        <MoodProvider>
+          <RouteTransition>{children}</RouteTransition>
+        </MoodProvider>
       </body>
     </html>
   );

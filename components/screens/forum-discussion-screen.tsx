@@ -75,10 +75,10 @@ export function ForumDiscussionScreen() {
               <div
                 key={post.id}
                 style={{
-                  borderRadius: 12,
-                  padding: 12,
-                  background: index === 0 ? "rgba(245,200,66,0.14)" : "var(--surface-muted)",
-                  border: `1px solid ${index === 0 ? "rgba(245,200,66,0.35)" : "var(--border-subtle)"}`,
+                  borderRadius: "var(--radius-md)",
+                  padding: "var(--space-3)",
+                  background: index === 0 ? "var(--main-subtle)" : "var(--surface-muted)",
+                  border: `1px solid ${index === 0 ? "var(--main-default)" : "var(--border-subtle)"}`,
                   display: "grid",
                   gap: 6,
                 }}
@@ -102,11 +102,11 @@ export function ForumDiscussionScreen() {
             style={{
               width: "100%",
               minHeight: 140,
-              borderRadius: 12,
+              borderRadius: "var(--radius-md)",
               border: "1px solid var(--border-subtle)",
               background: "var(--surface-muted)",
               color: "var(--text-primary)",
-              padding: 12,
+              padding: "var(--space-3)",
               fontFamily: "inherit",
               fontSize: "var(--font-size-md)",
               resize: "vertical",

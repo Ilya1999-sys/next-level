@@ -1,50 +1,70 @@
 :root {
-  --figma-font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --figma-line-height-normal: 1.2;
-  --figma-line-height-tight: 1.1;
+  --figma-elements-icons: #ffffff;
+  --figma-elements-accent: #012fff;
+  --figma-text-primary: #5e5e5e;
+  --figma-text-secondary: #ffffff;
+  --figma-bg-cards: #c1c1c1;
+  --figma-bg-cards-elements: #aeaeae;
+  --figma-bg-accent-primary: #012fff;
+  --figma-bg-accent-secondary: #181818;
+  --figma-bg-accent-tretiary: #e1fb5c;
+  --figma-bg-cards-glass: #00000066;
+  --figma-bg-page: #d6d6d6;
+  --figma-main-success: #4ecc91;
 
-  --figma-font-size-xs: 0.5625rem;
-  --figma-font-size-sm: 0.6875rem;
-  --figma-font-size-md: 0.8125rem;
-  --figma-font-size-lg: 0.875rem;
-  --figma-font-size-xl: 1rem;
-  --figma-font-size-2xl: 1.375rem;
-  --figma-font-size-3xl: 3rem;
-  --figma-font-size-hero-score: 3.5rem;
+  --figma-effect-glass-frost: 4px;
+  --figma-effect-glass-refraction: 4px;
+  --figma-effect-glass-depth: 4px;
+  --figma-effect-glass-dispersion: 4px;
+  --figma-effect-glass-splay: 4px;
+  --figma-glass-screen-blur: 20px;
 
-  --figma-space-1: 0.25rem;
-  --figma-space-2: 0.5rem;
-  --figma-space-3: 0.75rem;
-  --figma-space-4: 1rem;
-  --figma-space-5: 1.25rem;
-  --figma-space-6: 1.5rem;
-  --figma-space-8: 2rem;
-  --figma-space-10: 2.5rem;
-  --figma-space-12: 3rem;
-  --figma-space-20: 5rem;
+  --figma-type-font-family-primary: "Cartograph Mono CF", var(--font-ibm-plex-mono, "IBM Plex Mono"), ui-monospace, monospace;
+  --figma-type-font-family-secondary: Geneva, "Segoe UI", system-ui, sans-serif;
 
-  --figma-radius-xs: 0.25rem;
-  --figma-radius-sm: 0.625rem;
-  --figma-radius-md: 0.75rem;
-  --figma-radius-lg: 1rem;
-  --figma-radius-xl: 1.5rem;
-  --figma-radius-pill: 999px;
+  --figma-size-h1: 24px;
+  --figma-size-h2: 28px;
+  --figma-size-h3: 20px;
+  --figma-size-t1: 15px;
+  --figma-size-t2: 13px;
+  --figma-size-t3: 12px;
+  --figma-size-button-1: 18px;
 
-  --figma-layout-content-max-width: 120rem;
+  --figma-weight-h1: 900;
+  --figma-weight-h2: 900;
+  --figma-weight-h3: 700;
+  --figma-weight-t1: 400;
+  --figma-weight-t2: 400;
+  --figma-weight-t3: 400;
+  --figma-weight-button-1: 600;
 
-  --figma-surface-background: #08080d;
-  --figma-surface-elevated: #111118;
-  --figma-surface-muted: rgba(255, 255, 255, 0.06);
+  --figma-line-height-h1: 28px;
+  --figma-line-height-h2: 40px;
+  --figma-line-height-h3: 28px;
+  --figma-line-height-t1: 20px;
+  --figma-line-height-t2: 16px;
+  --figma-line-height-t3: 15px;
+  --figma-line-height-button-1: 24px;
 
-  --figma-text-primary: #ffffff;
-  --figma-text-secondary: rgba(255, 255, 255, 0.7);
-  --figma-text-tertiary: rgba(255, 255, 255, 0.5);
-  --figma-text-muted: rgba(255, 255, 255, 0.33);
+  --figma-letter-spacing-h1: 0.01px;
+  --figma-letter-spacing-h2: 0.01px;
+  --figma-letter-spacing-h3: 0.01px;
+  --figma-letter-spacing-t1: 0.01px;
+  --figma-letter-spacing-t2: 0px;
+  --figma-letter-spacing-t3: 0px;
+  --figma-letter-spacing-button-1: 0.01px;
 
-  --figma-accent-yellow: #f5c842;
-  --figma-accent-cyan: #3ecfcf;
-  --figma-accent-red: #ff453a;
+  --figma-space-xs: 4px;
+  --figma-space-s: 8px;
+  --figma-space-m: 12px;
+  --figma-space-l: 20px;
+  --figma-space-xl: 28px;
 
-  --figma-border-subtle: rgba(255, 255, 255, 0.08);
-  --figma-border-strong: rgba(104, 104, 104, 0.8);
+  --figma-radius-xs: 12px;
+  --figma-radius-s: 20px;
+  --figma-radius-m: 32px;
+  --figma-radius-l: 40px;
+  --figma-radius-xl: 999px;
+
+  --figma-glass-frost: var(--figma-glass-screen-blur);
 }

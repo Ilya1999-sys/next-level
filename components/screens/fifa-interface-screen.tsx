@@ -9,7 +9,7 @@ export function FifaInterfaceScreen() {
         display: "grid",
         alignContent: "space-between",
         background:
-          "linear-gradient(170deg, rgba(8,8,13,0.72), rgba(8,8,13,0.4)), url(https://images.unsplash.com/photo-1570498839593-e565b39455fc?auto=format&fit=crop&w=1600&q=80) center/cover no-repeat",
+          "linear-gradient(170deg, rgba(8,8,13,0.72), var(--surface-muted)), url(https://images.unsplash.com/photo-1570498839593-e565b39455fc?auto=format&fit=crop&w=1600&q=80) center/cover no-repeat",
       }}
     >
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -20,7 +20,7 @@ export function FifaInterfaceScreen() {
         >
           ← Back to match
         </Link>
-        <div className="panel" style={{ padding: "8px 14px", borderRadius: 14 }}>
+        <div className="panel" style={{ padding: "8px 14px", borderRadius: "var(--radius-md)" }}>
           <strong style={{ color: "var(--accent-yellow)" }}>FIFA Replay Interface</strong>
         </div>
       </header>
@@ -43,7 +43,7 @@ export function FifaInterfaceScreen() {
       </section>
 
       <footer style={{ display: "grid", justifyItems: "center" }}>
-        <div className="panel" style={{ padding: "8px 12px", borderRadius: 12 }}>
+        <div className="panel" style={{ padding: "8px 12px", borderRadius: "var(--radius-md)" }}>
           <span style={{ color: "var(--text-tertiary)", fontSize: "var(--font-size-sm)" }}>
             Controls synchronized with replay state
           </span>

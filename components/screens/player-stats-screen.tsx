@@ -43,8 +43,8 @@ export function PlayerStatsScreen() {
               <div
                 key={player.name}
                 style={{
-                  borderRadius: 12,
-                  padding: 12,
+                  borderRadius: "var(--radius-md)",
+                  padding: "var(--space-3)",
                   background: "var(--surface-muted)",
                   border: "1px solid var(--border-subtle)",
                   display: "flex",
@@ -83,8 +83,8 @@ export function PlayerStatsScreen() {
               <div
                 key={team.name}
                 style={{
-                  borderRadius: 12,
-                  padding: 12,
+                  borderRadius: "var(--radius-md)",
+                  padding: "var(--space-3)",
                   background: "var(--surface-muted)",
                   border: "1px solid var(--border-subtle)",
                   display: "flex",
@@ -111,7 +111,7 @@ export function PlayerStatsScreen() {
         <div className="cards-grid">
           {watchedMatches.map((match) => (
             <article key={match.title} className="stat-card">
-              <div style={{ height: 84, borderRadius: "var(--radius-sm)", background: "rgba(255,255,255,0.12)" }} />
+              <div style={{ height: 84, borderRadius: "var(--radius-sm)", background: "var(--surface-heavy)" }} />
               <strong>{match.title}</strong>
               <div style={{ display: "flex", justifyContent: "space-between", color: "var(--text-secondary)", fontSize: "var(--font-size-sm)" }}>
                 <span>{match.status}</span>
