@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AppChrome } from "@/components/navigation/app-chrome";
 import { useMoodCatalog } from "@/lib/mood/catalog";
 import { DotGrid, IconButton, NextArrow } from "@/components/ui/ds";
+import { PlayerFigure } from "@/components/ui/player-figure";
 
 export function HomeScreen() {
   const catalog = useMoodCatalog();
@@ -11,26 +12,19 @@ export function HomeScreen() {
 
   return (
     <AppChrome crumbs={["Home"]}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1fr)",
-          gap: 8,
-          minHeight: 488,
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <TeamCard card={leftTop} height={240} />
-          <TeamCard card={leftBottom} height={240} />
+      <div className="row-488">
+        <div className="col-stack col-stack--240">
+          <TeamCard card={leftTop} />
+          <TeamCard card={leftBottom} />
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div className="col-stack col-stack--fill">
           {catalog.facts.map((fact) => (
-            <article key={`${fact.title}-${fact.value}`} className="fact-card" style={{ flex: fact.dots ? 1 : undefined }}>
+            <article key={`${fact.title}-${fact.value}`} className="fact-card">
               <div style={{ display: "grid", gap: 28 }}>
                 <div className="fact-head">
                   <p className="type-t1">{fact.title}</p>
                   {fact.tournament ? (
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                    <span className="live-flag">
                       <span className="dot-live" />
                       <span className="type-t1">{fact.tournament}</span>
                     </span>
@@ -45,13 +39,13 @@ export function HomeScreen() {
             </article>
           ))}
         </div>
-        <TeamCard card={featured} tall />
+        <TeamCard card={featured} featured />
       </div>
 
-      <article className="ds-card" style={{ padding: 20, display: "grid", gap: 12 }}>
+      <article className="ds-card discussion-card">
         <div className="card-top" style={{ padding: 0 }}>
           <div className="year-team">
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+            <span className="live-flag">
               <span className="dot-live" />
               <span className="type-t1">Live</span>
             </span>
@@ -61,15 +55,15 @@ export function HomeScreen() {
             <NextArrow />
           </IconButton>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "center" }}>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <div className="discussion-body">
+          <div className="discussion-chips">
             {catalog.live.chips.map((chip) => (
               <span key={chip} className="discussion-chip type-t3">
                 {chip}
               </span>
             ))}
           </div>
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+          <span className="live-flag">
             <span className="dot-live" />
             <span className="type-t1">{catalog.live.fans}</span>
           </span>
@@ -77,8 +71,8 @@ export function HomeScreen() {
       </article>
 
       <article className="ds-card tournir-card">
-        <img className="player-art" data-pose="run" src={catalog.tournament.image} alt="" style={{ position: "absolute", right: -70, top: 80, width: 400, height: 320, objectFit: "contain" }} />
-        <div className="card-top" style={{ padding: 0, marginBottom: 20 }}>
+        <PlayerFigure className="tournir-figure" src={catalog.tournament.image} pose="run" alt="" fit="contain" />
+        <div className="card-top" style={{ padding: 0, marginBottom: 20, position: "relative", zIndex: 1 }}>
           <div className="year-team" style={{ maxWidth: "70%" }}>
             <p className="type-t1">{catalog.tournament.year}</p>
             <p className="type-t1">{catalog.tournament.title}</p>
@@ -87,7 +81,7 @@ export function HomeScreen() {
             <NextArrow />
           </IconButton>
         </div>
-        <div style={{ display: "flex", gap: 12, alignItems: "flex-end", minHeight: 160 }}>
+        <div className="tournir-stats" style={{ position: "relative", zIndex: 1 }}>
           {catalog.tournament.stats.map((stat) => (
             <div key={stat.label} className="circle-stat" data-accent={stat.accent ? "true" : "false"}>
               <p className="type-h2">{stat.value}</p>
@@ -97,9 +91,9 @@ export function HomeScreen() {
         </div>
       </article>
 
-      <div style={{ display: "flex", gap: 8, minHeight: 240 }}>
-        <TeamCard card={brazil} fill />
-        <article className="fact-card" style={{ flex: 1 }}>
+      <div className="row-bottom">
+        <TeamCard card={brazil} />
+        <article className="fact-card">
           <div style={{ display: "grid", gap: 28 }}>
             <p className="type-t1">{catalog.comeback.title}</p>
             <div className="fact-row">
@@ -118,21 +112,13 @@ export function HomeScreen() {
 
 function TeamCard({
   card,
-  height,
-  tall,
-  fill,
+  featured,
 }: {
   card: ReturnType<typeof useMoodCatalog>["teams"][number];
-  height?: number;
-  tall?: boolean;
-  fill?: boolean;
+  featured?: boolean;
 }) {
   const inner = (
-    <article
-      className="ds-card"
-      data-accent={card.accent ? "true" : "false"}
-      style={{ height: height ?? (tall ? "100%" : fill ? "100%" : undefined), minHeight: fill ? 240 : undefined, display: "flex", flexDirection: "column" }}
-    >
+    <article className="ds-card team-card" data-accent={card.accent ? "true" : "false"}>
       <div className="card-top">
         <div className="year-team">
           <p className={card.accent ? "type-h3" : "type-t1"}>{card.year}</p>
@@ -142,13 +128,19 @@ function TeamCard({
           <NextArrow />
         </span>
       </div>
-      <img className="player-art" data-pose={card.pose} src={card.image} alt={`${card.team} ${card.year}`} style={{ flex: 1, minHeight: 140, objectFit: card.objectFit ?? "cover" }} />
+      <PlayerFigure
+        className={featured ? "player-stage--featured" : undefined}
+        src={card.image}
+        pose={card.pose}
+        alt={`${card.team} ${card.year}`}
+        fit={card.objectFit ?? "cover"}
+      />
     </article>
   );
 
   if (card.href) {
     return (
-      <Link href={card.href} style={{ display: "block", height: tall || fill ? "100%" : undefined }}>
+      <Link href={card.href} className="card-link">
         {inner}
       </Link>
     );

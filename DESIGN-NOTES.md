@@ -4,6 +4,15 @@ Source of truth: Figma file `F3RebM3vrX7z9Pe1DDgDP8`, collection **design**.
 
 If a later chat asks to change UI, use **only** existing Figma component variants, styles, and variables. Do not invent new tokens, radii, or type styles.
 
+## 2026-08-17 — fonts, chrome, cards, moods
+
+1. Load **Cartograph Mono CF** (400/600/700/900 woff2) and **Geneva** from `/fonts`. No IBM Plex Mono.
+2. Left menu fills the remaining viewport height (`100dvh` page shell). The two `left-menu-group` blocks stay fully visible; extra height is the gap between them (`justify-content: space-between`). Cards scroll in `.cards-all`.
+3. Card heights from Home `323:3871` and Tournament `323:3890`: first row `488` / `0.8fr 1fr 1fr`, small cards `240`, featured `488` with image `642` clipped, tournament padding `28`, image `400×320` at `right: -70; top: 120`, stats row `200`, circles `120–160`. Tournament hero is photo left `2fr` / copy right `3fr`, H2 title, match row same `488`, labels “Match review” + score, wins fact `3×3` dots.
+4. Player hover no longer scales. Motion continues the crop: `lift` (trophy up + shake), `celebrate` (halves rise and close = hug), `run` (halves run in and reach = high-five). Stage overflows hidden so figures are not clipped by scale.
+5. **Drama** accent `#FF0901`. **Legends** accent `#FF9E01`. Resting player art stays grayscale; hover removes the filter so color in the file shows through. Same pose animation as Nostalgia. Current Figma PNG exports are near-grayscale stipple, so hover color only appears if a later export has chroma.
+6. Preview deploys from branch `cursor/home-player-figma-layout`. Unique hashed Vercel URLs do not update; production alias updates only on Production (`main`).
+
 ## 2026-08-14 — rebuild from new concept
 
 1. Site uses **all variables from Figma mode `design`**.
@@ -15,12 +24,12 @@ If a later chat asks to change UI, use **only** existing Figma component variant
 7. Player illustrations from `323:6707` must “continue the pose” on card hover (`lift` / `run` / `celebrate`).
 8. Top menu moods (`302:1993`):
    - **Nostalgia** — Figma as drawn, accent `--bg-accent-primary` `#012fff`.
-   - **Drama** — red accent `#e10600` (explicit chat instruction; no red token in current design collection).
-   - **Legends** — yellow accent; exact hex pending a later reference. Until then use `--bg-accent-tretiary` `#e1fb5c`.
+   - **Drama** — red accent `#FF0901`.
+   - **Legends** — orange accent `#FF9E01` (Home `327:2228`, Tournament `327:2532`).
    Mood also changes card lineup and player-illustration filter.
 9. Keep this file updated after each design comment.
 10. Ship via git push so Vercel rebuilds.
-11. Fonts from Figma: primary **Cartograph Mono CF**, secondary **Geneva**. Cartograph is not on Google Fonts; load **IBM Plex Mono** as `--font-ibm-plex-mono` while keeping the Figma family name first in CSS.
+11. Fonts from Figma: primary **Cartograph Mono CF**, secondary **Geneva**, served from `/public/fonts`.
 
 ## Implementation notes
 
@@ -29,7 +38,7 @@ If a later chat asks to change UI, use **only** existing Figma component variant
 - Open rate-player scores in range 8–10 use `--main-success` `#4ecc91`.
 - Euro 2016 final footage cannot be hosted as official broadcast; the match stage uses a Mixkit football clip as a stand-in over `match-bg.png`.
 - Profile / player-face exports from Figma came back empty; profile shows initials `IP`, rating rows use letter orbs, team crests use `team-por.png` / `team-fra.png`.
-- Drop licensed **Cartograph Mono CF** files into the project later if you want the exact Figma face on Vercel; until then IBM Plex Mono is the webfont.
+- Cartograph Mono CF and Geneva files live in `public/fonts` and are declared in `tokens/fonts.css`.
 
 ## Tokens (design mode)
 

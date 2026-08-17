@@ -19,8 +19,8 @@
   --figma-effect-glass-splay: 4px;
   --figma-glass-screen-blur: 20px;
 
-  --figma-type-font-family-primary: "Cartograph Mono CF", var(--font-ibm-plex-mono, "IBM Plex Mono"), ui-monospace, monospace;
-  --figma-type-font-family-secondary: Geneva, "Segoe UI", system-ui, sans-serif;
+  --figma-type-font-family-primary: "Cartograph Mono CF", ui-monospace, monospace;
+  --figma-type-font-family-secondary: Geneva, system-ui, sans-serif;
 
   --figma-size-h1: 24px;
   --figma-size-h2: 28px;

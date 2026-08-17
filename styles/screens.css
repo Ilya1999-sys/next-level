@@ -1,5 +1,7 @@
 .page-shell {
-  min-height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
   background: var(--bg-page);
   color: var(--text-primary);
   padding: var(--space-l);
@@ -154,7 +156,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: min(800px, calc(100vh - 140px));
+  align-self: stretch;
+  height: 100%;
+  min-height: 0;
+  flex-shrink: 0;
 }
 
 .left-menu-group {
@@ -304,9 +309,122 @@
 .cards-all {
   flex: 1;
   min-width: 0;
+  min-height: 0;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-s);
+}
+
+.row-488 {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-s);
+  height: 488px;
+  flex: 0 0 488px;
+}
+
+.col-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  height: 100%;
+  min-height: 0;
+}
+
+.col-stack--240 > * {
+  flex: 0 0 240px;
+  height: 240px;
+  min-height: 0;
+}
+
+.col-stack--fill > * {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.row-bottom {
+  display: flex;
+  gap: var(--space-s);
+  min-height: 240px;
+}
+
+.row-bottom > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.card-link {
+  display: block;
+  height: 100%;
+  min-height: 0;
+}
+
+.team-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.discussion-card {
+  padding: var(--space-l);
+  display: grid;
+  gap: var(--space-m);
+}
+
+.discussion-body {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-m);
+  align-items: center;
+}
+
+.discussion-chips {
+  display: flex;
+  gap: var(--space-m);
+  flex-wrap: wrap;
+}
+
+.live-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.tournament-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: var(--space-l);
+  min-height: 280px;
+  overflow: hidden;
+}
+
+.tournament-hero-copy {
+  padding: var(--space-xl) var(--space-xl) var(--space-xl) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-l);
+}
+
+.tournament-hero-stats {
+  display: flex;
+  gap: var(--space-m);
+  max-height: 120px;
+}
+
+.tournament-hero-photo {
+  min-height: 280px;
+  height: 100%;
+  flex: none;
+}
+
+.row-goals {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--space-s);
+  min-height: 240px;
 }
 
 .ds-card {
@@ -326,6 +444,7 @@
 }
 
 .ds-card[data-accent="true"] .type-t1,
+.ds-card[data-accent="true"] .type-h2,
 .ds-card[data-accent="true"] .type-h3 {
   color: var(--text-on-accent);
 }
@@ -336,6 +455,8 @@
   justify-content: space-between;
   width: 100%;
   padding: var(--space-l) var(--space-l) var(--space-s);
+  position: relative;
+  z-index: 2;
 }
 
 .ds-card[data-accent="true"] .card-top {
@@ -348,56 +469,210 @@
   gap: var(--space-s);
 }
 
+.player-stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
 .player-art {
-  width: 100%;
-  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 112%;
+  height: 124%;
   object-fit: cover;
-  transform-origin: 55% 85%;
-  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
-  filter: grayscale(1) contrast(1.12);
+  object-position: center 72%;
+  transform: translateX(-50%) translateY(6%);
+  transform-origin: 50% 88%;
+  filter: grayscale(1) contrast(1.08);
+  transition: filter 0.45s ease;
+  will-change: transform;
+  pointer-events: none;
 }
 
-.ds-card:hover .player-art {
-  transform: scale(1.1) translate(8px, -16px);
-  filter: grayscale(0.35) contrast(1.18);
+.player-stage[data-fit="contain"] .player-art {
+  object-fit: contain;
+  object-position: center bottom;
+  width: 100%;
+  height: 118%;
 }
 
-.ds-card:hover .player-art[data-pose="lift"] {
-  transform: scale(1.12) translate(4px, -22px) rotate(-2deg);
+.player-stage--featured .player-art {
+  height: 642px;
+  width: auto;
+  min-width: 112%;
 }
 
-.ds-card:hover .player-art[data-pose="run"] {
-  transform: scale(1.14) translate(18px, -8px) rotate(2deg);
+.player-art--left,
+.player-art--right {
+  opacity: 0;
 }
 
-.ds-card:hover .player-art[data-pose="celebrate"] {
-  transform: scale(1.16) translate(-6px, -18px) rotate(-3deg);
+.ds-card:hover .player-art--base[data-pose="lift"] {
+  animation: player-lift 1.15s ease-in-out infinite;
 }
 
-html[data-mood="drama"] .player-art {
-  filter: grayscale(0.15) sepia(0.55) hue-rotate(-35deg) saturate(2.1) contrast(1.1);
+.ds-card:hover .player-stage[data-pose="celebrate"] .player-art--base,
+.ds-card:hover .player-stage[data-pose="run"] .player-art--base {
+  opacity: 0;
 }
 
-html[data-mood="drama"] .ds-card:hover .player-art {
-  filter: grayscale(0) sepia(0.45) hue-rotate(-30deg) saturate(2.4) contrast(1.15);
+.ds-card:hover .player-stage[data-pose="celebrate"] .player-art--left,
+.ds-card:hover .player-stage[data-pose="celebrate"] .player-art--right,
+.ds-card:hover .player-stage[data-pose="run"] .player-art--left,
+.ds-card:hover .player-stage[data-pose="run"] .player-art--right {
+  opacity: 1;
 }
 
-html[data-mood="legends"] .player-art {
-  filter: grayscale(0.05) sepia(0.7) hue-rotate(8deg) saturate(1.7) contrast(1.05);
+.ds-card:hover .player-art--left[data-pose="celebrate"] {
+  clip-path: inset(0 42% 0 0);
+  animation: player-hug-left 1.25s ease-in-out infinite;
 }
 
+.ds-card:hover .player-art--right[data-pose="celebrate"] {
+  clip-path: inset(0 0 0 42%);
+  animation: player-hug-right 1.25s ease-in-out infinite;
+}
+
+.ds-card:hover .player-art--left[data-pose="run"] {
+  clip-path: inset(0 46% 0 0);
+  animation: player-highfive-left 1.2s ease-in-out infinite;
+}
+
+.ds-card:hover .player-art--right[data-pose="run"] {
+  clip-path: inset(0 0 0 46%);
+  animation: player-highfive-right 1.2s ease-in-out infinite;
+}
+
+html[data-mood="drama"] .player-art,
+html[data-mood="legends"] .player-art,
+html[data-mood="nostalgia"] .player-art {
+  filter: grayscale(1) contrast(1.08);
+}
+
+html[data-mood="drama"] .ds-card:hover .player-art,
 html[data-mood="legends"] .ds-card:hover .player-art {
-  filter: grayscale(0) sepia(0.55) hue-rotate(12deg) saturate(2) contrast(1.1);
+  filter: none;
+}
+
+@keyframes player-lift {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(-6%) rotate(-3deg);
+  }
+  25% {
+    transform: translateX(-48%) translateY(-12%) rotate(4deg);
+  }
+  50% {
+    transform: translateX(-52%) translateY(-7%) rotate(-5deg);
+  }
+  75% {
+    transform: translateX(-49%) translateY(-14%) rotate(3deg);
+  }
+}
+
+@keyframes player-hug-left {
+  0%,
+  100% {
+    transform: translateX(-54%) translateY(-2%);
+  }
+  40% {
+    transform: translateX(-47%) translateY(-10%) rotate(-2deg);
+  }
+  70% {
+    transform: translateX(-44%) translateY(-7%) rotate(-3deg);
+  }
+}
+
+@keyframes player-hug-right {
+  0%,
+  100% {
+    transform: translateX(-46%) translateY(-2%);
+  }
+  40% {
+    transform: translateX(-53%) translateY(-10%) rotate(2deg);
+  }
+  70% {
+    transform: translateX(-56%) translateY(-7%) rotate(3deg);
+  }
+}
+
+@keyframes player-highfive-left {
+  0%,
+  100% {
+    transform: translateX(-56%) translateY(4%);
+  }
+  35% {
+    transform: translateX(-49%) translateY(-4%);
+  }
+  50% {
+    transform: translateX(-45%) translateY(-10%) rotate(5deg);
+  }
+  70% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes player-highfive-right {
+  0%,
+  100% {
+    transform: translateX(-44%) translateY(4%);
+  }
+  35% {
+    transform: translateX(-51%) translateY(-4%);
+  }
+  50% {
+    transform: translateX(-55%) translateY(-10%) rotate(-5deg);
+  }
+  70% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-card:hover .player-art {
+    animation: none !important;
+    transform: translateX(-50%) translateY(-6%);
+  }
+
+  .ds-card:hover .player-stage[data-pose="celebrate"] .player-art--base,
+  .ds-card:hover .player-stage[data-pose="run"] .player-art--base {
+    opacity: 1;
+  }
+
+  .ds-card:hover .player-art--left,
+  .ds-card:hover .player-art--right {
+    opacity: 0;
+  }
 }
 
 .tournir-card {
   position: relative;
   overflow: hidden;
-  min-height: 280px;
   padding: var(--space-xl);
   border-radius: var(--radius-l);
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
+  min-height: 320px;
+}
+
+.tournir-figure {
+  position: absolute;
+  right: -70px;
+  top: 120px;
+  width: 400px;
+  height: 320px;
+  flex: none;
+}
+
+.tournir-stats {
+  display: flex;
+  gap: var(--space-m);
+  align-items: flex-end;
+  height: 200px;
 }
 
 .fact-card {
@@ -451,7 +726,9 @@ html[data-mood="legends"] .ds-card:hover .player-art {
 .circle-stat {
   width: 120px;
   min-width: 120px;
+  max-width: 160px;
   height: 120px;
+  max-height: 160px;
   border-radius: 1000px;
   background: var(--bg-cards-elements);
   color: var(--text-secondary);
@@ -462,6 +739,12 @@ html[data-mood="legends"] .ds-card:hover .player-art {
   gap: var(--space-m);
   padding: var(--space-m);
   text-align: center;
+  flex: 1 1 120px;
+}
+
+.tournament-hero-stats .circle-stat {
+  flex: 0 0 120px;
+  max-height: 120px;
 }
 
 .circle-stat[data-accent="true"] {
@@ -556,17 +839,37 @@ html[data-mood="legends"] .ds-card:hover .player-art {
 }
 
 @media (max-width: 1200px) {
+  .page-shell {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
   .page-body {
     flex-direction: column;
   }
 
   .left-menu {
     flex-direction: row;
-    min-height: auto;
+    height: auto;
+    justify-content: space-between;
   }
 
   .left-menu-group {
     flex-direction: row;
     border-radius: var(--radius-xl);
+  }
+
+  .row-488,
+  .tournament-hero,
+  .row-goals {
+    height: auto;
+    flex: none;
+    grid-template-columns: 1fr;
+  }
+
+  .col-stack--240 > * {
+    flex: none;
+    height: 240px;
   }
 }

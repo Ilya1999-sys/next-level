@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { AppChrome } from "@/components/navigation/app-chrome";
 import { DotGrid, NextArrow } from "@/components/ui/ds";
+import { PlayerFigure } from "@/components/ui/player-figure";
 
 const MATCHES = [
   { title: "3-3 Hungary", image: "/figma/hungary.png", pose: "run" as const },
@@ -14,13 +15,14 @@ const MATCHES = [
 export function Portugal2016Screen() {
   return (
     <AppChrome crumbs={["Home", "Portugal-2016"]}>
-      <article className="ds-card" style={{ minHeight: 280, display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 20, padding: 28 }}>
-        <div style={{ display: "grid", gap: 20, alignContent: "start" }}>
-          <p className="type-h3">Portugal win Euro</p>
+      <article className="ds-card tournament-hero">
+        <PlayerFigure className="tournament-hero-photo" src="/figma/portugal-hero.png" pose="celebrate" alt="Portugal win Euro 2016" fit="cover" />
+        <div className="tournament-hero-copy">
+          <p className="type-h2">Portugal win Euro</p>
           <p className="type-t3">
             Cristiano Ronaldo was injured and substituted in the final match against France. And the &quot;golden goal&quot; was scored by the striker of the Russian championship.
           </p>
-          <div style={{ display: "flex", gap: 12 }}>
+          <div className="tournament-hero-stats">
             <div className="circle-stat" data-accent="true">
               <p className="type-h2">9</p>
               <p className="type-t3">goals scored</p>
@@ -35,15 +37,14 @@ export function Portugal2016Screen() {
             </div>
           </div>
         </div>
-        <img className="player-art" data-pose="celebrate" src="/figma/portugal-hero.png" alt="Portugal win Euro 2016" style={{ width: "100%", height: "100%", minHeight: 220, objectFit: "contain" }} />
       </article>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1.1fr", gap: 8, minHeight: 360 }}>
-        <div style={{ display: "grid", gap: 8 }}>
+      <div className="row-488">
+        <div className="col-stack col-stack--240">
           <MatchCard {...MATCHES[0]} />
           <MatchCard {...MATCHES[1]} />
         </div>
-        <div style={{ display: "grid", gap: 8 }}>
+        <div className="col-stack col-stack--fill">
           <article className="fact-card">
             <p className="type-t1">Final fact</p>
             <div className="fact-row">
@@ -57,7 +58,7 @@ export function Portugal2016Screen() {
               <p className="type-h2">1</p>
               <p className="type-t2">regular-time victory over Wales in the entire tournament</p>
             </div>
-            <DotGrid total={12} filled={1} />
+            <DotGrid total={9} filled={1} columns={3} />
           </article>
           <article className="fact-card">
             <p className="type-t1">Ronaldo fact</p>
@@ -67,13 +68,13 @@ export function Portugal2016Screen() {
             </div>
           </article>
         </div>
-        <MatchCard {...MATCHES[2]} tall />
+        <MatchCard {...MATCHES[2]} />
       </div>
 
-      <article className="ds-card" style={{ padding: 20, display: "grid", gap: 12 }}>
+      <article className="ds-card discussion-card">
         <div className="card-top" style={{ padding: 0 }}>
           <div className="year-team">
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+            <span className="live-flag">
               <span className="dot-live" />
               <span className="type-t1">Live</span>
             </span>
@@ -83,19 +84,19 @@ export function Portugal2016Screen() {
             <NextArrow />
           </span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "center" }}>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <div className="discussion-body">
+          <div className="discussion-chips">
             <span className="discussion-chip type-t3">Ronaldo goals on tournir</span>
             <span className="discussion-chip type-t3">And if the rules hadn&apos;t changed...</span>
           </div>
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+          <span className="live-flag">
             <span className="dot-live" />
             <span className="type-t1">21 fans discussions</span>
           </span>
         </div>
       </article>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 8 }}>
+      <div className="row-goals">
         <article className="fact-card">
           <p className="type-t1">Goals scored and missed</p>
           <div className="fact-row">
@@ -115,31 +116,32 @@ function MatchCard({
   image,
   href,
   accent,
-  tall,
   pose,
 }: {
   title: string;
   image: string;
   href?: string;
   accent?: boolean;
-  tall?: boolean;
   pose?: "lift" | "run" | "celebrate";
 }) {
   const inner = (
-    <article className="ds-card" data-accent={accent ? "true" : "false"} style={{ minHeight: tall ? 360 : 160, height: "100%", display: "flex", flexDirection: "column" }}>
+    <article className="ds-card team-card" data-accent={accent ? "true" : "false"}>
       <div className="card-top">
-        <p className={accent ? "type-h3" : "type-t1"}>{title}</p>
+        <div className="year-team">
+          <p className={accent ? "type-h3" : "type-t1"}>Match review</p>
+          <p className={accent ? "type-h3" : "type-t1"}>{title}</p>
+        </div>
         <span className="icon-btn" data-inverted={accent ? "true" : "false"} aria-hidden="true">
           <NextArrow />
         </span>
       </div>
-      <img className="player-art" data-pose={pose} src={image} alt={title} style={{ flex: 1, minHeight: 120, objectFit: "cover" }} />
+      <PlayerFigure src={image} pose={pose} alt={title} />
     </article>
   );
 
   if (!href) return inner;
   return (
-    <Link href={href} style={{ display: "block", height: "100%" }}>
+    <Link href={href} className="card-link">
       {inner}
     </Link>
   );

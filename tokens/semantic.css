@@ -70,14 +70,14 @@
 }
 
 html[data-mood="drama"] {
-  --bg-accent-primary: #e10600;
-  --elements-accent: #e10600;
-  --main-default: #e10600;
+  --bg-accent-primary: #ff0901;
+  --elements-accent: #ff0901;
+  --main-default: #ff0901;
 }
 
 html[data-mood="legends"] {
-  --bg-accent-primary: var(--figma-bg-accent-tretiary);
-  --elements-accent: var(--figma-bg-accent-tretiary);
-  --main-default: var(--figma-bg-accent-tretiary);
+  --bg-accent-primary: #ff9e01;
+  --elements-accent: #ff9e01;
+  --main-default: #ff9e01;
   --text-on-accent: var(--figma-bg-accent-secondary);
 }
