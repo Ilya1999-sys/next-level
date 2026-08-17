@@ -4,6 +4,13 @@ Source of truth: Figma file `F3RebM3vrX7z9Pe1DDgDP8`, collection **design**.
 
 If a later chat asks to change UI, use **only** existing Figma component variants, styles, and variables. Do not invent new tokens, radii, or type styles.
 
+## 2026-08-17 — regular type, hug/fill facts, Figma photos
+
+1. Only **Cartograph Mono CF Regular** and **Geneva Regular**. All type styles use weight 400; bold/semibold faces are not loaded.
+2. Home facts (`323:3871`): Champions League card is `flex: 1` (fill the 488 row). Mbappe and Switzerland—Turkey cards are hug. Tournament facts (`323:3890`): Wins fact fills, Final and Ronaldo hug.
+3. Player photos re-exported from Figma. Rest state matches the card crop (`aspect 2048/1365`, featured `h-642`, overflow on the card). Hover only adds a small lift / celebrate / run motion — no scale, no split, no extra crop.
+4. **Legends** uses the color Figma photos (`327:2228`, `327:2532`) by default. Nostalgia keeps the stipple set. Drama rest is stipple; hover crossfades to the color set.
+
 ## 2026-08-17 — fonts, chrome, cards, moods
 
 1. Load **Cartograph Mono CF** (400/600/700/900 woff2) and **Geneva** from `/fonts`. No IBM Plex Mono.
@@ -29,7 +36,7 @@ If a later chat asks to change UI, use **only** existing Figma component variant
    Mood also changes card lineup and player-illustration filter.
 9. Keep this file updated after each design comment.
 10. Ship via git push so Vercel rebuilds.
-11. Fonts from Figma: primary **Cartograph Mono CF**, secondary **Geneva**, served from `/public/fonts`.
+11. Fonts from Figma: primary **Cartograph Mono CF Regular**, secondary **Geneva Regular**, served from `/public/fonts`. All UI type is weight 400.
 
 ## Implementation notes
 

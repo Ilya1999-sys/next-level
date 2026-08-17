@@ -16,7 +16,7 @@ export function Portugal2016Screen() {
   return (
     <AppChrome crumbs={["Home", "Portugal-2016"]}>
       <article className="ds-card tournament-hero">
-        <PlayerFigure className="tournament-hero-photo" src="/figma/portugal-hero.png" pose="celebrate" alt="Portugal win Euro 2016" fit="cover" />
+        <PlayerFigure className="tournament-hero-photo" variant="hero" src="/figma/portugal-hero.png" pose="celebrate" alt="Portugal win Euro 2016" fit="cover" />
         <div className="tournament-hero-copy">
           <p className="type-h2">Portugal win Euro</p>
           <p className="type-t3">
@@ -44,7 +44,7 @@ export function Portugal2016Screen() {
           <MatchCard {...MATCHES[0]} />
           <MatchCard {...MATCHES[1]} />
         </div>
-        <div className="col-stack col-stack--fill">
+        <div className="col-facts">
           <article className="fact-card">
             <p className="type-t1">Final fact</p>
             <div className="fact-row">
@@ -52,7 +52,7 @@ export function Portugal2016Screen() {
               <p className="type-t2">Eder’s extra-time goal beat host nation France in the final.</p>
             </div>
           </article>
-          <article className="fact-card">
+          <article className="fact-card fact-card--fill">
             <p className="type-t1">Wins fact</p>
             <div className="fact-row">
               <p className="type-h2">1</p>
@@ -68,7 +68,7 @@ export function Portugal2016Screen() {
             </div>
           </article>
         </div>
-        <MatchCard {...MATCHES[2]} />
+        <MatchCard {...MATCHES[2]} featured />
       </div>
 
       <article className="ds-card discussion-card">
@@ -117,12 +117,14 @@ function MatchCard({
   href,
   accent,
   pose,
+  featured,
 }: {
   title: string;
   image: string;
   href?: string;
   accent?: boolean;
   pose?: "lift" | "run" | "celebrate";
+  featured?: boolean;
 }) {
   const inner = (
     <article className="ds-card team-card" data-accent={accent ? "true" : "false"}>
@@ -135,7 +137,7 @@ function MatchCard({
           <NextArrow />
         </span>
       </div>
-      <PlayerFigure src={image} pose={pose} alt={title} />
+      <PlayerFigure src={image} pose={pose} alt={title} variant={featured ? "featured" : "card"} />
     </article>
   );
 

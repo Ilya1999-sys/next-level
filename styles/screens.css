@@ -338,8 +338,11 @@
   min-height: 0;
 }
 
-.col-stack--fill > * {
-  flex: 1 1 0;
+.col-facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  height: 100%;
   min-height: 0;
 }
 
@@ -471,181 +474,125 @@
 
 .player-stage {
   position: relative;
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: hidden;
-  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 2048 / 1365;
+  flex: 0 0 auto;
 }
 
 .player-art {
   position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 112%;
-  height: 124%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center 72%;
-  transform: translateX(-50%) translateY(6%);
-  transform-origin: 50% 88%;
-  filter: grayscale(1) contrast(1.08);
-  transition: filter 0.45s ease;
-  will-change: transform;
+  object-position: center top;
+  transform-origin: 50% 80%;
   pointer-events: none;
+  transition: opacity 0.35s ease;
 }
 
 .player-stage[data-fit="contain"] .player-art {
   object-fit: contain;
   object-position: center bottom;
-  width: 100%;
-  height: 118%;
 }
 
-.player-stage--featured .player-art {
+.player-stage--featured {
+  aspect-ratio: auto;
   height: 642px;
-  width: auto;
-  min-width: 112%;
 }
 
-.player-art--left,
-.player-art--right {
+.player-stage--hero {
+  aspect-ratio: auto;
+  height: 100%;
+  min-height: 280px;
+}
+
+.player-stage--float {
+  aspect-ratio: auto;
+  width: 400px;
+  height: 320px;
+}
+
+.player-art--color {
   opacity: 0;
 }
 
-.ds-card:hover .player-art--base[data-pose="lift"] {
-  animation: player-lift 1.15s ease-in-out infinite;
-}
-
-.ds-card:hover .player-stage[data-pose="celebrate"] .player-art--base,
-.ds-card:hover .player-stage[data-pose="run"] .player-art--base {
+html[data-mood="legends"] .player-art--ink {
   opacity: 0;
 }
 
-.ds-card:hover .player-stage[data-pose="celebrate"] .player-art--left,
-.ds-card:hover .player-stage[data-pose="celebrate"] .player-art--right,
-.ds-card:hover .player-stage[data-pose="run"] .player-art--left,
-.ds-card:hover .player-stage[data-pose="run"] .player-art--right {
+html[data-mood="legends"] .player-art--color {
   opacity: 1;
 }
 
-.ds-card:hover .player-art--left[data-pose="celebrate"] {
-  clip-path: inset(0 42% 0 0);
-  animation: player-hug-left 1.25s ease-in-out infinite;
+html[data-mood="drama"] .ds-card:hover .player-art--ink {
+  opacity: 0;
 }
 
-.ds-card:hover .player-art--right[data-pose="celebrate"] {
-  clip-path: inset(0 0 0 42%);
-  animation: player-hug-right 1.25s ease-in-out infinite;
+html[data-mood="drama"] .ds-card:hover .player-art--color {
+  opacity: 1;
 }
 
-.ds-card:hover .player-art--left[data-pose="run"] {
-  clip-path: inset(0 46% 0 0);
-  animation: player-highfive-left 1.2s ease-in-out infinite;
+.ds-card:hover .player-art[data-pose="lift"] {
+  animation: player-lift 1.2s ease-in-out infinite;
 }
 
-.ds-card:hover .player-art--right[data-pose="run"] {
-  clip-path: inset(0 0 0 46%);
-  animation: player-highfive-right 1.2s ease-in-out infinite;
+.ds-card:hover .player-art[data-pose="celebrate"] {
+  animation: player-celebrate 1.25s ease-in-out infinite;
 }
 
-html[data-mood="drama"] .player-art,
-html[data-mood="legends"] .player-art,
-html[data-mood="nostalgia"] .player-art {
-  filter: grayscale(1) contrast(1.08);
-}
-
-html[data-mood="drama"] .ds-card:hover .player-art,
-html[data-mood="legends"] .ds-card:hover .player-art {
-  filter: none;
+.ds-card:hover .player-art[data-pose="run"] {
+  animation: player-run 1.2s ease-in-out infinite;
 }
 
 @keyframes player-lift {
   0%,
   100% {
-    transform: translateX(-50%) translateY(-6%) rotate(-3deg);
+    transform: translateY(0) rotate(0deg);
   }
-  25% {
-    transform: translateX(-48%) translateY(-12%) rotate(4deg);
+  30% {
+    transform: translateY(-10px) rotate(-2deg);
   }
-  50% {
-    transform: translateX(-52%) translateY(-7%) rotate(-5deg);
+  55% {
+    transform: translateY(-4px) rotate(2deg);
+  }
+  80% {
+    transform: translateY(-12px) rotate(-1deg);
+  }
+}
+
+@keyframes player-celebrate {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  70% {
+    transform: translateY(-6px) translateX(4px);
+  }
+}
+
+@keyframes player-run {
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+  35% {
+    transform: translateX(10px) translateY(-4px);
+  }
+  55% {
+    transform: translateX(14px) translateY(-10px);
   }
   75% {
-    transform: translateX(-49%) translateY(-14%) rotate(3deg);
-  }
-}
-
-@keyframes player-hug-left {
-  0%,
-  100% {
-    transform: translateX(-54%) translateY(-2%);
-  }
-  40% {
-    transform: translateX(-47%) translateY(-10%) rotate(-2deg);
-  }
-  70% {
-    transform: translateX(-44%) translateY(-7%) rotate(-3deg);
-  }
-}
-
-@keyframes player-hug-right {
-  0%,
-  100% {
-    transform: translateX(-46%) translateY(-2%);
-  }
-  40% {
-    transform: translateX(-53%) translateY(-10%) rotate(2deg);
-  }
-  70% {
-    transform: translateX(-56%) translateY(-7%) rotate(3deg);
-  }
-}
-
-@keyframes player-highfive-left {
-  0%,
-  100% {
-    transform: translateX(-56%) translateY(4%);
-  }
-  35% {
-    transform: translateX(-49%) translateY(-4%);
-  }
-  50% {
-    transform: translateX(-45%) translateY(-10%) rotate(5deg);
-  }
-  70% {
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-@keyframes player-highfive-right {
-  0%,
-  100% {
-    transform: translateX(-44%) translateY(4%);
-  }
-  35% {
-    transform: translateX(-51%) translateY(-4%);
-  }
-  50% {
-    transform: translateX(-55%) translateY(-10%) rotate(-5deg);
-  }
-  70% {
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(6px) translateY(-2px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .ds-card:hover .player-art {
     animation: none !important;
-    transform: translateX(-50%) translateY(-6%);
-  }
-
-  .ds-card:hover .player-stage[data-pose="celebrate"] .player-art--base,
-  .ds-card:hover .player-stage[data-pose="run"] .player-art--base {
-    opacity: 1;
-  }
-
-  .ds-card:hover .player-art--left,
-  .ds-card:hover .player-art--right {
-    opacity: 0;
   }
 }
 
@@ -683,6 +630,13 @@ html[data-mood="legends"] .ds-card:hover .player-art {
   padding: var(--space-l);
   background: var(--bg-cards);
   border-radius: var(--radius-m);
+  flex: 0 0 auto;
+  height: auto;
+}
+
+.fact-card--fill {
+  flex: 1 0 0;
+  min-height: 0;
 }
 
 .fact-head {
@@ -871,5 +825,13 @@ html[data-mood="legends"] .ds-card:hover .player-art {
   .col-stack--240 > * {
     flex: none;
     height: 240px;
+  }
+
+  .col-facts {
+    height: auto;
+  }
+
+  .fact-card--fill {
+    flex: none;
   }
 }

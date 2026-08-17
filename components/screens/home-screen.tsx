@@ -17,9 +17,9 @@ export function HomeScreen() {
           <TeamCard card={leftTop} />
           <TeamCard card={leftBottom} />
         </div>
-        <div className="col-stack col-stack--fill">
+        <div className="col-facts">
           {catalog.facts.map((fact) => (
-            <article key={`${fact.title}-${fact.value}`} className="fact-card">
+            <article key={`${fact.title}-${fact.value}`} className={fact.dots ? "fact-card fact-card--fill" : "fact-card"}>
               <div style={{ display: "grid", gap: 28 }}>
                 <div className="fact-head">
                   <p className="type-t1">{fact.title}</p>
@@ -71,7 +71,7 @@ export function HomeScreen() {
       </article>
 
       <article className="ds-card tournir-card">
-        <PlayerFigure className="tournir-figure" src={catalog.tournament.image} pose="run" alt="" fit="contain" />
+        <PlayerFigure className="tournir-figure" variant="float" src={catalog.tournament.image} pose="run" alt="" fit="contain" />
         <div className="card-top" style={{ padding: 0, marginBottom: 20, position: "relative", zIndex: 1 }}>
           <div className="year-team" style={{ maxWidth: "70%" }}>
             <p className="type-t1">{catalog.tournament.year}</p>
@@ -129,7 +129,7 @@ function TeamCard({
         </span>
       </div>
       <PlayerFigure
-        className={featured ? "player-stage--featured" : undefined}
+        variant={featured ? "featured" : "card"}
         src={card.image}
         pose={card.pose}
         alt={`${card.team} ${card.year}`}
