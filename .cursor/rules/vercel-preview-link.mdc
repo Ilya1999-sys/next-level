@@ -1,0 +1,16 @@
+---
+description: After every git push, send the Vercel preview URL in chat
+alwaysApply: true
+---
+
+# Vercel preview link
+
+After any commit/push that should rebuild the site, put the live preview URL in the chat reply.
+
+Current preview branch: `cursor/home-player-figma-layout`
+
+Preview alias:
+
+https://next-level-git-cursor-home-player-figma-layout-next-level-1999.vercel.app/
+
+Do not send a unique hashed deployment URL (`…-e81m1gkm5-…`). That URL never updates. Production (`main`) is separate and must not be used unless the user asks to ship production.

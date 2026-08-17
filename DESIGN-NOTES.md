@@ -35,7 +35,7 @@ If a later chat asks to change UI, use **only** existing Figma component variant
    - **Legends** — orange accent `#FF9E01` (Home `327:2228`, Tournament `327:2532`).
    Mood also changes card lineup and player-illustration filter.
 9. Keep this file updated after each design comment.
-10. Ship via git push so Vercel rebuilds.
+10. Ship via git push so Vercel rebuilds. After every push, paste the preview URL in chat: https://next-level-git-cursor-home-player-figma-layout-next-level-1999.vercel.app/ (branch `cursor/home-player-figma-layout`). Do not send hashed unique deployment URLs.
 11. Fonts from Figma: primary **Cartograph Mono CF Regular**, secondary **Geneva Regular**, served from `/public/fonts`. All UI type is weight 400.
 
 ## Implementation notes
