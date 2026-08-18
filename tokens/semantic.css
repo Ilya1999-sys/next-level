@@ -73,11 +73,25 @@ html[data-mood="drama"] {
   --bg-accent-primary: #ff0901;
   --elements-accent: #ff0901;
   --main-default: #ff0901;
+  --bg-page: #1a1010;
+  --bg-cards: #2a1818;
+  --bg-cards-elements: #4a2c2c;
+  --bg-cards-glass: #14040499;
+  --text-primary: #b89a9a;
+  --text-secondary: #fff4f2;
+  --elements-icons: #fff4f2;
 }
 
 html[data-mood="legends"] {
   --bg-accent-primary: #ff9e01;
   --elements-accent: #ff9e01;
   --main-default: #ff9e01;
-  --text-on-accent: var(--figma-bg-accent-secondary);
+  --text-on-accent: #1a1408;
+  --bg-page: #1c1710;
+  --bg-cards: #2a2418;
+  --bg-cards-elements: #4a3d28;
+  --bg-cards-glass: #14100899;
+  --text-primary: #b49a72;
+  --text-secondary: #fff6e8;
+  --elements-icons: #fff6e8;
 }

@@ -4,6 +4,12 @@ Source of truth: Figma file `F3RebM3vrX7z9Pe1DDgDP8`, collection **design**.
 
 If a later chat asks to change UI, use **only** existing Figma component variants, styles, and variables. Do not invent new tokens, radii, or type styles.
 
+## 2026-08-18 — team icons, rate/health, Drama/Legends color+effects
+
+1. Match-view team icons (`team-icon`) sit on `--bg-cards-elements` (`323:3928`). Crests use multiply so the circle follows the mood token.
+2. Rate / Health follow the match layout: label+chevron on the team toggle, Portugal open, France collapsed, 40px crest orbs on `--bg-cards-elements`, Rate has +/−, Health is score-only.
+3. Drama / Legends now change **colors and effects only** (no type, size, or layout). Drama: dark broadcast, red grain/scan, vignette. Legends: warm archive, gold inset, film grain. Nostalgia stays on Figma `design` tokens.
+
 ## 2026-08-18 — comments vs discussion, LIVE, hover video, match panels
 
 1. Design comments go to Git immediately (preview branch). Discussion-only items stay in chat and are not shipped.
@@ -54,7 +60,7 @@ If a later chat asks to change UI, use **only** existing Figma component variant
 - Closed match HUD labels stay white on `--bg-cards`; closed score uses `--bg-page` and `--text-primary`.
 - Open rate-player scores in range 8–10 use `--main-success` `#4ecc91`.
 - Euro 2016 final footage cannot be hosted as official broadcast; the match stage and card hover clips use Mixkit football videos as stand-ins over `match-bg.png`.
-- Profile / player-face exports from Figma came back empty; profile shows initials `IP`, rating rows use letter orbs, team crests use `team-por.png` / `team-fra.png`.
+- Profile exports from Figma came back empty; profile shows initials `IP`. Match-view crests use `team-por.png` / `team-fra.png` on `--bg-cards-elements`.
 - Cartograph Mono CF and Geneva files live in `public/fonts` and are declared in `tokens/fonts.css`.
 
 ## Tokens (design mode)

@@ -49,7 +49,6 @@ export function EuroFinalMatchScreen() {
   const [ratePortugalOpen, setRatePortugalOpen] = useState(true);
   const [healthFranceOpen, setHealthFranceOpen] = useState(false);
   const [healthPortugalOpen, setHealthPortugalOpen] = useState(true);
-  const [healthModeOpen, setHealthModeOpen] = useState(false);
   const [camera, setCamera] = useState<(typeof CAMERAS)[number]>("Player");
   const [ratings, setRatings] = useState<Record<string, number>>(() =>
     Object.fromEntries([...PORTUGAL, ...FRANCE].map((player) => [player.name, player.rating]))
@@ -79,7 +78,9 @@ export function EuroFinalMatchScreen() {
               <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
                 <TeamBadge code="Por" src="/figma/team-por.png" />
                 <div className="match-score" style={{ textAlign: "center" }}>
-                  <p className="type-h2 fact-number">0 - 0</p>
+                  <p className="type-h2 fact-number">
+                    0 <span>-</span> 0
+                  </p>
                   <p className="type-t2">18:45</p>
                 </div>
                 <TeamBadge code="Fra" src="/figma/team-fra.png" reverse />
@@ -147,23 +148,16 @@ export function EuroFinalMatchScreen() {
               name="Portugal"
               open={healthPortugalOpen}
               onToggle={() => setHealthPortugalOpen((value) => !value)}
+              crest="/figma/team-por.png"
               players={PORTUGAL.map((player) => ({ ...player, value: ratings[player.name] }))}
             />
             <TeamBlock
               name="France"
               open={healthFranceOpen}
               onToggle={() => setHealthFranceOpen((value) => !value)}
+              crest="/figma/team-fra.png"
               players={FRANCE.map((player) => ({ ...player, value: ratings[player.name] }))}
             />
-            <TeamBlock name="Mode" open={healthModeOpen} onToggle={() => setHealthModeOpen((value) => !value)}>
-              <div style={{ display: "grid", gap: 12, width: "100%" }}>
-                {CAMERAS.map((item) => (
-                  <TagMood key={item} selected={camera === item} onClick={() => setCamera(item)}>
-                    {item}
-                  </TagMood>
-                ))}
-              </div>
-            </TeamBlock>
           </MatchDrawer>
 
           <MatchDrawer open={rateOpen} onToggle={() => setRateOpen((value) => !value)} label="Rate players" variant="rate">
@@ -172,6 +166,7 @@ export function EuroFinalMatchScreen() {
               name="Portugal"
               open={ratePortugalOpen}
               onToggle={() => setRatePortugalOpen((value) => !value)}
+              crest="/figma/team-por.png"
               players={PORTUGAL.map((player) => ({ ...player, value: ratings[player.name] }))}
               rate
               onRate={bump}
@@ -180,6 +175,7 @@ export function EuroFinalMatchScreen() {
               name="France"
               open={rateFranceOpen}
               onToggle={() => setRateFranceOpen((value) => !value)}
+              crest="/figma/team-fra.png"
               players={FRANCE.map((player) => ({ ...player, value: ratings[player.name] }))}
               rate
               onRate={bump}
@@ -220,29 +216,33 @@ function TeamBlock({
   open,
   onToggle,
   players = [],
+  crest,
   rate,
   onRate,
-  children,
 }: {
   name: string;
   open: boolean;
   onToggle: () => void;
   players?: Array<{ name: string; number: string; position: string; value: number }>;
+  crest?: string;
   rate?: boolean;
   onRate?: (name: string, delta: number) => void;
-  children?: ReactNode;
 }) {
   return (
     <div className={open ? "team-block" : "team-block team-block--closed"}>
-      {open ? <p className="type-t2">{name}</p> : null}
       <button type="button" className="collapse-label" onClick={onToggle} aria-label={`${open ? "Collapse" : "Expand"} ${name}`}>
-        {open ? null : <span className="type-t1">{name}</span>}
+        <span className="type-t1">{name}</span>
         <CollapseIcon direction={open ? "up" : "down"} />
       </button>
-      {open ? children : null}
       {open
         ? players.map((player) => (
-            <PlayerRow key={player.name} {...player} rate={rate} onRate={onRate ? (delta) => onRate(player.name, delta) : undefined} />
+            <PlayerRow
+              key={player.name}
+              {...player}
+              crest={crest}
+              rate={rate}
+              onRate={onRate ? (delta) => onRate(player.name, delta) : undefined}
+            />
           ))
         : null}
     </div>
@@ -254,6 +254,7 @@ function PlayerRow({
   number,
   position,
   value,
+  crest,
   rate,
   onRate,
 }: {
@@ -261,13 +262,16 @@ function PlayerRow({
   number: string;
   position: string;
   value: number;
+  crest?: string;
   rate?: boolean;
   onRate?: (delta: number) => void;
 }) {
   return (
     <div className="player-row">
       <div className="player-row-meta">
-        <span className="profile-orb player-face">{name.slice(0, 1)}</span>
+        <span className="team-icon team-icon--player">
+          {crest ? <img src={crest} alt="" /> : name.slice(0, 1)}
+        </span>
         <div className="player-row-copy">
           <p className="type-h3">{name}</p>
           <p className="type-t2">
@@ -277,7 +281,7 @@ function PlayerRow({
       </div>
       <div className="rating-controls">
         {rate ? (
-          <button type="button" className="collapse-label" aria-label={`Lower rating for ${name}`} onClick={() => onRate?.(-1)}>
+          <button type="button" className="rate-btn" aria-label={`Lower rating for ${name}`} onClick={() => onRate?.(-1)}>
             <DsIcon name="minus" />
           </button>
         ) : null}
@@ -285,7 +289,7 @@ function PlayerRow({
           {value}
         </span>
         {rate ? (
-          <button type="button" className="collapse-label" aria-label={`Raise rating for ${name}`} onClick={() => onRate?.(1)}>
+          <button type="button" className="rate-btn" aria-label={`Raise rating for ${name}`} onClick={() => onRate?.(1)}>
             <DsIcon name="plus" />
           </button>
         ) : null}
@@ -296,8 +300,10 @@ function PlayerRow({
 
 function TeamBadge({ code, src, reverse }: { code: string; src: string; reverse?: boolean }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 12, flexDirection: reverse ? "row-reverse" : "row" }}>
-      <img className="profile-orb" src={src} alt={code} width={72} height={72} />
+    <div className={reverse ? "score-team score-team--reverse" : "score-team"}>
+      <span className="team-icon">
+        <img src={src} alt="" />
+      </span>
       <p className="type-h3">{code}</p>
     </div>
   );
