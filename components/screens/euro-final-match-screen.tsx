@@ -8,22 +8,34 @@ const EURO_2016_FINAL = "https://assets.mixkit.co/videos/43483/43483-720.mp4";
 const CAMERAS = ["Player", "Referee", "Behind goal", "Drone"] as const;
 
 const PORTUGAL = [
-  { name: "Cristiano Ronaldo", meta: "№7 / Forward", rating: 10 },
-  { name: "Pepe", meta: "№3 / Defender", rating: 9 },
-  { name: "Eder", meta: "№9 / Forward", rating: 10 },
-  { name: "Rui Patricio", meta: "№1 / Goalkeeper", rating: 8 },
+  { name: "Cristiano Ronaldo", number: "№7", position: "Forward", rating: 10 },
+  { name: "Pepe", number: "№3", position: "Defender", rating: 9 },
+  { name: "Eder", number: "№9", position: "Forward", rating: 10 },
+  { name: "Rui Patricio", number: "№1", position: "Goalkeeper", rating: 8 },
 ];
 
 const FRANCE = [
-  { name: "Antoine Griezmann", meta: "№7 / Forward", rating: 8 },
-  { name: "Paul Pogba", meta: "№6 / Midfielder", rating: 7 },
-  { name: "Hugo Lloris", meta: "№1 / Goalkeeper", rating: 7 },
+  { name: "Antoine Griezmann", number: "№7", position: "Forward", rating: 8 },
+  { name: "Paul Pogba", number: "№6", position: "Midfielder", rating: 7 },
+  { name: "Hugo Lloris", number: "№1", position: "Goalkeeper", rating: 7 },
 ];
 
-const FACTS = [
-  "Eder’s extra-time goal beat host nation France in the final.",
-  "Cristiano Ronaldo was injured and substituted in the final match against France.",
-  "Portugal needed one regular-time victory over Wales in the entire tournament.",
+const SMART_FACTS = [
+  {
+    tournament: "EURO—2016",
+    title: "Eder from extra time",
+    desc: "Eder’s extra-time goal beat host nation France in the final.",
+  },
+  {
+    tournament: "EURO—2016",
+    title: "Captain leaves the pitch",
+    desc: "Cristiano Ronaldo was injured and substituted in the final match against France.",
+  },
+  {
+    tournament: "EURO—2016",
+    title: "One regular-time win",
+    desc: "Portugal needed one regular-time victory over Wales in the entire tournament.",
+  },
 ];
 
 export function EuroFinalMatchScreen() {
@@ -33,6 +45,10 @@ export function EuroFinalMatchScreen() {
   const [factsOpen, setFactsOpen] = useState(false);
   const [healthOpen, setHealthOpen] = useState(false);
   const [rateOpen, setRateOpen] = useState(false);
+  const [rateFranceOpen, setRateFranceOpen] = useState(false);
+  const [ratePortugalOpen, setRatePortugalOpen] = useState(true);
+  const [healthFranceOpen, setHealthFranceOpen] = useState(false);
+  const [healthPortugalOpen, setHealthPortugalOpen] = useState(true);
   const [camera, setCamera] = useState<(typeof CAMERAS)[number]>("Player");
   const [ratings, setRatings] = useState<Record<string, number>>(() =>
     Object.fromEntries([...PORTUGAL, ...FRANCE].map((player) => [player.name, player.rating]))
@@ -61,16 +77,18 @@ export function EuroFinalMatchScreen() {
               </IconButton>
               <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
                 <TeamBadge code="Por" src="/figma/team-por.png" />
-                <div style={{ textAlign: "center" }}>
-                  <p className="type-h2">0 - 0</p>
+                <div className="match-score" style={{ textAlign: "center" }}>
+                  <p className="type-h2 fact-number">
+                    0 <span>-</span> 0
+                  </p>
                   <p className="type-t2">18:45</p>
                 </div>
                 <TeamBadge code="Fra" src="/figma/team-fra.png" reverse />
               </div>
             </>
           ) : (
-            <div style={{ textAlign: "center" }}>
-              <p className="type-h2">0 - 0</p>
+            <div className="match-score" style={{ textAlign: "center" }}>
+              <p className="type-h2 fact-number">0 - 0</p>
               <p className="type-t2">18:45</p>
             </div>
           )}
@@ -105,120 +123,188 @@ export function EuroFinalMatchScreen() {
       </div>
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 12 }}>
-        <OverlayPanel open={factsOpen} onToggle={() => setFactsOpen((value) => !value)} label="Smart facts">
-          <div style={{ display: "grid", gap: 12, width: 560 }}>
-            {FACTS.map((fact) => (
-              <p key={fact} className="type-t2">
-                {fact}
-              </p>
+        <MatchDrawer open={factsOpen} onToggle={() => setFactsOpen((value) => !value)} label="smart facts" variant="facts">
+          <p className="type-t1">smart facts</p>
+          <div className="smart-facts-list">
+            {SMART_FACTS.map((fact) => (
+              <article key={fact.title} className="smart-fact-card">
+                <span className="live-flag">
+                  <span className="dot-live" />
+                  <span className="type-t1">{fact.tournament}</span>
+                </span>
+                <div className="smart-fact-copy">
+                  <p className="type-h3">{fact.title}</p>
+                  <p className="type-t2">{fact.desc}</p>
+                </div>
+              </article>
             ))}
           </div>
-        </OverlayPanel>
+        </MatchDrawer>
 
         <div style={{ display: "flex", gap: 12, alignItems: "flex-end" }}>
-          <OverlayPanel open={healthOpen} onToggle={() => setHealthOpen((value) => !value)} label="Health players">
-            <div style={{ display: "grid", gap: 8, width: 420 }}>
-              {[...PORTUGAL, ...FRANCE].map((player) => (
-                <div key={player.name} style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
-                  <span className="type-t1">{player.name}</span>
-                  <span className="type-t2">{player.meta}</span>
-                </div>
-              ))}
-            </div>
-          </OverlayPanel>
+          <MatchDrawer open={healthOpen} onToggle={() => setHealthOpen((value) => !value)} label="Health players" variant="health">
+            <p className="type-t1">Health players</p>
+            <TeamBlock
+              name="Portugal"
+              open={healthPortugalOpen}
+              onToggle={() => setHealthPortugalOpen((value) => !value)}
+              crest="/figma/team-por.png"
+              players={PORTUGAL.map((player) => ({ ...player, value: ratings[player.name] }))}
+            />
+            <TeamBlock
+              name="France"
+              open={healthFranceOpen}
+              onToggle={() => setHealthFranceOpen((value) => !value)}
+              crest="/figma/team-fra.png"
+              players={FRANCE.map((player) => ({ ...player, value: ratings[player.name] }))}
+            />
+          </MatchDrawer>
 
-          <OverlayPanel open={rateOpen} onToggle={() => setRateOpen((value) => !value)} label="Rate players" width={500}>
+          <MatchDrawer open={rateOpen} onToggle={() => setRateOpen((value) => !value)} label="Rate players" variant="rate">
             <p className="type-t1">Rate players</p>
-            <p className="type-t2">Portugal</p>
-            {PORTUGAL.map((player) => (
-              <RatingRow key={player.name} {...player} value={ratings[player.name]} onChange={(delta) => bump(player.name, delta)} />
-            ))}
-            <p className="type-t2">France</p>
-            {FRANCE.map((player) => (
-              <RatingRow key={player.name} {...player} value={ratings[player.name]} onChange={(delta) => bump(player.name, delta)} />
-            ))}
-          </OverlayPanel>
+            <TeamBlock
+              name="Portugal"
+              open={ratePortugalOpen}
+              onToggle={() => setRatePortugalOpen((value) => !value)}
+              crest="/figma/team-por.png"
+              players={PORTUGAL.map((player) => ({ ...player, value: ratings[player.name] }))}
+              rate
+              onRate={bump}
+            />
+            <TeamBlock
+              name="France"
+              open={rateFranceOpen}
+              onToggle={() => setRateFranceOpen((value) => !value)}
+              crest="/figma/team-fra.png"
+              players={FRANCE.map((player) => ({ ...player, value: ratings[player.name] }))}
+              rate
+              onRate={bump}
+            />
+          </MatchDrawer>
         </div>
       </div>
     </div>
   );
 }
 
-function OverlayPanel({
+function MatchDrawer({
   open,
   onToggle,
   label,
+  variant,
   children,
-  width,
 }: {
   open: boolean;
   onToggle: () => void;
   label: string;
+  variant: "facts" | "rate" | "health";
   children: ReactNode;
-  width?: number;
 }) {
   return (
-    <div
-      className={open ? "glass-panel" : "opaque-panel"}
-      style={{
-        borderRadius: open ? "var(--radius-m)" : "var(--radius-xs)",
-        padding: open ? 20 : 8,
-        display: "grid",
-        gap: 20,
-        width: open ? width : undefined,
-      }}
-    >
+    <div className={`${open ? "glass-panel" : "opaque-panel"} match-drawer match-drawer--${variant} ${open ? "match-drawer--open" : "match-drawer--closed"}`}>
       {open ? children : null}
-      <button type="button" className="collapse-label" onClick={onToggle}>
-        <span className="type-t1">{label}</span>
+      <button type="button" className="collapse-label" onClick={onToggle} aria-label={open ? `Collapse ${label}` : `Open ${label}`}>
+        {open ? null : <span className="type-t1">{label}</span>}
         <CollapseIcon direction={open ? "down" : "up"} />
       </button>
     </div>
   );
 }
 
-function TeamBadge({ code, src, reverse }: { code: string; src: string; reverse?: boolean }) {
+function TeamBlock({
+  name,
+  open,
+  onToggle,
+  players = [],
+  crest,
+  rate,
+  onRate,
+}: {
+  name: string;
+  open: boolean;
+  onToggle: () => void;
+  players?: Array<{ name: string; number: string; position: string; value: number }>;
+  crest?: string;
+  rate?: boolean;
+  onRate?: (name: string, delta: number) => void;
+}) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 12, flexDirection: reverse ? "row-reverse" : "row" }}>
-      <img className="profile-orb" src={src} alt={code} width={72} height={72} />
-      <p className="type-h3">{code}</p>
+    <div className={open ? "team-block" : "team-block team-block--closed"}>
+      <button type="button" className="collapse-label" onClick={onToggle} aria-label={`${open ? "Collapse" : "Expand"} ${name}`}>
+        <span className="type-t1">{name}</span>
+        <CollapseIcon direction={open ? "up" : "down"} />
+      </button>
+      {open
+        ? players.map((player) => (
+            <PlayerRow
+              key={player.name}
+              {...player}
+              crest={crest}
+              rate={rate}
+              onRate={onRate ? (delta) => onRate(player.name, delta) : undefined}
+            />
+          ))
+        : null}
     </div>
   );
 }
 
-function RatingRow({
+function PlayerRow({
   name,
-  meta,
+  number,
+  position,
   value,
-  onChange,
+  crest,
+  rate,
+  onRate,
 }: {
   name: string;
-  meta: string;
+  number: string;
+  position: string;
   value: number;
-  onChange: (delta: number) => void;
+  crest?: string;
+  rate?: boolean;
+  onRate?: (delta: number) => void;
 }) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 12, alignItems: "center", width: "100%" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <span className="profile-orb" style={{ width: 40, height: 40, fontSize: 12 }}>
-          {name.slice(0, 1)}
+    <div className="player-row">
+      <div className="player-row-meta">
+        <span className="team-icon team-icon--player">
+          {crest ? <img src={crest} alt="" /> : name.slice(0, 1)}
         </span>
-        <div>
+        <div className="player-row-copy">
           <p className="type-h3">{name}</p>
-          <p className="type-t2">{meta}</p>
+          <p className="type-t2">
+            {number} / {position}
+          </p>
         </div>
       </div>
-      <div style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
-        <button type="button" className="collapse-label" aria-label={`Lower rating for ${name}`} onClick={() => onChange(-1)}>
-          <DsIcon name="minus" />
-        </button>
+      <div className="rating-controls">
+        {rate ? (
+          <button type="button" className="rate-btn" aria-label={`Lower rating for ${name}`} onClick={() => onRate?.(-1)}>
+            <DsIcon name="minus" />
+          </button>
+        ) : null}
         <span className="score-icon type-h3" data-range={value >= 8 ? "high" : "mid"}>
           {value}
         </span>
-        <button type="button" className="collapse-label" aria-label={`Raise rating for ${name}`} onClick={() => onChange(1)}>
-          <DsIcon name="plus" />
-        </button>
+        {rate ? (
+          <button type="button" className="rate-btn" aria-label={`Raise rating for ${name}`} onClick={() => onRate?.(1)}>
+            <DsIcon name="plus" />
+          </button>
+        ) : null}
       </div>
+    </div>
+  );
+}
+
+function TeamBadge({ code, src, reverse }: { code: string; src: string; reverse?: boolean }) {
+  return (
+    <div className={reverse ? "score-team score-team--reverse" : "score-team"}>
+      <span className="team-icon">
+        <img src={src} alt="" />
+      </span>
+      <p className="type-h3">{code}</p>
     </div>
   );
 }

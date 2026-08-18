@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { AppChrome } from "@/components/navigation/app-chrome";
 import { useMoodCatalog } from "@/lib/mood/catalog";
 import { DotGrid, IconButton, NextArrow } from "@/components/ui/ds";
+import { HoverPlayerCard } from "@/components/ui/hover-player-card";
+import { PlayerFigure } from "@/components/ui/player-figure";
 
 export function HomeScreen() {
   const catalog = useMoodCatalog();
@@ -11,33 +12,44 @@ export function HomeScreen() {
 
   return (
     <AppChrome crumbs={["Home"]}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1fr)",
-          gap: 8,
-          minHeight: 488,
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <TeamCard card={leftTop} height={240} />
-          <TeamCard card={leftBottom} height={240} />
+      <div className="row-488">
+        <div className="col-stack col-stack--240">
+          <HoverPlayerCard
+            year={leftTop.year}
+            team={leftTop.team}
+            image={leftTop.image}
+            fit={leftTop.objectFit}
+            video={leftTop.video}
+            href={leftTop.href}
+            accent={leftTop.accent}
+            alt={`${leftTop.team} ${leftTop.year}`}
+          />
+          <HoverPlayerCard
+            year={leftBottom.year}
+            team={leftBottom.team}
+            image={leftBottom.image}
+            fit={leftBottom.objectFit}
+            video={leftBottom.video}
+            href={leftBottom.href}
+            accent={leftBottom.accent}
+            alt={`${leftBottom.team} ${leftBottom.year}`}
+          />
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div className="col-facts">
           {catalog.facts.map((fact) => (
-            <article key={`${fact.title}-${fact.value}`} className="fact-card" style={{ flex: fact.dots ? 1 : undefined }}>
-              <div style={{ display: "grid", gap: 28 }}>
+            <article key={`${fact.title}-${fact.value}`} className={fact.dots ? "fact-card fact-card--fill" : "fact-card"}>
+              <div className="fact-copy">
                 <div className="fact-head">
                   <p className="type-t1">{fact.title}</p>
                   {fact.tournament ? (
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                    <span className="live-flag">
                       <span className="dot-live" />
                       <span className="type-t1">{fact.tournament}</span>
                     </span>
                   ) : null}
                 </div>
                 <div className="fact-row">
-                  <p className="type-h2">{fact.value}</p>
+                  <p className="type-h2 fact-number">{fact.value}</p>
                   <p className="type-t2">{fact.text}</p>
                 </div>
               </div>
@@ -45,13 +57,23 @@ export function HomeScreen() {
             </article>
           ))}
         </div>
-        <TeamCard card={featured} tall />
+        <HoverPlayerCard
+          featured
+          year={featured.year}
+          team={featured.team}
+          image={featured.image}
+          fit={featured.objectFit}
+          video={featured.video}
+          href={featured.href}
+          accent={featured.accent}
+          alt={`${featured.team} ${featured.year}`}
+        />
       </div>
 
-      <article className="ds-card" style={{ padding: 20, display: "grid", gap: 12 }}>
+      <article className="ds-card discussion-card">
         <div className="card-top" style={{ padding: 0 }}>
           <div className="year-team">
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+            <span className="live-flag">
               <span className="dot-live" />
               <span className="type-t1">Live</span>
             </span>
@@ -61,15 +83,15 @@ export function HomeScreen() {
             <NextArrow />
           </IconButton>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "center" }}>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <div className="discussion-body">
+          <div className="discussion-chips">
             {catalog.live.chips.map((chip) => (
               <span key={chip} className="discussion-chip type-t3">
                 {chip}
               </span>
             ))}
           </div>
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+          <span className="live-flag">
             <span className="dot-live" />
             <span className="type-t1">{catalog.live.fans}</span>
           </span>
@@ -77,8 +99,8 @@ export function HomeScreen() {
       </article>
 
       <article className="ds-card tournir-card">
-        <img className="player-art" data-pose="run" src={catalog.tournament.image} alt="" style={{ position: "absolute", right: -70, top: 80, width: 400, height: 320, objectFit: "contain" }} />
-        <div className="card-top" style={{ padding: 0, marginBottom: 20 }}>
+        <PlayerFigure className="tournir-figure" variant="float" src={catalog.tournament.image} alt="" fit="contain" />
+        <div className="card-top" style={{ padding: 0, marginBottom: 20, position: "relative", zIndex: 1 }}>
           <div className="year-team" style={{ maxWidth: "70%" }}>
             <p className="type-t1">{catalog.tournament.year}</p>
             <p className="type-t1">{catalog.tournament.title}</p>
@@ -87,23 +109,32 @@ export function HomeScreen() {
             <NextArrow />
           </IconButton>
         </div>
-        <div style={{ display: "flex", gap: 12, alignItems: "flex-end", minHeight: 160 }}>
+        <div className="tournir-stats" style={{ position: "relative", zIndex: 1 }}>
           {catalog.tournament.stats.map((stat) => (
             <div key={stat.label} className="circle-stat" data-accent={stat.accent ? "true" : "false"}>
-              <p className="type-h2">{stat.value}</p>
+              <p className="type-h2 fact-number">{stat.value}</p>
               <p className="type-t3">{stat.label}</p>
             </div>
           ))}
         </div>
       </article>
 
-      <div style={{ display: "flex", gap: 8, minHeight: 240 }}>
-        <TeamCard card={brazil} fill />
-        <article className="fact-card" style={{ flex: 1 }}>
-          <div style={{ display: "grid", gap: 28 }}>
+      <div className="row-bottom">
+        <HoverPlayerCard
+          year={brazil.year}
+          team={brazil.team}
+          image={brazil.image}
+          fit={brazil.objectFit}
+          video={brazil.video}
+          href={brazil.href}
+          accent={brazil.accent}
+          alt={`${brazil.team} ${brazil.year}`}
+        />
+        <article className="fact-card">
+          <div className="fact-copy">
             <p className="type-t1">{catalog.comeback.title}</p>
             <div className="fact-row">
-              <p className="type-h2">{catalog.comeback.value}</p>
+              <p className="type-h2 fact-number">{catalog.comeback.value}</p>
               <p className="type-t2">{catalog.comeback.text}</p>
             </div>
           </div>
@@ -114,45 +145,4 @@ export function HomeScreen() {
       </div>
     </AppChrome>
   );
-}
-
-function TeamCard({
-  card,
-  height,
-  tall,
-  fill,
-}: {
-  card: ReturnType<typeof useMoodCatalog>["teams"][number];
-  height?: number;
-  tall?: boolean;
-  fill?: boolean;
-}) {
-  const inner = (
-    <article
-      className="ds-card"
-      data-accent={card.accent ? "true" : "false"}
-      style={{ height: height ?? (tall ? "100%" : fill ? "100%" : undefined), minHeight: fill ? 240 : undefined, display: "flex", flexDirection: "column" }}
-    >
-      <div className="card-top">
-        <div className="year-team">
-          <p className={card.accent ? "type-h3" : "type-t1"}>{card.year}</p>
-          <p className={card.accent ? "type-h3" : "type-t1"}>{card.team}</p>
-        </div>
-        <span className="icon-btn" data-inverted={card.accent ? "true" : "false"} aria-hidden="true">
-          <NextArrow />
-        </span>
-      </div>
-      <img className="player-art" data-pose={card.pose} src={card.image} alt={`${card.team} ${card.year}`} style={{ flex: 1, minHeight: 140, objectFit: card.objectFit ?? "cover" }} />
-    </article>
-  );
-
-  if (card.href) {
-    return (
-      <Link href={card.href} style={{ display: "block", height: tall || fill ? "100%" : undefined }}>
-        {inner}
-      </Link>
-    );
-  }
-
-  return inner;
 }

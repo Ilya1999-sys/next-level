@@ -1,3 +1,4 @@
+@import "../tokens/fonts.css";
 @import "../tokens/figma.css";
 @import "../tokens/semantic.css";
 @import "../styles/screens.css";
@@ -20,6 +21,7 @@ body {
   font-family: var(--font-family-primary);
   min-height: 100vh;
   line-height: var(--line-height-t1);
+  font-synthesis: none;
 }
 
 a {
@@ -33,4 +35,8 @@ button {
 
 img {
   max-width: 100%;
+}
+
+.player-art {
+  max-width: none;
 }
