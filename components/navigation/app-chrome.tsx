@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMood, type Mood } from "@/components/mood/mood-provider";
 import {
@@ -30,16 +31,16 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
     <div className="page-shell">
       <header className="top-menu">
         <div className="top-menu-brand">
-          <div className="logo-a" aria-hidden="true">
+          <Link href="/" className="logo-a" aria-label="Home">
             <img src="/figma/logo.svg" alt="" width={88} height={44} />
-          </div>
+          </Link>
           <div className="top-menu-copy">
             <p className="type-h1">Your mood, your match</p>
             <div className="crumbs type-t2">
               {crumbs.map((crumb, index) => (
                 <span key={`${crumb}-${index}`}>
                   {index > 0 ? " / " : null}
-                  {crumb}
+                  {crumb === "Home" ? <Link href="/">Home</Link> : crumb}
                 </span>
               ))}
             </div>

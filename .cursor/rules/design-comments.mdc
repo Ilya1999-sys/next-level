@@ -1,0 +1,18 @@
+---
+description: Design comments go to git immediately; discussion-only stays in chat
+alwaysApply: true
+---
+
+# Design comments vs discussion
+
+When the user sends design comments, implementation notes, Figma fixes, or “внеси эти изменения”:
+
+- Apply them in the repo immediately.
+- Commit and push to the preview branch (`cursor/home-player-figma-layout` unless told otherwise).
+- After push, paste this preview URL in chat: https://next-level-git-cursor-home-player-figma-layout-next-level-1999.vercel.app/
+- Do not send hashed unique Vercel URLs.
+
+When the user marks something as discussion-only (“отдельный момент для обсуждения”, “не в прод”, “просто поразмышлять”):
+
+- Answer in chat only.
+- Do not change code, tokens, rules, or Git for that part.

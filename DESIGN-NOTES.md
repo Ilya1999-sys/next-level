@@ -4,11 +4,21 @@ Source of truth: Figma file `F3RebM3vrX7z9Pe1DDgDP8`, collection **design**.
 
 If a later chat asks to change UI, use **only** existing Figma component variants, styles, and variables. Do not invent new tokens, radii, or type styles.
 
+## 2026-08-18 — comments vs discussion, LIVE, hover video, match panels
+
+1. Design comments go to Git immediately (preview branch). Discussion-only items stay in chat and are not shipped.
+2. LIVE discussion card hugs its content (`flex: 0 0 auto`, padding 20, gap 12). Chips stay `nowrap` and wrap to a new row if needed instead of clipping the card height.
+3. Top logo and the `Home` crumb always link to `/`.
+4. Player-card hover no longer translates the photo. On hover (Drama / Legends / Nostalgia) the still + labels hide and a muted looping match clip fills the card; the arrow button stays.
+5. Player photos fill the remaining card width (`width: 100%`, `object-cover`). Featured cards use the same fill instead of a fixed 642 crop that overflowed.
+6. Fact numbers (`15`, `6—5`, `9-5`, match `0 - 0`) are `whitespace-nowrap` and do not shrink.
+7. Match HUD: Smart facts closed = opaque + label + chevron up. Open = glass, title at top, three `--bg-cards-elements` fact cards, chevron-only collapse at the bottom (`310:5667`). Rate / Health (`310:4144`): Rate has +/−, Health is score-only; Portugal starts open, France (and Mode in Health) start collapsed.
+
 ## 2026-08-17 — regular type, hug/fill facts, Figma photos
 
 1. Only **Cartograph Mono CF Regular** and **Geneva Regular**. All type styles use weight 400; bold/semibold faces are not loaded.
 2. Home facts (`323:3871`): Champions League card is `flex: 1` (fill the 488 row). Mbappe and Switzerland—Turkey cards are hug. Tournament facts (`323:3890`): Wins fact fills, Final and Ronaldo hug.
-3. Player photos re-exported from Figma. Rest state matches the card crop (`aspect 2048/1365`, featured `h-642`, overflow on the card). Hover only adds a small lift / celebrate / run motion — no scale, no split, no extra crop.
+3. Player photos fill the card width (`object-cover`). Hover replaces the still with a match clip; the arrow stays.
 4. **Legends** uses the color Figma photos (`327:2228`, `327:2532`) by default. Nostalgia keeps the stipple set. Drama rest is stipple; hover crossfades to the color set.
 
 ## 2026-08-17 — fonts, chrome, cards, moods
@@ -16,8 +26,8 @@ If a later chat asks to change UI, use **only** existing Figma component variant
 1. Load **Cartograph Mono CF** (400/600/700/900 woff2) and **Geneva** from `/fonts`. No IBM Plex Mono.
 2. Left menu fills the remaining viewport height (`100dvh` page shell). The two `left-menu-group` blocks stay fully visible; extra height is the gap between them (`justify-content: space-between`). Cards scroll in `.cards-all`.
 3. Card heights from Home `323:3871` and Tournament `323:3890`: first row `488` / `0.8fr 1fr 1fr`, small cards `240`, featured `488` with image `642` clipped, tournament padding `28`, image `400×320` at `right: -70; top: 120`, stats row `200`, circles `120–160`. Tournament hero is photo left `2fr` / copy right `3fr`, H2 title, match row same `488`, labels “Match review” + score, wins fact `3×3` dots.
-4. Player hover no longer scales. Motion continues the crop: `lift` (trophy up + shake), `celebrate` (halves rise and close = hug), `run` (halves run in and reach = high-five). Stage overflows hidden so figures are not clipped by scale.
-5. **Drama** accent `#FF0901`. **Legends** accent `#FF9E01`. Resting player art stays grayscale; hover removes the filter so color in the file shows through. Same pose animation as Nostalgia. Current Figma PNG exports are near-grayscale stipple, so hover color only appears if a later export has chroma.
+4. Player hover plays a match clip inside the card. The arrow button stays; year/team and the photo hide.
+5. **Drama** accent `#FF0901`. **Legends** accent `#FF9E01`. Resting player art stays grayscale; hover reveals the color set under the match clip. Current Figma PNG exports are near-grayscale stipple, so color only appears if a later export has chroma.
 6. Preview deploys from branch `cursor/home-player-figma-layout`. Unique hashed Vercel URLs do not update; production alias updates only on Production (`main`).
 
 ## 2026-08-14 — rebuild from new concept
@@ -28,7 +38,7 @@ If a later chat asks to change UI, use **only** existing Figma component variant
 4. Arrow on card `/2016 Portugal` → `/portugal-2016` (`323:3890`).
 5. Arrow on card `Match review 1-0 France` → `/portugal-2016/france` (`323:3918`). Background is **video** of Euro 2016 final Portugal vs France, not the still.
 6. Opened match overlays: `323:3928`. Collapse controls toggle panels. **Closed** panels use opaque `--bg-cards` (score closed uses `--bg-page`). **Open** panels use glass `--bg-cards-glass` (`#00000066`) + screen blur 20px from left-menu. Figma `effect/glass/frost` is `4` (shader units); CSS blur follows the 20px used on screens.
-7. Player illustrations from `323:6707` must “continue the pose” on card hover (`lift` / `run` / `celebrate`).
+7. Player illustrations from `323:6707` show stills at rest. On card hover the still is replaced by a match video; the arrow stays.
 8. Top menu moods (`302:1993`):
    - **Nostalgia** — Figma as drawn, accent `--bg-accent-primary` `#012fff`.
    - **Drama** — red accent `#FF0901`.
@@ -43,7 +53,7 @@ If a later chat asks to change UI, use **only** existing Figma component variant
 - Icons are Figma paths from `278:1302`, with the component-set chrome stripped so `currentColor` works on inverted buttons.
 - Closed match HUD labels stay white on `--bg-cards`; closed score uses `--bg-page` and `--text-primary`.
 - Open rate-player scores in range 8–10 use `--main-success` `#4ecc91`.
-- Euro 2016 final footage cannot be hosted as official broadcast; the match stage uses a Mixkit football clip as a stand-in over `match-bg.png`.
+- Euro 2016 final footage cannot be hosted as official broadcast; the match stage and card hover clips use Mixkit football videos as stand-ins over `match-bg.png`.
 - Profile / player-face exports from Figma came back empty; profile shows initials `IP`, rating rows use letter orbs, team crests use `team-por.png` / `team-fra.png`.
 - Cartograph Mono CF and Geneva files live in `public/fonts` and are declared in `tokens/fonts.css`.
 

@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { AppChrome } from "@/components/navigation/app-chrome";
 import { useMoodCatalog } from "@/lib/mood/catalog";
 import { DotGrid, IconButton, NextArrow } from "@/components/ui/ds";
+import { HoverPlayerCard } from "@/components/ui/hover-player-card";
 import { PlayerFigure } from "@/components/ui/player-figure";
 
 export function HomeScreen() {
@@ -14,13 +14,31 @@ export function HomeScreen() {
     <AppChrome crumbs={["Home"]}>
       <div className="row-488">
         <div className="col-stack col-stack--240">
-          <TeamCard card={leftTop} />
-          <TeamCard card={leftBottom} />
+          <HoverPlayerCard
+            year={leftTop.year}
+            team={leftTop.team}
+            image={leftTop.image}
+            fit={leftTop.objectFit}
+            video={leftTop.video}
+            href={leftTop.href}
+            accent={leftTop.accent}
+            alt={`${leftTop.team} ${leftTop.year}`}
+          />
+          <HoverPlayerCard
+            year={leftBottom.year}
+            team={leftBottom.team}
+            image={leftBottom.image}
+            fit={leftBottom.objectFit}
+            video={leftBottom.video}
+            href={leftBottom.href}
+            accent={leftBottom.accent}
+            alt={`${leftBottom.team} ${leftBottom.year}`}
+          />
         </div>
         <div className="col-facts">
           {catalog.facts.map((fact) => (
             <article key={`${fact.title}-${fact.value}`} className={fact.dots ? "fact-card fact-card--fill" : "fact-card"}>
-              <div style={{ display: "grid", gap: 28 }}>
+              <div className="fact-copy">
                 <div className="fact-head">
                   <p className="type-t1">{fact.title}</p>
                   {fact.tournament ? (
@@ -31,7 +49,7 @@ export function HomeScreen() {
                   ) : null}
                 </div>
                 <div className="fact-row">
-                  <p className="type-h2">{fact.value}</p>
+                  <p className="type-h2 fact-number">{fact.value}</p>
                   <p className="type-t2">{fact.text}</p>
                 </div>
               </div>
@@ -39,7 +57,17 @@ export function HomeScreen() {
             </article>
           ))}
         </div>
-        <TeamCard card={featured} featured />
+        <HoverPlayerCard
+          featured
+          year={featured.year}
+          team={featured.team}
+          image={featured.image}
+          fit={featured.objectFit}
+          video={featured.video}
+          href={featured.href}
+          accent={featured.accent}
+          alt={`${featured.team} ${featured.year}`}
+        />
       </div>
 
       <article className="ds-card discussion-card">
@@ -71,7 +99,7 @@ export function HomeScreen() {
       </article>
 
       <article className="ds-card tournir-card">
-        <PlayerFigure className="tournir-figure" variant="float" src={catalog.tournament.image} pose="run" alt="" fit="contain" />
+        <PlayerFigure className="tournir-figure" variant="float" src={catalog.tournament.image} alt="" fit="contain" />
         <div className="card-top" style={{ padding: 0, marginBottom: 20, position: "relative", zIndex: 1 }}>
           <div className="year-team" style={{ maxWidth: "70%" }}>
             <p className="type-t1">{catalog.tournament.year}</p>
@@ -84,7 +112,7 @@ export function HomeScreen() {
         <div className="tournir-stats" style={{ position: "relative", zIndex: 1 }}>
           {catalog.tournament.stats.map((stat) => (
             <div key={stat.label} className="circle-stat" data-accent={stat.accent ? "true" : "false"}>
-              <p className="type-h2">{stat.value}</p>
+              <p className="type-h2 fact-number">{stat.value}</p>
               <p className="type-t3">{stat.label}</p>
             </div>
           ))}
@@ -92,12 +120,21 @@ export function HomeScreen() {
       </article>
 
       <div className="row-bottom">
-        <TeamCard card={brazil} />
+        <HoverPlayerCard
+          year={brazil.year}
+          team={brazil.team}
+          image={brazil.image}
+          fit={brazil.objectFit}
+          video={brazil.video}
+          href={brazil.href}
+          accent={brazil.accent}
+          alt={`${brazil.team} ${brazil.year}`}
+        />
         <article className="fact-card">
-          <div style={{ display: "grid", gap: 28 }}>
+          <div className="fact-copy">
             <p className="type-t1">{catalog.comeback.title}</p>
             <div className="fact-row">
-              <p className="type-h2">{catalog.comeback.value}</p>
+              <p className="type-h2 fact-number">{catalog.comeback.value}</p>
               <p className="type-t2">{catalog.comeback.text}</p>
             </div>
           </div>
@@ -108,43 +145,4 @@ export function HomeScreen() {
       </div>
     </AppChrome>
   );
-}
-
-function TeamCard({
-  card,
-  featured,
-}: {
-  card: ReturnType<typeof useMoodCatalog>["teams"][number];
-  featured?: boolean;
-}) {
-  const inner = (
-    <article className="ds-card team-card" data-accent={card.accent ? "true" : "false"}>
-      <div className="card-top">
-        <div className="year-team">
-          <p className={card.accent ? "type-h3" : "type-t1"}>{card.year}</p>
-          <p className={card.accent ? "type-h3" : "type-t1"}>{card.team}</p>
-        </div>
-        <span className="icon-btn" data-inverted={card.accent ? "true" : "false"} aria-hidden="true">
-          <NextArrow />
-        </span>
-      </div>
-      <PlayerFigure
-        variant={featured ? "featured" : "card"}
-        src={card.image}
-        pose={card.pose}
-        alt={`${card.team} ${card.year}`}
-        fit={card.objectFit ?? "cover"}
-      />
-    </article>
-  );
-
-  if (card.href) {
-    return (
-      <Link href={card.href} className="card-link">
-        {inner}
-      </Link>
-    );
-  }
-
-  return inner;
 }

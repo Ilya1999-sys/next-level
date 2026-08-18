@@ -7,6 +7,8 @@ alwaysApply: true
 
 After any commit/push that should rebuild the site, put the live preview URL in the chat reply.
 
+Design comments and Figma fixes are committed and pushed immediately. Discussion-only items stay in chat and are not shipped.
+
 Current preview branch: `cursor/home-player-figma-layout`
 
 Preview alias:

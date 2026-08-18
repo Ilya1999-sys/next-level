@@ -25,8 +25,8 @@ export function PlayerFigure({
 
   return (
     <div className={stageClass} data-pose={pose} data-fit={fit}>
-      <img className="player-art player-art--ink" data-pose={pose} src={src} alt={alt} />
-      <img className="player-art player-art--color" data-pose={pose} src={colorSrc} alt="" aria-hidden="true" />
+      <img className="player-art player-art--ink" src={src} alt={alt} />
+      <img className="player-art player-art--color" src={colorSrc} alt="" aria-hidden="true" />
     </div>
   );
 }

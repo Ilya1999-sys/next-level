@@ -1,5 +1,13 @@
 import { useMood } from "@/components/mood/mood-provider";
 
+export const MATCH_VIDEO = {
+  duel: "https://assets.mixkit.co/videos/43483/43483-720.mp4",
+  dribble: "https://assets.mixkit.co/videos/43484/43484-720.mp4",
+  penalty: "https://assets.mixkit.co/videos/43492/43492-720.mp4",
+  goal: "https://assets.mixkit.co/videos/43499/43499-720.mp4",
+  bicycle: "https://assets.mixkit.co/videos/2916/2916-720.mp4",
+} as const;
+
 export type TeamCard = {
   year: string;
   team: string;
@@ -7,7 +15,7 @@ export type TeamCard = {
   href?: string;
   accent?: boolean;
   objectFit?: "cover" | "contain";
-  pose?: "lift" | "run" | "celebrate";
+  video?: string;
 };
 
 export type FactCard = {
@@ -34,10 +42,10 @@ type Catalog = {
 const CATALOG: Record<string, Catalog> = {
   nostalgia: {
     teams: [
-      { year: "/2009", team: "Barcelona", image: "/figma/barcelona.png", pose: "celebrate" },
-      { year: "/2006", team: "France", image: "/figma/france-2006.png", objectFit: "contain", pose: "run" },
-      { year: "/2016", team: "Portugal", image: "/figma/portugal-2016.png", href: "/portugal-2016", accent: true, pose: "lift" },
-      { year: "/2014", team: "Brazil", image: "/figma/brazil-2014.png", objectFit: "contain", pose: "celebrate" },
+      { year: "/2009", team: "Barcelona", image: "/figma/barcelona.png", video: MATCH_VIDEO.dribble },
+      { year: "/2006", team: "France", image: "/figma/france-2006.png", objectFit: "contain", video: MATCH_VIDEO.penalty },
+      { year: "/2016", team: "Portugal", image: "/figma/portugal-2016.png", href: "/portugal-2016", accent: true, video: MATCH_VIDEO.duel },
+      { year: "/2014", team: "Brazil", image: "/figma/brazil-2014.png", objectFit: "contain", video: MATCH_VIDEO.bicycle },
     ],
     facts: [
       { title: "Nostalgia fact", value: "15", text: "Champions League Cups won by Real Madrid", dots: { total: 12, filled: 8 } },
@@ -68,10 +76,10 @@ const CATALOG: Record<string, Catalog> = {
   },
   drama: {
     teams: [
-      { year: "/2016", team: "France", image: "/figma/france-final.png", href: "/portugal-2016/france", accent: true, pose: "celebrate" },
-      { year: "/2006", team: "Italy", image: "/figma/france-2006.png", objectFit: "contain", pose: "run" },
-      { year: "/2014", team: "Brazil", image: "/figma/brazil-2014.png", pose: "run" },
-      { year: "/2008", team: "Russia", image: "/figma/russia-2008.png", objectFit: "contain", pose: "lift" },
+      { year: "/2016", team: "France", image: "/figma/france-final.png", href: "/portugal-2016/france", accent: true, video: MATCH_VIDEO.duel },
+      { year: "/2006", team: "Italy", image: "/figma/france-2006.png", objectFit: "contain", video: MATCH_VIDEO.penalty },
+      { year: "/2014", team: "Brazil", image: "/figma/brazil-2014.png", video: MATCH_VIDEO.goal },
+      { year: "/2008", team: "Russia", image: "/figma/russia-2008.png", objectFit: "contain", video: MATCH_VIDEO.bicycle },
     ],
     facts: [
       { title: "Drama fact", value: "109", text: "Eder scored the only goal in extra time of the final", dots: { total: 12, filled: 1 } },
@@ -102,10 +110,10 @@ const CATALOG: Record<string, Catalog> = {
   },
   legends: {
     teams: [
-      { year: "/2016", team: "Portugal", image: "/figma/portugal-2016.png", href: "/portugal-2016", accent: true, pose: "lift" },
-      { year: "/2009", team: "Barcelona", image: "/figma/barcelona.png", pose: "celebrate" },
-      { year: "/2006", team: "France", image: "/figma/france-2006.png", objectFit: "contain", pose: "run" },
-      { year: "/2014", team: "Brazil", image: "/figma/brazil-2014.png", objectFit: "contain", pose: "celebrate" },
+      { year: "/2016", team: "Portugal", image: "/figma/portugal-2016.png", href: "/portugal-2016", accent: true, video: MATCH_VIDEO.duel },
+      { year: "/2009", team: "Barcelona", image: "/figma/barcelona.png", video: MATCH_VIDEO.dribble },
+      { year: "/2006", team: "France", image: "/figma/france-2006.png", objectFit: "contain", video: MATCH_VIDEO.penalty },
+      { year: "/2014", team: "Brazil", image: "/figma/brazil-2014.png", objectFit: "contain", video: MATCH_VIDEO.bicycle },
     ],
     facts: [
       { title: "Legend fact", value: "25", text: "minutes Ronaldo stayed on the pitch in the final", dots: { total: 12, filled: 10 } },
