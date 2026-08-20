@@ -3,9 +3,10 @@
 import { useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { CollapseIcon, DsIcon, IconButton, TagMood } from "@/components/ui/ds";
+import { HIGHLIGHTS, youtubeEmbedSrc } from "@/lib/media/highlights";
 
-const EURO_2016_FINAL = "https://assets.mixkit.co/videos/43483/43483-720.mp4";
 const CAMERAS = ["Player", "Referee", "Behind goal", "Drone"] as const;
+type HudKey = "score" | "mode" | "facts" | "health" | "rate";
 
 const PORTUGAL = [
   { name: "Cristiano Ronaldo", number: "№7", position: "Forward", rating: 10 },
@@ -40,37 +41,76 @@ const SMART_FACTS = [
 
 export function EuroFinalMatchScreen() {
   const router = useRouter();
-  const [scoreOpen, setScoreOpen] = useState(false);
-  const [modeOpen, setModeOpen] = useState(false);
-  const [factsOpen, setFactsOpen] = useState(false);
-  const [healthOpen, setHealthOpen] = useState(false);
-  const [rateOpen, setRateOpen] = useState(false);
-  const [rateFranceOpen, setRateFranceOpen] = useState(false);
-  const [ratePortugalOpen, setRatePortugalOpen] = useState(true);
-  const [healthFranceOpen, setHealthFranceOpen] = useState(false);
-  const [healthPortugalOpen, setHealthPortugalOpen] = useState(true);
+  const [open, setOpen] = useState<Record<HudKey, boolean>>({
+    score: false,
+    mode: false,
+    facts: false,
+    health: false,
+    rate: false,
+  });
+  const [rateTeam, setRateTeam] = useState<"portugal" | "france" | null>("portugal");
+  const [healthTeam, setHealthTeam] = useState<"portugal" | "france" | null>("portugal");
   const [camera, setCamera] = useState<(typeof CAMERAS)[number]>("Player");
   const [ratings, setRatings] = useState<Record<string, number>>(() =>
     Object.fromEntries([...PORTUGAL, ...FRANCE].map((player) => [player.name, player.rating]))
   );
 
+  function toggleHud(key: HudKey) {
+    setOpen((prev) => {
+      const nextOpen = !prev[key];
+      const next = { ...prev, [key]: nextOpen };
+      if (!nextOpen) return next;
+      if (key === "facts") {
+        next.score = false;
+        next.health = false;
+        next.rate = false;
+      }
+      if (key === "health" || key === "rate") {
+        next.facts = false;
+        next.mode = false;
+        if (key === "health") next.rate = false;
+        if (key === "rate") next.health = false;
+      }
+      if (key === "score") next.facts = false;
+      if (key === "mode") {
+        next.health = false;
+        next.rate = false;
+      }
+      return next;
+    });
+  }
+
   function bump(name: string, delta: number) {
     setRatings((prev) => ({ ...prev, [name]: Math.min(10, Math.max(0, prev[name] + delta)) }));
   }
 
+  function toggleTeam(panel: "rate" | "health", team: "portugal" | "france") {
+    const current = panel === "rate" ? rateTeam : healthTeam;
+    const set = panel === "rate" ? setRateTeam : setHealthTeam;
+    set(current === team ? null : team);
+  }
+
   return (
     <div className="match-stage">
-      <video className="match-video" autoPlay muted loop playsInline poster="/figma/match-bg.png">
-        <source src={EURO_2016_FINAL} type="video/mp4" />
-      </video>
+      <div className="match-video match-video--embed">
+        <iframe
+          src={youtubeEmbedSrc(HIGHLIGHTS.france2016, { controls: true, autoplay: true })}
+          title="EURO 2016 final highlights: Portugal 1-0 France"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowFullScreen
+        />
+      </div>
+      <p className="match-credit type-t3">
+        Match footage is used for an educational non-commercial study project. Sources are not presented as original broadcasts.
+      </p>
 
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
+      <div className="match-hud-top">
         <div
-          className={scoreOpen ? "glass-panel" : "opaque-panel"}
-          data-tone={scoreOpen ? undefined : "page"}
-          style={{ borderRadius: scoreOpen ? "var(--radius-l)" : "var(--radius-xs)", padding: 12, display: "flex", gap: 28, alignItems: "center" }}
+          className={open.score ? "glass-panel" : "opaque-panel"}
+          data-tone={open.score ? undefined : "page"}
+          style={{ borderRadius: open.score ? "var(--radius-l)" : "var(--radius-xs)", padding: 12, display: "flex", gap: 28, alignItems: "center" }}
         >
-          {scoreOpen ? (
+          {open.score ? (
             <>
               <IconButton label="Back" onClick={() => router.push("/portugal-2016")}>
                 <DsIcon name="back" />
@@ -92,16 +132,16 @@ export function EuroFinalMatchScreen() {
               <p className="type-t2">18:45</p>
             </div>
           )}
-          <button type="button" className="collapse-label" onClick={() => setScoreOpen((value) => !value)} aria-label="Toggle score">
-            <CollapseIcon direction={scoreOpen ? "left" : "right"} />
+          <button type="button" className="collapse-label" onClick={() => toggleHud("score")} aria-label="Toggle score">
+            <CollapseIcon direction={open.score ? "left" : "right"} />
           </button>
         </div>
 
         <div
-          className={modeOpen ? "glass-panel" : "opaque-panel"}
-          style={{ borderRadius: modeOpen ? "var(--radius-l)" : "var(--radius-s)", padding: modeOpen ? 20 : 8, display: "grid", gap: 28, justifyItems: "center" }}
+          className={open.mode ? "glass-panel" : "opaque-panel"}
+          style={{ borderRadius: open.mode ? "var(--radius-l)" : "var(--radius-s)", padding: open.mode ? 20 : 8, display: "grid", gap: 28, justifyItems: "center" }}
         >
-          {modeOpen ? (
+          {open.mode ? (
             <>
               <p className="type-t1" style={{ textAlign: "center" }}>
                 View mode
@@ -115,15 +155,15 @@ export function EuroFinalMatchScreen() {
               </div>
             </>
           ) : null}
-          <button type="button" className="collapse-label" onClick={() => setModeOpen((value) => !value)}>
+          <button type="button" className="collapse-label" onClick={() => toggleHud("mode")}>
             <span className="type-t1">Mode</span>
-            <CollapseIcon direction={modeOpen ? "up" : "down"} />
+            <CollapseIcon direction={open.mode ? "up" : "down"} />
           </button>
         </div>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 12 }}>
-        <MatchDrawer open={factsOpen} onToggle={() => setFactsOpen((value) => !value)} label="smart facts" variant="facts">
+      <div className="match-hud-bottom">
+        <MatchDrawer open={open.facts} onToggle={() => toggleHud("facts")} label="smart facts" variant="facts">
           <p className="type-t1">smart facts</p>
           <div className="smart-facts-list">
             {SMART_FACTS.map((fact) => (
@@ -141,31 +181,31 @@ export function EuroFinalMatchScreen() {
           </div>
         </MatchDrawer>
 
-        <div style={{ display: "flex", gap: 12, alignItems: "flex-end" }}>
-          <MatchDrawer open={healthOpen} onToggle={() => setHealthOpen((value) => !value)} label="Health players" variant="health">
+        <div className="match-hud-right">
+          <MatchDrawer open={open.health} onToggle={() => toggleHud("health")} label="Health players" variant="health">
             <p className="type-t1">Health players</p>
             <TeamBlock
               name="Portugal"
-              open={healthPortugalOpen}
-              onToggle={() => setHealthPortugalOpen((value) => !value)}
+              open={healthTeam === "portugal"}
+              onToggle={() => toggleTeam("health", "portugal")}
               crest="/figma/team-por.png"
               players={PORTUGAL.map((player) => ({ ...player, value: ratings[player.name] }))}
             />
             <TeamBlock
               name="France"
-              open={healthFranceOpen}
-              onToggle={() => setHealthFranceOpen((value) => !value)}
+              open={healthTeam === "france"}
+              onToggle={() => toggleTeam("health", "france")}
               crest="/figma/team-fra.png"
               players={FRANCE.map((player) => ({ ...player, value: ratings[player.name] }))}
             />
           </MatchDrawer>
 
-          <MatchDrawer open={rateOpen} onToggle={() => setRateOpen((value) => !value)} label="Rate players" variant="rate">
+          <MatchDrawer open={open.rate} onToggle={() => toggleHud("rate")} label="Rate players" variant="rate">
             <p className="type-t1">Rate players</p>
             <TeamBlock
               name="Portugal"
-              open={ratePortugalOpen}
-              onToggle={() => setRatePortugalOpen((value) => !value)}
+              open={rateTeam === "portugal"}
+              onToggle={() => toggleTeam("rate", "portugal")}
               crest="/figma/team-por.png"
               players={PORTUGAL.map((player) => ({ ...player, value: ratings[player.name] }))}
               rate
@@ -173,8 +213,8 @@ export function EuroFinalMatchScreen() {
             />
             <TeamBlock
               name="France"
-              open={rateFranceOpen}
-              onToggle={() => setRateFranceOpen((value) => !value)}
+              open={rateTeam === "france"}
+              onToggle={() => toggleTeam("rate", "france")}
               crest="/figma/team-fra.png"
               players={FRANCE.map((player) => ({ ...player, value: ratings[player.name] }))}
               rate

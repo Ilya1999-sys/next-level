@@ -1,77 +1,81 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useState, type ReactNode } from "react";
 import { NextArrow } from "@/components/ui/ds";
-import { PlayerFigure } from "@/components/ui/player-figure";
+import { youtubeEmbedSrc } from "@/lib/media/highlights";
 
-export function HoverPlayerCard({
+export function GraphicHoverCard({
   href,
   accent,
   featured,
-  image,
-  fit,
-  video,
+  banner,
+  youtube,
   year,
-  team,
-  alt,
+  title,
+  children,
 }: {
   href?: string;
   accent?: boolean;
   featured?: boolean;
-  image: string;
-  fit?: "cover" | "contain";
-  video?: string;
+  banner?: boolean;
+  youtube?: string;
   year: string;
-  team: string;
-  alt: string;
+  title: string;
+  children: ReactNode;
 }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  function play() {
+  const [hover, setHover] = useState(false);
+  function enter() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    void videoRef.current?.play();
-  }
-
-  function stop() {
-    const el = videoRef.current;
-    if (!el) return;
-    el.pause();
-    el.currentTime = 0;
+    setHover(true);
   }
 
   const inner = (
-    <article className="ds-card team-card" data-accent={accent ? "true" : "false"} data-hover-video={video ? "true" : "false"}>
-      {video ? (
-        <video ref={videoRef} className="card-hover-video" muted loop playsInline preload="metadata">
-          <source src={video} type="video/mp4" />
-        </video>
+    <article
+      className={`ds-card team-card ${featured ? "team-card--featured" : ""} ${banner ? "team-card--banner" : ""}`}
+      data-accent={accent ? "true" : "false"}
+      data-hover-video={youtube ? "true" : "false"}
+    >
+      {hover && youtube ? (
+        <div className="card-hover-frame">
+          <iframe
+            src={youtubeEmbedSrc(youtube)}
+            title={`${year} ${title} highlights`}
+            allow="autoplay; encrypted-media; picture-in-picture"
+            tabIndex={-1}
+          />
+        </div>
       ) : null}
       <div className="card-top">
         <div className="year-team card-hover-static">
           <p className={accent ? "type-h3" : "type-t1"}>{year}</p>
-          <p className={accent ? "type-h3" : "type-t1"}>{team}</p>
+          <p className={accent ? "type-h3" : "type-t1"}>{title}</p>
         </div>
         <span className="icon-btn" data-inverted={accent ? "true" : "false"} aria-hidden="true">
           <NextArrow />
         </span>
       </div>
-      <div className="card-hover-static player-slot">
-        <PlayerFigure variant={featured ? "featured" : "card"} src={image} alt={alt} fit={fit ?? "cover"} />
-      </div>
+      <div className="card-hover-static graphic-slot">{children}</div>
     </article>
   );
 
+  const events = {
+    onMouseEnter: enter,
+    onMouseLeave: () => setHover(false),
+    onFocus: enter,
+    onBlur: () => setHover(false),
+  };
+
   if (href) {
     return (
-      <Link href={href} className="card-link" onMouseEnter={play} onMouseLeave={stop} onFocus={play} onBlur={stop}>
+      <Link href={href} className="card-link" {...events}>
         {inner}
       </Link>
     );
   }
 
   return (
-    <div className="card-link" onMouseEnter={play} onMouseLeave={stop} onFocus={play} onBlur={stop}>
+    <div className="card-link" {...events}>
       {inner}
     </div>
   );

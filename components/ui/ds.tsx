@@ -139,3 +139,12 @@ export function DotGrid({ total, filled, columns = 6 }: { total: number; filled:
     </div>
   );
 }
+
+export function CircleStat({ value, label, accent }: { value: string; label: string; accent?: boolean }) {
+  return (
+    <div className="circle-stat" data-accent={accent ? "true" : "false"}>
+      <p className="type-h2 fact-number">{value}</p>
+      <p className="type-t3">{label}</p>
+    </div>
+  );
+}
