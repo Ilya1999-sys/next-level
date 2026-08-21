@@ -15,6 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-mood="nostalgia">
+      <head>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+      </head>
       <body>
         <MoodProvider>
           <RouteTransition>{children}</RouteTransition>

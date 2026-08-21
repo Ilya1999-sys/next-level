@@ -136,7 +136,7 @@ export function GoalTimeline({
   highlight: number;
 }) {
   function y(minute: number) {
-    return `${((minute - 1) / 119) * 100}%`;
+    return `${8 + ((minute - 1) / 119) * 84}%`;
   }
 
   const ticks = [120, 105, 90, 75, 60, 45, 30, 15, 1];

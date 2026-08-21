@@ -3,7 +3,8 @@
 import { useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { CollapseIcon, DsIcon, IconButton, TagMood } from "@/components/ui/ds";
-import { HIGHLIGHTS, youtubeEmbedSrc } from "@/lib/media/highlights";
+import { HIGHLIGHTS } from "@/lib/media/highlights";
+import { HighlightIframe } from "@/components/ui/highlight-iframe";
 
 const CAMERAS = ["Player", "Referee", "Behind goal", "Drone"] as const;
 type HudKey = "score" | "mode" | "facts" | "health" | "rate";
@@ -93,12 +94,7 @@ export function EuroFinalMatchScreen() {
   return (
     <div className="match-stage">
       <div className="match-video match-video--embed">
-        <iframe
-          src={youtubeEmbedSrc(HIGHLIGHTS.france2016, { controls: true, autoplay: true })}
-          title="EURO 2016 final highlights: Portugal 1-0 France"
-          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-          allowFullScreen
-        />
+        <HighlightIframe id={HIGHLIGHTS.france2016} title="EURO 2016 final highlights: Portugal 1-0 France" controls />
       </div>
       <p className="match-credit type-t3">
         Match footage is used for an educational non-commercial study project. Sources are not presented as original broadcasts.

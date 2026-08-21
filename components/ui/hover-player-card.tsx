@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { NextArrow } from "@/components/ui/ds";
-import { youtubeEmbedSrc } from "@/lib/media/highlights";
+import { HighlightIframe } from "@/components/ui/highlight-iframe";
 
 export function GraphicHoverCard({
   href,
@@ -38,12 +38,7 @@ export function GraphicHoverCard({
     >
       {hover && youtube ? (
         <div className="card-hover-frame">
-          <iframe
-            src={youtubeEmbedSrc(youtube)}
-            title={`${year} ${title} highlights`}
-            allow="autoplay; encrypted-media; picture-in-picture"
-            tabIndex={-1}
-          />
+          <HighlightIframe id={youtube} title={`${year} ${title} highlights`} />
         </div>
       ) : null}
       <div className="card-top">

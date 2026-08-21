@@ -1,6 +1,6 @@
 export const HIGHLIGHTS = {
-  barcelona: "NkR_CBgZ8YA",
-  zidane: "9RCh6XvDLTI",
+  barcelona: "PaOheYo-upE",
+  zidane: "Nlsm0RlC8zI",
   portugal2016: "8Kzy6u3Kdgg",
   euro2008: "I5ZQSHj1UKk",
   croatia: "wtzdYiH7qVc",
@@ -11,21 +11,22 @@ export const HIGHLIGHTS = {
 
 export function youtubeEmbedSrc(
   id: string,
-  options?: { controls?: boolean; autoplay?: boolean }
+  options?: { controls?: boolean; autoplay?: boolean; origin?: string }
 ) {
   const params = new URLSearchParams({
     autoplay: options?.autoplay === false ? "0" : "1",
     mute: "1",
     controls: options?.controls ? "1" : "0",
-    loop: "1",
-    playlist: id,
-    modestbranding: "1",
     rel: "0",
+    modestbranding: "1",
     playsinline: "1",
     iv_load_policy: "3",
-    disablekb: options?.controls ? "0" : "1",
     fs: options?.controls ? "1" : "0",
   });
 
-  return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
+  if (options?.origin) {
+    params.set("origin", options.origin);
+  }
+
+  return `https://www.youtube.com/embed/${id}?${params.toString()}`;
 }
