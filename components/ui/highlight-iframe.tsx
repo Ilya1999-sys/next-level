@@ -24,8 +24,9 @@ export function HighlightIframe({
     <iframe
       src={highlightEmbedSrc(clip)}
       title={title}
-      allow="autoplay; clipboard-write; encrypted-media"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       referrerPolicy="origin"
+      allowFullScreen
       tabIndex={-1}
       onLoad={handleLoad}
     />

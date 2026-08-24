@@ -1,5 +1,5 @@
 .page-shell {
-  width: 1024px;
+  width: min(1024px, 100%);
   max-width: 1024px;
   min-height: 100dvh;
   height: auto;
@@ -342,6 +342,37 @@
   align-items: stretch;
 }
 
+.home-top-grid {
+  grid-template-columns: minmax(340px, 1fr) minmax(0, 560px);
+}
+
+.home-left-stack {
+  display: grid;
+  grid-template-rows: 248px 180px 1fr;
+  min-height: 634px;
+}
+
+.home-left-stack .card-link,
+.home-left-stack .fact-card {
+  height: 100%;
+}
+
+.home-facts-grid {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+}
+
+.home-extra-stack > .fact-card {
+  min-height: 0;
+}
+
+.tournament-top-grid {
+  grid-template-columns: minmax(396px, 1fr) minmax(0, 1fr);
+}
+
+.tournament-left-stack {
+  min-height: 0;
+}
+
 .row-split > .col-stack,
 .row-split > .card-link,
 .row-facts-split > .col-stack {
@@ -467,10 +498,6 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--space-s);
   align-items: stretch;
-}
-
-.row-facts-split--2-3 {
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
 }
 
 .row-goals {
@@ -625,14 +652,10 @@
 
 .card-hover-frame iframe {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 140%;
-  height: 140%;
-  min-width: 100%;
-  min-height: 100%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   border: 0;
-  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -1330,6 +1353,26 @@
   align-items: center;
   gap: var(--space-xs);
   flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .page-shell {
+    padding: var(--space-m);
+  }
+
+  .home-top-grid,
+  .tournament-top-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-left-stack {
+    grid-template-rows: auto;
+    min-height: 0;
+  }
+
+  .row-goals {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 900px) {

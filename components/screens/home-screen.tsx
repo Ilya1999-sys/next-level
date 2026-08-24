@@ -17,8 +17,8 @@ export function HomeScreen() {
 
   return (
     <AppChrome crumbs={["Home"]}>
-      <div className="row-split">
-        <div className="col-stack">
+      <div className="row-split home-top-grid">
+        <div className="col-stack home-left-stack">
           <GraphicHoverCard year={catalog.barcelona.year} title={catalog.barcelona.title} video={catalog.barcelona.video}>
             <MixChart marks={BARCELONA_MARKS} />
           </GraphicHoverCard>
@@ -54,7 +54,7 @@ export function HomeScreen() {
         </GraphicHoverCard>
       </div>
 
-      <div className="row-facts-split row-facts-split--2-3">
+      <div className="row-facts-split row-facts-split--2-3 home-facts-grid">
         <article className={clubFact.dots ? "fact-card fact-card--fill" : "fact-card"}>
           <div className="fact-copy">
             <div className="fact-head">
@@ -67,7 +67,7 @@ export function HomeScreen() {
           </div>
           {clubFact.dots ? <DotGrid total={clubFact.dots.total} filled={clubFact.dots.filled} columns={clubFact.dots.columns} /> : null}
         </article>
-        <div className="col-stack">
+        <div className="col-stack home-extra-stack">
           {catalog.extraFacts.map((fact) => (
             <article key={`${fact.title}-${fact.value}`} className="fact-card">
               <div className="fact-copy">

@@ -27,8 +27,8 @@ export function Portugal2016Screen() {
         />
       </article>
 
-      <div className="row-split">
-        <div className="col-stack">
+      <div className="row-split tournament-top-grid">
+        <div className="col-stack tournament-left-stack">
           <GraphicHoverCard year="Match review" title="1:0 Croatia" video={HIGHLIGHTS.croatia}>
             <StatBars rows={CROATIA_BARS} />
           </GraphicHoverCard>
@@ -54,7 +54,7 @@ export function Portugal2016Screen() {
         </GraphicHoverCard>
       </div>
 
-      <div className="row-facts-split">
+      <div className="row-facts-split tournament-facts-grid">
         <article className="fact-card fact-card--fill">
           <div className="fact-copy">
             <p className="type-t1">Wins fact</p>
