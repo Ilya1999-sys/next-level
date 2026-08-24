@@ -1,5 +1,5 @@
 import { useMood } from "@/components/mood/mood-provider";
-import { HIGHLIGHTS, type VkClip } from "@/lib/media/highlights";
+import { HIGHLIGHTS, type HighlightClip } from "@/lib/media/highlights";
 import type { MixMark } from "@/components/ui/card-graphics";
 
 export const BARCELONA_MARKS: MixMark[] = [
@@ -39,7 +39,7 @@ export type StoryCard = {
   title: string;
   href?: string;
   accent?: boolean;
-  video: VkClip;
+  video: HighlightClip;
 };
 
 export type FactCard = {
@@ -102,7 +102,7 @@ const CATALOG: Record<string, Catalog> = {
         title: "Nostalgia fact",
         value: "15",
         text: "Champions League Cups won by Real Madrid",
-        dots: { total: 18, filled: 8, columns: 6 },
+        dots: { total: 24, filled: 15, columns: 8 },
       },
     ],
     extraFacts: [
@@ -128,7 +128,7 @@ const CATALOG: Record<string, Catalog> = {
         title: "Drama fact",
         value: "15",
         text: "Champions League Cups won by Real Madrid",
-        dots: { total: 18, filled: 8, columns: 6 },
+        dots: { total: 24, filled: 15, columns: 8 },
       },
     ],
     extraFacts: [
@@ -154,7 +154,7 @@ const CATALOG: Record<string, Catalog> = {
         title: "Legend fact",
         value: "15",
         text: "Champions League Cups won by Real Madrid",
-        dots: { total: 18, filled: 8, columns: 6 },
+        dots: { total: 24, filled: 15, columns: 8 },
       },
     ],
     extraFacts: [

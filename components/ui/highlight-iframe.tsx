@@ -1,16 +1,14 @@
 "use client";
 
 import type { SyntheticEvent } from "react";
-import { vkEmbedSrc, type VkClip } from "@/lib/media/highlights";
+import { highlightEmbedSrc, type HighlightClip } from "@/lib/media/highlights";
 
 export function HighlightIframe({
   clip,
   title,
-  controls,
 }: {
-  clip: VkClip;
+  clip: HighlightClip;
   title: string;
-  controls?: boolean;
 }) {
   function handleLoad(event: SyntheticEvent<HTMLIFrameElement>) {
     const win = event.currentTarget.contentWindow;
@@ -24,11 +22,10 @@ export function HighlightIframe({
 
   return (
     <iframe
-      src={vkEmbedSrc(clip, { controls, autoplay: true })}
+      src={highlightEmbedSrc(clip)}
       title={title}
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      allow="autoplay; clipboard-write; encrypted-media"
       referrerPolicy="origin"
-      allowFullScreen={Boolean(controls)}
       tabIndex={-1}
       onLoad={handleLoad}
     />

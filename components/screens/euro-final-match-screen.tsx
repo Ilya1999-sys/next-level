@@ -94,7 +94,7 @@ export function EuroFinalMatchScreen() {
   return (
     <div className="match-stage">
       <div className="match-video match-video--embed">
-        <HighlightIframe clip={HIGHLIGHTS.france2016} title="EURO 2016 final highlights: Portugal 1-0 France" controls />
+        <HighlightIframe clip={HIGHLIGHTS.france2016} title="EURO 2016 final highlights: Portugal 1-0 France" />
       </div>
       <p className="match-credit type-t3">
         Match footage is used for an educational non-commercial study project. Sources are not presented as original broadcasts.

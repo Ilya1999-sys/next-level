@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { NextArrow } from "@/components/ui/ds";
 import { HighlightIframe } from "@/components/ui/highlight-iframe";
-import type { VkClip } from "@/lib/media/highlights";
+import type { HighlightClip } from "@/lib/media/highlights";
 
 export function GraphicHoverCard({
   href,
@@ -20,7 +20,7 @@ export function GraphicHoverCard({
   accent?: boolean;
   featured?: boolean;
   banner?: boolean;
-  video?: VkClip;
+  video?: HighlightClip;
   year: string;
   title: string;
   children: ReactNode;

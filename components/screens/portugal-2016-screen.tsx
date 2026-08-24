@@ -27,8 +27,8 @@ export function Portugal2016Screen() {
         />
       </article>
 
-      <div className="row-488">
-        <div className="col-stack col-stack--240">
+      <div className="row-split">
+        <div className="col-stack">
           <GraphicHoverCard year="Match review" title="1:0 Croatia" video={HIGHLIGHTS.croatia}>
             <StatBars rows={CROATIA_BARS} />
           </GraphicHoverCard>
@@ -42,17 +42,30 @@ export function Portugal2016Screen() {
             />
           </GraphicHoverCard>
         </div>
-        <div className="col-facts">
-          <article className="fact-card fact-card--fill">
-            <div className="fact-copy">
-              <p className="type-t1">Wins fact</p>
-              <div className="fact-row">
-                <p className="type-h2 fact-number">1</p>
-                <p className="type-t2">regular-time victory over Wales in the entire tournament</p>
-              </div>
+        <GraphicHoverCard
+          featured
+          accent
+          year="Match review"
+          title="1-0 France"
+          href="/portugal-2016/france"
+          video={HIGHLIGHTS.france2016}
+        >
+          <GoalTimeline left={FRANCE_MINUTES} right={PORTUGAL_MINUTES} highlight={109} />
+        </GraphicHoverCard>
+      </div>
+
+      <div className="row-facts-split">
+        <article className="fact-card fact-card--fill">
+          <div className="fact-copy">
+            <p className="type-t1">Wins fact</p>
+            <div className="fact-row">
+              <p className="type-h2 fact-number">1</p>
+              <p className="type-t2">regular-time victory over Wales in the entire tournament</p>
             </div>
-            <MixChart marks={WINS_MARKS} />
-          </article>
+          </div>
+          <MixChart marks={WINS_MARKS} />
+        </article>
+        <div className="col-stack">
           <article className="fact-card">
             <div className="fact-copy">
               <p className="type-t1">Final fact</p>
@@ -72,16 +85,6 @@ export function Portugal2016Screen() {
             </div>
           </article>
         </div>
-        <GraphicHoverCard
-          featured
-          accent
-          year="Match review"
-          title="1-0 France"
-          href="/portugal-2016/france"
-          video={HIGHLIGHTS.france2016}
-        >
-          <GoalTimeline left={FRANCE_MINUTES} right={PORTUGAL_MINUTES} highlight={109} />
-        </GraphicHoverCard>
       </div>
 
       <div className="row-goals">

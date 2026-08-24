@@ -1,7 +1,10 @@
 .page-shell {
-  height: 100dvh;
-  max-height: 100dvh;
-  overflow: hidden;
+  width: 1024px;
+  max-width: 1024px;
+  min-height: 100dvh;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
   background: var(--bg-page);
   color: var(--text-primary);
   padding: var(--space-l);
@@ -279,6 +282,10 @@
   mask-image: url("/figma/icons/minus.svg");
   -webkit-mask-image: url("/figma/icons/minus.svg");
 }
+.ds-icon--profile {
+  mask-image: url("/figma/icons/profile.svg");
+  -webkit-mask-image: url("/figma/icons/profile.svg");
+}
 
 .ds-icon-rotate-up { transform: none; }
 .ds-icon-rotate-down { transform: rotate(180deg); }
@@ -328,26 +335,34 @@
   flex: 0 0 auto;
 }
 
-.row-488 {
+.row-split {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-s);
-  height: 488px;
-  flex: 0 0 488px;
+  align-items: stretch;
+}
+
+.row-split > .col-stack,
+.row-split > .card-link,
+.row-facts-split > .col-stack {
+  min-height: 0;
+  height: 100%;
 }
 
 .col-stack {
   display: flex;
   flex-direction: column;
   gap: var(--space-s);
-  height: 100%;
   min-height: 0;
 }
 
-.col-stack--240 > * {
-  flex: 0 0 240px;
-  height: 240px;
+.col-stack > * {
+  flex: 1 1 0;
   min-height: 0;
+}
+
+.col-stack > .fact-card {
+  flex: 0 0 auto;
 }
 
 .col-facts {
@@ -422,7 +437,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-l);
-  min-height: 200px;
+  min-height: 206px;
   padding: var(--space-xl);
   overflow: hidden;
 }
@@ -432,7 +447,7 @@
   flex-direction: column;
   justify-content: center;
   gap: var(--space-l);
-  max-width: 640px;
+  max-width: 400px;
   min-width: 0;
 }
 
@@ -451,13 +466,19 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-s);
+  align-items: stretch;
+}
+
+.row-facts-split--2-3 {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
 }
 
 .row-goals {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(372px, 0.75fr);
   gap: var(--space-s);
   min-height: 240px;
+  align-items: stretch;
 }
 
 .ds-card {
@@ -586,7 +607,7 @@
 
 .team-card--banner {
   height: auto;
-  min-height: 280px;
+  min-height: 300px;
 }
 
 .team-card--banner .graphic-slot {
@@ -606,12 +627,13 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 177.78%;
-  height: 177.78%;
+  width: 140%;
+  height: 140%;
   min-width: 100%;
   min-height: 100%;
   border: 0;
   transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .card-hover-static {
@@ -749,11 +771,13 @@
 }
 
 .circle-stat {
-  width: 120px;
-  min-width: 120px;
-  max-width: 120px;
-  height: 120px;
-  max-height: 120px;
+  width: 160px;
+  min-width: 0;
+  max-width: 160px;
+  height: auto;
+  min-height: 0;
+  max-height: 160px;
+  aspect-ratio: 1;
   border-radius: 1000px;
   background: var(--bg-cards-elements);
   color: var(--text-secondary);
@@ -764,17 +788,11 @@
   gap: var(--space-m);
   padding: var(--space-m);
   text-align: center;
-  flex: 0 0 120px;
+  flex: 1 1 120px;
 }
 
 .col-stack .circle-stat,
 .row-goals .circle-stat {
-  width: 80px;
-  min-width: 64px;
-  max-width: 80px;
-  height: 80px;
-  max-height: 80px;
-  flex: 0 1 80px;
   gap: var(--space-xs);
   padding: var(--space-s);
 }
@@ -784,9 +802,12 @@
   font-size: var(--size-h3);
 }
 
-.tournament-hero .circle-stat {
-  flex: 0 0 120px;
-  max-height: 120px;
+.tournament-hero .circle-stat,
+.team-card--banner .circle-stat {
+  flex: 0 0 160px;
+  width: 160px;
+  height: 160px;
+  max-height: 160px;
 }
 
 .circle-stat[data-accent="true"] {
@@ -1071,11 +1092,15 @@
   z-index: 0;
 }
 
+.match-video--embed {
+  pointer-events: none;
+}
+
 .match-video--embed iframe {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: -18%;
+  width: 136%;
+  height: 136%;
   border: 0;
 }
 
@@ -1307,52 +1332,10 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 900px) {
   .page-shell {
     height: auto;
     max-height: none;
     overflow: visible;
-  }
-
-  .page-body {
-    flex-direction: column;
-  }
-
-  .left-menu {
-    flex-direction: row;
-    height: auto;
-    justify-content: space-between;
-  }
-
-  .left-menu-group {
-    flex-direction: row;
-    border-radius: var(--radius-xl);
-  }
-
-  .row-facts-split,
-  .row-488,
-  .tournament-hero,
-  .row-goals {
-    height: auto;
-    flex: none;
-    grid-template-columns: 1fr;
-  }
-
-  .tournament-hero {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .col-stack--240 > * {
-    flex: none;
-    height: 240px;
-  }
-
-  .col-facts {
-    height: auto;
-  }
-
-  .fact-card--fill {
-    flex: none;
   }
 }

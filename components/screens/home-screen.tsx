@@ -13,11 +13,12 @@ import { GraphicHoverCard } from "@/components/ui/hover-player-card";
 
 export function HomeScreen() {
   const catalog = useMoodCatalog();
+  const [playerFact, clubFact] = catalog.facts;
 
   return (
     <AppChrome crumbs={["Home"]}>
-      <div className="row-488">
-        <div className="col-stack col-stack--240">
+      <div className="row-split">
+        <div className="col-stack">
           <GraphicHoverCard year={catalog.barcelona.year} title={catalog.barcelona.title} video={catalog.barcelona.video}>
             <MixChart marks={BARCELONA_MARKS} />
           </GraphicHoverCard>
@@ -29,22 +30,17 @@ export function HomeScreen() {
               ]}
             />
           </GraphicHoverCard>
-        </div>
-        <div className="col-facts">
-          {catalog.facts.map((fact) => (
-            <article key={`${fact.title}-${fact.value}`} className={fact.dots ? "fact-card fact-card--fill" : "fact-card"}>
-              <div className="fact-copy">
-                <div className="fact-head">
-                  <p className="type-t1">{fact.title}</p>
-                </div>
-                <div className="fact-row">
-                  <p className="type-h2 fact-number">{fact.value}</p>
-                  <p className="type-t2">{fact.text}</p>
-                </div>
+          <article className="fact-card">
+            <div className="fact-copy">
+              <div className="fact-head">
+                <p className="type-t1">{playerFact.title}</p>
               </div>
-              {fact.dots ? <DotGrid total={fact.dots.total} filled={fact.dots.filled} columns={fact.dots.columns} /> : null}
-            </article>
-          ))}
+              <div className="fact-row">
+                <p className="type-h2 fact-number">{playerFact.value}</p>
+                <p className="type-t2">{playerFact.text}</p>
+              </div>
+            </div>
+          </article>
         </div>
         <GraphicHoverCard
           featured
@@ -58,26 +54,40 @@ export function HomeScreen() {
         </GraphicHoverCard>
       </div>
 
-      <div className="row-facts-split">
-        {catalog.extraFacts.map((fact) => (
-          <article key={`${fact.title}-${fact.value}`} className="fact-card">
-            <div className="fact-copy">
-              <div className="fact-head">
-                <p className="type-t1">{fact.title}</p>
-                {fact.tournament ? (
-                  <span className="live-flag">
-                    <span className="dot-live" />
-                    <span className="type-t1">{fact.tournament}</span>
-                  </span>
-                ) : null}
-              </div>
-              <div className="fact-row">
-                <p className="type-h2 fact-number">{fact.value}</p>
-                <p className="type-t2">{fact.text}</p>
-              </div>
+      <div className="row-facts-split row-facts-split--2-3">
+        <article className={clubFact.dots ? "fact-card fact-card--fill" : "fact-card"}>
+          <div className="fact-copy">
+            <div className="fact-head">
+              <p className="type-t1">{clubFact.title}</p>
             </div>
-          </article>
-        ))}
+            <div className="fact-row">
+              <p className="type-h2 fact-number">{clubFact.value}</p>
+              <p className="type-t2">{clubFact.text}</p>
+            </div>
+          </div>
+          {clubFact.dots ? <DotGrid total={clubFact.dots.total} filled={clubFact.dots.filled} columns={clubFact.dots.columns} /> : null}
+        </article>
+        <div className="col-stack">
+          {catalog.extraFacts.map((fact) => (
+            <article key={`${fact.title}-${fact.value}`} className="fact-card">
+              <div className="fact-copy">
+                <div className="fact-head">
+                  <p className="type-t1">{fact.title}</p>
+                  {fact.tournament ? (
+                    <span className="live-flag">
+                      <span className="dot-live" />
+                      <span className="type-t1">{fact.tournament}</span>
+                    </span>
+                  ) : null}
+                </div>
+                <div className="fact-row">
+                  <p className="type-h2 fact-number">{fact.value}</p>
+                  <p className="type-t2">{fact.text}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
 
       <article className="ds-card discussion-card">

@@ -11,6 +11,7 @@ import {
   IconExit,
   IconGames,
   IconHome,
+  IconProfile,
   IconStar,
   IconStats,
   TagMood,
@@ -84,9 +85,9 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
             <IconButton href="/" label="Exit">
               <IconExit />
             </IconButton>
-            <div className="profile-orb" aria-label="Profile">
-              IP
-            </div>
+            <IconButton href="/profile" label="Profile">
+              <IconProfile />
+            </IconButton>
           </div>
         </aside>
         <div className="cards-all">{children}</div>
