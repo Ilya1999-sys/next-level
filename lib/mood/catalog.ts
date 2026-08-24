@@ -1,5 +1,5 @@
 import { useMood } from "@/components/mood/mood-provider";
-import { HIGHLIGHTS } from "@/lib/media/highlights";
+import { HIGHLIGHTS, type VkClip } from "@/lib/media/highlights";
 import type { MixMark } from "@/components/ui/card-graphics";
 
 export const BARCELONA_MARKS: MixMark[] = [
@@ -39,7 +39,7 @@ export type StoryCard = {
   title: string;
   href?: string;
   accent?: boolean;
-  youtube: string;
+  video: VkClip;
 };
 
 export type FactCard = {
@@ -67,24 +67,24 @@ const SHARED_CARDS = {
   barcelona: {
     year: "/2009",
     title: "Path to the final: “Barcelona”.",
-    youtube: HIGHLIGHTS.barcelona,
+    video: HIGHLIGHTS.barcelona,
   },
   zidane: {
     year: "/2006",
     title: "The incredible Zidane at the World Cup and the tragedy in the final.",
-    youtube: HIGHLIGHTS.zidane,
+    video: HIGHLIGHTS.zidane,
   },
   portugal: {
     year: "/2016",
     title: "Portugal's first victory in a major tournament.",
     href: "/portugal-2016",
     accent: true,
-    youtube: HIGHLIGHTS.portugal2016,
+    video: HIGHLIGHTS.portugal2016,
   },
   tournament: {
     year: "/2008",
     title: "Russia, incredible comebacks and golden Spain",
-    youtube: HIGHLIGHTS.euro2008,
+    video: HIGHLIGHTS.euro2008,
     stats: [
       { value: "77", label: "goals scored", accent: true },
       { value: "31", label: "matches played" },

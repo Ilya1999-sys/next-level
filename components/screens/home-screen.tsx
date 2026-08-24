@@ -18,10 +18,10 @@ export function HomeScreen() {
     <AppChrome crumbs={["Home"]}>
       <div className="row-488">
         <div className="col-stack col-stack--240">
-          <GraphicHoverCard year={catalog.barcelona.year} title={catalog.barcelona.title} youtube={catalog.barcelona.youtube}>
+          <GraphicHoverCard year={catalog.barcelona.year} title={catalog.barcelona.title} video={catalog.barcelona.video}>
             <MixChart marks={BARCELONA_MARKS} />
           </GraphicHoverCard>
-          <GraphicHoverCard year={catalog.zidane.year} title={catalog.zidane.title} youtube={catalog.zidane.youtube}>
+          <GraphicHoverCard year={catalog.zidane.year} title={catalog.zidane.title} video={catalog.zidane.video}>
             <CircleRow
               stats={[
                 { value: "3", label: "Zidane goals", accent: true },
@@ -51,7 +51,7 @@ export function HomeScreen() {
           accent
           year={catalog.portugal.year}
           title={catalog.portugal.title}
-          youtube={catalog.portugal.youtube}
+          video={catalog.portugal.video}
           href={catalog.portugal.href}
         >
           <LineChart portugal={PORTUGAL_GOALS} france={FRANCE_GOALS} accent />
@@ -108,7 +108,7 @@ export function HomeScreen() {
         </div>
       </article>
 
-      <GraphicHoverCard banner year={catalog.tournament.year} title={catalog.tournament.title} youtube={catalog.tournament.youtube}>
+      <GraphicHoverCard banner year={catalog.tournament.year} title={catalog.tournament.title} video={catalog.tournament.video}>
         <CircleRow stats={catalog.tournament.stats} />
       </GraphicHoverCard>
     </AppChrome>

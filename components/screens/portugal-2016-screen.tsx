@@ -29,10 +29,10 @@ export function Portugal2016Screen() {
 
       <div className="row-488">
         <div className="col-stack col-stack--240">
-          <GraphicHoverCard year="Match review" title="1:0 Croatia" youtube={HIGHLIGHTS.croatia}>
+          <GraphicHoverCard year="Match review" title="1:0 Croatia" video={HIGHLIGHTS.croatia}>
             <StatBars rows={CROATIA_BARS} />
           </GraphicHoverCard>
-          <GraphicHoverCard year="Match review" title="3-3 Hungary" youtube={HIGHLIGHTS.hungary}>
+          <GraphicHoverCard year="Match review" title="3-3 Hungary" video={HIGHLIGHTS.hungary}>
             <CircleRow
               stats={[
                 { value: "19", label: "shots on goal", accent: true },
@@ -78,7 +78,7 @@ export function Portugal2016Screen() {
           year="Match review"
           title="1-0 France"
           href="/portugal-2016/france"
-          youtube={HIGHLIGHTS.france2016}
+          video={HIGHLIGHTS.france2016}
         >
           <GoalTimeline left={FRANCE_MINUTES} right={PORTUGAL_MINUTES} highlight={109} />
         </GraphicHoverCard>
@@ -95,7 +95,7 @@ export function Portugal2016Screen() {
           </div>
           <DotGrid total={22} filled={9} columns={11} />
         </article>
-        <GraphicHoverCard year="Match review" title="2:0 Wales" youtube={HIGHLIGHTS.wales}>
+        <GraphicHoverCard year="Match review" title="2:0 Wales" video={HIGHLIGHTS.wales}>
           <CircleRow
             stats={[
               { value: "17", label: "shots on goal", accent: true },

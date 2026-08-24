@@ -438,7 +438,7 @@
 
 .tournament-hero .circle-row {
   flex: 0 1 auto;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .tournament-hero-stats {
@@ -572,7 +572,7 @@
   width: 100%;
   display: flex;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 0 var(--space-l) var(--space-l);
   overflow: hidden;
   position: relative;
@@ -733,6 +733,8 @@
   display: grid;
   grid-template-columns: repeat(var(--cols, 6), 24px);
   gap: var(--space-m);
+  align-self: flex-start;
+  justify-items: start;
 }
 
 .stat-dot {
@@ -749,9 +751,9 @@
 .circle-stat {
   width: 120px;
   min-width: 120px;
-  max-width: 160px;
+  max-width: 120px;
   height: 120px;
-  max-height: 160px;
+  max-height: 120px;
   border-radius: 1000px;
   background: var(--bg-cards-elements);
   color: var(--text-secondary);
@@ -762,16 +764,17 @@
   gap: var(--space-m);
   padding: var(--space-m);
   text-align: center;
-  flex: 1 1 120px;
+  flex: 0 0 120px;
 }
 
 .col-stack .circle-stat,
 .row-goals .circle-stat {
   width: 80px;
-  min-width: 72px;
+  min-width: 64px;
+  max-width: 80px;
   height: 80px;
-  max-height: 88px;
-  flex: 1 1 72px;
+  max-height: 80px;
+  flex: 0 1 80px;
   gap: var(--space-xs);
   padding: var(--space-s);
 }
@@ -794,7 +797,7 @@
   display: flex;
   gap: var(--space-m);
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   min-width: 0;
   overflow: hidden;
@@ -803,6 +806,7 @@
 .mix-chart {
   display: flex;
   align-items: flex-end;
+  justify-content: flex-start;
   gap: 10px;
   width: 100%;
   height: 100%;
@@ -880,10 +884,14 @@
 
 .line-chart-portugal-dot {
   fill: var(--text-on-accent);
+  stroke: rgba(0, 0, 0, 0.35);
+  stroke-width: 2;
 }
 
 .line-chart-france-dot {
   fill: color-mix(in srgb, var(--text-on-accent) 70%, transparent);
+  stroke: rgba(0, 0, 0, 0.35);
+  stroke-width: 2;
 }
 
 .line-chart-legend {
@@ -1050,9 +1058,6 @@
   min-height: calc(100vh - 40px);
   overflow: hidden;
   border-radius: var(--radius-xs);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   padding: var(--space-l);
 }
 
@@ -1087,13 +1092,28 @@
 
 .match-hud-top,
 .match-hud-bottom {
+  position: absolute;
+  left: var(--space-l);
+  right: var(--space-l);
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
+  pointer-events: none;
+}
+
+.match-hud-top > *,
+.match-hud-bottom > * {
+  pointer-events: auto;
+}
+
+.match-hud-top {
+  top: var(--space-l);
 }
 
 .match-hud-bottom {
+  bottom: var(--space-l);
   align-items: flex-end;
 }
 
@@ -1104,9 +1124,8 @@
   max-width: min(960px, 100%);
 }
 
-.match-stage > *:not(.match-video):not(.match-still) {
-  position: relative;
-  z-index: 1;
+.match-stage > .match-credit {
+  z-index: 2;
 }
 
 .collapse-label {

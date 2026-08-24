@@ -51,9 +51,10 @@ export function LineChart({
   const padY = 18;
   const innerW = width - padX - 16;
   const innerH = height - padY - 36;
+  const seriesGap = 10;
 
-  function point(value: number, index: number, total: number) {
-    const x = padX + (index / (total - 1)) * innerW;
+  function point(value: number, index: number, total: number, offsetX = 0) {
+    const x = padX + (index / (total - 1)) * innerW + offsetX;
     const y = padY + ((max - value) / (max - min)) * innerH;
     return `${x},${y}`;
   }
@@ -72,15 +73,15 @@ export function LineChart({
           );
         })}
         <line x1={padX} y1={padY + innerH} x2={padX + innerW} y2={padY + innerH} className="line-chart-axis" />
-        <polyline fill="none" className="line-chart-france" points={france.map((value, index) => point(value, index, france.length)).join(" ")} />
-        <polyline fill="none" className="line-chart-portugal" points={portugal.map((value, index) => point(value, index, portugal.length)).join(" ")} />
+        <polyline fill="none" className="line-chart-france" points={france.map((value, index) => point(value, index, france.length, seriesGap / 2)).join(" ")} />
+        <polyline fill="none" className="line-chart-portugal" points={portugal.map((value, index) => point(value, index, portugal.length, -seriesGap / 2)).join(" ")} />
         {france.map((value, index) => {
-          const [x, y] = point(value, index, france.length).split(",");
-          return <circle key={`f-${index}`} cx={x} cy={y} r="5" className="line-chart-france-dot" />;
+          const [x, y] = point(value, index, france.length, seriesGap / 2).split(",");
+          return <circle key={`f-${index}`} cx={x} cy={y} r="4" className="line-chart-france-dot" />;
         })}
         {portugal.map((value, index) => {
-          const [x, y] = point(value, index, portugal.length).split(",");
-          return <circle key={`p-${index}`} cx={x} cy={y} r="6" className="line-chart-portugal-dot" />;
+          const [x, y] = point(value, index, portugal.length, -seriesGap / 2).split(",");
+          return <circle key={`p-${index}`} cx={x} cy={y} r="4.5" className="line-chart-portugal-dot" />;
         })}
         {portugal.map((_, index) => (
           <text key={`x-${index}`} x={padX + (index / (portugal.length - 1)) * innerW} y={height - 8} textAnchor="middle" className="line-chart-tick">
@@ -139,7 +140,20 @@ export function GoalTimeline({
     return `${8 + ((minute - 1) / 119) * 84}%`;
   }
 
+  function stagger(minutes: number[]) {
+    const offset: number[] = minutes.map(() => 0);
+    for (let i = 1; i < minutes.length; i++) {
+      if (minutes[i] - minutes[i - 1] < 10) {
+        offset[i] = offset[i - 1] <= 0 ? 16 : -16;
+        if (offset[i - 1] === 0) offset[i - 1] = -16;
+      }
+    }
+    return offset;
+  }
+
   const ticks = [120, 105, 90, 75, 60, 45, 30, 15, 1];
+  const leftOffset = stagger(left);
+  const rightOffset = stagger(right);
 
   return (
     <div className="goal-timeline" aria-hidden="true">
@@ -149,18 +163,22 @@ export function GoalTimeline({
         ))}
       </div>
       <div className="goal-timeline-col">
-        {left.map((minute) => (
-          <span key={`l-${minute}`} className="goal-dot" style={{ bottom: y(minute) }} />
+        {left.map((minute, index) => (
+          <span
+            key={`l-${minute}`}
+            className="goal-dot"
+            style={{ bottom: y(minute), left: `calc(50% + ${leftOffset[index]}px)` }}
+          />
         ))}
         <span className="goal-timeline-caption type-t3">France</span>
       </div>
       <div className="goal-timeline-col">
-        {right.map((minute) => (
+        {right.map((minute, index) => (
           <span
             key={`r-${minute}`}
             className="goal-dot"
             data-large={minute === highlight ? "true" : "false"}
-            style={{ bottom: y(minute) }}
+            style={{ bottom: y(minute), left: `calc(50% + ${rightOffset[index]}px)` }}
           />
         ))}
         <span className="goal-timeline-caption type-t3">Portugal</span>

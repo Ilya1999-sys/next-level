@@ -1,24 +1,36 @@
 "use client";
 
-import { youtubeEmbedSrc } from "@/lib/media/highlights";
+import type { SyntheticEvent } from "react";
+import { vkEmbedSrc, type VkClip } from "@/lib/media/highlights";
 
 export function HighlightIframe({
-  id,
+  clip,
   title,
   controls,
 }: {
-  id: string;
+  clip: VkClip;
   title: string;
   controls?: boolean;
 }) {
+  function handleLoad(event: SyntheticEvent<HTMLIFrameElement>) {
+    const win = event.currentTarget.contentWindow;
+    if (!win) return;
+    const send = (payload: Record<string, unknown>) => {
+      win.postMessage(JSON.stringify(payload), "*");
+    };
+    send({ method: "setVolume", value: 0 });
+    send({ method: "play" });
+  }
+
   return (
     <iframe
-      src={youtubeEmbedSrc(id, { controls })}
+      src={vkEmbedSrc(clip, { controls, autoplay: true })}
       title={title}
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-      referrerPolicy="strict-origin-when-cross-origin"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      referrerPolicy="origin"
       allowFullScreen={Boolean(controls)}
       tabIndex={-1}
+      onLoad={handleLoad}
     />
   );
 }

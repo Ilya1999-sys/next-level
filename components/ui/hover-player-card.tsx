@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { NextArrow } from "@/components/ui/ds";
 import { HighlightIframe } from "@/components/ui/highlight-iframe";
+import type { VkClip } from "@/lib/media/highlights";
 
 export function GraphicHoverCard({
   href,
   accent,
   featured,
   banner,
-  youtube,
+  video,
   year,
   title,
   children,
@@ -19,7 +20,7 @@ export function GraphicHoverCard({
   accent?: boolean;
   featured?: boolean;
   banner?: boolean;
-  youtube?: string;
+  video?: VkClip;
   year: string;
   title: string;
   children: ReactNode;
@@ -34,11 +35,11 @@ export function GraphicHoverCard({
     <article
       className={`ds-card team-card ${featured ? "team-card--featured" : ""} ${banner ? "team-card--banner" : ""}`}
       data-accent={accent ? "true" : "false"}
-      data-hover-video={youtube ? "true" : "false"}
+      data-hover-video={video ? "true" : "false"}
     >
-      {hover && youtube ? (
+      {hover && video ? (
         <div className="card-hover-frame">
-          <HighlightIframe id={youtube} title={`${year} ${title} highlights`} />
+          <HighlightIframe clip={video} title={`${year} ${title} highlights`} />
         </div>
       ) : null}
       <div className="card-top">
