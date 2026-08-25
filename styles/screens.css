@@ -701,7 +701,6 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.28s ease;
-  container-type: size;
 }
 
 .card-hover-frame video {
@@ -720,7 +719,8 @@
   width: 2560px;
   height: 1440px;
   max-width: none;
-  transform: translate(-50%, -50%) scale(max(calc(100cqw / 2560), calc(100cqh / 1440)));
+  margin: -720px 0 0 -1280px;
+  transform: none;
   border: 0;
   pointer-events: none;
 }
@@ -1250,7 +1250,6 @@
 
 .match-video--embed {
   pointer-events: none;
-  container-type: size;
 }
 
 .match-video--embed video {
@@ -1269,7 +1268,8 @@
   width: 2560px;
   height: 1440px;
   max-width: none;
-  transform: translate(-50%, -50%) scale(max(calc(100cqw / 2560), calc(100cqh / 1440)));
+  margin: -720px 0 0 -1280px;
+  transform: none;
   border: 0;
   pointer-events: none;
 }

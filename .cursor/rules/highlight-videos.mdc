@@ -6,7 +6,7 @@ alwaysApply: true
 # Highlight videos
 
 - Minimum **1080p**, prefer **2K**.
-- Fill the card and the match stage (`object-fit: cover` or a 2K iframe scaled to cover).
+- Fill the card and the match stage. Local files: `object-fit: cover`. Embeds: a 2560×1440 iframe centered with negative margins, clipped by `overflow: hidden`. Do not use `cqw`/`scale()` for this — invalid container units drop the whole transform and leave the video in the bottom-right corner.
 - On card hover, muted autoplay starts at once. No extra click.
 - The clip must be that **year, tournament, and match** from the card title.
 
