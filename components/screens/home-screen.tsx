@@ -2,7 +2,7 @@
 
 import { AppChrome } from "@/components/navigation/app-chrome";
 import {
-  BARCELONA_MARKS,
+  BARCELONA_GROUPS,
   FRANCE_GOALS,
   PORTUGAL_GOALS,
   useMoodCatalog,
@@ -20,7 +20,7 @@ export function HomeScreen() {
       <div className="row-split home-top-grid">
         <div className="home-left-stack">
           <GraphicHoverCard year={catalog.barcelona.year} title={catalog.barcelona.title} video={catalog.barcelona.video}>
-            <MixChart marks={BARCELONA_MARKS} />
+            <MixChart groups={BARCELONA_GROUPS} />
           </GraphicHoverCard>
           <GraphicHoverCard year={catalog.zidane.year} title={catalog.zidane.title} video={catalog.zidane.video}>
             <CircleRow

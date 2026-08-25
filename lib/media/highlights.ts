@@ -23,14 +23,14 @@ export type DailymotionClip = {
 export type HighlightClip = VkClip | DzenClip | RutubeClip | DailymotionClip;
 
 export const HIGHLIGHTS = {
-  barcelona: { oid: -16945832, id: 151940438 },
+  barcelona: { provider: "rutube", id: "a432b31d97c1fa87a0adc671d52dc926" },
   zidane: { oid: -16945832, id: 456239716 },
-  portugal2016: { provider: "rutube", id: "e23207c2c8ad818483d69370bfcb4fb8" },
+  portugal2016: { provider: "rutube", id: "ec8e8b9b25377a81e1fee3b757de45fa" },
   euro2008: { oid: -135826836, id: 456241767 },
-  croatia: { oid: -38379805, id: 456244614 },
-  france2016: { provider: "rutube", id: "e23207c2c8ad818483d69370bfcb4fb8" },
+  croatia: { provider: "rutube", id: "07595d662cc859e1ef95778cef3be3f1" },
+  france2016: { provider: "dailymotion", id: "x7q204o" },
   hungary: { oid: -16945832, id: 456239214 },
-  wales: { oid: -76104733, id: 456259932 },
+  wales: { provider: "dailymotion", id: "x4jmmp8" },
 } as const satisfies Record<string, HighlightClip>;
 
 function vkEmbedSrc(clip: VkClip) {
@@ -56,7 +56,17 @@ export function highlightEmbedSrc(clip: HighlightClip) {
     return `https://rutube.ru/play/embed/${clip.id}?autoplay=1&mute=1&autostartmute=true&quality=1`;
   }
   if (clip.provider === "dailymotion") {
-    return `https://www.dailymotion.com/embed/video/${clip.id}?autoplay=1&mute=1&queue-enable=false`;
+    const params = new URLSearchParams({
+      autoplay: "1",
+      mute: "1",
+      "queue-enable": "false",
+      "ui-start-screen-info": "0",
+      "ui-logo": "0",
+      "endscreen-enable": "false",
+      "sharing-enable": "false",
+      quality: "1080",
+    });
+    return `https://www.dailymotion.com/embed/video/${clip.id}?${params.toString()}`;
   }
   return vkEmbedSrc(clip);
 }

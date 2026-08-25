@@ -5,7 +5,7 @@ import { AppChrome } from "@/components/navigation/app-chrome";
 import { CircleRow, MixChart } from "@/components/ui/card-graphics";
 import { DotGrid, IconButton, NextArrow } from "@/components/ui/ds";
 import { GraphicHoverCard } from "@/components/ui/hover-player-card";
-import { BARCELONA_MARKS } from "@/lib/mood/catalog";
+import { BARCELONA_GROUPS } from "@/lib/mood/catalog";
 import { HIGHLIGHTS } from "@/lib/media/highlights";
 import type { ReactNode } from "react";
 
@@ -160,7 +160,7 @@ export function TeamStatsScreen() {
       </article>
       <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" fill dots={{ total: 18, filled: 8, columns: 6 }} />
       <GraphicHoverCard banner year="/2009" title="Path to the final: “Barcelona”." video={HIGHLIGHTS.barcelona}>
-        <MixChart marks={BARCELONA_MARKS} />
+        <MixChart groups={BARCELONA_GROUPS} />
       </GraphicHoverCard>
     </ArchiveShell>
   );

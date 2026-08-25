@@ -2,15 +2,23 @@ import { useMood } from "@/components/mood/mood-provider";
 import { HIGHLIGHTS, type HighlightClip } from "@/lib/media/highlights";
 import type { MixMark } from "@/components/ui/card-graphics";
 
-export const BARCELONA_MARKS: MixMark[] = [
-  { type: "bar", tone: "accent", height: 100 },
-  { type: "bar", tone: "muted", height: 48 },
-  { type: "bar", tone: "accent", height: 88 },
-  { type: "dot", tone: "muted" },
-  { type: "dot", tone: "accent" },
-  { type: "dot", tone: "muted" },
-  { type: "bar", tone: "accent", height: 42 },
-  { type: "bar", tone: "muted", height: 10 },
+export const BARCELONA_GROUPS: MixMark[][] = [
+  [
+    { type: "bar", tone: "accent", height: 144 },
+    { type: "bar", tone: "muted", height: 60 },
+  ],
+  [
+    { type: "bar", tone: "accent", height: 120 },
+    { type: "dot", tone: "muted" },
+  ],
+  [
+    { type: "dot", tone: "accent" },
+    { type: "dot", tone: "muted" },
+  ],
+  [
+    { type: "bar", tone: "accent", height: 48 },
+    { type: "line", tone: "muted" },
+  ],
 ];
 
 export const WINS_MARKS: MixMark[] = [

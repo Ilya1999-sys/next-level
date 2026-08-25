@@ -21,6 +21,9 @@ export function HighlightIframe({
     send({ type: "player:mute", data: {} });
     send({ type: "player:play", data: {} });
     send({ type: "player:setVolume", data: { volume: 0 } });
+    send({ command: "mute" });
+    send({ command: "play" });
+    win.postMessage("play", "*");
   }
 
   return (

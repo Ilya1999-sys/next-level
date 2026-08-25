@@ -1,21 +1,49 @@
 import { CircleStat } from "@/components/ui/ds";
 
 export type MixMark = {
-  type: "bar" | "dot";
+  type: "bar" | "dot" | "line";
   tone: "accent" | "muted";
   height?: number;
 };
 
-export function MixChart({ marks }: { marks: MixMark[] }) {
+function MixMarkNode({ mark, grouped }: { mark: MixMark; grouped: boolean }) {
+  if (mark.type === "dot") return <span className="mix-dot" data-tone={mark.tone} />;
+  if (mark.type === "line") return <span className="mix-line" data-tone={mark.tone} />;
+  return (
+    <span
+      className="mix-bar"
+      data-tone={mark.tone}
+      style={{ height: grouped ? `${mark.height}px` : `${mark.height ?? 70}%` }}
+    />
+  );
+}
+
+export function MixChart({
+  marks,
+  groups,
+}: {
+  marks?: MixMark[];
+  groups?: MixMark[][];
+}) {
+  if (groups) {
+    return (
+      <div className="mix-chart" data-grouped="true" aria-hidden="true">
+        {groups.map((cluster, clusterIndex) => (
+          <div key={clusterIndex} className="mix-cluster">
+            {cluster.map((mark, index) => (
+              <MixMarkNode key={index} mark={mark} grouped />
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="mix-chart" aria-hidden="true">
-      {marks.map((mark, index) =>
-        mark.type === "dot" ? (
-          <span key={index} className="mix-dot" data-tone={mark.tone} />
-        ) : (
-          <span key={index} className="mix-bar" data-tone={mark.tone} style={{ height: `${mark.height ?? 70}%` }} />
-        )
-      )}
+      {(marks ?? []).map((mark, index) => (
+        <MixMarkNode key={index} mark={mark} grouped={false} />
+      ))}
     </div>
   );
 }
