@@ -18,7 +18,7 @@ export function HomeScreen() {
   return (
     <AppChrome crumbs={["Home"]}>
       <div className="row-split home-top-grid">
-        <div className="col-stack home-left-stack">
+        <div className="home-left-stack">
           <GraphicHoverCard year={catalog.barcelona.year} title={catalog.barcelona.title} video={catalog.barcelona.video}>
             <MixChart marks={BARCELONA_MARKS} />
           </GraphicHoverCard>

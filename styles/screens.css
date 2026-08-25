@@ -355,12 +355,21 @@
 .home-left-stack {
   display: grid;
   grid-template-rows: 248px 248px minmax(0, 1fr);
+  gap: var(--space-s);
   min-height: 634px;
+  height: 100%;
+  min-width: 0;
 }
 
-.home-left-stack .card-link,
-.home-left-stack .fact-card {
+.home-left-stack > .card-link {
+  height: 248px;
+  min-height: 248px;
+  flex: none;
+}
+
+.home-left-stack > .fact-card {
   height: 100%;
+  min-height: 0;
 }
 
 .home-facts-grid {
@@ -376,7 +385,18 @@
 }
 
 .tournament-left-stack {
-  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(248px, 1fr) minmax(248px, 1fr);
+  gap: var(--space-s);
+  min-height: 508px;
+  height: 100%;
+  min-width: 0;
+}
+
+.tournament-left-stack > .card-link {
+  min-height: 248px;
+  height: 100%;
+  flex: none;
 }
 
 .tournament-facts-grid {
@@ -387,6 +407,11 @@
 .row-split > .card-link,
 .row-facts-split > .col-stack {
   min-height: 0;
+  height: 100%;
+}
+
+.row-split > .home-left-stack,
+.row-split > .tournament-left-stack {
   height: 100%;
 }
 
@@ -1443,8 +1468,16 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .home-left-stack {
+  .home-left-stack,
+  .tournament-left-stack {
     grid-template-rows: auto;
     min-height: 0;
+    height: auto;
+  }
+
+  .home-left-stack > .card-link,
+  .tournament-left-stack > .card-link {
+    height: 248px;
+    min-height: 248px;
   }
 }

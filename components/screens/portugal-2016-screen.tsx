@@ -28,7 +28,7 @@ export function Portugal2016Screen() {
       </article>
 
       <div className="row-split tournament-top-grid">
-        <div className="col-stack tournament-left-stack">
+        <div className="tournament-left-stack">
           <GraphicHoverCard year="Match review" title="1:0 Croatia" video={HIGHLIGHTS.croatia}>
             <StatBars rows={CROATIA_BARS} />
           </GraphicHoverCard>
