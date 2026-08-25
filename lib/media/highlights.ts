@@ -25,10 +25,10 @@ export type HighlightClip = VkClip | DzenClip | RutubeClip | DailymotionClip;
 export const HIGHLIGHTS = {
   barcelona: { oid: -16945832, id: 151940438 },
   zidane: { oid: -16945832, id: 456239716 },
-  portugal2016: { oid: -8722610, id: 456259499 },
+  portugal2016: { provider: "rutube", id: "e23207c2c8ad818483d69370bfcb4fb8" },
   euro2008: { oid: -135826836, id: 456241767 },
-  croatia: { oid: -16945832, id: 456239392 },
-  france2016: { oid: -8722610, id: 456259499 },
+  croatia: { oid: -38379805, id: 456244614 },
+  france2016: { provider: "rutube", id: "e23207c2c8ad818483d69370bfcb4fb8" },
   hungary: { oid: -16945832, id: 456239214 },
   wales: { oid: -76104733, id: 456259932 },
 } as const satisfies Record<string, HighlightClip>;
@@ -53,7 +53,7 @@ export function highlightEmbedSrc(clip: HighlightClip) {
     return `https://dzen.ru/embed/${clip.id}?autoplay=1&muted=1`;
   }
   if (clip.provider === "rutube") {
-    return `https://rutube.ru/play/embed/${clip.id}?autoplay=1&mute=1&quality=1`;
+    return `https://rutube.ru/play/embed/${clip.id}?autoplay=1&mute=1&autostartmute=true&quality=1`;
   }
   if (clip.provider === "dailymotion") {
     return `https://www.dailymotion.com/embed/video/${clip.id}?autoplay=1&mute=1&queue-enable=false`;

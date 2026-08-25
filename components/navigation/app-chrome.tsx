@@ -76,11 +76,11 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
             </IconButton>
           </div>
           <div className="left-menu-group">
-            <IconButton href="/profile" label="Favorites" badge="2">
-              <IconStar />
-            </IconButton>
             <IconButton href="/notifications" label="Notifications" badge="2">
               <IconBell />
+            </IconButton>
+            <IconButton href="/profile" label="Favorites" badge="2">
+              <IconStar />
             </IconButton>
             <IconButton href="/" label="Exit">
               <IconExit />

@@ -25,10 +25,11 @@ export function GraphicHoverCard({
   title: string;
   children: ReactNode;
 }) {
-  const [hover, setHover] = useState(false);
+  const [armed, setArmed] = useState(false);
+
   function enter() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setHover(true);
+    setArmed(true);
   }
 
   const inner = (
@@ -37,7 +38,7 @@ export function GraphicHoverCard({
       data-accent={accent ? "true" : "false"}
       data-hover-video={video ? "true" : "false"}
     >
-      {hover && video ? (
+      {armed && video ? (
         <div className="card-hover-frame">
           <HighlightIframe clip={video} title={`${year} ${title} highlights`} />
         </div>
@@ -57,9 +58,7 @@ export function GraphicHoverCard({
 
   const events = {
     onMouseEnter: enter,
-    onMouseLeave: () => setHover(false),
     onFocus: enter,
-    onBlur: () => setHover(false),
   };
 
   if (href) {

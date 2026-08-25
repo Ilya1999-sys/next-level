@@ -18,6 +18,9 @@ export function HighlightIframe({
     };
     send({ method: "setVolume", value: 0 });
     send({ method: "play" });
+    send({ type: "player:mute", data: {} });
+    send({ type: "player:play", data: {} });
+    send({ type: "player:setVolume", data: { volume: 0 } });
   }
 
   return (
@@ -25,7 +28,7 @@ export function HighlightIframe({
       src={highlightEmbedSrc(clip)}
       title={title}
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      referrerPolicy="origin"
+      referrerPolicy="strict-origin-when-cross-origin"
       allowFullScreen
       tabIndex={-1}
       onLoad={handleLoad}

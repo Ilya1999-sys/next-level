@@ -45,56 +45,51 @@ export function LineChart({
 }) {
   const max = 13;
   const min = 1;
-  const width = 320;
-  const height = 280;
-  const padX = 36;
-  const padY = 18;
-  const innerW = width - padX - 16;
-  const innerH = height - padY - 36;
-  const seriesGap = 10;
+  const width = 403;
+  const height = 462;
+  const xs = [71.5, 119.5, 167.5, 215.5, 263.5, 311.5, 360];
+  const yTop = 18;
+  const yBottom = 354;
+  const ticks = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
-  function point(value: number, index: number, total: number, offsetX = 0) {
-    const x = padX + (index / (total - 1)) * innerW + offsetX;
-    const y = padY + ((max - value) / (max - min)) * innerH;
-    return `${x},${y}`;
+  function yOf(value: number) {
+    return yTop + ((max - value) / (max - min)) * (yBottom - yTop);
   }
 
-  const ticks = [13, 12, 11, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+  function points(series: number[]) {
+    return series.map((value, index) => `${xs[index]},${yOf(value)}`).join(" ");
+  }
 
   return (
     <div className="line-chart" data-accent={accent ? "true" : "false"}>
       <svg viewBox={`0 0 ${width} ${height}`} className="line-chart-svg" aria-hidden="true">
-        {ticks.map((tick) => {
-          const y = padY + ((max - tick) / (max - min)) * innerH;
-          return (
-            <text key={tick} x={8} y={y + 4} className="line-chart-tick">
-              {tick}
-            </text>
-          );
-        })}
-        <line x1={padX} y1={padY + innerH} x2={padX + innerW} y2={padY + innerH} className="line-chart-axis" />
-        <polyline fill="none" className="line-chart-france" points={france.map((value, index) => point(value, index, france.length, seriesGap / 2)).join(" ")} />
-        <polyline fill="none" className="line-chart-portugal" points={portugal.map((value, index) => point(value, index, portugal.length, -seriesGap / 2)).join(" ")} />
-        {france.map((value, index) => {
-          const [x, y] = point(value, index, france.length, seriesGap / 2).split(",");
-          return <circle key={`f-${index}`} cx={x} cy={y} r="4" className="line-chart-france-dot" />;
-        })}
-        {portugal.map((value, index) => {
-          const [x, y] = point(value, index, portugal.length, -seriesGap / 2).split(",");
-          return <circle key={`p-${index}`} cx={x} cy={y} r="4.5" className="line-chart-portugal-dot" />;
-        })}
-        {portugal.map((_, index) => (
-          <text key={`x-${index}`} x={padX + (index / (portugal.length - 1)) * innerW} y={height - 8} textAnchor="middle" className="line-chart-tick">
+        {ticks.map((tick) => (
+          <text key={tick} x={19} y={yOf(tick) + 4} textAnchor="end" className="line-chart-tick">
+            {tick}
+          </text>
+        ))}
+        <line x1={23} y1={0} x2={23} y2={379} className="line-chart-axis" />
+        <line x1={23} y1={379} x2={403} y2={379} className="line-chart-axis" />
+        <polyline fill="none" className="line-chart-france" points={points(france)} />
+        <polyline fill="none" className="line-chart-portugal" points={points(portugal)} />
+        {france.map((value, index) => (
+          <circle key={`f-${index}`} cx={xs[index]} cy={yOf(value)} r="6" className="line-chart-france-dot" />
+        ))}
+        {portugal.map((value, index) => (
+          <circle key={`p-${index}`} cx={xs[index]} cy={yOf(value)} r="6" className="line-chart-portugal-dot" />
+        ))}
+        {xs.map((x, index) => (
+          <text key={`x-${index}`} x={x} y={396} textAnchor="middle" className="line-chart-tick">
             {index + 1}
           </text>
         ))}
       </svg>
       <div className="line-chart-legend">
         <span>
-          <i className="legend-dot legend-dot--portugal" /> Portugal goals
+          <i className="legend-swatch legend-swatch--portugal" /> Portugal goals
         </span>
         <span>
-          <i className="legend-dot legend-dot--france" /> France goals
+          <i className="legend-swatch legend-swatch--france" /> France goals
         </span>
       </div>
     </div>
