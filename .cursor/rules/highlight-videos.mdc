@@ -1,0 +1,24 @@
+---
+description: Hover and match videos must be self-hosted 1080/2K files that match the card
+alwaysApply: true
+---
+
+# Highlight videos
+
+Do not embed VK, Rutube, Dailymotion, YouTube, or Dzen. Third-party players show ads and block muted autoplay.
+
+- Minimum **1080p**, prefer **2K**.
+- Put files in `public/media/highlights/` and play with `<video>`, not `<iframe>`.
+- Fill the card and the match stage: `object-fit: cover` on the whole area.
+- On card hover, muted autoplay starts at once. No extra click. Loop while hovered.
+- The clip must be that **year, tournament, and match** from the card title. Do not reuse another story’s video.
+
+```ts
+// BAD: embed + wrong match
+{ provider: "dailymotion", id: "x4jmmp8" }
+
+// GOOD: local 1080/2K file for this card only
+{ src: "/media/highlights/portugal-wales-2016.mp4" }
+```
+
+Do not download or commit copyrighted broadcasts. The user supplies licensed files with the names in `lib/media/highlights.ts`.

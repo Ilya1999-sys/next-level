@@ -26,21 +26,29 @@ export function GraphicHoverCard({
   children: ReactNode;
 }) {
   const [armed, setArmed] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   function enter() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (failed) return;
     setArmed(true);
   }
+
+  const showVideo = Boolean(video) && !failed;
 
   const inner = (
     <article
       className={`ds-card team-card ${featured ? "team-card--featured" : ""} ${banner ? "team-card--banner" : ""}`}
       data-accent={accent ? "true" : "false"}
-      data-hover-video={video ? "true" : "false"}
+      data-hover-video={showVideo ? "true" : "false"}
     >
-      {armed && video ? (
+      {armed && video && !failed ? (
         <div className="card-hover-frame">
-          <HighlightIframe clip={video} title={`${year} ${title} highlights`} />
+          <HighlightIframe
+            clip={video}
+            title={`${year} ${title} highlights`}
+            onError={() => setFailed(true)}
+          />
         </div>
       ) : null}
       <div className="card-top">

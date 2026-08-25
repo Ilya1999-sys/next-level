@@ -237,7 +237,7 @@ export function MatchesLandingScreen() {
         <GraphicHoverCard year="/2016" title="Portugal's first victory in a major tournament." href="/portugal-2016" video={HIGHLIGHTS.portugal2016} accent>
           <CircleRow stats={[{ value: "1", label: "European title", accent: true }, { value: "9", label: "goals scored" }]} />
         </GraphicHoverCard>
-        <GraphicHoverCard year="/2010" title="USA vs Ghana, World Cup round of 16" href="/match/usa-vs-ghana-2010" video={HIGHLIGHTS.zidane}>
+        <GraphicHoverCard year="/2010" title="USA vs Ghana, World Cup round of 16" href="/match/usa-vs-ghana-2010" video={HIGHLIGHTS.usaGhana2010}>
           <CircleRow stats={[{ value: "2", label: "extra-time drama", accent: true }, { value: "1", label: "Ghana winner" }]} />
         </GraphicHoverCard>
       </div>

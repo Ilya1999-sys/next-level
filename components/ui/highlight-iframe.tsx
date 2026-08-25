@@ -1,40 +1,42 @@
 "use client";
 
-import type { SyntheticEvent } from "react";
-import { highlightEmbedSrc, type HighlightClip } from "@/lib/media/highlights";
+import { useEffect, useRef } from "react";
+import type { HighlightClip } from "@/lib/media/highlights";
 
 export function HighlightIframe({
   clip,
   title,
+  onError,
 }: {
   clip: HighlightClip;
   title: string;
+  onError?: () => void;
 }) {
-  function handleLoad(event: SyntheticEvent<HTMLIFrameElement>) {
-    const win = event.currentTarget.contentWindow;
-    if (!win) return;
-    const send = (payload: Record<string, unknown>) => {
-      win.postMessage(JSON.stringify(payload), "*");
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.muted = true;
+    const play = () => {
+      void el.play().catch(() => undefined);
     };
-    send({ method: "setVolume", value: 0 });
-    send({ method: "play" });
-    send({ type: "player:mute", data: {} });
-    send({ type: "player:play", data: {} });
-    send({ type: "player:setVolume", data: { volume: 0 } });
-    send({ command: "mute" });
-    send({ command: "play" });
-    win.postMessage("play", "*");
-  }
+    play();
+    el.addEventListener("canplay", play);
+    return () => el.removeEventListener("canplay", play);
+  }, [clip.src]);
 
   return (
-    <iframe
-      src={highlightEmbedSrc(clip)}
+    <video
+      ref={ref}
+      src={clip.src}
       title={title}
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      referrerPolicy="strict-origin-when-cross-origin"
-      allowFullScreen
-      tabIndex={-1}
-      onLoad={handleLoad}
+      muted
+      loop
+      playsInline
+      autoPlay
+      preload="auto"
+      onError={onError}
     />
   );
 }
