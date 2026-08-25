@@ -25,10 +25,10 @@ export type HighlightClip = VkClip | DzenClip | RutubeClip | DailymotionClip;
 export const HIGHLIGHTS = {
   barcelona: { oid: -16945832, id: 151940438 },
   zidane: { oid: -16945832, id: 456239716 },
-  portugal2016: { provider: "rutube", id: "e23207c2c8ad818483d69370bfcb4fb8" },
+  portugal2016: { oid: -8722610, id: 456259499 },
   euro2008: { oid: -135826836, id: 456241767 },
-  croatia: { provider: "dailymotion", id: "x4ij4jj" },
-  france2016: { provider: "rutube", id: "e23207c2c8ad818483d69370bfcb4fb8" },
+  croatia: { oid: -16945832, id: 456239392 },
+  france2016: { oid: -8722610, id: 456259499 },
   hungary: { oid: -16945832, id: 456239214 },
   wales: { oid: -76104733, id: 456259932 },
 } as const satisfies Record<string, HighlightClip>;
