@@ -10,6 +10,7 @@ import {
 import { DotGrid, IconButton, NextArrow } from "@/components/ui/ds";
 import { CircleRow, LineChart, MixChart } from "@/components/ui/card-graphics";
 import { GraphicHoverCard } from "@/components/ui/hover-player-card";
+import { watchHref } from "@/lib/media/highlights";
 
 export function HomeScreen() {
   const catalog = useMoodCatalog();
@@ -19,10 +20,14 @@ export function HomeScreen() {
     <AppChrome crumbs={["Home"]}>
       <div className="row-split home-top-grid">
         <div className="home-left-stack">
-          <GraphicHoverCard year={catalog.barcelona.year} title={catalog.barcelona.title} video={catalog.barcelona.video}>
+          <GraphicHoverCard
+            year={catalog.barcelona.year}
+            title={catalog.barcelona.title}
+            watchHref={watchHref("barcelona")}
+          >
             <MixChart groups={BARCELONA_GROUPS} />
           </GraphicHoverCard>
-          <GraphicHoverCard year={catalog.zidane.year} title={catalog.zidane.title} video={catalog.zidane.video}>
+          <GraphicHoverCard year={catalog.zidane.year} title={catalog.zidane.title} watchHref={watchHref("zidane")}>
             <CircleRow
               stats={[
                 { value: "3", label: "Zidane goals", accent: true },
@@ -45,10 +50,12 @@ export function HomeScreen() {
         <GraphicHoverCard
           featured
           accent
+          hoverVideo
           year={catalog.portugal.year}
           title={catalog.portugal.title}
           video={catalog.portugal.video}
           href={catalog.portugal.href}
+          watchHref={watchHref("portugal2016")}
         >
           <LineChart portugal={PORTUGAL_GOALS} france={FRANCE_GOALS} accent />
         </GraphicHoverCard>
@@ -118,7 +125,12 @@ export function HomeScreen() {
         </div>
       </article>
 
-      <GraphicHoverCard banner year={catalog.tournament.year} title={catalog.tournament.title} video={catalog.tournament.video}>
+      <GraphicHoverCard
+        banner
+        year={catalog.tournament.year}
+        title={catalog.tournament.title}
+        watchHref={watchHref("euro2008")}
+      >
         <CircleRow stats={catalog.tournament.stats} />
       </GraphicHoverCard>
     </AppChrome>

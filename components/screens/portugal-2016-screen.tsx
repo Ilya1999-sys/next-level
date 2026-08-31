@@ -1,7 +1,7 @@
 "use client";
 
 import { AppChrome } from "@/components/navigation/app-chrome";
-import { HIGHLIGHTS } from "@/lib/media/highlights";
+import { HIGHLIGHTS, watchHref } from "@/lib/media/highlights";
 import { CROATIA_BARS, FRANCE_MINUTES, PORTUGAL_MINUTES, WINS_MARKS } from "@/lib/mood/catalog";
 import { CircleRow, GoalTimeline, MixChart, StatBars } from "@/components/ui/card-graphics";
 import { DotGrid } from "@/components/ui/ds";
@@ -29,10 +29,10 @@ export function Portugal2016Screen() {
 
       <div className="row-split tournament-top-grid">
         <div className="tournament-left-stack">
-          <GraphicHoverCard year="Match review" title="1:0 Croatia" video={HIGHLIGHTS.croatia}>
+          <GraphicHoverCard year="Match review" title="1:0 Croatia" watchHref={watchHref("croatia")}>
             <StatBars rows={CROATIA_BARS} />
           </GraphicHoverCard>
-          <GraphicHoverCard year="Match review" title="3-3 Hungary" video={HIGHLIGHTS.hungary}>
+          <GraphicHoverCard year="Match review" title="3-3 Hungary" watchHref={watchHref("hungary")}>
             <CircleRow
               stats={[
                 { value: "19", label: "shots on goal", accent: true },
@@ -45,9 +45,11 @@ export function Portugal2016Screen() {
         <GraphicHoverCard
           featured
           accent
+          hoverVideo
           year="Match review"
           title="1-0 France"
           href="/portugal-2016/france"
+          watchHref="/portugal-2016/france"
           video={HIGHLIGHTS.france2016}
         >
           <GoalTimeline left={FRANCE_MINUTES} right={PORTUGAL_MINUTES} highlight={109} />
@@ -98,7 +100,7 @@ export function Portugal2016Screen() {
           </div>
           <DotGrid total={22} filled={9} columns={11} />
         </article>
-        <GraphicHoverCard year="Match review" title="2:0 Wales" video={HIGHLIGHTS.wales}>
+        <GraphicHoverCard year="Match review" title="2:0 Wales" watchHref={watchHref("wales")}>
           <CircleRow
             stats={[
               { value: "17", label: "shots on goal", accent: true },

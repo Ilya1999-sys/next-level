@@ -6,7 +6,7 @@ import { CircleRow, MixChart } from "@/components/ui/card-graphics";
 import { DotGrid, IconButton, NextArrow } from "@/components/ui/ds";
 import { GraphicHoverCard } from "@/components/ui/hover-player-card";
 import { BARCELONA_GROUPS } from "@/lib/mood/catalog";
-import { HIGHLIGHTS } from "@/lib/media/highlights";
+import { watchHref } from "@/lib/media/highlights";
 import type { ReactNode } from "react";
 
 export function ArchiveShell({ crumbs, children }: { crumbs: string[]; children: ReactNode }) {
@@ -103,7 +103,13 @@ export function PlayerStatsScreen() {
         <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 8, columns: 6 }} />
       </div>
       <div className="row-goals">
-        <GraphicHoverCard year="/2016" title="Open Portugal Euro archive" href="/portugal-2016" video={HIGHLIGHTS.portugal2016} accent>
+        <GraphicHoverCard
+          year="/2016"
+          title="Open Portugal Euro archive"
+          href="/portugal-2016"
+          watchHref={watchHref("portugal2016")}
+          accent
+        >
           <CircleRow stats={[{ value: "9", label: "Portugal goals", accent: true }, { value: "1", label: "regular-time win" }]} />
         </GraphicHoverCard>
         <article className="ds-card" style={{ padding: "var(--space-l)", display: "grid", gap: "var(--space-m)", alignContent: "center" }}>
@@ -159,7 +165,7 @@ export function TeamStatsScreen() {
         />
       </article>
       <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" fill dots={{ total: 18, filled: 8, columns: 6 }} />
-      <GraphicHoverCard banner year="/2009" title="Path to the final: “Barcelona”." video={HIGHLIGHTS.barcelona}>
+      <GraphicHoverCard banner year="/2009" title="Path to the final: “Barcelona”." watchHref={watchHref("barcelona")}>
         <MixChart groups={BARCELONA_GROUPS} />
       </GraphicHoverCard>
     </ArchiveShell>
@@ -223,7 +229,7 @@ export function MatchesLandingScreen() {
       <article className="ds-card tournament-hero">
         <div className="tournament-hero-copy">
           <p className="type-h2">Match archive</p>
-          <p className="type-t3">Hover a card with an arrow to play the review. Open Portugal 2016 to walk the path to the final.</p>
+          <p className="type-t3">Use the arrow on a card to open the review. Open Portugal 2016 to walk the path to the final.</p>
         </div>
         <CircleRow
           stats={[
@@ -234,10 +240,21 @@ export function MatchesLandingScreen() {
         />
       </article>
       <div className="row-goals">
-        <GraphicHoverCard year="/2016" title="Portugal's first victory in a major tournament." href="/portugal-2016" video={HIGHLIGHTS.portugal2016} accent>
+        <GraphicHoverCard
+          year="/2016"
+          title="Portugal's first victory in a major tournament."
+          href="/portugal-2016"
+          watchHref={watchHref("portugal2016")}
+          accent
+        >
           <CircleRow stats={[{ value: "1", label: "European title", accent: true }, { value: "9", label: "goals scored" }]} />
         </GraphicHoverCard>
-        <GraphicHoverCard year="/2010" title="USA vs Ghana, World Cup round of 16" href="/match/usa-vs-ghana-2010" video={HIGHLIGHTS.usaGhana2010}>
+        <GraphicHoverCard
+          year="/2010"
+          title="USA vs Ghana, World Cup round of 16"
+          href="/match/usa-vs-ghana-2010"
+          watchHref={watchHref("usaGhana2010")}
+        >
           <CircleRow stats={[{ value: "2", label: "extra-time drama", accent: true }, { value: "1", label: "Ghana winner" }]} />
         </GraphicHoverCard>
       </div>
@@ -274,7 +291,14 @@ export function PauseReplayScreen() {
     <ArchiveShell crumbs={["Home", "Pause"]}>
       <FactBlock title="Paused fact" value="109" text="Eder’s extra-time goal is the frame this archive keeps coming back to." />
       <LiveCard place="Saint-Denis" chips={["Replay the winner", "Captain leaves the pitch"]} fans="198 fans discussions" href="/portugal-2016/france" />
-      <GraphicHoverCard banner year="Match review" title="1-0 France" href="/portugal-2016/france" video={HIGHLIGHTS.france2016} accent>
+      <GraphicHoverCard
+        banner
+        year="Match review"
+        title="1-0 France"
+        href="/portugal-2016/france"
+        watchHref="/portugal-2016/france"
+        accent
+      >
         <CircleRow stats={[{ value: "1", label: "golden goal", accent: true }, { value: "0", label: "France" }]} />
       </GraphicHoverCard>
     </ArchiveShell>

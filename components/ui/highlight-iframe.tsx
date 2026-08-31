@@ -1,7 +1,28 @@
 "use client";
 
 import { useEffect, useRef, useState, type SyntheticEvent } from "react";
-import { highlightEmbedSrc, type HighlightClip } from "@/lib/media/highlights";
+import {
+  highlightEmbedSrc,
+  hostedPlayerSrc,
+  isDirectVideoUrl,
+  type HighlightClip,
+} from "@/lib/media/highlights";
+
+function fileSrc(clip: HighlightClip) {
+  if (clip.hosted && isDirectVideoUrl(clip.hosted)) return clip.hosted;
+  return clip.src;
+}
+
+function iframeSrc(clip: HighlightClip) {
+  if (clip.hosted && !isDirectVideoUrl(clip.hosted)) return hostedPlayerSrc(clip.hosted);
+  if (clip.embed) return highlightEmbedSrc(clip.embed);
+  return null;
+}
+
+function initialMode(clip: HighlightClip): "file" | "embed" {
+  if (clip.hosted) return isDirectVideoUrl(clip.hosted) ? "file" : "embed";
+  return clip.embed ? "embed" : "file";
+}
 
 export function HighlightIframe({
   clip,
@@ -11,9 +32,14 @@ export function HighlightIframe({
   title: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [mode, setMode] = useState<"file" | "embed">(clip.embed ? "embed" : "file");
+  const [mode, setMode] = useState<"file" | "embed">(() => initialMode(clip));
 
   useEffect(() => {
+    setMode(initialMode(clip));
+  }, [clip]);
+
+  useEffect(() => {
+    if (clip.hosted) return;
     let cancelled = false;
     fetch(clip.src, { method: "HEAD" })
       .then((res) => {
@@ -23,7 +49,7 @@ export function HighlightIframe({
     return () => {
       cancelled = true;
     };
-  }, [clip.src]);
+  }, [clip.hosted, clip.src]);
 
   useEffect(() => {
     const el = videoRef.current;
@@ -35,7 +61,7 @@ export function HighlightIframe({
     play();
     el.addEventListener("canplay", play);
     return () => el.removeEventListener("canplay", play);
-  }, [clip.src, mode]);
+  }, [clip.src, clip.hosted, mode]);
 
   function handleEmbedLoad(event: SyntheticEvent<HTMLIFrameElement>) {
     const win = event.currentTarget.contentWindow;
@@ -57,7 +83,7 @@ export function HighlightIframe({
     return (
       <video
         ref={videoRef}
-        src={clip.src}
+        src={fileSrc(clip)}
         title={title}
         muted
         loop
@@ -65,17 +91,18 @@ export function HighlightIframe({
         autoPlay
         preload="auto"
         onError={() => {
-          if (clip.embed) setMode("embed");
+          if (iframeSrc(clip)) setMode("embed");
         }}
       />
     );
   }
 
-  if (!clip.embed) return null;
+  const src = iframeSrc(clip);
+  if (!src) return null;
 
   return (
     <iframe
-      src={highlightEmbedSrc(clip.embed)}
+      src={src}
       title={title}
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       referrerPolicy="strict-origin-when-cross-origin"

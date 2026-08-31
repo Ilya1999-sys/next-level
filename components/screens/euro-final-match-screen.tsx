@@ -3,7 +3,7 @@
 import { useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { CollapseIcon, DsIcon, IconButton, TagMood } from "@/components/ui/ds";
-import { HIGHLIGHTS } from "@/lib/media/highlights";
+import { HIGHLIGHTS, type HighlightClip } from "@/lib/media/highlights";
 import { HighlightIframe } from "@/components/ui/highlight-iframe";
 
 const CAMERAS = ["Player", "Referee", "Behind goal", "Drone"] as const;
@@ -40,7 +40,15 @@ const SMART_FACTS = [
   },
 ];
 
-export function EuroFinalMatchScreen() {
+export function EuroFinalMatchScreen({
+  clip = HIGHLIGHTS.france2016,
+  backHref = "/portugal-2016",
+  title = "EURO 2016 final highlights: Portugal 1-0 France",
+}: {
+  clip?: HighlightClip;
+  backHref?: string;
+  title?: string;
+}) {
   const router = useRouter();
   const [open, setOpen] = useState<Record<HudKey, boolean>>({
     score: false,
@@ -94,7 +102,7 @@ export function EuroFinalMatchScreen() {
   return (
     <div className="match-stage">
       <div className="match-video match-video--embed">
-        <HighlightIframe clip={HIGHLIGHTS.france2016} title="EURO 2016 final highlights: Portugal 1-0 France" />
+        <HighlightIframe clip={clip} title={title} />
       </div>
       <p className="match-credit type-t3">
         Match footage is used for an educational non-commercial study project. Sources are not presented as original broadcasts.
@@ -106,22 +114,20 @@ export function EuroFinalMatchScreen() {
           data-tone={open.score ? undefined : "page"}
           style={{ borderRadius: open.score ? "var(--radius-l)" : "var(--radius-xs)", padding: 12, display: "flex", gap: 28, alignItems: "center" }}
         >
+          <IconButton label="Back" onClick={() => router.push(backHref)}>
+            <DsIcon name="back" />
+          </IconButton>
           {open.score ? (
-            <>
-              <IconButton label="Back" onClick={() => router.push("/portugal-2016")}>
-                <DsIcon name="back" />
-              </IconButton>
-              <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-                <TeamBadge code="Por" src="/figma/team-por.png" />
-                <div className="match-score" style={{ textAlign: "center" }}>
-                  <p className="type-h2 fact-number">
-                    0 <span>-</span> 0
-                  </p>
-                  <p className="type-t2">18:45</p>
-                </div>
-                <TeamBadge code="Fra" src="/figma/team-fra.png" reverse />
+            <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+              <TeamBadge code="Por" src="/figma/team-por.png" />
+              <div className="match-score" style={{ textAlign: "center" }}>
+                <p className="type-h2 fact-number">
+                  0 <span>-</span> 0
+                </p>
+                <p className="type-t2">18:45</p>
               </div>
-            </>
+              <TeamBadge code="Fra" src="/figma/team-fra.png" reverse />
+            </div>
           ) : (
             <div className="match-score" style={{ textAlign: "center" }}>
               <p className="type-h2 fact-number">0 - 0</p>

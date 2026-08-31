@@ -7,18 +7,19 @@ alwaysApply: true
 
 - Minimum **1080p**, prefer **2K**.
 - Fill the card and the match stage. Local files: `object-fit: cover`. Embeds: a 2560×1440 iframe centered with negative margins, clipped by `overflow: hidden`. Do not use `cqw`/`scale()` for this — invalid container units drop the whole transform and leave the video in the bottom-right corner.
-- On card hover, muted autoplay starts at once. No extra click.
+- Hover autoplay only on the two blue featured cards: Home Portugal and Tournament France. Other story cards open video from the top-right arrow (`/watch/[clip]` or `/portugal-2016/france`).
 - The clip must be that **year, tournament, and match** from the card title.
 
-Prefer a local file in `public/media/highlights/` (`<video>`, no ads). If the file is missing, play the matching embed so hover still works.
+Prefer a hosted Kinescope/Vimeo URL in `NEXT_PUBLIC_VIDEO_*` (see `.env.example`). Local file in `public/media/highlights/` is next. Rutube/VK/Dailymotion remain fallbacks when neither is set.
 
 ```ts
 // BAD: local-only path with no file → hover plays nothing
 { src: "/media/highlights/portugal-wales-2016.mp4" }
 
-// GOOD: local file when present, embed fallback so hover always plays
+// GOOD: hosted player, local file, or embed fallback
 {
   src: "/media/highlights/portugal-wales-2016.mp4",
   embed: { provider: "dailymotion", id: "x4jmmp8" },
+  hosted: process.env.NEXT_PUBLIC_VIDEO_WALES,
 }
 ```

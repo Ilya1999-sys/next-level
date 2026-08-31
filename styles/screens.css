@@ -35,13 +35,13 @@
 }
 
 .logo-a {
-  width: 88px;
-  height: 44px;
+  width: var(--size-logo-w);
+  height: var(--size-logo-h);
   display: grid;
   place-items: center;
   color: var(--elements-icons);
   font-family: var(--font-family-primary);
-  font-size: 40px;
+  font-size: var(--size-logo-glyph);
   font-weight: 400;
   line-height: 1;
 }
@@ -170,10 +170,10 @@
   align-self: flex-start;
   position: sticky;
   top: var(--space-l);
-  width: 88px;
-  height: calc(100dvh - var(--space-l) * 3 - 44px);
-  min-height: 640px;
-  max-height: calc(100dvh - var(--space-l) * 3 - 44px);
+  width: var(--size-left-menu);
+  height: calc(100dvh - var(--space-l) * 3 - var(--size-logo-h));
+  min-height: var(--size-left-menu-min-h);
+  max-height: calc(100dvh - var(--space-l) * 3 - var(--size-logo-h));
   flex-shrink: 0;
 }
 
@@ -183,7 +183,7 @@
   align-items: center;
   gap: var(--space-m);
   padding: var(--space-s);
-  width: 88px;
+  width: var(--size-left-menu);
   border-radius: var(--radius-l);
   background: var(--bg-cards);
   backdrop-filter: blur(var(--glass-frost));
@@ -192,8 +192,8 @@
 
 .icon-btn {
   position: relative;
-  width: 72px;
-  height: 72px;
+  width: var(--size-icon-btn);
+  height: var(--size-icon-btn);
   border: 0;
   border-radius: var(--radius-xl);
   background: var(--bg-cards-elements);
@@ -220,8 +220,8 @@
 
 .icon-btn svg,
 .ds-icon {
-  width: 32px;
-  height: 32px;
+  width: var(--size-icon-glyph);
+  height: var(--size-icon-glyph);
 }
 
 .ds-icon {
@@ -300,10 +300,10 @@
 
 .icon-badge {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 24px;
-  height: 24px;
+  top: var(--size-icon-badge-offset);
+  right: var(--size-icon-badge-offset);
+  width: var(--size-icon-badge);
+  height: var(--size-icon-badge);
   border-radius: var(--radius-m);
   background: var(--bg-accent-primary);
   color: var(--text-secondary);
@@ -315,8 +315,8 @@
 }
 
 .profile-orb {
-  width: 72px;
-  height: 72px;
+  width: var(--size-icon-btn);
+  height: var(--size-icon-btn);
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--bg-cards-elements);
@@ -356,7 +356,7 @@
   display: grid;
   grid-template-rows: auto auto minmax(min-content, 1fr);
   gap: var(--space-s);
-  min-height: 634px;
+  min-height: var(--size-home-stack-min);
   min-width: 0;
   align-self: stretch;
 }
@@ -401,15 +401,15 @@
 
 .tournament-left-stack {
   display: grid;
-  grid-template-rows: minmax(248px, 1fr) minmax(248px, 1fr);
+  grid-template-rows: minmax(var(--size-card-row), 1fr) minmax(var(--size-card-row), 1fr);
   gap: var(--space-s);
-  min-height: 508px;
+  min-height: var(--size-tournament-stack-min);
   min-width: 0;
   align-self: stretch;
 }
 
 .tournament-left-stack > .card-link {
-  min-height: 248px;
+  min-height: var(--size-card-row);
   height: 100%;
   flex: none;
 }
@@ -466,9 +466,16 @@
 }
 
 .card-link {
+  position: relative;
   display: block;
   height: 100%;
   min-height: 0;
+}
+
+.card-link-hit {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
 }
 
 .card-link:has(.team-card--banner) {
@@ -528,7 +535,7 @@
   flex-direction: column;
   justify-content: center;
   gap: var(--space-l);
-  max-width: 400px;
+  max-width: var(--size-hero-copy-max);
   min-width: 0;
 }
 
@@ -541,7 +548,7 @@
 .tournament-hero-stats {
   display: flex;
   gap: var(--space-m);
-  max-height: 120px;
+  max-height: var(--size-hero-stats-max);
 }
 
 .row-facts-split {
@@ -598,7 +605,10 @@
 }
 
 .card-top .icon-btn {
-  flex: 0 0 72px;
+  position: relative;
+  z-index: 5;
+  flex: 0 0 var(--size-icon-btn);
+  pointer-events: auto;
 }
 
 .year-team {
@@ -654,14 +664,14 @@
 .player-stage--hero {
   aspect-ratio: auto;
   height: 100%;
-  min-height: 280px;
+  min-height: var(--size-player-stage-min);
   flex: none;
 }
 
 .player-stage--float {
   aspect-ratio: auto;
-  width: 400px;
-  height: 320px;
+  width: var(--size-player-figure-w);
+  height: var(--size-player-figure-h);
   flex: none;
 }
 
@@ -685,7 +695,7 @@
 
 .team-card--banner {
   height: auto;
-  min-height: 300px;
+  min-height: var(--size-banner-min);
 }
 
 .team-card--banner .graphic-slot {
@@ -716,10 +726,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 2560px;
-  height: 1440px;
+  width: var(--size-video-w);
+  height: var(--size-video-h);
   max-width: none;
-  margin: -720px 0 0 -1280px;
+  margin: calc(var(--size-video-h) / -2) 0 0 calc(var(--size-video-w) / -2);
   transform: none;
   border: 0;
   pointer-events: none;
@@ -747,7 +757,7 @@
 
 .ds-card .card-top .icon-btn {
   position: relative;
-  z-index: 4;
+  z-index: 5;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -773,15 +783,15 @@
   border-radius: var(--radius-l);
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
-  min-height: 320px;
+  min-height: var(--size-tournir-min);
 }
 
 .tournir-figure {
   position: absolute;
   right: -70px;
-  top: 120px;
-  width: 400px;
-  height: 320px;
+  top: var(--size-hero-stats-max);
+  width: var(--size-player-figure-w);
+  height: var(--size-player-figure-h);
   flex: none;
 }
 
@@ -843,8 +853,8 @@
 }
 
 .dot-live {
-  width: 8px;
-  height: 8px;
+  width: var(--size-dot-live);
+  height: var(--size-dot-live);
   border-radius: 999px;
   background: var(--bg-accent-tretiary);
   flex-shrink: 0;
@@ -852,15 +862,15 @@
 
 .dot-grid {
   display: grid;
-  grid-template-columns: repeat(var(--cols, 6), 24px);
+  grid-template-columns: repeat(var(--cols, 6), var(--size-dot-grid-cell));
   gap: var(--space-m);
   align-self: flex-start;
   justify-items: start;
 }
 
 .stat-dot {
-  width: 24px;
-  height: 24px;
+  width: var(--size-dot-stat);
+  height: var(--size-dot-stat);
   border-radius: 999px;
   background: var(--elements-icons);
 }
@@ -870,12 +880,12 @@
 }
 
 .circle-stat {
-  width: 120px;
+  width: var(--size-circle-stat-compact);
   min-width: 0;
-  max-width: 160px;
+  max-width: var(--size-circle-stat);
   height: auto;
   min-height: 0;
-  max-height: 160px;
+  max-height: var(--size-circle-stat);
   aspect-ratio: 1;
   border-radius: 1000px;
   background: var(--bg-cards-elements);
@@ -887,7 +897,7 @@
   gap: var(--space-m);
   padding: var(--space-m);
   text-align: center;
-  flex: 0 1 120px;
+  flex: 0 1 var(--size-circle-stat-compact);
 }
 
 .col-stack .circle-stat,
@@ -903,25 +913,25 @@
 
 .tournament-hero .circle-stat,
 .team-card--banner .circle-stat {
-  flex: 0 0 160px;
-  width: 160px;
-  height: 160px;
-  max-height: 160px;
+  flex: 0 0 var(--size-circle-stat);
+  width: var(--size-circle-stat);
+  height: var(--size-circle-stat);
+  max-height: var(--size-circle-stat);
 }
 
 .tournament-hero .circle-stat {
-  flex: 0 0 150px;
-  width: 150px;
-  height: 150px;
+  flex: 0 0 var(--size-circle-stat-hero);
+  width: var(--size-circle-stat-hero);
+  height: var(--size-circle-stat-hero);
 }
 
 .home-left-stack .circle-stat,
 .tournament-left-stack .circle-stat,
 .row-goals .circle-stat {
-  width: 120px;
-  height: 120px;
-  max-height: 120px;
-  flex: 0 1 120px;
+  width: var(--size-circle-stat-compact);
+  height: var(--size-circle-stat-compact);
+  max-height: var(--size-circle-stat-compact);
+  flex: 0 1 var(--size-circle-stat-compact);
 }
 
 .circle-stat[data-accent="true"] {
@@ -942,17 +952,17 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  gap: 10px;
+  gap: var(--size-mix-gap);
   width: 100%;
   height: 100%;
-  max-height: 96px;
+  max-height: var(--size-mix-chart-compact);
   padding-bottom: 4px;
 }
 
 .mix-chart[data-grouped="true"] {
   gap: var(--space-xl);
-  height: 144px;
-  max-height: 144px;
+  height: var(--size-mix-chart);
+  max-height: var(--size-mix-chart);
   padding-bottom: 0;
 }
 
@@ -963,35 +973,35 @@
 }
 
 .mix-bar {
-  width: 22px;
+  width: var(--size-mix-bar);
   border-radius: 4px 4px 0 0;
   flex-shrink: 0;
 }
 
 .mix-chart[data-grouped="true"] .mix-bar,
 .mix-chart[data-grouped="true"] .mix-dot {
-  width: 24px;
+  width: var(--size-mix-mark);
   border-radius: var(--radius-s);
 }
 
 .col-stack .mix-bar,
 .col-stack .mix-dot {
-  width: 16px;
+  width: var(--size-mix-bar-compact);
 }
 
 .mix-dot {
-  width: 22px;
-  height: 22px;
+  width: var(--size-mix-bar);
+  height: var(--size-mix-mark-compact);
   border-radius: 999px;
   flex-shrink: 0;
 }
 
 .mix-chart[data-grouped="true"] .mix-dot {
-  height: 24px;
+  height: var(--size-mix-mark);
 }
 
 .mix-line {
-  width: 24px;
+  width: var(--size-mix-mark);
   height: 1px;
   flex-shrink: 0;
   border-radius: 0;
@@ -1265,10 +1275,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 2560px;
-  height: 1440px;
+  width: var(--size-video-w);
+  height: var(--size-video-h);
   max-width: none;
-  margin: -720px 0 0 -1280px;
+  margin: calc(var(--size-video-h) / -2) 0 0 calc(var(--size-video-w) / -2);
   transform: none;
   border: 0;
   pointer-events: none;
@@ -1277,7 +1287,7 @@
 .match-credit {
   position: absolute;
   left: var(--space-l);
-  bottom: 88px;
+  bottom: var(--size-match-credit-bottom);
   z-index: 2;
   max-width: 520px;
   color: var(--text-secondary);
@@ -1448,8 +1458,8 @@
 }
 
 .team-icon {
-  width: 72px;
-  height: 72px;
+  width: var(--size-team-badge);
+  height: var(--size-team-badge);
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--bg-cards-elements);
@@ -1465,8 +1475,8 @@
 }
 
 .team-icon--player {
-  width: 40px;
-  height: 40px;
+  width: var(--size-team-icon-player);
+  height: var(--size-team-icon-player);
   font-size: var(--size-t1);
   color: var(--elements-icons);
   font-family: var(--font-family-primary);
@@ -1550,7 +1560,7 @@
   }
 
   .tournament-left-stack > .card-link {
-    height: 248px;
-    min-height: 248px;
+    height: var(--size-card-row);
+    min-height: var(--size-card-row);
   }
 }
