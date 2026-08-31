@@ -20,7 +20,12 @@ export type DailymotionClip = {
   id: string;
 };
 
-export type EmbedClip = VkClip | DzenClip | RutubeClip | DailymotionClip;
+export type YoutubeClip = {
+  provider: "youtube";
+  id: string;
+};
+
+export type EmbedClip = VkClip | DzenClip | RutubeClip | DailymotionClip | YoutubeClip;
 
 export type HighlightClip = {
   src: string;
@@ -38,19 +43,19 @@ export const HIGHLIGHTS = {
   barcelona: {
     src: "/media/highlights/barcelona-2009-ucl.mp4",
     about: "2009 UEFA Champions League: Barcelona path to the final vs Manchester United",
-    embed: { provider: "rutube", id: "a432b31d97c1fa87a0adc671d52dc926" },
+    embed: { provider: "youtube", id: "NkR_CBgZ8YA" },
     hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_BARCELONA),
   },
   zidane: {
     src: "/media/highlights/zidane-2006-wc-final.mp4",
     about: "2006 FIFA World Cup final: Zidane, France vs Italy",
-    embed: { oid: -16945832, id: 456239716 },
+    embed: { provider: "youtube", id: "Nlsm0RlC8zI" },
     hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_ZIDANE),
   },
   portugal2016: {
     src: "/media/highlights/portugal-2016-euro.mp4",
     about: "UEFA Euro 2016: Portugal’s first major tournament victory",
-    embed: { provider: "rutube", id: "ec8e8b9b25377a81e1fee3b757de45fa" },
+    embed: { provider: "youtube", id: "tLFzGcfcIjc" },
     hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_PORTUGAL2016),
   },
   euro2008: {
@@ -68,7 +73,7 @@ export const HIGHLIGHTS = {
   france2016: {
     src: "/media/highlights/portugal-france-2016.mp4",
     about: "UEFA Euro 2016 final: Portugal 1-0 France",
-    embed: { provider: "dailymotion", id: "x7q204o" },
+    embed: { provider: "youtube", id: "tLFzGcfcIjc" },
     hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_FRANCE2016),
   },
   hungary: {
@@ -131,7 +136,36 @@ export function isDirectVideoUrl(url: string) {
   return /\.(mp4|webm|ogg|m3u8)(\?|#|$)/i.test(url);
 }
 
+function youtubeIdFromUrl(url: string) {
+  const watch = url.match(/[?&]v=([A-Za-z0-9_-]{11})/);
+  if (watch) return watch[1];
+  const short = url.match(/youtu\.be\/([A-Za-z0-9_-]{11})/);
+  if (short) return short[1];
+  const embed = url.match(/youtube(?:-nocookie)?\.com\/embed\/([A-Za-z0-9_-]{11})/);
+  return embed?.[1];
+}
+
+export function youtubeEmbedSrc(id: string) {
+  const params = new URLSearchParams({
+    autoplay: "1",
+    mute: "1",
+    loop: "1",
+    playlist: id,
+    controls: "0",
+    modestbranding: "1",
+    playsinline: "1",
+    rel: "0",
+    fs: "0",
+    iv_load_policy: "3",
+    enablejsapi: "1",
+  });
+  return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
+}
+
 export function hostedPlayerSrc(url: string) {
+  const youtubeId = youtubeIdFromUrl(url);
+  if (youtubeId) return youtubeEmbedSrc(youtubeId);
+
   const kinescope = url.match(/kinescope\.io\/(?:embed\/)?([A-Za-z0-9_-]+)/);
   if (kinescope) {
     return `https://kinescope.io/embed/${kinescope[1]}?autoplay=1&muted=1&loop=true`;
@@ -146,6 +180,7 @@ export function hostedPlayerSrc(url: string) {
 }
 
 export function highlightEmbedSrc(clip: EmbedClip) {
+  if (clip.provider === "youtube") return youtubeEmbedSrc(clip.id);
   if (clip.provider === "dzen") {
     return `https://dzen.ru/embed/${clip.id}?autoplay=1&muted=1`;
   }

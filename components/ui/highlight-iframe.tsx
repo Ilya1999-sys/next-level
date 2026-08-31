@@ -39,19 +39,6 @@ export function HighlightIframe({
   }, [clip]);
 
   useEffect(() => {
-    if (clip.hosted) return;
-    let cancelled = false;
-    fetch(clip.src, { method: "HEAD" })
-      .then((res) => {
-        if (!cancelled && res.ok) setMode("file");
-      })
-      .catch(() => undefined);
-    return () => {
-      cancelled = true;
-    };
-  }, [clip.hosted, clip.src]);
-
-  useEffect(() => {
     const el = videoRef.current;
     if (!el || mode !== "file") return;
     el.muted = true;
@@ -69,6 +56,8 @@ export function HighlightIframe({
     const send = (payload: Record<string, unknown>) => {
       win.postMessage(JSON.stringify(payload), "*");
     };
+    send({ event: "command", func: "mute", args: [] });
+    send({ event: "command", func: "playVideo", args: [] });
     send({ method: "setVolume", value: 0 });
     send({ method: "play" });
     send({ type: "player:mute", data: {} });

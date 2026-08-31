@@ -10,16 +10,15 @@ alwaysApply: true
 - Hover autoplay only on the two blue featured cards: Home Portugal and Tournament France. Other story cards open video from the top-right arrow (`/watch/[clip]` or `/portugal-2016/france`).
 - The clip must be that **year, tournament, and match** from the card title.
 
-Prefer a hosted Kinescope/Vimeo URL in `NEXT_PUBLIC_VIDEO_*` (see `.env.example`). Local file in `public/media/highlights/` is next. Rutube/VK/Dailymotion remain fallbacks when neither is set.
+Prefer `NEXT_PUBLIC_VIDEO_*` (Kinescope, Vimeo, or YouTube). Else official UEFA/FIFA YouTube embed. Do not HEAD missing local `.mp4` files — that delays the first frame. Rutube/VK/Dailymotion remain last fallbacks.
 
 ```ts
-// BAD: local-only path with no file → hover plays nothing
+// BAD: HEAD a missing local file, then start Rutube
 { src: "/media/highlights/portugal-wales-2016.mp4" }
 
-// GOOD: hosted player, local file, or embed fallback
+// GOOD: YouTube/Kinescope first, no local HEAD
 {
-  src: "/media/highlights/portugal-wales-2016.mp4",
-  embed: { provider: "dailymotion", id: "x4jmmp8" },
-  hosted: process.env.NEXT_PUBLIC_VIDEO_WALES,
+  embed: { provider: "youtube", id: "NkR_CBgZ8YA" },
+  hosted: process.env.NEXT_PUBLIC_VIDEO_BARCELONA,
 }
 ```
