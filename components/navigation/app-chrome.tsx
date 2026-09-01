@@ -62,30 +62,39 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
             <IconButton href="/" label="Home" selected={pathname === "/"}>
               <IconHome />
             </IconButton>
-            <IconButton href="/portugal-2016" label="Games" selected={pathname.startsWith("/match") || pathname.startsWith("/portugal-2016")}>
+            <IconButton
+              href="/portugal-2016"
+              label="Games"
+              selected={
+                pathname.startsWith("/match") ||
+                pathname.startsWith("/portugal-2016") ||
+                pathname.startsWith("/watch") ||
+                pathname.startsWith("/forum")
+              }
+            >
               <IconGames />
             </IconButton>
-            <IconButton href="/player-stats" label="Cup">
+            <IconButton href="/tournaments" label="Cup" selected={pathname.startsWith("/tournaments")}>
               <IconCup />
             </IconButton>
             <IconButton href="/player-stats" label="Stats" selected={pathname.startsWith("/player-stats")}>
               <IconStats />
             </IconButton>
-            <IconButton href="/team/real-madrid" label="My club">
+            <IconButton href="/team/real-madrid" label="My club" selected={pathname.startsWith("/team")}>
               <IconClub />
             </IconButton>
           </div>
           <div className="left-menu-group">
-            <IconButton href="/notifications" label="Notifications" badge="2">
+            <IconButton href="/notifications" label="Notifications" badge="2" selected={pathname.startsWith("/notifications")}>
               <IconBell />
             </IconButton>
-            <IconButton href="/profile" label="Favorites" badge="2">
+            <IconButton href="/profile" label="Favorites" badge="2" selected={pathname.startsWith("/profile")}>
               <IconStar />
             </IconButton>
             <IconButton href="/" label="Exit">
               <IconExit />
             </IconButton>
-            <IconButton href="/profile" label="Profile">
+            <IconButton href="/profile" label="Profile" selected={pathname.startsWith("/profile")}>
               <IconProfile />
             </IconButton>
           </div>

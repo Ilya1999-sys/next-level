@@ -2,7 +2,7 @@
 
 import { AppChrome } from "@/components/navigation/app-chrome";
 import { HIGHLIGHTS, watchHref } from "@/lib/media/highlights";
-import { CROATIA_BARS, FRANCE_MINUTES, PORTUGAL_MINUTES, WINS_MARKS } from "@/lib/mood/catalog";
+import { CROATIA_BARS, WINS_MARKS } from "@/lib/mood/catalog";
 import { CircleRow, GoalTimeline, MixChart, StatBars } from "@/components/ui/card-graphics";
 import { DotGrid } from "@/components/ui/ds";
 import { GraphicHoverCard } from "@/components/ui/hover-player-card";
@@ -52,7 +52,7 @@ export function Portugal2016Screen() {
           watchHref="/portugal-2016/france"
           video={HIGHLIGHTS.france2016}
         >
-          <GoalTimeline left={FRANCE_MINUTES} right={PORTUGAL_MINUTES} highlight={109} />
+          <GoalTimeline />
         </GraphicHoverCard>
       </div>
 

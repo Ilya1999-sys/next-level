@@ -39,9 +39,6 @@ export const CROATIA_BARS = [
   { left: 59, right: 41, leftLabel: "59% ball possession", rightLabel: "41% ball possession" },
 ];
 
-export const FRANCE_MINUTES = [8, 12, 18, 30, 37, 45, 52, 58, 67, 75, 82, 90, 97, 105];
-export const PORTUGAL_MINUTES = [16, 45, 52, 78, 92, 102, 109];
-
 export type StoryCard = {
   year: string;
   title: string;

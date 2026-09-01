@@ -150,62 +150,69 @@ export function StatBars({
   );
 }
 
-export function GoalTimeline({
-  left,
-  right,
-  highlight,
-}: {
-  left: number[];
-  right: number[];
-  highlight: number;
-}) {
-  function y(minute: number) {
-    return `${8 + ((minute - 1) / 119) * 84}%`;
-  }
+const TIMELINE = {
+  width: 403,
+  height: 462,
+  franceLeft: 83,
+  portugalLeft: 213,
+  highlightLeft: 205,
+  dot: 24,
+  large: 40,
+  franceBottoms: [37, 70, 118, 146, 182, 208, 241, 267, 293, 319, 345, 392, 418],
+  portugalBottoms: [61, 87, 177, 237, 279, 307, 337, 363],
+  highlightBottom: 396,
+  ticks: [120, 105, 90, 75, 60, 45, 30, 15, 1],
+};
 
-  function stagger(minutes: number[]) {
-    const offset: number[] = minutes.map(() => 0);
-    for (let i = 1; i < minutes.length; i++) {
-      if (minutes[i] - minutes[i - 1] < 10) {
-        offset[i] = offset[i - 1] <= 0 ? 16 : -16;
-        if (offset[i - 1] === 0) offset[i - 1] = -16;
-      }
-    }
-    return offset;
-  }
-
-  const ticks = [120, 105, 90, 75, 60, 45, 30, 15, 1];
-  const leftOffset = stagger(left);
-  const rightOffset = stagger(right);
+export function GoalTimeline() {
+  const { width, height, dot, large } = TIMELINE;
+  const tickTop = 32;
+  const tickBottom = 413;
 
   return (
     <div className="goal-timeline" aria-hidden="true">
-      <div className="goal-timeline-axis">
-        {ticks.map((tick) => (
-          <span key={tick}>{tick}</span>
+      <svg viewBox={`0 0 ${width} ${height}`} className="goal-timeline-svg">
+        {TIMELINE.ticks.map((tick, index) => (
+          <text
+            key={tick}
+            x={0}
+            y={tickTop + (index / (TIMELINE.ticks.length - 1)) * (tickBottom - tickTop)}
+            className="goal-timeline-tick"
+          >
+            {tick}
+          </text>
         ))}
-      </div>
-      <div className="goal-timeline-col">
-        {left.map((minute, index) => (
-          <span
-            key={`l-${minute}`}
-            className="goal-dot"
-            style={{ bottom: y(minute), left: `calc(50% + ${leftOffset[index]}px)` }}
+        {TIMELINE.franceBottoms.map((bottom) => (
+          <circle
+            key={`fr-${bottom}`}
+            className="goal-dot-svg"
+            cx={TIMELINE.franceLeft + dot / 2}
+            cy={height - bottom - dot / 2}
+            r={dot / 2}
           />
         ))}
-        <span className="goal-timeline-caption type-t3">France</span>
-      </div>
-      <div className="goal-timeline-col">
-        {right.map((minute, index) => (
-          <span
-            key={`r-${minute}`}
-            className="goal-dot"
-            data-large={minute === highlight ? "true" : "false"}
-            style={{ bottom: y(minute), left: `calc(50% + ${rightOffset[index]}px)` }}
+        {TIMELINE.portugalBottoms.map((bottom) => (
+          <circle
+            key={`pt-${bottom}`}
+            className="goal-dot-svg"
+            cx={TIMELINE.portugalLeft + dot / 2}
+            cy={height - bottom - dot / 2}
+            r={dot / 2}
           />
         ))}
-        <span className="goal-timeline-caption type-t3">Portugal</span>
-      </div>
+        <circle
+          className="goal-dot-svg goal-dot-svg--large"
+          cx={TIMELINE.highlightLeft + large / 2}
+          cy={height - TIMELINE.highlightBottom - large / 2}
+          r={large / 2}
+        />
+        <text x={95} y={448} textAnchor="middle" className="goal-timeline-caption">
+          France
+        </text>
+        <text x={225} y={448} textAnchor="middle" className="goal-timeline-caption">
+          Portugal
+        </text>
+      </svg>
     </div>
   );
 }

@@ -192,6 +192,101 @@ export function ProfileScreen() {
         <FactBlock title="Watch fact" value="31" text="highlights watched this month" />
         <FactBlock title="Club fact" value="15" text="Real Madrid European Cups in the museum" tournament="UCL" />
       </div>
+      <div className="row-goals">
+        <GraphicHoverCard
+          year="/2016"
+          title="Last watched: Portugal’s first major title"
+          href="/portugal-2016"
+          watchHref={watchHref("portugal2016")}
+          accent
+        >
+          <CircleRow stats={[{ value: "1", label: "European title", accent: true }, { value: "9", label: "goals scored" }]} />
+        </GraphicHoverCard>
+        <GraphicHoverCard year="Match review" title="1-0 France" href="/portugal-2016/france" watchHref="/portugal-2016/france">
+          <CircleRow stats={[{ value: "109", label: "Eder goal", accent: true }, { value: "0", label: "France" }]} />
+        </GraphicHoverCard>
+      </div>
+      <div className="row-goals">
+        <GraphicHoverCard year="/2009" title="Path to the final: “Barcelona”." watchHref={watchHref("barcelona")}>
+          <MixChart groups={BARCELONA_GROUPS} />
+        </GraphicHoverCard>
+        <GraphicHoverCard year="/2006" title="Zidane at the World Cup final" watchHref={watchHref("zidane")}>
+          <CircleRow
+            stats={[
+              { value: "3", label: "Zidane goals", accent: true },
+              { value: "0", label: "France defeats" },
+            ]}
+          />
+        </GraphicHoverCard>
+      </div>
+      <div className="row-facts-split">
+        <FactBlock title="Profile fact" value="18" text="years in the archive since the first Switzerland — Turkey night" tournament="EURO—2008" />
+        <FactBlock title="Unlocked fact" value="6" text="story cards opened from the Nostalgia mood" dots={{ total: 12, filled: 6 }} />
+      </div>
+    </ArchiveShell>
+  );
+}
+
+export function TournamentsScreen() {
+  return (
+    <ArchiveShell crumbs={["Home", "Cups"]}>
+      <article className="ds-card tournament-hero">
+        <div className="tournament-hero-copy">
+          <p className="type-h2">Cups and tournaments</p>
+          <p className="type-t3">Champions League, UEFA Euro, and the match nights built from the same archive cards.</p>
+        </div>
+        <CircleRow
+          stats={[
+            { value: "15", label: "Madrid UCL", accent: true },
+            { value: "1", label: "Portugal Euro" },
+            { value: "2", label: "UEFA Cups" },
+          ]}
+        />
+      </article>
+      <div className="row-split">
+        <GraphicHoverCard
+          year="/2009"
+          title="UEFA Champions League: path to the final, Barcelona"
+          watchHref={watchHref("barcelona")}
+        >
+          <MixChart groups={BARCELONA_GROUPS} />
+        </GraphicHoverCard>
+        <GraphicHoverCard
+          year="/2016"
+          title="UEFA Euro: Portugal champions"
+          href="/portugal-2016"
+          watchHref={watchHref("portugal2016")}
+          accent
+        >
+          <CircleRow stats={[{ value: "1", label: "European title", accent: true }, { value: "9", label: "goals scored" }]} />
+        </GraphicHoverCard>
+      </div>
+      <GraphicHoverCard banner year="/2008" title="UEFA Euro: Russia, incredible comebacks and golden Spain" watchHref={watchHref("euro2008")}>
+        <CircleRow
+          stats={[
+            { value: "77", label: "goals scored", accent: true },
+            { value: "31", label: "matches played" },
+            { value: "12", label: "Spain scored" },
+          ]}
+        />
+      </GraphicHoverCard>
+      <div className="row-facts-split">
+        <FactBlock title="Club cup fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
+        <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" />
+      </div>
+      <div className="row-goals">
+        <GraphicHoverCard year="Match review" title="2:0 Wales" watchHref={watchHref("wales")}>
+          <CircleRow
+            stats={[
+              { value: "17", label: "shots on goal", accent: true },
+              { value: "46%", label: "ball possession" },
+            ]}
+          />
+        </GraphicHoverCard>
+        <GraphicHoverCard year="Match review" title="1:0 Croatia" watchHref={watchHref("croatia")}>
+          <CircleRow stats={[{ value: "1", label: "extra-time", accent: true }, { value: "0", label: "Croatia" }]} />
+        </GraphicHoverCard>
+      </div>
     </ArchiveShell>
   );
 }

@@ -35,7 +35,7 @@ export function HomeScreen() {
               ]}
             />
           </GraphicHoverCard>
-          <article className="fact-card">
+          <article className="fact-card fact-card--fill">
             <div className="fact-copy">
               <div className="fact-head">
                 <p className="type-t1">{playerFact.title}</p>
