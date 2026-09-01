@@ -88,7 +88,7 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
             <IconButton href="/notifications" label="Notifications" badge="2" selected={pathname.startsWith("/notifications")}>
               <IconBell />
             </IconButton>
-            <IconButton href="/profile" label="Favorites" badge="2" selected={pathname.startsWith("/profile")}>
+            <IconButton href="/favorites" label="Favorites" badge="2" selected={pathname.startsWith("/favorites")}>
               <IconStar />
             </IconButton>
             <IconButton href="/" label="Exit">

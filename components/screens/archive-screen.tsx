@@ -164,10 +164,70 @@ export function TeamStatsScreen() {
           ]}
         />
       </article>
-      <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" fill dots={{ total: 18, filled: 8, columns: 6 }} />
-      <GraphicHoverCard banner year="/2009" title="Path to the final: “Barcelona”." watchHref={watchHref("barcelona")}>
-        <MixChart groups={BARCELONA_GROUPS} />
-      </GraphicHoverCard>
+      <div className="cards-compact-grid">
+        <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
+        <FactBlock title="Final fact" value="93'" text="Ramos equalized in added time before La Decima was sealed in extra time." tournament="UCL—2014" />
+        <FactBlock title="Final fact" value="3-1" text="Bale's bicycle kick and a late third goal beat Liverpool in Kyiv." tournament="UCL—2018" />
+      </div>
+      <div className="row-goals">
+        <GraphicHoverCard year="Match review" title="Real Madrid 4-1 Atletico (2014 final)" watchHref={watchHref("realAtletico2014")} accent>
+          <CircleRow stats={[{ value: "93'", label: "Ramos goal", accent: true }, { value: "4-1", label: "final score" }]} />
+        </GraphicHoverCard>
+        <GraphicHoverCard year="Match review" title="Real Madrid 3-1 Liverpool (2018 final)" watchHref={watchHref("realLiverpool2018")}>
+          <CircleRow stats={[{ value: "2", label: "Bale goals", accent: true }, { value: "3-1", label: "final score" }]} />
+        </GraphicHoverCard>
+      </div>
+      <div className="cards-compact-grid">
+        <GraphicHoverCard year="/2009" title="Path to the final: “Barcelona”." watchHref={watchHref("barcelona")}>
+          <MixChart groups={BARCELONA_GROUPS} />
+        </GraphicHoverCard>
+        <GraphicHoverCard year="Match review" title="Real Madrid 1-1 Atletico (2016 final, 5-3 pens)" watchHref={watchHref("realAtletico2016")}>
+          <CircleRow stats={[{ value: "5-3", label: "penalties", accent: true }, { value: "11", label: "European Cups then" }]} />
+        </GraphicHoverCard>
+        <FactBlock title="Preview fact" value="3" text="classic finals pinned for quick replay from this page." />
+      </div>
+    </ArchiveShell>
+  );
+}
+
+export function FavoritesScreen() {
+  return (
+    <ArchiveShell crumbs={["Home", "Favorites"]}>
+      <article className="ds-card tournament-hero">
+        <div className="tournament-hero-copy">
+          <p className="type-h2">Watchlist matches</p>
+          <p className="type-t3">Only the matches you marked for later rewatch.</p>
+        </div>
+        <CircleRow
+          stats={[
+            { value: "6", label: "saved matches", accent: true },
+            { value: "3", label: "finals" },
+            { value: "2", label: "tournaments" },
+          ]}
+        />
+      </article>
+      <div className="cards-compact-grid">
+        <GraphicHoverCard year="Match review" title="Portugal 1-0 France (EURO 2016 final)" href="/portugal-2016/france" watchHref={watchHref("france2016")} accent>
+          <CircleRow stats={[{ value: "109", label: "Eder goal", accent: true }, { value: "1-0", label: "final score" }]} />
+        </GraphicHoverCard>
+        <GraphicHoverCard year="Match review" title="Real Madrid 4-1 Atletico (UCL 2014 final)" watchHref={watchHref("realAtletico2014")}>
+          <CircleRow stats={[{ value: "93'", label: "Ramos goal", accent: true }, { value: "4-1", label: "AET" }]} />
+        </GraphicHoverCard>
+        <GraphicHoverCard year="Match review" title="Real Madrid 3-1 Liverpool (UCL 2018 final)" watchHref={watchHref("realLiverpool2018")}>
+          <CircleRow stats={[{ value: "2", label: "Bale goals", accent: true }, { value: "3-1", label: "final score" }]} />
+        </GraphicHoverCard>
+        <GraphicHoverCard year="Match review" title="Portugal 2-0 Wales (EURO 2016 semi-final)" watchHref={watchHref("wales")}>
+          <CircleRow stats={[{ value: "2-0", label: "score", accent: true }, { value: "1", label: "clean sheet" }]} />
+        </GraphicHoverCard>
+      </div>
+      <div className="cards-compact-grid">
+        <GraphicHoverCard year="Match review" title="Portugal 1-0 Croatia (EURO 2016)" watchHref={watchHref("croatia")}>
+          <CircleRow stats={[{ value: "117'", label: "winner", accent: true }, { value: "1-0", label: "AET" }]} />
+        </GraphicHoverCard>
+        <GraphicHoverCard year="Match review" title="USA 1-2 Ghana (World Cup 2010)" href="/match/usa-vs-ghana-2010" watchHref={watchHref("usaGhana2010")}>
+          <CircleRow stats={[{ value: "120", label: "minutes", accent: true }, { value: "2-1", label: "Ghana" }]} />
+        </GraphicHoverCard>
+      </div>
     </ArchiveShell>
   );
 }

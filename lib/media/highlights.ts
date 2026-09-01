@@ -92,6 +92,24 @@ export const HIGHLIGHTS = {
     about: "2010 FIFA World Cup round of 16: USA vs Ghana",
     hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_USAGHANA2010),
   },
+  realAtletico2014: {
+    src: "/media/highlights/real-atletico-2014-final.mp4",
+    about: "2014 UEFA Champions League final: Real Madrid 4-1 Atletico Madrid",
+    embed: { provider: "youtube", id: "A6Dt3l_qIF8" },
+    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_REAL_ATLETICO_2014),
+  },
+  realLiverpool2018: {
+    src: "/media/highlights/real-liverpool-2018-final.mp4",
+    about: "2018 UEFA Champions League final: Real Madrid 3-1 Liverpool",
+    embed: { provider: "youtube", id: "rtFGpfrdlMI" },
+    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_REAL_LIVERPOOL_2018),
+  },
+  realAtletico2016: {
+    src: "/media/highlights/real-atletico-2016-final.mp4",
+    about: "2016 UEFA Champions League final: Real Madrid 1-1 Atletico Madrid (5-3 pens)",
+    embed: { provider: "youtube", id: "DrFAIzdlTH8" },
+    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_REAL_ATLETICO_2016),
+  },
 } as const satisfies Record<string, HighlightClip>;
 
 export type HighlightKey = keyof typeof HIGHLIGHTS;
@@ -106,6 +124,9 @@ export const WATCH_ROUTES = {
   wales: { clip: "wales", backHref: "/portugal-2016", slug: "wales" },
   france2016: { clip: "france2016", backHref: "/portugal-2016", slug: "france2016" },
   usaGhana2010: { clip: "usaGhana2010", backHref: "/match", slug: "usa-ghana-2010" },
+  realAtletico2014: { clip: "realAtletico2014", backHref: "/team/real-madrid", slug: "real-atletico-2014-final" },
+  realLiverpool2018: { clip: "realLiverpool2018", backHref: "/team/real-madrid", slug: "real-liverpool-2018-final" },
+  realAtletico2016: { clip: "realAtletico2016", backHref: "/team/real-madrid", slug: "real-atletico-2016-final" },
 } as const satisfies Record<HighlightKey, { clip: HighlightKey; backHref: string; slug: string }>;
 
 export function watchHref(key: HighlightKey) {
