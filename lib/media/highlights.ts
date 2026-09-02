@@ -90,25 +90,25 @@ export const HIGHLIGHTS = {
   usaGhana2010: {
     src: "/media/highlights/usa-ghana-2010.mp4",
     about: "2010 FIFA World Cup round of 16: USA vs Ghana",
-    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_USAGHANA2010),
+    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_USAGHANA2010, "https://kinescope.io/fr3onwmYX4sqAmiNmjMBYh"),
   },
   realAtletico2014: {
     src: "/media/highlights/real-atletico-2014-final.mp4",
     about: "2014 UEFA Champions League final: Real Madrid 4-1 Atletico Madrid",
     embed: { provider: "youtube", id: "A6Dt3l_qIF8" },
-    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_REAL_ATLETICO_2014),
+    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_REAL_ATLETICO_2014, "https://kinescope.io/82QUgLDUsjRXaQRBtnw48C"),
   },
   realLiverpool2018: {
     src: "/media/highlights/real-liverpool-2018-final.mp4",
     about: "2018 UEFA Champions League final: Real Madrid 3-1 Liverpool",
     embed: { provider: "youtube", id: "rtFGpfrdlMI" },
-    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_REAL_LIVERPOOL_2018),
+    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_REAL_LIVERPOOL_2018, "https://kinescope.io/3THWZDt56qrSBNxcwCyEa6"),
   },
   realAtletico2016: {
     src: "/media/highlights/real-atletico-2016-final.mp4",
     about: "2016 UEFA Champions League final: Real Madrid 1-1 Atletico Madrid (5-3 pens)",
     embed: { provider: "youtube", id: "DrFAIzdlTH8" },
-    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_REAL_ATLETICO_2016),
+    hosted: hostedUrl(process.env.NEXT_PUBLIC_VIDEO_REAL_ATLETICO_2016, "https://kinescope.io/bfLgh8LKZdZjRrSjyYNq3M"),
   },
 } as const satisfies Record<string, HighlightClip>;
 
