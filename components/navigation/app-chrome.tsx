@@ -7,6 +7,7 @@ import { useMood, type Mood } from "@/components/mood/mood-provider";
 import {
   IconBell,
   IconButton,
+  IconClose,
   IconClub,
   IconCup,
   IconExit,
@@ -23,6 +24,10 @@ const MOODS: Array<{ id: Mood; label: string }> = [
   { id: "legends", label: "Legends" },
   { id: "nostalgia", label: "Nostalgia" },
 ];
+
+function NavLabel({ children }: { children: string }) {
+  return <span className="nav-label type-t1">{children}</span>;
+}
 
 export function AppChrome({ crumbs, children }: { crumbs: string[]; children: ReactNode }) {
   const pathname = usePathname();
@@ -54,12 +59,12 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
           <button
             type="button"
             className="menu-toggle icon-btn"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-label="Open menu"
             aria-expanded={menuOpen}
             aria-controls={navId}
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={() => setMenuOpen(true)}
           >
-            <span className="burger" data-open={menuOpen ? "true" : "false"} aria-hidden="true">
+            <span className="burger" aria-hidden="true">
               <span />
               <span />
               <span />
@@ -80,7 +85,7 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
             </div>
           </div>
         </div>
-        <div className="mood-row">
+        <div className="mood-row mood-row--header">
           {MOODS.map((item) => (
             <TagMood key={item.id} selected={mood === item.id} onClick={() => setMood(item.id)}>
               {item.label}
@@ -90,17 +95,19 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
       </header>
 
       <div className="page-body">
-        <button
-          type="button"
-          className="menu-backdrop"
-          aria-label="Close menu"
-          data-open={menuOpen ? "true" : "false"}
-          onClick={() => setMenuOpen(false)}
-        />
         <aside id={navId} className="left-menu" data-open={menuOpen ? "true" : "false"}>
+          <button
+            type="button"
+            className="menu-close icon-btn"
+            aria-label="Close menu"
+            onClick={() => setMenuOpen(false)}
+          >
+            <IconClose />
+          </button>
           <div className="left-menu-group">
             <IconButton href="/" label="Home" selected={pathname === "/"}>
               <IconHome />
+              <NavLabel>Home</NavLabel>
             </IconButton>
             <IconButton
               href="/portugal-2016"
@@ -113,30 +120,46 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
               }
             >
               <IconGames />
+              <NavLabel>Games</NavLabel>
             </IconButton>
             <IconButton href="/tournaments" label="Cup" selected={pathname.startsWith("/tournaments")}>
               <IconCup />
+              <NavLabel>Cup</NavLabel>
             </IconButton>
             <IconButton href="/player-stats" label="Stats" selected={pathname.startsWith("/player-stats")}>
               <IconStats />
+              <NavLabel>Stats</NavLabel>
             </IconButton>
             <IconButton href="/team/real-madrid" label="My club" selected={pathname.startsWith("/team")}>
               <IconClub />
+              <NavLabel>My club</NavLabel>
             </IconButton>
           </div>
           <div className="left-menu-group">
             <IconButton href="/notifications" label="Notifications" badge="2" selected={pathname.startsWith("/notifications")}>
               <IconBell />
+              <NavLabel>Notifications</NavLabel>
             </IconButton>
             <IconButton href="/favorites" label="Favorites" badge="2" selected={pathname.startsWith("/favorites")}>
               <IconStar />
+              <NavLabel>Favorites</NavLabel>
             </IconButton>
             <IconButton href="/" label="Exit">
               <IconExit />
+              <NavLabel>Exit</NavLabel>
             </IconButton>
             <IconButton href="/profile" label="Profile" selected={pathname.startsWith("/profile")}>
               <IconProfile />
+              <NavLabel>Profile</NavLabel>
             </IconButton>
+          </div>
+          <div className="mood-row mood-row--menu">
+            <p className="type-t1">View mode</p>
+            {MOODS.map((item) => (
+              <TagMood key={item.id} selected={mood === item.id} onClick={() => setMood(item.id)}>
+                {item.label}
+              </TagMood>
+            ))}
           </div>
         </aside>
         <div className="cards-all">{children}</div>

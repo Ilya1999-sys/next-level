@@ -354,10 +354,22 @@ export function TournamentsScreen() {
 export function NotificationsScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Notifications"]}>
-      <FactBlock title="Reminder" value="10" text="minutes until a Portugal 2016 rewatch starts" tournament="EURO—2016" />
-      <FactBlock title="Discussion" value="3" text="new comments in the match forum" />
-      <FactBlock title="Reward" value="25" text="bonus points earned for yesterday’s vote" />
-      <LiveCard place="Portugal-2016" chips={["Ronaldo goals on tournir", "And if the rules hadn't changed..."]} fans="21 fans discussions" />
+      <div className="facts-pack">
+        <FactBlock title="Reminder" value="10" text="minutes until a Portugal 2016 rewatch starts" tournament="EURO—2016" />
+        <FactBlock title="Discussion" value="3" text="new comments in the match forum" />
+        <FactBlock title="Reward" value="25" text="bonus points earned for yesterday’s vote" />
+      </div>
+      <LiveCard
+        place="Portugal-2016"
+        chips={[
+          "Ronaldo goals on tournir",
+          "And if the rules hadn't changed...",
+          "Eder from extra time",
+          "One regular-time win",
+          "Captain leaves the pitch",
+        ]}
+        fans="21 fans discussions"
+      />
     </ArchiveShell>
   );
 }
@@ -445,7 +457,7 @@ export function PauseReplayScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Pause"]}>
       <FactBlock title="Paused fact" value="109" text="Eder’s extra-time goal is the frame this archive keeps coming back to." />
-      <LiveCard place="Saint-Denis" chips={["Replay the winner", "Captain leaves the pitch"]} fans="198 fans discussions" href="/portugal-2016/france" />
+      <LiveCard place="Saint-Denis" chips={["Replay the winner", "Captain leaves the pitch", "Eder from extra time", "Host nation, extra time"]} fans="198 fans discussions" href="/portugal-2016/france" />
       <GraphicHoverCard
         banner
         year="Match review"

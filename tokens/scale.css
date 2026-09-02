@@ -71,6 +71,7 @@
   --size-dot-live: 8px;
   --size-dot-stat: 24px;
   --size-mix-chart: 144px;
+  --size-mix-scale: 144;
   --size-mix-chart-compact: 96px;
   --size-mix-mark: 24px;
   --size-mix-mark-compact: 22px;
@@ -91,6 +92,8 @@
   --size-dot-grid-cell: 24px;
   --size-timeline-w: 403px;
   --size-timeline-h: 462px;
+  --space-timeline-gap: 40px;
+  --size-fact-pack-min: 240px;
   --size-grid-home-left: 340px;
   --size-grid-home-right: 560px;
   --size-grid-tournament-left: 396px;
