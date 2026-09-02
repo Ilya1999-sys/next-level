@@ -163,26 +163,31 @@ const TIMELINE = {
 export function GoalTimeline() {
   return (
     <div className="goal-timeline" aria-hidden="true">
-      <div className="goal-timeline-axis">
-        {TIMELINE.ticks.map((tick) => (
-          <span key={tick} className="type-t2">
-            {tick}
-          </span>
+      <div className="goal-timeline-plot">
+        <div className="goal-timeline-axis">
+          {TIMELINE.ticks.map((tick) => (
+            <span key={tick} className="type-t2">
+              {tick}
+            </span>
+          ))}
+        </div>
+        {TIMELINE.franceBottoms.map((bottom) => (
+          <span key={`fr-${bottom}`} className="goal-dot" style={{ left: TIMELINE.franceLeft, bottom }} />
         ))}
+        {TIMELINE.portugalBottoms.map((bottom) => (
+          <span key={`pt-${bottom}`} className="goal-dot" style={{ left: TIMELINE.portugalLeft, bottom }} />
+        ))}
+        <span className="goal-dot goal-dot--large" style={{ left: TIMELINE.highlightLeft, bottom: TIMELINE.highlightBottom }} />
       </div>
-      {TIMELINE.franceBottoms.map((bottom) => (
-        <span key={`fr-${bottom}`} className="goal-dot" style={{ left: TIMELINE.franceLeft, bottom }} />
-      ))}
-      {TIMELINE.portugalBottoms.map((bottom) => (
-        <span key={`pt-${bottom}`} className="goal-dot" style={{ left: TIMELINE.portugalLeft, bottom }} />
-      ))}
-      <span className="goal-dot goal-dot--large" style={{ left: TIMELINE.highlightLeft, bottom: TIMELINE.highlightBottom }} />
-      <span className="goal-timeline-caption type-t2" style={{ left: 95 }}>
-        France
-      </span>
-      <span className="goal-timeline-caption type-t2" style={{ left: 225 }}>
-        Portugal
-      </span>
+      <div className="goal-timeline-teams">
+        <span className="goal-timeline-caption type-t2" style={{ left: 95 }}>
+          France
+        </span>
+        <span className="goal-timeline-caption type-t2" style={{ left: 225 }}>
+          Portugal
+        </span>
+      </div>
+      <p className="goal-timeline-key type-t2">Minutes/Teams</p>
     </div>
   );
 }
