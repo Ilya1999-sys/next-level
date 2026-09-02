@@ -21,13 +21,19 @@ export const BARCELONA_GROUPS: MixMark[][] = [
   ],
 ];
 
-export const WINS_MARKS: MixMark[] = [
-  { type: "dot", tone: "accent" },
-  { type: "dot", tone: "muted" },
-  { type: "bar", tone: "accent", height: 100 },
-  { type: "bar", tone: "muted", height: 100 },
-  { type: "dot", tone: "accent" },
-  { type: "dot", tone: "muted" },
+export const WINS_MARKS: MixMark[][] = [
+  [
+    { type: "dot", tone: "accent" },
+    { type: "dot", tone: "muted" },
+  ],
+  [
+    { type: "bar", tone: "accent", height: 72 },
+    { type: "bar", tone: "muted", height: 72 },
+  ],
+  [
+    { type: "dot", tone: "accent" },
+    { type: "dot", tone: "muted" },
+  ],
 ];
 
 export const PORTUGAL_GOALS = [1, 1, 4, 5, 6, 8, 9];

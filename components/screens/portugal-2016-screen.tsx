@@ -65,7 +65,7 @@ export function Portugal2016Screen() {
               <p className="type-t2">regular-time victory over Wales in the entire tournament</p>
             </div>
           </div>
-          <MixChart marks={WINS_MARKS} />
+          <MixChart groups={WINS_MARKS} />
         </article>
         <div className="col-stack">
           <article className="fact-card">

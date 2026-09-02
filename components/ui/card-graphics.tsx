@@ -151,13 +151,9 @@ export function StatBars({
 }
 
 const TIMELINE = {
-  width: 403,
-  height: 462,
   franceLeft: 83,
   portugalLeft: 213,
   highlightLeft: 205,
-  dot: 24,
-  large: 40,
   franceBottoms: [37, 70, 118, 146, 182, 208, 241, 267, 293, 319, 345, 392, 418],
   portugalBottoms: [61, 87, 177, 237, 279, 307, 337, 363],
   highlightBottom: 396,
@@ -165,54 +161,28 @@ const TIMELINE = {
 };
 
 export function GoalTimeline() {
-  const { width, height, dot, large } = TIMELINE;
-  const tickTop = 32;
-  const tickBottom = 413;
-
   return (
     <div className="goal-timeline" aria-hidden="true">
-      <svg viewBox={`0 0 ${width} ${height}`} className="goal-timeline-svg">
-        {TIMELINE.ticks.map((tick, index) => (
-          <text
-            key={tick}
-            x={0}
-            y={tickTop + (index / (TIMELINE.ticks.length - 1)) * (tickBottom - tickTop)}
-            className="goal-timeline-tick"
-          >
+      <div className="goal-timeline-axis">
+        {TIMELINE.ticks.map((tick) => (
+          <span key={tick} className="type-t2">
             {tick}
-          </text>
+          </span>
         ))}
-        {TIMELINE.franceBottoms.map((bottom) => (
-          <circle
-            key={`fr-${bottom}`}
-            className="goal-dot-svg"
-            cx={TIMELINE.franceLeft + dot / 2}
-            cy={height - bottom - dot / 2}
-            r={dot / 2}
-          />
-        ))}
-        {TIMELINE.portugalBottoms.map((bottom) => (
-          <circle
-            key={`pt-${bottom}`}
-            className="goal-dot-svg"
-            cx={TIMELINE.portugalLeft + dot / 2}
-            cy={height - bottom - dot / 2}
-            r={dot / 2}
-          />
-        ))}
-        <circle
-          className="goal-dot-svg goal-dot-svg--large"
-          cx={TIMELINE.highlightLeft + large / 2}
-          cy={height - TIMELINE.highlightBottom - large / 2}
-          r={large / 2}
-        />
-        <text x={95} y={448} textAnchor="middle" className="goal-timeline-caption">
-          France
-        </text>
-        <text x={225} y={448} textAnchor="middle" className="goal-timeline-caption">
-          Portugal
-        </text>
-      </svg>
+      </div>
+      {TIMELINE.franceBottoms.map((bottom) => (
+        <span key={`fr-${bottom}`} className="goal-dot" style={{ left: TIMELINE.franceLeft, bottom }} />
+      ))}
+      {TIMELINE.portugalBottoms.map((bottom) => (
+        <span key={`pt-${bottom}`} className="goal-dot" style={{ left: TIMELINE.portugalLeft, bottom }} />
+      ))}
+      <span className="goal-dot goal-dot--large" style={{ left: TIMELINE.highlightLeft, bottom: TIMELINE.highlightBottom }} />
+      <span className="goal-timeline-caption type-t2" style={{ left: 95 }}>
+        France
+      </span>
+      <span className="goal-timeline-caption type-t2" style={{ left: 225 }}>
+        Portugal
+      </span>
     </div>
   );
 }

@@ -4,7 +4,13 @@ Source of truth: Figma file `F3RebM3vrX7z9Pe1DDgDP8`, collection **design**.
 
 If a later chat asks to change UI, use **only** existing Figma component variants, styles, and variables. Do not invent new tokens, radii, or type styles.
 
-## 2026-08-18 — team icons, rate/health, Drama/Legends color+effects
+## 2026-09-02 — equal-height fact rows, France timeline, on-accent tokens
+
+1. Horizontal card rows (`.cards-compact-grid`) stretch to the tallest item. Fact title stays at the top; the number + description sit at the bottom (`margin-top: auto`).
+2. France 1-0 timeline is a 403×462 graphic, left-aligned with “Match review”, T2 labels, dots at Figma offsets. Muted marks use `elements/accent-secondary-dark-bg`.
+3. Wins-fact mix marks use `radius/s` on 24px dots and 72px bars, grouped with `space/xl` between clusters.
+4. Match Mode chips use `--bg-accent-primary` when selected (blue in Nostalgia). Left-nav selected stays `--bg-accent-secondary`.
+
 
 1. Match-view team icons (`team-icon`) sit on `--bg-cards-elements` (`323:3928`). Crests use multiply so the circle follows the mood token.
 2. Rate / Health follow the match layout: label+chevron on the team toggle, Portugal open, France collapsed, 40px crest orbs on `--bg-cards-elements`, Rate has +/−, Health is score-only.
@@ -65,7 +71,7 @@ If a later chat asks to change UI, use **only** existing Figma component variant
 
 ## Tokens (design mode)
 
-Colors: `elements/icons`, `elements/accent`, `text/primary`, `text/secondary`, `bg/cards`, `bg/cards-elements`, `bg/cards-glass`, `bg/page`, `bg/accent-primary`, `bg/accent-secondary`, `bg/accent-tretiary`, `main/success`.
+Colors: `elements/icons`, `elements/accent`, `elements/accent-primary-dark-bg` (`#ffffff`), `elements/accent-secondary-dark-bg` (`#ffffff4d`, white 30% on accent), `text/primary`, `text/secondary`, `bg/cards`, `bg/cards-elements`, `bg/cards-glass`, `bg/page`, `bg/accent-primary`, `bg/accent-secondary`, `bg/accent-tretiary`, `main/success`.
 
 Type: `type/font-family-primary`, `type/font-family-secondary`, sizes/weights/line-heights/letter-spacings for H1–H3, T1–T3, button-1.
 

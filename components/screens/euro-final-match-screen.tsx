@@ -112,13 +112,13 @@ export function EuroFinalMatchScreen({
         <div
           className={open.score ? "glass-panel" : "opaque-panel"}
           data-tone={open.score ? undefined : "page"}
-          style={{ borderRadius: open.score ? "var(--radius-l)" : "var(--radius-xs)", padding: 12, display: "flex", gap: 28, alignItems: "center" }}
+          style={{ borderRadius: open.score ? "var(--radius-l)" : "var(--radius-xs)", padding: "var(--space-m)", display: "flex", gap: "var(--space-xl)", alignItems: "center" }}
         >
           <IconButton label="Back" onClick={() => router.push(backHref)}>
             <DsIcon name="back" />
           </IconButton>
           {open.score ? (
-            <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "var(--space-l)" }}>
               <TeamBadge code="Por" src="/figma/team-por.png" />
               <div className="match-score" style={{ textAlign: "center" }}>
                 <p className="type-h2 fact-number">
@@ -141,14 +141,14 @@ export function EuroFinalMatchScreen({
 
         <div
           className={open.mode ? "glass-panel" : "opaque-panel"}
-          style={{ borderRadius: open.mode ? "var(--radius-l)" : "var(--radius-s)", padding: open.mode ? 20 : 8, display: "grid", gap: 28, justifyItems: "center" }}
+          style={{ borderRadius: open.mode ? "var(--radius-l)" : "var(--radius-s)", padding: open.mode ? "var(--space-l)" : "var(--space-s)", display: "grid", gap: "var(--space-xl)", justifyItems: "center" }}
         >
           {open.mode ? (
             <>
               <p className="type-t1" style={{ textAlign: "center" }}>
                 View mode
               </p>
-              <div style={{ display: "grid", gap: 12, width: 147 }}>
+              <div style={{ display: "grid", gap: "var(--space-m)", width: 147 }}>
                 {CAMERAS.map((item) => (
                   <TagMood key={item} selected={camera === item} onClick={() => setCamera(item)}>
                     {item}

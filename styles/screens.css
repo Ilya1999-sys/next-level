@@ -147,7 +147,7 @@
 }
 
 .tag-mood[data-selected="true"] {
-  background: var(--bg-accent-secondary);
+  background: var(--bg-accent-primary);
   color: var(--text-secondary);
 }
 
@@ -586,11 +586,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-s);
-  align-items: start;
+  align-items: stretch;
 }
 
 .cards-compact-grid > * {
   min-width: 0;
+  height: 100%;
+  align-self: stretch;
 }
 
 .ds-card {
@@ -606,19 +608,18 @@
 
 .ds-card[data-accent="true"] {
   background: var(--bg-accent-primary);
-  color: var(--text-on-accent);
-  --on-accent-soft: color-mix(in srgb, var(--text-secondary) 55%, transparent);
+  color: var(--elements-accent-primary-dark-bg);
 }
 
 .ds-card[data-accent="true"] .type-t1,
 .ds-card[data-accent="true"] .type-h2,
 .ds-card[data-accent="true"] .type-h3 {
-  color: var(--text-on-accent);
+  color: var(--elements-accent-primary-dark-bg);
 }
 
 .ds-card[data-accent="true"] .type-t2,
 .ds-card[data-accent="true"] .type-t3 {
-  color: var(--on-accent-soft);
+  color: var(--elements-accent-secondary-dark-bg);
 }
 
 .card-top {
@@ -658,10 +659,14 @@
   overflow-wrap: anywhere;
 }
 
+.ds-card[data-accent="true"] .year-team {
+  gap: var(--space-l);
+}
+
 .ds-card[data-accent="true"] .year-team .type-t2,
 .ds-card[data-accent="true"] .year-team .type-h3,
 .ds-card[data-accent="true"] .year-team .type-t1 {
-  color: var(--text-on-accent);
+  color: var(--elements-accent-primary-dark-bg);
 }
 
 .player-stage {
@@ -727,6 +732,8 @@
 .ds-card[data-accent="true"] .graphic-slot {
   padding: 0 var(--space-xl) var(--space-xl);
   overflow: visible;
+  justify-content: flex-start;
+  align-items: flex-end;
 }
 
 .team-card--banner {
@@ -857,7 +864,7 @@
   align-self: stretch;
 }
 
-.home-left-stack > .fact-card {
+.cards-compact-grid > .fact-card {
   height: 100%;
   min-height: 0;
   align-self: stretch;
@@ -871,10 +878,16 @@
 }
 
 .fact-copy {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-xl);
   width: 100%;
   min-width: 0;
+  flex: 1 1 auto;
+}
+
+.cards-compact-grid .fact-copy .fact-row {
+  margin-top: auto;
 }
 
 .fact-row {
@@ -983,8 +996,8 @@
 }
 
 .ds-card[data-accent="true"] .circle-stat {
-  background: var(--on-accent-soft);
-  color: var(--text-secondary);
+  background: var(--elements-accent-secondary-dark-bg);
+  color: var(--elements-accent-primary-dark-bg);
 }
 
 .ds-card[data-accent="true"] .circle-stat .type-h2,
@@ -994,7 +1007,7 @@
 }
 
 .ds-card[data-accent="true"] .circle-stat[data-accent="true"] {
-  background: var(--text-secondary);
+  background: var(--elements-accent-primary-dark-bg);
   color: var(--bg-accent-primary);
 }
 
@@ -1012,17 +1025,17 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  gap: var(--size-mix-gap);
+  gap: var(--space-m);
   width: 100%;
-  height: 100%;
-  max-height: var(--size-mix-chart-compact);
-  padding-bottom: 4px;
+  height: auto;
+  max-height: none;
+  padding-bottom: 0;
 }
 
 .mix-chart[data-grouped="true"] {
   gap: var(--space-xl);
-  height: var(--size-mix-chart);
-  max-height: var(--size-mix-chart);
+  height: auto;
+  max-height: none;
   padding-bottom: 0;
 }
 
@@ -1033,8 +1046,8 @@
 }
 
 .mix-bar {
-  width: var(--size-mix-bar);
-  border-radius: 4px 4px 0 0;
+  width: var(--size-mix-mark);
+  border-radius: var(--radius-s);
   flex-shrink: 0;
 }
 
@@ -1046,13 +1059,13 @@
 
 .col-stack .mix-bar,
 .col-stack .mix-dot {
-  width: var(--size-mix-bar-compact);
+  width: var(--size-mix-mark);
 }
 
 .mix-dot {
-  width: var(--size-mix-bar);
-  height: var(--size-mix-mark-compact);
-  border-radius: 999px;
+  width: var(--size-mix-mark);
+  height: var(--size-mix-mark);
+  border-radius: var(--radius-s);
   flex-shrink: 0;
 }
 
@@ -1082,13 +1095,13 @@
 .ds-card[data-accent="true"] .mix-bar[data-tone="accent"],
 .ds-card[data-accent="true"] .mix-dot[data-tone="accent"],
 .ds-card[data-accent="true"] .mix-line[data-tone="accent"] {
-  background: var(--text-on-accent);
+  background: var(--elements-accent-primary-dark-bg);
 }
 
 .ds-card[data-accent="true"] .mix-bar[data-tone="muted"],
 .ds-card[data-accent="true"] .mix-dot[data-tone="muted"],
 .ds-card[data-accent="true"] .mix-line[data-tone="muted"] {
-  background: var(--on-accent-soft);
+  background: var(--elements-accent-secondary-dark-bg);
 }
 
 .line-chart {
@@ -1107,24 +1120,24 @@
 
 .line-chart-tick,
 .line-chart-axis {
-  fill: color-mix(in srgb, var(--text-on-accent) 70%, transparent);
+  fill: var(--elements-accent-secondary-dark-bg);
   font-size: var(--size-t2);
   font-family: var(--font-family-secondary);
 }
 
 .line-chart-axis {
-  stroke: color-mix(in srgb, var(--text-on-accent) 40%, transparent);
+  stroke: var(--elements-accent-secondary-dark-bg);
 }
 
 .line-chart-portugal {
-  stroke: var(--text-on-accent);
+  stroke: var(--elements-accent-primary-dark-bg);
   stroke-width: 2;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
 
 .line-chart-france {
-  stroke: color-mix(in srgb, var(--text-on-accent) 55%, transparent);
+  stroke: var(--elements-accent-secondary-dark-bg);
   stroke-width: 2;
   stroke-linejoin: round;
   stroke-linecap: round;
@@ -1132,12 +1145,12 @@
 
 .line-chart-portugal-dot,
 .line-chart-france-dot {
-  fill: var(--text-on-accent);
+  fill: var(--elements-accent-primary-dark-bg);
   stroke: none;
 }
 
 .line-chart-france-dot {
-  fill: color-mix(in srgb, var(--text-on-accent) 70%, transparent);
+  fill: var(--elements-accent-secondary-dark-bg);
 }
 
 .line-chart-legend {
@@ -1145,7 +1158,7 @@
   flex-direction: column;
   gap: var(--space-m);
   align-items: flex-start;
-  color: color-mix(in srgb, var(--text-on-accent) 70%, transparent);
+  color: var(--elements-accent-secondary-dark-bg);
   font-family: var(--font-family-secondary);
   font-size: var(--size-t2);
   padding: 0;
@@ -1166,11 +1179,11 @@
 }
 
 .legend-swatch--portugal {
-  background: var(--text-on-accent);
+  background: var(--elements-accent-primary-dark-bg);
 }
 
 .legend-swatch--france {
-  background: color-mix(in srgb, var(--text-on-accent) 55%, transparent);
+  background: var(--elements-accent-secondary-dark-bg);
 }
 
 .stat-bars {
@@ -1215,63 +1228,72 @@
 }
 
 .ds-card[data-accent="true"] .stat-bar-label {
-  color: var(--on-accent-soft);
+  color: var(--elements-accent-secondary-dark-bg);
 }
 
 .ds-card[data-accent="true"] .stat-bar--track {
-  background: var(--on-accent-soft);
+  background: var(--elements-accent-secondary-dark-bg);
 }
 
 .ds-card[data-accent="true"] .stat-bar--fill {
-  background: var(--text-secondary);
+  background: var(--elements-accent-primary-dark-bg);
 }
 
 .ds-card[data-accent="true"] .stat-dot {
-  background: var(--on-accent-soft);
+  background: var(--elements-accent-secondary-dark-bg);
 }
 
 .ds-card[data-accent="true"] .stat-dot[data-on="true"] {
-  background: var(--text-secondary);
+  background: var(--elements-accent-primary-dark-bg);
 }
 
 .goal-timeline {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
+  position: relative;
+  width: 403px;
+  height: 462px;
+  max-width: 100%;
+  flex: 0 0 auto;
+  align-self: flex-start;
   overflow: visible;
-  max-height: 360px;
 }
 
-.goal-timeline-svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  max-height: 360px;
+.goal-timeline-axis {
+  position: absolute;
+  left: 0;
+  bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(var(--space-xl) + var(--space-m));
+  color: var(--elements-accent-primary-dark-bg);
 }
 
-.tournament-top-grid > .card-link:last-child .team-card {
-  max-height: 560px;
+.ds-card[data-accent="true"] .goal-timeline-axis,
+.ds-card[data-accent="true"] .goal-timeline-axis .type-t2,
+.ds-card[data-accent="true"] .goal-timeline-caption {
+  color: var(--elements-accent-primary-dark-bg);
 }
 
-.goal-timeline-tick,
+.goal-dot {
+  position: absolute;
+  width: var(--size-dot-stat);
+  height: var(--size-dot-stat);
+  border-radius: var(--radius-xl);
+  background: var(--elements-accent-secondary-dark-bg);
+}
+
+.goal-dot--large {
+  width: 40px;
+  height: 40px;
+  background: var(--elements-accent-primary-dark-bg);
+}
+
 .goal-timeline-caption {
-  fill: var(--text-on-accent);
-  font-family: var(--font-family-secondary);
-  font-size: var(--size-t2);
-  dominant-baseline: middle;
-}
-
-.goal-timeline-caption {
-  font-size: var(--size-t3);
-}
-
-.goal-dot-svg {
-  fill: var(--on-accent-soft);
-}
-
-.goal-dot-svg--large {
-  fill: var(--text-on-accent);
+  position: absolute;
+  bottom: 14px;
+  transform: translate(-50%, 100%);
+  color: var(--elements-accent-primary-dark-bg);
+  white-space: nowrap;
 }
 
 .discussion-chip {
@@ -1380,7 +1402,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 12px;
+  gap: var(--space-m);
   pointer-events: none;
 }
 
@@ -1400,7 +1422,7 @@
 
 .match-hud-right {
   display: flex;
-  gap: 12px;
+  gap: var(--space-m);
   align-items: flex-end;
   max-width: min(960px, 100%);
 }

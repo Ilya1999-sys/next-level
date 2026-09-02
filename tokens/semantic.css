@@ -59,6 +59,8 @@
   --text-secondary: var(--figma-text-secondary);
   --elements-icons: var(--figma-elements-icons);
   --elements-accent: var(--figma-elements-accent);
+  --elements-accent-primary-dark-bg: var(--figma-elements-accent-primary-dark-bg);
+  --elements-accent-secondary-dark-bg: var(--figma-elements-accent-secondary-dark-bg);
   --main-success: var(--figma-main-success);
   --glass-frost: var(--figma-glass-frost);
 

@@ -1,6 +1,8 @@
 :root {
   --figma-elements-icons: #ffffff;
   --figma-elements-accent: #012fff;
+  --figma-elements-accent-primary-dark-bg: #ffffff;
+  --figma-elements-accent-secondary-dark-bg: #ffffff4d;
   --figma-text-primary: #5e5e5e;
   --figma-text-secondary: #ffffff;
   --figma-bg-cards: #c1c1c1;
