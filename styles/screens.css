@@ -1657,12 +1657,64 @@
   flex-shrink: 0;
 }
 
+/* Experimental responsive layer. Desktop ≥1200 stays the Figma layout. */
+@media (max-width: 1200px) {
+  .home-top-grid,
+  .tournament-top-grid,
+  .home-facts-grid,
+  .tournament-facts-grid,
+  .row-goals,
+  .row-facts-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-left-stack,
+  .tournament-left-stack {
+    grid-template-rows: auto;
+    min-height: 0;
+    height: auto;
+  }
+
+  .row-bottom {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .tournament-hero {
+    flex-wrap: wrap;
+  }
+
+  .tournament-hero-copy {
+    max-width: none;
+  }
+
+  .tournament-hero .circle-row {
+    flex-wrap: wrap;
+  }
+}
+
 @media (max-width: 1024px) {
-  .page-shell { padding: var(--space-m); }
+  .page-shell {
+    padding: var(--space-m);
+  }
+
+  .top-menu {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .mood-row {
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 900px) {
-  .page-shell { height: auto; max-height: none; overflow: visible; }
+  .page-shell {
+    height: auto;
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
 
   .page-body {
     flex-direction: column;
@@ -1677,26 +1729,14 @@
     align-self: stretch;
     flex-direction: row;
     justify-content: space-between;
+    gap: var(--space-s);
   }
 
   .left-menu-group {
     flex-direction: row;
+    flex-wrap: wrap;
     width: auto;
-  }
-
-  .home-top-grid,
-  .tournament-top-grid,
-  .home-facts-grid,
-  .tournament-facts-grid,
-  .row-goals {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .home-left-stack,
-  .tournament-left-stack {
-    grid-template-rows: auto;
-    min-height: 0;
-    height: auto;
+    justify-content: center;
   }
 
   .home-left-stack > .card-link {
@@ -1705,7 +1745,138 @@
   }
 
   .tournament-left-stack > .card-link {
-    height: var(--size-card-row);
+    height: auto;
     min-height: var(--size-card-row);
+  }
+
+  .tournament-top-grid > .card-link:last-child,
+  .tournament-top-grid > .card-link:last-child .team-card {
+    min-height: 0;
+  }
+
+  .graphic-slot {
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  .circle-stat,
+  .team-card--banner .circle-stat,
+  .tournament-hero .circle-stat,
+  .row-goals .circle-stat {
+    flex: 0 1 var(--size-circle-stat-compact);
+    width: var(--size-circle-stat-compact);
+    height: var(--size-circle-stat-compact);
+    max-width: var(--size-circle-stat-compact);
+    max-height: var(--size-circle-stat-compact);
+  }
+
+  .player-stage--float,
+  .tournir-figure {
+    width: min(var(--size-player-figure-w), 100%);
+    max-width: 100%;
+  }
+
+  .player-row-copy .type-h3,
+  .player-row-copy .type-t2 {
+    white-space: normal;
+  }
+
+  .cards-compact-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: var(--space-s);
+    padding-bottom: calc(var(--space-s) + 120px + env(safe-area-inset-bottom, 0px));
+    gap: var(--space-s);
+  }
+
+  .top-menu {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-s);
+  }
+
+  .top-menu-brand {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .logo-a {
+    width: 64px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .logo-a img {
+    width: 64px;
+    height: 32px;
+  }
+
+  .type-h1 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .mood-row {
+    width: 100%;
+  }
+
+  .tag-mood {
+    padding: var(--space-s) var(--space-m);
+  }
+
+  .left-menu {
+    position: fixed;
+    left: var(--space-s);
+    right: var(--space-s);
+    bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0px));
+    top: auto;
+    z-index: 40;
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .left-menu-group {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    padding: var(--space-xs);
+    gap: var(--space-xs);
+  }
+
+  .icon-btn,
+  .profile-orb {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+
+  .icon-btn svg,
+  .ds-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .icon-badge {
+    top: 2px;
+    right: 2px;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+
+  .cards-all {
+    overflow: visible;
+  }
+
+  .year-team .type-t1,
+  .year-team .type-h3 {
+    overflow-wrap: anywhere;
   }
 }

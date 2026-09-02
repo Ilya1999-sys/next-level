@@ -1,7 +1,7 @@
 :root {
   /* Edit this file. Changes apply after tokens/figma.css.
      Type, space, radius, and UI metrics. screens.css reads these variables.
-     Media queries keep 1024px / 900px — CSS variables do not work in @media. */
+     Media queries keep 1200px / 1024px / 900px / 640px — CSS variables do not work in @media. */
 
   --figma-type-font-family-primary: "Cartograph Mono CF", ui-monospace, monospace;
   --figma-type-font-family-secondary: Geneva, system-ui, sans-serif;
