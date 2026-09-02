@@ -1,7 +1,7 @@
 :root {
-  /* Edit this file. Changes apply after tokens/figma.css.
-     Type, space, radius, and UI metrics. screens.css reads these variables.
-     Media queries keep 1200px / 1024px / 900px / 640px — CSS variables do not work in @media. */
+  /* Single file for type, space, radius, and UI metrics.
+     Desktop values match Figma. Breakpoints below override the same names.
+     @media cannot use CSS variables as the breakpoint width — keep 1200 / 1024 / 900 / 640. */
 
   --figma-type-font-family-primary: "Cartograph Mono CF", ui-monospace, monospace;
   --figma-type-font-family-secondary: Geneva, system-ui, sans-serif;
@@ -50,6 +50,8 @@
   --figma-radius-l: 40px;
   --figma-radius-xl: 999px;
 
+  --size-page-pad: var(--figma-space-l);
+  --size-page-gap: var(--figma-space-l);
   --size-logo-w: 88px;
   --size-logo-h: 44px;
   --size-logo-glyph: 40px;
@@ -87,6 +89,104 @@
   --size-team-icon-player: 40px;
   --size-match-credit-bottom: 88px;
   --size-dot-grid-cell: 24px;
+  --size-timeline-w: 403px;
+  --size-timeline-h: 462px;
+  --size-grid-home-left: 340px;
+  --size-grid-home-right: 560px;
+  --size-grid-tournament-left: 396px;
+  --size-grid-goals-right: 372px;
+  --size-burger-line: 2px;
+  --size-z-nav-backdrop: 40;
+  --size-z-nav: 50;
   --size-breakpoint: 1024px;
   --size-breakpoint-stack: 900px;
+  --size-breakpoint-wide: 1200px;
+  --size-breakpoint-phone: 640px;
+}
+
+/* ≤1200: keep desktop type, slightly tighter page pad */
+@media (max-width: 1200px) {
+  :root {
+    --size-page-pad: var(--figma-space-l);
+    --size-home-stack-min: 0px;
+    --size-tournament-stack-min: 0px;
+  }
+}
+
+/* ≤1024: tablet */
+@media (max-width: 1024px) {
+  :root {
+    --size-page-pad: var(--figma-space-m);
+    --size-page-gap: var(--figma-space-m);
+    --size-icon-btn: 64px;
+    --size-icon-glyph: 28px;
+    --size-left-menu: 80px;
+    --size-logo-w: 80px;
+    --size-logo-h: 40px;
+    --size-circle-stat: 140px;
+    --size-circle-stat-hero: 132px;
+  }
+}
+
+/* ≤900: small tablet / hamburger */
+@media (max-width: 900px) {
+  :root {
+    --size-page-pad: var(--figma-space-m);
+    --size-page-gap: var(--figma-space-s);
+    --size-icon-btn: 56px;
+    --size-icon-glyph: 24px;
+    --size-icon-badge: 20px;
+    --size-icon-badge-offset: 6px;
+    --size-left-menu: 80px;
+    --size-left-menu-min-h: 0px;
+    --size-logo-w: 72px;
+    --size-logo-h: 36px;
+    --size-circle-stat: 120px;
+    --size-circle-stat-hero: 120px;
+    --size-circle-stat-compact: 104px;
+    --size-card-row: 220px;
+    --size-player-figure-w: 320px;
+    --size-player-figure-h: 256px;
+    --size-hero-copy-max: 100%;
+  }
+}
+
+/* ≤640: phone — type ~15% smaller, integer px */
+@media (max-width: 640px) {
+  :root {
+    --figma-size-h1: 20px;
+    --figma-size-h2: 24px;
+    --figma-size-h3: 17px;
+    --figma-size-t1: 13px;
+    --figma-size-t2: 11px;
+    --figma-size-t3: 10px;
+    --figma-size-button-1: 15px;
+
+    --figma-line-height-h1: 24px;
+    --figma-line-height-h2: 34px;
+    --figma-line-height-h3: 24px;
+    --figma-line-height-t1: 17px;
+    --figma-line-height-t2: 14px;
+    --figma-line-height-t3: 13px;
+    --figma-line-height-button-1: 20px;
+
+    --size-page-pad: var(--figma-space-s);
+    --size-page-gap: var(--figma-space-s);
+    --size-icon-btn: 48px;
+    --size-icon-glyph: 22px;
+    --size-icon-badge: 16px;
+    --size-icon-badge-offset: 4px;
+    --size-left-menu: 72px;
+    --size-logo-w: 64px;
+    --size-logo-h: 32px;
+    --size-logo-glyph: 28px;
+    --size-circle-stat: 96px;
+    --size-circle-stat-hero: 96px;
+    --size-circle-stat-compact: 88px;
+    --size-card-row: 200px;
+    --size-player-figure-w: 240px;
+    --size-player-figure-h: 192px;
+    --size-mix-chart: 112px;
+    --size-mix-mark: 20px;
+  }
 }

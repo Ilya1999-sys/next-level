@@ -7,10 +7,10 @@
   overflow: visible;
   background: var(--bg-page);
   color: var(--text-primary);
-  padding: var(--space-l);
+  padding: var(--size-page-pad);
   display: flex;
   flex-direction: column;
-  gap: var(--space-l);
+  gap: var(--size-page-gap);
 }
 
 .top-menu {
@@ -44,6 +44,46 @@
   font-size: var(--size-logo-glyph);
   font-weight: 400;
   line-height: 1;
+  flex-shrink: 0;
+}
+
+.logo-a img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.menu-toggle {
+  display: none;
+  flex-shrink: 0;
+}
+
+.burger {
+  width: var(--size-icon-glyph);
+  height: var(--size-icon-glyph);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.burger span {
+  display: block;
+  width: 100%;
+  height: var(--size-burger-line);
+  border-radius: var(--radius-xl);
+  background: currentColor;
+}
+
+.menu-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: var(--bg-cards-glass);
+  z-index: var(--size-z-nav-backdrop);
+  cursor: pointer;
 }
 
 .top-menu-copy {
@@ -169,12 +209,13 @@
   justify-content: space-between;
   align-self: flex-start;
   position: sticky;
-  top: var(--space-l);
+  top: var(--size-page-pad);
   width: var(--size-left-menu);
-  height: calc(100dvh - var(--space-l) * 3 - var(--size-logo-h));
+  height: calc(100dvh - var(--size-page-pad) * 2 - var(--size-page-gap) - var(--size-logo-h));
   min-height: var(--size-left-menu-min-h);
-  max-height: calc(100dvh - var(--space-l) * 3 - var(--size-logo-h));
+  max-height: calc(100dvh - var(--size-page-pad) * 2 - var(--size-page-gap) - var(--size-logo-h));
   flex-shrink: 0;
+  z-index: var(--size-z-nav);
 }
 
 .left-menu-group {
@@ -350,7 +391,7 @@
 }
 
 .home-top-grid {
-  grid-template-columns: minmax(340px, 1fr) minmax(0, 560px);
+  grid-template-columns: minmax(var(--size-grid-home-left), 1fr) minmax(0, var(--size-grid-home-right));
 }
 
 .home-left-stack {
@@ -412,7 +453,7 @@
 }
 
 .tournament-top-grid {
-  grid-template-columns: minmax(396px, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(var(--size-grid-tournament-left), 1fr) minmax(0, 1fr);
   align-items: stretch;
 }
 
@@ -577,10 +618,13 @@
   min-width: 0;
 }
 
-.tournament-hero .circle-row {
+.tournament-hero .circle-row,
+.ds-card:not(:has(> .card-top)) .circle-row {
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  justify-content: flex-end;
   flex: 0 1 auto;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
 }
 
 .tournament-hero-stats {
@@ -598,7 +642,7 @@
 
 .row-goals {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(372px, 0.75fr);
+  grid-template-columns: minmax(0, 1fr) minmax(var(--size-grid-goals-right), 0.75fr);
   gap: var(--space-s);
   min-height: 240px;
   align-items: stretch;
@@ -914,11 +958,11 @@
 
 .fact-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-s);
   width: 100%;
   min-width: 0;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .fact-number {
@@ -929,6 +973,7 @@
 .fact-row .type-t2 {
   flex: 1 1 auto;
   min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .dot-live {
@@ -1275,7 +1320,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-s);
-  width: 403px;
+  width: var(--size-timeline-w);
   max-width: 100%;
   height: auto;
   flex: 0 0 auto;
@@ -1286,7 +1331,7 @@
 .goal-timeline-plot {
   position: relative;
   width: 100%;
-  height: 462px;
+  height: var(--size-timeline-h);
   flex: 0 0 auto;
 }
 
@@ -1657,57 +1702,43 @@
   flex-shrink: 0;
 }
 
-/* Experimental responsive layer. Desktop ≥1200 stays the Figma layout. */
-@media (max-width: 1200px) {
-  .home-top-grid,
-  .tournament-top-grid,
-  .home-facts-grid,
-  .tournament-facts-grid,
-  .row-goals,
-  .row-facts-split {
-    grid-template-columns: minmax(0, 1fr);
+/* Large screens: sit half-empty stacked cards in a row without overlapping internals. */
+@media (min-width: 1201px) {
+  .home-left-stack {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
   }
 
-  .home-left-stack,
-  .tournament-left-stack {
-    grid-template-rows: auto;
-    min-height: 0;
+  .home-left-stack > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .home-left-stack > .card-link:not(:first-child),
+  .home-left-stack > .fact-card {
+    height: 100%;
+    min-width: 0;
+    align-self: stretch;
+  }
+
+  .home-left-stack > .card-link:not(:first-child) .team-card {
+    height: 100%;
+  }
+
+  .col-stack:has(> .fact-card + .fact-card):not(:has(.mix-chart, .dot-grid, .circle-row, .stat-bars, .goal-timeline)) {
+    flex-direction: row;
+    align-items: stretch;
     height: auto;
   }
 
-  .row-bottom {
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .tournament-hero {
-    flex-wrap: wrap;
-  }
-
-  .tournament-hero-copy {
-    max-width: none;
-  }
-
-  .tournament-hero .circle-row {
-    flex-wrap: wrap;
+  .col-stack:has(> .fact-card + .fact-card):not(:has(.mix-chart, .dot-grid, .circle-row, .stat-bars, .goal-timeline)) > .fact-card {
+    flex: 1 1 0;
+    min-width: 0;
+    height: auto;
+    align-self: stretch;
   }
 }
 
-@media (max-width: 1024px) {
-  .page-shell {
-    padding: var(--space-m);
-  }
-
-  .top-menu {
-    flex-wrap: wrap;
-    align-items: flex-start;
-  }
-
-  .mood-row {
-    flex-wrap: wrap;
-  }
-}
-
+/* Small screens: cards stack, side nav becomes a burger drawer. */
 @media (max-width: 900px) {
   .page-shell {
     height: auto;
@@ -1716,32 +1747,83 @@
     overflow-y: visible;
   }
 
+  .top-menu {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .menu-backdrop[data-open="true"] {
+    display: block;
+  }
+
+  .mood-row {
+    flex-wrap: wrap;
+  }
+
   .page-body {
     flex-direction: column;
   }
 
   .left-menu {
-    position: static;
-    width: auto;
+    position: fixed;
+    top: var(--size-page-pad);
+    left: var(--size-page-pad);
+    bottom: var(--size-page-pad);
+    width: var(--size-left-menu);
     height: auto;
     min-height: 0;
     max-height: none;
     align-self: stretch;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: var(--space-s);
+    transform: translateX(calc(-100% - var(--size-page-pad) * 2));
+    transition: transform 0.2s ease;
   }
 
-  .left-menu-group {
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: auto;
-    justify-content: center;
+  .left-menu[data-open="true"] {
+    transform: none;
   }
 
-  .home-left-stack > .card-link {
+  .left-menu:not([data-open="true"]) {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .home-top-grid,
+  .tournament-top-grid,
+  .home-facts-grid,
+  .tournament-facts-grid,
+  .row-goals,
+  .row-facts-split,
+  .cards-compact-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-left-stack,
+  .tournament-left-stack {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    min-height: 0;
+    height: auto;
+  }
+
+  .home-left-stack > :first-child {
+    grid-column: auto;
+  }
+
+  .row-bottom,
+  .col-stack {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .home-left-stack > .card-link,
+  .home-left-stack > .fact-card {
     height: auto;
     min-height: 0;
+    align-self: stretch;
   }
 
   .tournament-left-stack > .card-link {
@@ -1754,20 +1836,18 @@
     min-height: 0;
   }
 
+  .tournament-hero {
+    flex-wrap: wrap;
+  }
+
+  .tournament-hero .circle-row,
+  .ds-card:not(:has(> .card-top)) .circle-row {
+    flex-wrap: wrap;
+  }
+
   .graphic-slot {
     overflow-x: auto;
     overflow-y: visible;
-  }
-
-  .circle-stat,
-  .team-card--banner .circle-stat,
-  .tournament-hero .circle-stat,
-  .row-goals .circle-stat {
-    flex: 0 1 var(--size-circle-stat-compact);
-    width: var(--size-circle-stat-compact);
-    height: var(--size-circle-stat-compact);
-    max-width: var(--size-circle-stat-compact);
-    max-height: var(--size-circle-stat-compact);
   }
 
   .player-stage--float,
@@ -1781,102 +1861,14 @@
     white-space: normal;
   }
 
-  .cards-compact-grid {
-    grid-template-columns: minmax(0, 1fr);
+  .year-team .type-t1,
+  .year-team .type-h3 {
+    overflow-wrap: anywhere;
   }
 }
 
 @media (max-width: 640px) {
-  .page-shell {
-    padding: var(--space-s);
-    padding-bottom: calc(var(--space-s) + 120px + env(safe-area-inset-bottom, 0px));
-    gap: var(--space-s);
-  }
-
-  .top-menu {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--space-s);
-  }
-
-  .top-menu-brand {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .logo-a {
-    width: 64px;
-    height: 32px;
-    flex-shrink: 0;
-  }
-
-  .logo-a img {
-    width: 64px;
-    height: 32px;
-  }
-
-  .type-h1 {
-    font-size: 18px;
-    line-height: 22px;
-  }
-
-  .mood-row {
-    width: 100%;
-  }
-
-  .tag-mood {
-    padding: var(--space-s) var(--space-m);
-  }
-
-  .left-menu {
-    position: fixed;
-    left: var(--space-s);
-    right: var(--space-s);
-    bottom: calc(var(--space-s) + env(safe-area-inset-bottom, 0px));
-    top: auto;
-    z-index: 40;
-    width: auto;
-    height: auto;
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-
-  .left-menu-group {
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    padding: var(--space-xs);
-    gap: var(--space-xs);
-  }
-
-  .icon-btn,
-  .profile-orb {
-    width: 44px;
-    height: 44px;
-    flex-shrink: 0;
-  }
-
-  .icon-btn svg,
-  .ds-icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .icon-badge {
-    top: 2px;
-    right: 2px;
-    width: 16px;
-    height: 16px;
-    font-size: 10px;
-  }
-
   .cards-all {
     overflow: visible;
-  }
-
-  .year-team .type-t1,
-  .year-team .type-h3 {
-    overflow-wrap: anywhere;
   }
 }
