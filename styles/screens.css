@@ -1853,6 +1853,9 @@
   .tournament-hero .circle-row,
   .ds-card:not(:has(> .card-top)) .circle-row {
     flex-wrap: wrap;
+    margin-left: 0;
+    justify-content: flex-start;
+    width: 100%;
   }
 
   .graphic-slot {
