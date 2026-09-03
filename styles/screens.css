@@ -690,12 +690,12 @@
 .title-fact-body {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: var(--space-s);
   max-width: 100%;
   margin-top: auto;
-  align-self: flex-end;
-  text-align: right;
+  align-self: flex-start;
+  text-align: left;
 }
 
 .ds-card[data-radius="m"] {
