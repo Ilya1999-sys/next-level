@@ -104,6 +104,13 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
           >
             <IconClose />
           </button>
+          <div className="mood-row mood-row--menu">
+            {MOODS.map((item) => (
+              <TagMood key={item.id} selected={mood === item.id} onClick={() => setMood(item.id)}>
+                {item.label}
+              </TagMood>
+            ))}
+          </div>
           <div className="left-menu-group">
             <IconButton href="/" label="Home" selected={pathname === "/"}>
               <IconHome />
@@ -152,14 +159,6 @@ export function AppChrome({ crumbs, children }: { crumbs: string[]; children: Re
               <IconProfile />
               <NavLabel>Profile</NavLabel>
             </IconButton>
-          </div>
-          <div className="mood-row mood-row--menu">
-            <p className="type-t1">View mode</p>
-            {MOODS.map((item) => (
-              <TagMood key={item.id} selected={mood === item.id} onClick={() => setMood(item.id)}>
-                {item.label}
-              </TagMood>
-            ))}
           </div>
         </aside>
         <div className="cards-all">{children}</div>

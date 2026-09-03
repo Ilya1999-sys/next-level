@@ -66,7 +66,7 @@
   display: none;
 }
 
-.mood-row--menu {
+.mood-row.mood-row--menu {
   display: none;
 }
 
@@ -632,7 +632,7 @@
   max-width: 100%;
   margin-left: auto;
   justify-content: flex-end;
-  flex: 0 1 auto;
+  flex: 0 0 auto;
 }
 
 .tournament-hero-stats {
@@ -800,6 +800,12 @@
   overflow: hidden;
   position: relative;
   z-index: 1;
+}
+
+.graphic-slot:has(.circle-row) {
+  overflow: visible;
+  min-height: min-content;
+  flex: 1 0 auto;
 }
 
 .team-card--featured .graphic-slot,
@@ -1029,28 +1035,36 @@
 }
 
 .circle-stat {
+  box-sizing: border-box;
   width: var(--size-circle-stat-compact);
   height: var(--size-circle-stat-compact);
+  min-width: var(--size-circle-stat-compact);
+  min-height: var(--size-circle-stat-compact);
   max-width: var(--size-circle-stat-compact);
   max-height: var(--size-circle-stat-compact);
-  aspect-ratio: 1;
-  border-radius: 1000px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   background: var(--bg-cards-elements);
   color: var(--text-secondary);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-m);
+  gap: var(--size-circle-gap);
   padding: var(--space-m);
   text-align: center;
   flex: 0 0 var(--size-circle-stat-compact);
+  flex-shrink: 0;
+  align-self: center;
+  overflow: hidden;
 }
 
-.col-stack .circle-stat,
-.row-goals .circle-stat {
-  gap: var(--space-xs);
-  padding: var(--space-s);
+.circle-stat .type-h2 {
+  line-height: 1;
+}
+
+.circle-stat .type-t3 {
+  line-height: 1.2;
 }
 
 .col-stack .circle-stat .type-h2,
@@ -1058,18 +1072,24 @@
   font-size: var(--size-h3);
 }
 
-.tournament-hero .circle-stat,
 .team-card--banner .circle-stat {
-  flex: 0 0 var(--size-circle-stat);
   width: var(--size-circle-stat);
   height: var(--size-circle-stat);
+  min-width: var(--size-circle-stat);
+  min-height: var(--size-circle-stat);
+  max-width: var(--size-circle-stat);
   max-height: var(--size-circle-stat);
+  flex: 0 0 var(--size-circle-stat);
 }
 
 .tournament-hero .circle-stat {
-  flex: 0 0 var(--size-circle-stat-hero);
   width: var(--size-circle-stat-hero);
   height: var(--size-circle-stat-hero);
+  min-width: var(--size-circle-stat-hero);
+  min-height: var(--size-circle-stat-hero);
+  max-width: var(--size-circle-stat-hero);
+  max-height: var(--size-circle-stat-hero);
+  flex: 0 0 var(--size-circle-stat-hero);
 }
 
 .home-left-stack .circle-stat,
@@ -1077,10 +1097,12 @@
 .row-goals .circle-stat {
   width: var(--size-circle-stat-compact);
   height: var(--size-circle-stat-compact);
+  min-width: var(--size-circle-stat-compact);
+  min-height: var(--size-circle-stat-compact);
   max-width: var(--size-circle-stat-compact);
   max-height: var(--size-circle-stat-compact);
   flex: 0 0 var(--size-circle-stat-compact);
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
 }
 
 .circle-stat[data-accent="true"] {
@@ -1112,6 +1134,7 @@
   min-width: 0;
   overflow: visible;
   flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
 .mix-chart {
@@ -1954,18 +1977,16 @@
     display: inline;
   }
 
-  .mood-row--menu {
+  .mood-row.mood-row--menu {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: stretch;
     gap: var(--space-m);
     width: 100%;
-    padding: var(--space-l);
-    background: var(--bg-cards);
-    border-radius: var(--radius-l);
   }
 
   .mood-row--menu .tag-mood {
-    width: 100%;
+    flex: 1 1 auto;
   }
 }
