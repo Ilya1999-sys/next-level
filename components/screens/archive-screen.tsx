@@ -112,12 +112,14 @@ export function PlayerStatsScreen() {
         >
           <CircleRow stats={[{ value: "9", label: "Portugal goals", accent: true }, { value: "1", label: "regular-time win" }]} />
         </GraphicHoverCard>
-        <article className="ds-card" style={{ padding: "var(--space-l)", display: "grid", gap: "var(--space-m)", alignContent: "center" }}>
+        <article className="ds-card title-fact-card">
           <p className="type-t1">Player files</p>
-          <Link href="/player-stats/mbappe" className="type-h3">
-            Kylian Mbappe →
-          </Link>
-          <p className="type-t2">Goals, rating and the nights you keep rewatching.</p>
+          <div className="title-fact-body">
+            <Link href="/player-stats/mbappe" className="type-h3">
+              Kylian Mbappe →
+            </Link>
+            <p className="type-t2">Goals, rating and the nights you keep rewatching.</p>
+          </div>
         </article>
       </div>
     </ArchiveShell>

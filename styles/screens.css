@@ -676,6 +676,28 @@
   border-radius: var(--radius-l);
 }
 
+.title-fact-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--space-l);
+  height: 100%;
+  min-height: var(--size-card-row);
+}
+
+.title-fact-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-s);
+  max-width: 100%;
+  margin-top: auto;
+  align-self: flex-end;
+  text-align: right;
+}
+
 .ds-card[data-radius="m"] {
   border-radius: var(--radius-m);
 }
