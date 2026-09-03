@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { AppChrome } from "@/components/navigation/app-chrome";
 import { CircleRow, MixChart } from "@/components/ui/card-graphics";
+import { FactRow } from "@/components/ui/fact-row";
 import { DotGrid, IconButton, NextArrow } from "@/components/ui/ds";
 import { GraphicHoverCard } from "@/components/ui/hover-player-card";
 import { BARCELONA_GROUPS } from "@/lib/mood/catalog";
@@ -40,10 +41,7 @@ export function FactBlock({
             </span>
           ) : null}
         </div>
-        <div className="fact-row">
-          <p className="type-h2 fact-number">{value}</p>
-          <p className="type-t2">{text}</p>
-        </div>
+        <FactRow value={value} text={text} />
       </div>
       {dots ? <DotGrid total={dots.total} filled={dots.filled} columns={dots.columns} /> : null}
     </article>
@@ -166,10 +164,12 @@ export function TeamStatsScreen() {
           ]}
         />
       </article>
-      <div className="cards-compact-grid">
+      <div className="row-facts-split">
         <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
-        <FactBlock title="Final fact" value="93'" text="Ramos equalized in added time before La Decima was sealed in extra time." tournament="UCL—2014" />
-        <FactBlock title="Final fact" value="3-1" text="Bale's bicycle kick and a late third goal beat Liverpool in Kyiv." tournament="UCL—2018" />
+        <div className="col-stack">
+          <FactBlock title="Final fact" value="93'" text="Ramos equalized in added time before La Decima was sealed in extra time." tournament="UCL—2014" />
+          <FactBlock title="Final fact" value="3-1" text="Bale's bicycle kick and a late third goal beat Liverpool in Kyiv." tournament="UCL—2018" />
+        </div>
       </div>
       <div className="row-goals">
         <GraphicHoverCard year="Match review" title="Real Madrid 4-1 Atletico (2014 final)" watchHref={watchHref("realAtletico2014")} accent>
@@ -323,18 +323,20 @@ export function TournamentsScreen() {
           <CircleRow stats={[{ value: "1", label: "European title", accent: true }, { value: "9", label: "goals scored" }]} />
         </GraphicHoverCard>
       </div>
-      <GraphicHoverCard banner year="/2008" title="UEFA Euro: Russia, incredible comebacks and golden Spain" watchHref={watchHref("euro2008")}>
-        <CircleRow
-          stats={[
-            { value: "77", label: "goals scored", accent: true },
-            { value: "31", label: "matches played" },
-            { value: "12", label: "Spain scored" },
-          ]}
-        />
-      </GraphicHoverCard>
       <div className="row-facts-split">
-        <FactBlock title="Club cup fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
-        <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" />
+        <GraphicHoverCard banner year="/2008" title="UEFA Euro: Russia, incredible comebacks and golden Spain" watchHref={watchHref("euro2008")}>
+          <CircleRow
+            stats={[
+              { value: "77", label: "goals scored", accent: true },
+              { value: "31", label: "matches played" },
+              { value: "12", label: "Spain scored" },
+            ]}
+          />
+        </GraphicHoverCard>
+        <div className="col-stack">
+          <FactBlock title="Club cup fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
+          <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" />
+        </div>
       </div>
       <div className="row-goals">
         <GraphicHoverCard year="Match review" title="2:0 Wales" watchHref={watchHref("wales")}>

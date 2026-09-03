@@ -648,6 +648,31 @@
   align-items: stretch;
 }
 
+.row-facts-split > .col-stack > .fact-card {
+  flex: 1 1 0;
+  min-height: 0;
+  height: auto;
+  align-self: stretch;
+}
+
+.row-facts-split > .card-link {
+  min-height: 0;
+  height: 100%;
+}
+
+.row-facts-split > .card-link:has(.team-card--banner) {
+  height: 100%;
+}
+
+.row-facts-split > .card-link .team-card,
+.row-facts-split > .card-link .team-card--banner {
+  height: 100%;
+}
+
+.row-facts-split:has(> .card-link):has(> .col-stack) {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+}
+
 .row-goals {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(var(--size-grid-goals-right), 0.75fr);
@@ -1021,11 +1046,12 @@
 
 .fact-row {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-s);
   width: 100%;
   min-width: 0;
-  flex-wrap: wrap;
 }
 
 .fact-number {
@@ -1036,7 +1062,28 @@
 .fact-row .type-t2 {
   flex: 1 1 auto;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+}
+
+.fact-row[data-stack="true"] {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.fact-row[data-stack="true"] .type-t2 {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.fact-row--measure {
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+}
+
+.fact-row--measure .type-t2 {
+  flex: 1 1 auto !important;
+  width: auto !important;
 }
 
 .dot-live {
@@ -1822,19 +1869,6 @@
 
   .home-left-stack > .card-link:not(:first-child) .team-card {
     height: 100%;
-  }
-
-  .col-stack:has(> .fact-card + .fact-card):not(:has(.mix-chart, .dot-grid, .circle-row, .stat-bars, .goal-timeline)) {
-    flex-direction: row;
-    align-items: stretch;
-    height: auto;
-  }
-
-  .col-stack:has(> .fact-card + .fact-card):not(:has(.mix-chart, .dot-grid, .circle-row, .stat-bars, .goal-timeline)) > .fact-card {
-    flex: 1 1 0;
-    min-width: 0;
-    height: auto;
-    align-self: stretch;
   }
 }
 
