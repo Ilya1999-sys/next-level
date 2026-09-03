@@ -6,7 +6,7 @@ If a later chat asks to change UI, use **only** existing Figma component variant
 
 ## 2026-09-02 — equal-height fact rows, France timeline, on-accent tokens
 
-1. Horizontal card rows (`.cards-compact-grid`) stretch to the tallest item. Fact title stays at the top; the number + description sit at the bottom (`margin-top: auto`).
+1. Horizontal card rows (`.cards-compact-grid`) stretch to the tallest item. Text-only facts: title at the top, number + description at the bottom (`margin-top: auto`). Title + fact + chart (dot-grid / mix-chart): number + description stay on the title with `--size-fact-title-gap` (`space/xl`); leftover height goes to the chart.
 2. France 1-0 timeline is a 403×462 graphic, left-aligned with “Match review”, T2 labels, dots at Figma offsets. Muted marks use `elements/accent-secondary-dark-bg`.
 3. Wins-fact mix marks use `radius/s` on 24px dots and 72px bars, grouped with `space/xl` between clusters.
 4. Match Mode chips use `--bg-accent-primary` when selected (blue in Nostalgia). Left-nav selected stays `--bg-accent-secondary`.

@@ -66,6 +66,7 @@
   --size-circle-stat-hero: 150px;
   --size-circle-stat-compact: 120px;
   --size-circle-gap: 12px;
+  --size-fact-title-gap: var(--figma-space-xl);
   --size-home-stack-min: 634px;
   --size-tournament-stack-min: 508px;
   --size-card-row: 248px;
