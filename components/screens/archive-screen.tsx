@@ -335,7 +335,7 @@ export function TournamentsScreen() {
         </GraphicHoverCard>
         <div className="col-stack">
           <FactBlock title="Club cup fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
-          <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" />
+          <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" fill />
         </div>
       </div>
       <div className="row-goals">
