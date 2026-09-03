@@ -7,10 +7,10 @@
   overflow: visible;
   background: var(--bg-page);
   color: var(--text-primary);
-  padding: var(--size-page-pad);
+  padding: var(--space-l);
   display: flex;
   flex-direction: column;
-  gap: var(--size-page-gap);
+  gap: var(--space-l);
 }
 
 .top-menu {
@@ -44,46 +44,6 @@
   font-size: var(--size-logo-glyph);
   font-weight: 400;
   line-height: 1;
-  flex-shrink: 0;
-}
-
-.logo-a img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.menu-toggle.icon-btn {
-  display: none;
-  flex-shrink: 0;
-}
-
-.menu-close.icon-btn {
-  display: none;
-}
-
-.nav-label {
-  display: none;
-}
-
-.mood-row.mood-row--menu {
-  display: none;
-}
-
-.burger {
-  width: var(--size-icon-glyph);
-  height: var(--size-icon-glyph);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.burger span {
-  display: block;
-  width: 100%;
-  height: var(--size-burger-line);
-  border-radius: var(--radius-xl);
-  background: currentColor;
 }
 
 .top-menu-copy {
@@ -209,13 +169,12 @@
   justify-content: space-between;
   align-self: flex-start;
   position: sticky;
-  top: var(--size-page-pad);
+  top: var(--space-l);
   width: var(--size-left-menu);
-  height: calc(100dvh - var(--size-page-pad) * 2 - var(--size-page-gap) - var(--size-logo-h));
+  height: calc(100dvh - var(--space-l) * 3 - var(--size-logo-h));
   min-height: var(--size-left-menu-min-h);
-  max-height: calc(100dvh - var(--size-page-pad) * 2 - var(--size-page-gap) - var(--size-logo-h));
+  max-height: calc(100dvh - var(--space-l) * 3 - var(--size-logo-h));
   flex-shrink: 0;
-  z-index: var(--size-z-nav);
 }
 
 .left-menu-group {
@@ -334,10 +293,6 @@
   mask-image: url("/figma/icons/profile.svg");
   -webkit-mask-image: url("/figma/icons/profile.svg");
 }
-.ds-icon--close {
-  mask-image: url("/figma/icons/close.svg");
-  -webkit-mask-image: url("/figma/icons/close.svg");
-}
 
 .ds-icon-rotate-up { transform: none; }
 .ds-icon-rotate-down { transform: rotate(180deg); }
@@ -395,7 +350,7 @@
 }
 
 .home-top-grid {
-  grid-template-columns: minmax(var(--size-grid-home-left), 1fr) minmax(0, var(--size-grid-home-right));
+  grid-template-columns: minmax(340px, 1fr) minmax(0, 560px);
 }
 
 .home-left-stack {
@@ -431,8 +386,6 @@
 
 .home-left-stack > .card-link:first-child .graphic-slot {
   flex: 1 1 auto;
-  min-height: var(--size-mix-chart);
-  align-items: stretch;
 }
 
 .home-left-stack > .card-link .card-top {
@@ -459,7 +412,7 @@
 }
 
 .tournament-top-grid {
-  grid-template-columns: minmax(var(--size-grid-tournament-left), 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(396px, 1fr) minmax(0, 1fr);
   align-items: stretch;
 }
 
@@ -471,7 +424,7 @@
 .tournament-top-grid > .card-link:last-child .team-card {
   height: auto;
   min-height: 100%;
-  gap: var(--space-timeline-gap);
+  gap: var(--space-l);
 }
 
 .tournament-top-grid > .card-link:last-child .card-top {
@@ -590,7 +543,6 @@
   gap: var(--space-m);
   align-items: center;
   min-width: 0;
-  flex-wrap: wrap;
 }
 
 .discussion-chips {
@@ -598,7 +550,6 @@
   gap: var(--space-m);
   flex-wrap: wrap;
   min-width: 0;
-  flex: 1 1 auto;
 }
 
 .live-flag {
@@ -626,13 +577,10 @@
   min-width: 0;
 }
 
-.tournament-hero .circle-row,
-.ds-card:not(:has(> .card-top)) .circle-row {
-  width: auto;
-  max-width: 100%;
-  margin-left: auto;
-  justify-content: flex-end;
-  flex: 0 0 auto;
+.tournament-hero .circle-row {
+  flex: 0 1 auto;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
 }
 
 .tournament-hero-stats {
@@ -648,48 +596,9 @@
   align-items: stretch;
 }
 
-.row-facts-split > .col-stack > .fact-card {
-  flex: 1 1 0;
-  min-height: 0;
-  height: auto;
-  align-self: stretch;
-}
-
-.row-facts-split > .col-stack > .fact-card:has(.dot-grid, .mix-chart) {
-  flex: 0 0 auto;
-  flex-shrink: 0;
-  min-height: min-content;
-  height: auto;
-  overflow: visible;
-}
-
-.row-facts-split > .col-stack > .fact-card--fill {
-  flex: 1 1 0;
-  min-height: 0;
-  align-self: stretch;
-}
-
-.row-facts-split > .card-link {
-  min-height: 0;
-  height: 100%;
-}
-
-.row-facts-split > .card-link:has(.team-card--banner) {
-  height: 100%;
-}
-
-.row-facts-split > .card-link .team-card,
-.row-facts-split > .card-link .team-card--banner {
-  height: 100%;
-}
-
-.row-facts-split:has(> .card-link):has(> .col-stack) {
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-}
-
 .row-goals {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(var(--size-grid-goals-right), 0.75fr);
+  grid-template-columns: minmax(0, 1fr) minmax(372px, 0.75fr);
   gap: var(--space-s);
   min-height: 240px;
   align-items: stretch;
@@ -713,28 +622,6 @@
   overflow: hidden;
   background: var(--bg-cards);
   border-radius: var(--radius-l);
-}
-
-.title-fact-card {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: var(--space-l);
-  height: 100%;
-  min-height: var(--size-card-row);
-}
-
-.title-fact-body {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-s);
-  max-width: 100%;
-  margin-top: auto;
-  align-self: flex-start;
-  text-align: left;
 }
 
 .ds-card[data-radius="m"] {
@@ -861,12 +748,6 @@
   overflow: hidden;
   position: relative;
   z-index: 1;
-}
-
-.graphic-slot:has(.circle-row) {
-  overflow: visible;
-  min-height: min-content;
-  flex: 1 0 auto;
 }
 
 .team-card--featured .graphic-slot,
@@ -1021,51 +902,23 @@
 .fact-copy {
   display: flex;
   flex-direction: column;
-  gap: var(--size-fact-title-gap);
+  gap: var(--space-xl);
   width: 100%;
   min-width: 0;
   flex: 1 1 auto;
 }
 
-/* Text-only: title at the top, number + description at the bottom. */
-.fact-card:not(:has(.dot-grid, .mix-chart)) .fact-row {
-  margin-top: auto;
-}
-
-/* Title + fact + chart: keep the fact on the title; leftover height goes to the chart. */
-.fact-card:has(.dot-grid, .mix-chart) .fact-copy {
-  flex: 0 0 auto;
-}
-
-.fact-card:has(.dot-grid, .mix-chart) .fact-row {
-  margin-top: 0;
-}
-
-.facts-pack {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--size-fact-pack-min)), 1fr));
-  gap: var(--space-s);
-  align-items: stretch;
-}
-
-.facts-pack > .fact-card {
-  min-width: 0;
-  height: auto;
-  align-self: stretch;
-}
-
-.cards-compact-grid .fact-card:not(:has(.dot-grid, .mix-chart)) .fact-copy .fact-row {
+.cards-compact-grid .fact-copy .fact-row {
   margin-top: auto;
 }
 
 .fact-row {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-s);
   width: 100%;
   min-width: 0;
+  flex-wrap: nowrap;
 }
 
 .fact-number {
@@ -1076,28 +929,6 @@
 .fact-row .type-t2 {
   flex: 1 1 auto;
   min-width: 0;
-  overflow-wrap: break-word;
-}
-
-.fact-row[data-stack="true"] {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.fact-row[data-stack="true"] .type-t2 {
-  flex: 0 0 auto;
-  width: 100%;
-}
-
-.fact-row--measure {
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  align-items: center !important;
-}
-
-.fact-row--measure .type-t2 {
-  flex: 1 1 auto !important;
-  width: auto !important;
 }
 
 .dot-live {
@@ -1128,36 +959,30 @@
 }
 
 .circle-stat {
-  box-sizing: border-box;
   width: var(--size-circle-stat-compact);
-  height: var(--size-circle-stat-compact);
-  min-width: var(--size-circle-stat-compact);
-  min-height: var(--size-circle-stat-compact);
-  max-width: var(--size-circle-stat-compact);
-  max-height: var(--size-circle-stat-compact);
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
+  min-width: 0;
+  max-width: var(--size-circle-stat);
+  height: auto;
+  min-height: 0;
+  max-height: var(--size-circle-stat);
+  aspect-ratio: 1;
+  border-radius: 1000px;
   background: var(--bg-cards-elements);
   color: var(--text-secondary);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--size-circle-gap);
+  gap: var(--space-m);
   padding: var(--space-m);
   text-align: center;
-  flex: 0 0 var(--size-circle-stat-compact);
-  flex-shrink: 0;
-  align-self: center;
-  overflow: hidden;
+  flex: 0 1 var(--size-circle-stat-compact);
 }
 
-.circle-stat .type-h2 {
-  line-height: 1;
-}
-
-.circle-stat .type-t3 {
-  line-height: 1.2;
+.col-stack .circle-stat,
+.row-goals .circle-stat {
+  gap: var(--space-xs);
+  padding: var(--space-s);
 }
 
 .col-stack .circle-stat .type-h2,
@@ -1165,24 +990,18 @@
   font-size: var(--size-h3);
 }
 
+.tournament-hero .circle-stat,
 .team-card--banner .circle-stat {
+  flex: 0 0 var(--size-circle-stat);
   width: var(--size-circle-stat);
   height: var(--size-circle-stat);
-  min-width: var(--size-circle-stat);
-  min-height: var(--size-circle-stat);
-  max-width: var(--size-circle-stat);
   max-height: var(--size-circle-stat);
-  flex: 0 0 var(--size-circle-stat);
 }
 
 .tournament-hero .circle-stat {
+  flex: 0 0 var(--size-circle-stat-hero);
   width: var(--size-circle-stat-hero);
   height: var(--size-circle-stat-hero);
-  min-width: var(--size-circle-stat-hero);
-  min-height: var(--size-circle-stat-hero);
-  max-width: var(--size-circle-stat-hero);
-  max-height: var(--size-circle-stat-hero);
-  flex: 0 0 var(--size-circle-stat-hero);
 }
 
 .home-left-stack .circle-stat,
@@ -1190,12 +1009,8 @@
 .row-goals .circle-stat {
   width: var(--size-circle-stat-compact);
   height: var(--size-circle-stat-compact);
-  min-width: var(--size-circle-stat-compact);
-  min-height: var(--size-circle-stat-compact);
-  max-width: var(--size-circle-stat-compact);
   max-height: var(--size-circle-stat-compact);
-  flex: 0 0 var(--size-circle-stat-compact);
-  aspect-ratio: 1 / 1;
+  flex: 0 1 var(--size-circle-stat-compact);
 }
 
 .circle-stat[data-accent="true"] {
@@ -1226,8 +1041,6 @@
   width: 100%;
   min-width: 0;
   overflow: visible;
-  flex-wrap: wrap;
-  flex-shrink: 0;
 }
 
 .mix-chart {
@@ -1248,23 +1061,6 @@
   padding-bottom: 0;
 }
 
-.home-left-stack > .card-link:first-child .mix-chart {
-  height: 100%;
-  min-height: var(--size-mix-chart);
-  align-self: stretch;
-  align-items: stretch;
-}
-
-.home-left-stack > .card-link:first-child .mix-cluster {
-  height: 100%;
-  min-height: var(--size-mix-chart);
-  align-items: flex-end;
-}
-
-.home-left-stack > .card-link:first-child .mix-bar {
-  height: max(calc(var(--mark-h) * 1px), calc(var(--mark-h) / var(--size-mix-scale) * 100%));
-}
-
 .mix-cluster {
   display: flex;
   align-items: flex-end;
@@ -1273,7 +1069,6 @@
 
 .mix-bar {
   width: var(--size-mix-mark);
-  height: calc(var(--mark-h, 70) * 1px);
   border-radius: var(--radius-s);
   flex-shrink: 0;
 }
@@ -1479,8 +1274,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0;
-  width: var(--size-timeline-w);
+  gap: var(--space-s);
+  width: 403px;
   max-width: 100%;
   height: auto;
   flex: 0 0 auto;
@@ -1491,7 +1286,7 @@
 .goal-timeline-plot {
   position: relative;
   width: 100%;
-  height: var(--size-timeline-h);
+  height: 462px;
   flex: 0 0 auto;
 }
 
@@ -1532,7 +1327,6 @@
   position: relative;
   width: 100%;
   height: var(--line-height-t2);
-  margin-top: var(--space-s);
 }
 
 .goal-timeline-caption {
@@ -1544,7 +1338,7 @@
 }
 
 .goal-timeline-key {
-  margin: var(--space-timeline-gap) 0 0;
+  margin: 0;
   color: var(--elements-accent-primary-dark-bg);
   white-space: nowrap;
 }
@@ -1863,210 +1657,55 @@
   flex-shrink: 0;
 }
 
-/* Large screens: sit half-empty stacked cards in a row without overlapping internals. */
-@media (min-width: 1201px) {
-  .home-left-stack {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: minmax(0, 1fr) auto;
-  }
-
-  .home-left-stack > :first-child {
-    grid-column: 1 / -1;
-  }
-
-  .home-left-stack > .card-link:not(:first-child),
-  .home-left-stack > .fact-card {
-    height: 100%;
-    min-width: 0;
-    align-self: stretch;
-  }
-
-  .home-left-stack > .card-link:not(:first-child) .team-card {
-    height: 100%;
-  }
+@media (max-width: 1024px) {
+  .page-shell { padding: var(--space-m); }
 }
 
-/* Small screens: cards stack. Side rail stays until phone. */
 @media (max-width: 900px) {
-  .page-shell {
-    height: auto;
-    max-height: none;
-    overflow-x: hidden;
-    overflow-y: visible;
-  }
-
-  .top-menu {
-    flex-wrap: wrap;
-    align-items: flex-start;
-  }
-
-  .facts-pack {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .home-top-grid,
-  .tournament-top-grid,
-  .home-facts-grid,
-  .tournament-facts-grid,
-  .row-goals,
-  .row-facts-split,
-  .cards-compact-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .home-left-stack,
-  .tournament-left-stack {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto;
-    min-height: 0;
-    height: auto;
-  }
-
-  .home-left-stack > :first-child {
-    grid-column: auto;
-  }
-
-  .row-bottom,
-  .col-stack {
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .home-left-stack > .card-link,
-  .home-left-stack > .fact-card {
-    height: auto;
-    min-height: 0;
-    align-self: stretch;
-  }
-
-  .tournament-left-stack > .card-link {
-    height: auto;
-    min-height: var(--size-card-row);
-  }
-
-  .tournament-top-grid > .card-link:last-child,
-  .tournament-top-grid > .card-link:last-child .team-card {
-    min-height: 0;
-  }
-
-  .tournament-hero {
-    flex-wrap: wrap;
-  }
-
-  .tournament-hero .circle-row,
-  .ds-card:not(:has(> .card-top)) .circle-row {
-    flex-wrap: wrap;
-    margin-left: 0;
-    justify-content: flex-start;
-    width: 100%;
-  }
-
-  .graphic-slot {
-    overflow-x: auto;
-    overflow-y: visible;
-  }
-
-  .player-stage--float,
-  .tournir-figure {
-    width: min(var(--size-player-figure-w), 100%);
-    max-width: 100%;
-  }
-
-  .player-row-copy .type-h3,
-  .player-row-copy .type-t2 {
-    white-space: normal;
-  }
-
-  .year-team .type-t1,
-  .year-team .type-h3 {
-    overflow-wrap: anywhere;
-  }
-}
-
-@media (max-width: 640px) {
-  .cards-all {
-    overflow: visible;
-  }
-
-  .menu-toggle.icon-btn {
-    display: inline-flex;
-  }
-
-  .mood-row--header {
-    display: none;
-  }
+  .page-shell { height: auto; max-height: none; overflow: visible; }
 
   .page-body {
     flex-direction: column;
   }
 
   .left-menu {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100dvh;
-    min-height: 100dvh;
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
     max-height: none;
     align-self: stretch;
-    background: var(--bg-page);
-    padding: var(--size-page-pad);
-    padding-top: calc(var(--size-page-pad) + var(--size-icon-btn) + var(--space-s));
-    gap: var(--space-l);
-    justify-content: flex-start;
-    overflow: auto;
-  }
-
-  .left-menu:not([data-open="true"]) {
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .left-menu[data-open="true"] {
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  .menu-close.icon-btn {
-    display: inline-flex;
-    position: absolute;
-    top: var(--size-page-pad);
-    right: var(--size-page-pad);
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .left-menu-group {
-    width: 100%;
-    align-items: stretch;
-    background: transparent;
-    backdrop-filter: none;
-    padding: 0;
-    gap: var(--space-s);
-    border-radius: 0;
-  }
-
-  .left-menu .icon-btn {
-    width: 100%;
-    height: auto;
-    min-height: var(--size-icon-btn);
-    justify-content: flex-start;
-    gap: var(--space-m);
-    padding: var(--space-m) var(--space-l);
-    border-radius: var(--radius-s);
-  }
-
-  .nav-label {
-    display: inline;
-  }
-
-  .mood-row.mood-row--menu {
-    display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    align-items: stretch;
-    gap: var(--space-m);
-    width: 100%;
+    width: auto;
   }
 
-  .mood-row--menu .tag-mood {
-    flex: 1 1 auto;
+  .home-top-grid,
+  .tournament-top-grid,
+  .home-facts-grid,
+  .tournament-facts-grid,
+  .row-goals {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-left-stack,
+  .tournament-left-stack {
+    grid-template-rows: auto;
+    min-height: 0;
+    height: auto;
+  }
+
+  .home-left-stack > .card-link {
+    height: auto;
+    min-height: 0;
+  }
+
+  .tournament-left-stack > .card-link {
+    height: var(--size-card-row);
+    min-height: var(--size-card-row);
   }
 }

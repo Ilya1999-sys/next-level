@@ -4,7 +4,6 @@ import { AppChrome } from "@/components/navigation/app-chrome";
 import { HIGHLIGHTS, watchHref } from "@/lib/media/highlights";
 import { CROATIA_BARS, WINS_MARKS } from "@/lib/mood/catalog";
 import { CircleRow, GoalTimeline, MixChart, StatBars } from "@/components/ui/card-graphics";
-import { FactRow } from "@/components/ui/fact-row";
 import { DotGrid } from "@/components/ui/ds";
 import { GraphicHoverCard } from "@/components/ui/hover-player-card";
 
@@ -61,7 +60,10 @@ export function Portugal2016Screen() {
         <article className="fact-card fact-card--fill">
           <div className="fact-copy">
             <p className="type-t1">Wins fact</p>
-            <FactRow value="1" text="regular-time victory over Wales in the entire tournament" />
+            <div className="fact-row">
+              <p className="type-h2 fact-number">1</p>
+              <p className="type-t2">regular-time victory over Wales in the entire tournament</p>
+            </div>
           </div>
           <MixChart groups={WINS_MARKS} />
         </article>
@@ -69,16 +71,19 @@ export function Portugal2016Screen() {
           <article className="fact-card">
             <div className="fact-copy">
               <p className="type-t1">Final fact</p>
-              <FactRow value="109" text="Eder’s extra-time goal beat host nation France in the final." />
+              <div className="fact-row">
+                <p className="type-h2 fact-number">109</p>
+                <p className="type-t2">Eder’s extra-time goal beat host nation France in the final.</p>
+              </div>
             </div>
           </article>
           <article className="fact-card">
             <div className="fact-copy">
               <p className="type-t1">Ronaldo fact</p>
-              <FactRow
-                value="25"
-                text="Cristiano Ronaldo played for a few minutes in the final of the tournament and then watched the match from the sidelines"
-              />
+              <div className="fact-row">
+                <p className="type-h2 fact-number">25</p>
+                <p className="type-t2">Cristiano Ronaldo played for a few minutes in the final of the tournament and then watched the match from the sidelines</p>
+              </div>
             </div>
           </article>
         </div>
@@ -88,7 +93,10 @@ export function Portugal2016Screen() {
         <article className="fact-card">
           <div className="fact-copy">
             <p className="type-t1">Goals scored and missed</p>
-            <FactRow value="9-5" text="The total difference between goals scored and conceded by the Portuguese national team" />
+            <div className="fact-row">
+              <p className="type-h2 fact-number">9-5</p>
+              <p className="type-t2">The total difference between goals scored and conceded by the Portuguese national team</p>
+            </div>
           </div>
           <DotGrid total={22} filled={9} columns={11} />
         </article>

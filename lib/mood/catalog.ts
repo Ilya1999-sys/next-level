@@ -127,14 +127,7 @@ const CATALOG: Record<string, Catalog> = {
     ],
     live: {
       place: "Barcelona",
-      chips: [
-        "The Benzema Extravaganza in 2021",
-        "How Germany went to the championship in 2014",
-        "Iniesta in Johannesburg",
-        "Ramos from the spot in Lisbon",
-        "Casillas and the last wall",
-        "When Spain made it look easy",
-      ],
+      chips: ["The Benzema Extravaganza in 2021", "How Germany went to the championship in 2014"],
       fans: "324 fans discussions",
     },
   },
@@ -160,14 +153,7 @@ const CATALOG: Record<string, Catalog> = {
     ],
     live: {
       place: "Saint-Denis",
-      chips: [
-        "Eder from nowhere",
-        "If Ronaldo stays on the pitch",
-        "One regular-time win",
-        "The captain on the stretcher",
-        "Host nation, extra time",
-        "Pepe holds the line",
-      ],
+      chips: ["Eder from nowhere", "If Ronaldo stays on the pitch"],
       fans: "412 fans discussions",
     },
   },
@@ -193,14 +179,7 @@ const CATALOG: Record<string, Catalog> = {
     ],
     live: {
       place: "Lisbon archive",
-      chips: [
-        "Ronaldo with the trophy",
-        "Golden generation night",
-        "Eusebio’s Lisbon echo",
-        "The final no one expected",
-        "From the bench to the cup",
-        "One night, one generation",
-      ],
+      chips: ["Ronaldo with the trophy", "Golden generation night"],
       fans: "198 fans discussions",
     },
   },

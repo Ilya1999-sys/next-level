@@ -6,14 +6,14 @@ export type MixMark = {
   height?: number;
 };
 
-function MixMarkNode({ mark }: { mark: MixMark }) {
+function MixMarkNode({ mark, grouped }: { mark: MixMark; grouped: boolean }) {
   if (mark.type === "dot") return <span className="mix-dot" data-tone={mark.tone} />;
   if (mark.type === "line") return <span className="mix-line" data-tone={mark.tone} />;
   return (
     <span
       className="mix-bar"
       data-tone={mark.tone}
-      style={{ ["--mark-h" as string]: String(mark.height ?? 70) }}
+      style={{ height: grouped ? `${mark.height}px` : `${mark.height ?? 70}%` }}
     />
   );
 }
@@ -31,7 +31,7 @@ export function MixChart({
         {groups.map((cluster, clusterIndex) => (
           <div key={clusterIndex} className="mix-cluster">
             {cluster.map((mark, index) => (
-              <MixMarkNode key={index} mark={mark} />
+              <MixMarkNode key={index} mark={mark} grouped />
             ))}
           </div>
         ))}
@@ -41,9 +41,9 @@ export function MixChart({
 
   return (
     <div className="mix-chart" aria-hidden="true">
-        {(marks ?? []).map((mark, index) => (
-          <MixMarkNode key={index} mark={mark} />
-        ))}
+      {(marks ?? []).map((mark, index) => (
+        <MixMarkNode key={index} mark={mark} grouped={false} />
+      ))}
     </div>
   );
 }

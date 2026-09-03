@@ -9,7 +9,6 @@ import {
 } from "@/lib/mood/catalog";
 import { DotGrid, IconButton, NextArrow } from "@/components/ui/ds";
 import { CircleRow, LineChart, MixChart } from "@/components/ui/card-graphics";
-import { FactRow } from "@/components/ui/fact-row";
 import { GraphicHoverCard } from "@/components/ui/hover-player-card";
 import { watchHref } from "@/lib/media/highlights";
 
@@ -41,7 +40,10 @@ export function HomeScreen() {
               <div className="fact-head">
                 <p className="type-t1">{playerFact.title}</p>
               </div>
-              <FactRow value={playerFact.value} text={playerFact.text} />
+              <div className="fact-row">
+                <p className="type-h2 fact-number">{playerFact.value}</p>
+                <p className="type-t2">{playerFact.text}</p>
+              </div>
             </div>
           </article>
         </div>
@@ -65,7 +67,10 @@ export function HomeScreen() {
             <div className="fact-head">
               <p className="type-t1">{clubFact.title}</p>
             </div>
-            <FactRow value={clubFact.value} text={clubFact.text} />
+            <div className="fact-row">
+              <p className="type-h2 fact-number">{clubFact.value}</p>
+              <p className="type-t2">{clubFact.text}</p>
+            </div>
           </div>
           {clubFact.dots ? <DotGrid total={clubFact.dots.total} filled={clubFact.dots.filled} columns={clubFact.dots.columns} /> : null}
         </article>
@@ -82,7 +87,10 @@ export function HomeScreen() {
                     </span>
                   ) : null}
                 </div>
-                <FactRow value={fact.value} text={fact.text} />
+                <div className="fact-row">
+                  <p className="type-h2 fact-number">{fact.value}</p>
+                  <p className="type-t2">{fact.text}</p>
+                </div>
               </div>
             </article>
           ))}

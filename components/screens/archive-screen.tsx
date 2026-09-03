@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { AppChrome } from "@/components/navigation/app-chrome";
 import { CircleRow, MixChart } from "@/components/ui/card-graphics";
-import { FactRow } from "@/components/ui/fact-row";
 import { DotGrid, IconButton, NextArrow } from "@/components/ui/ds";
 import { GraphicHoverCard } from "@/components/ui/hover-player-card";
 import { BARCELONA_GROUPS } from "@/lib/mood/catalog";
@@ -41,7 +40,10 @@ export function FactBlock({
             </span>
           ) : null}
         </div>
-        <FactRow value={value} text={text} />
+        <div className="fact-row">
+          <p className="type-h2 fact-number">{value}</p>
+          <p className="type-t2">{text}</p>
+        </div>
       </div>
       {dots ? <DotGrid total={dots.total} filled={dots.filled} columns={dots.columns} /> : null}
     </article>
@@ -110,14 +112,12 @@ export function PlayerStatsScreen() {
         >
           <CircleRow stats={[{ value: "9", label: "Portugal goals", accent: true }, { value: "1", label: "regular-time win" }]} />
         </GraphicHoverCard>
-        <article className="ds-card title-fact-card">
+        <article className="ds-card" style={{ padding: "var(--space-l)", display: "grid", gap: "var(--space-m)", alignContent: "center" }}>
           <p className="type-t1">Player files</p>
-          <div className="title-fact-body">
-            <Link href="/player-stats/mbappe" className="type-h3">
-              Kylian Mbappe →
-            </Link>
-            <p className="type-t2">Goals, rating and the nights you keep rewatching.</p>
-          </div>
+          <Link href="/player-stats/mbappe" className="type-h3">
+            Kylian Mbappe →
+          </Link>
+          <p className="type-t2">Goals, rating and the nights you keep rewatching.</p>
         </article>
       </div>
     </ArchiveShell>
@@ -164,12 +164,10 @@ export function TeamStatsScreen() {
           ]}
         />
       </article>
-      <div className="row-facts-split">
+      <div className="cards-compact-grid">
         <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
-        <div className="col-stack">
-          <FactBlock title="Final fact" value="93'" text="Ramos equalized in added time before La Decima was sealed in extra time." tournament="UCL—2014" />
-          <FactBlock title="Final fact" value="3-1" text="Bale's bicycle kick and a late third goal beat Liverpool in Kyiv." tournament="UCL—2018" />
-        </div>
+        <FactBlock title="Final fact" value="93'" text="Ramos equalized in added time before La Decima was sealed in extra time." tournament="UCL—2014" />
+        <FactBlock title="Final fact" value="3-1" text="Bale's bicycle kick and a late third goal beat Liverpool in Kyiv." tournament="UCL—2018" />
       </div>
       <div className="row-goals">
         <GraphicHoverCard year="Match review" title="Real Madrid 4-1 Atletico (2014 final)" watchHref={watchHref("realAtletico2014")} accent>
@@ -323,20 +321,18 @@ export function TournamentsScreen() {
           <CircleRow stats={[{ value: "1", label: "European title", accent: true }, { value: "9", label: "goals scored" }]} />
         </GraphicHoverCard>
       </div>
+      <GraphicHoverCard banner year="/2008" title="UEFA Euro: Russia, incredible comebacks and golden Spain" watchHref={watchHref("euro2008")}>
+        <CircleRow
+          stats={[
+            { value: "77", label: "goals scored", accent: true },
+            { value: "31", label: "matches played" },
+            { value: "12", label: "Spain scored" },
+          ]}
+        />
+      </GraphicHoverCard>
       <div className="row-facts-split">
-        <GraphicHoverCard banner year="/2008" title="UEFA Euro: Russia, incredible comebacks and golden Spain" watchHref={watchHref("euro2008")}>
-          <CircleRow
-            stats={[
-              { value: "77", label: "goals scored", accent: true },
-              { value: "31", label: "matches played" },
-              { value: "12", label: "Spain scored" },
-            ]}
-          />
-        </GraphicHoverCard>
-        <div className="col-stack">
-          <FactBlock title="Club cup fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
-          <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" fill />
-        </div>
+        <FactBlock title="Club cup fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
+        <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" />
       </div>
       <div className="row-goals">
         <GraphicHoverCard year="Match review" title="2:0 Wales" watchHref={watchHref("wales")}>
@@ -358,22 +354,10 @@ export function TournamentsScreen() {
 export function NotificationsScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Notifications"]}>
-      <div className="facts-pack">
-        <FactBlock title="Reminder" value="10" text="minutes until a Portugal 2016 rewatch starts" tournament="EURO—2016" />
-        <FactBlock title="Discussion" value="3" text="new comments in the match forum" />
-        <FactBlock title="Reward" value="25" text="bonus points earned for yesterday’s vote" />
-      </div>
-      <LiveCard
-        place="Portugal-2016"
-        chips={[
-          "Ronaldo goals on tournir",
-          "And if the rules hadn't changed...",
-          "Eder from extra time",
-          "One regular-time win",
-          "Captain leaves the pitch",
-        ]}
-        fans="21 fans discussions"
-      />
+      <FactBlock title="Reminder" value="10" text="minutes until a Portugal 2016 rewatch starts" tournament="EURO—2016" />
+      <FactBlock title="Discussion" value="3" text="new comments in the match forum" />
+      <FactBlock title="Reward" value="25" text="bonus points earned for yesterday’s vote" />
+      <LiveCard place="Portugal-2016" chips={["Ronaldo goals on tournir", "And if the rules hadn't changed..."]} fans="21 fans discussions" />
     </ArchiveShell>
   );
 }
@@ -461,7 +445,7 @@ export function PauseReplayScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Pause"]}>
       <FactBlock title="Paused fact" value="109" text="Eder’s extra-time goal is the frame this archive keeps coming back to." />
-      <LiveCard place="Saint-Denis" chips={["Replay the winner", "Captain leaves the pitch", "Eder from extra time", "Host nation, extra time"]} fans="198 fans discussions" href="/portugal-2016/france" />
+      <LiveCard place="Saint-Denis" chips={["Replay the winner", "Captain leaves the pitch"]} fans="198 fans discussions" href="/portugal-2016/france" />
       <GraphicHoverCard
         banner
         year="Match review"

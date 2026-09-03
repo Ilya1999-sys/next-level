@@ -16,7 +16,6 @@ const ICONS = [
   "plus",
   "minus",
   "profile",
-  "close",
 ] as const;
 
 export type DsIconName = (typeof ICONS)[number];
@@ -126,10 +125,6 @@ export function IconExit() {
 
 export function IconProfile() {
   return <DsIcon name="profile" />;
-}
-
-export function IconClose() {
-  return <DsIcon name="close" />;
 }
 
 export function IconBack() {
