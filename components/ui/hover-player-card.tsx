@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { IconButton, NextArrow } from "@/components/ui/ds";
 import { HighlightIframe } from "@/components/ui/highlight-iframe";
 import type { HighlightClip } from "@/lib/media/highlights";
@@ -16,6 +16,7 @@ export function GraphicHoverCard({
   video,
   year,
   title,
+  className,
   children,
 }: {
   href?: string;
@@ -27,16 +28,10 @@ export function GraphicHoverCard({
   video?: HighlightClip;
   year: string;
   title: string;
+  className?: string;
   children: ReactNode;
 }) {
-  const [armed, setArmed] = useState(false);
   const canHover = Boolean(hoverVideo && video);
-
-  function enter() {
-    if (!canHover) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setArmed(true);
-  }
 
   const heading = (
     <>
@@ -46,17 +41,13 @@ export function GraphicHoverCard({
   );
 
   return (
-    <div
-      className="card-link"
-      onMouseEnter={canHover ? enter : undefined}
-      onFocus={canHover ? enter : undefined}
-    >
+    <div className={className ? `card-link ${className}` : "card-link"}>
       <article
         className={`ds-card team-card ${featured ? "team-card--featured" : ""} ${banner ? "team-card--banner" : ""}`}
         data-accent={accent ? "true" : "false"}
         data-hover-video={canHover ? "true" : "false"}
       >
-        {armed && video ? (
+        {canHover && video ? (
           <div className="card-hover-frame">
             <HighlightIframe clip={video} title={`${year} ${title} highlights`} />
           </div>

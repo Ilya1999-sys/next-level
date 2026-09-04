@@ -188,7 +188,7 @@ export function hostedPlayerSrc(url: string) {
 
   const kinescope = url.match(/kinescope\.io\/(?:embed\/)?([A-Za-z0-9_-]+)/);
   if (kinescope) {
-    return `https://kinescope.io/embed/${kinescope[1]}?autoplay=1&muted=1&loop=true`;
+    return `https://kinescope.io/embed/${kinescope[1]}?autoplay=1&muted=1&loop=true&preload=true`;
   }
 
   const vimeo = url.match(/(?:player\.)?vimeo\.com\/(?:video\/)?(\d+)/);

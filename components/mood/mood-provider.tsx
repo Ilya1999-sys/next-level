@@ -17,19 +17,16 @@ export function MoodProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = window.localStorage.getItem("ilya-mood");
-    if (stored === "nostalgia" || stored === "drama" || stored === "legends") {
-      setMoodState(stored);
-    }
+    const next = stored === "nostalgia" || stored === "drama" || stored === "legends" ? stored : "nostalgia";
+    setMoodState(next);
+    document.documentElement.dataset.mood = next;
   }, []);
 
   const setMood = (next: Mood) => {
     setMoodState(next);
     window.localStorage.setItem("ilya-mood", next);
+    document.documentElement.dataset.mood = next;
   };
-
-  useEffect(() => {
-    document.documentElement.dataset.mood = mood;
-  }, [mood]);
 
   const value = useMemo(() => ({ mood, setMood }), [mood]);
   return <MoodContext.Provider value={value}>{children}</MoodContext.Provider>;

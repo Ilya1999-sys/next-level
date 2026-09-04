@@ -17,27 +17,34 @@ import { watchHref } from "@/lib/media/highlights";
 export function HomeScreen() {
   const catalog = useMoodCatalog();
   const [playerFact, clubFact] = catalog.facts;
+  const packedFacts = [playerFact, ...catalog.extraFacts];
 
   return (
     <AppChrome crumbs={["Home"]}>
-      <div className="row-split home-top-grid">
-        <div className="home-left-stack">
-          <div className="row-facts-split">
-            <GraphicHoverCard
-              year={catalog.barcelona.year}
-              title={catalog.barcelona.title}
-              watchHref={watchHref("barcelona")}
-            >
-              <MixChart groups={BARCELONA_GROUPS} />
-            </GraphicHoverCard>
-            <div className="col-stack">
-              {catalog.barcelonaFacts.map((fact, index) => (
-                <FactBlock key={`${fact.title}-${fact.value}`} fill={index === catalog.barcelonaFacts.length - 1} {...fact} />
-              ))}
+      <div className="home-board">
+        <div className="row-split home-top-grid">
+          <div className="home-left-stack">
+            <div className="row-facts-split home-barca-row">
+              <GraphicHoverCard
+                className="home-story-barca"
+                year={catalog.barcelona.year}
+                title={catalog.barcelona.title}
+                watchHref={watchHref("barcelona")}
+              >
+                <MixChart groups={BARCELONA_GROUPS} />
+              </GraphicHoverCard>
+              <div className="col-stack home-facts-barca">
+                {catalog.barcelonaFacts.map((fact) => (
+                  <FactBlock key={`${fact.title}-${fact.value}`} {...fact} />
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="row-facts-split">
-            <GraphicHoverCard year={catalog.zidane.year} title={catalog.zidane.title} watchHref={watchHref("zidane")}>
+            <GraphicHoverCard
+              className="home-story-zidane"
+              year={catalog.zidane.year}
+              title={catalog.zidane.title}
+              watchHref={watchHref("zidane")}
+            >
               <CircleRow
                 stats={[
                   { value: "3", label: "Zidane goals", accent: true },
@@ -45,106 +52,95 @@ export function HomeScreen() {
                 ]}
               />
             </GraphicHoverCard>
-            <div className="col-stack">
-              <FactBlock title={playerFact.title} value={playerFact.value} text={playerFact.text} />
-              {catalog.zidaneFacts.map((fact, index) => (
-                <FactBlock
-                  key={`${fact.title}-${fact.value}`}
-                  fill={index === catalog.zidaneFacts.length - 1}
-                  {...fact}
-                />
-              ))}
-            </div>
           </div>
+          <GraphicHoverCard
+            className="home-story-portugal"
+            featured
+            accent
+            hoverVideo
+            year={catalog.portugal.year}
+            title={catalog.portugal.title}
+            video={catalog.portugal.video}
+            href={catalog.portugal.href}
+            watchHref={watchHref("portugal2016")}
+          >
+            <LineChart portugal={PORTUGAL_GOALS} france={FRANCE_GOALS} accent />
+          </GraphicHoverCard>
         </div>
-        <GraphicHoverCard
-          featured
-          accent
-          hoverVideo
-          year={catalog.portugal.year}
-          title={catalog.portugal.title}
-          video={catalog.portugal.video}
-          href={catalog.portugal.href}
-          watchHref={watchHref("portugal2016")}
-        >
-          <LineChart portugal={PORTUGAL_GOALS} france={FRANCE_GOALS} accent />
-        </GraphicHoverCard>
-      </div>
 
-      <div className="row-facts-split row-facts-split--2-3 home-facts-grid">
-        <article className={clubFact.dots ? "fact-card fact-card--fill" : "fact-card"}>
-          <div className="fact-copy">
-            <div className="fact-head">
-              <p className="type-t1">{clubFact.title}</p>
-            </div>
-            <FactRow value={clubFact.value} text={clubFact.text} />
-          </div>
-          {clubFact.dots ? <DotGrid total={clubFact.dots.total} filled={clubFact.dots.filled} columns={clubFact.dots.columns} /> : null}
-        </article>
-        <div className="col-stack home-extra-stack">
-          {catalog.extraFacts.map((fact, index) => (
-            <article
-              key={`${fact.title}-${fact.value}`}
-              className={index === catalog.extraFacts.length - 1 ? "fact-card fact-card--fill" : "fact-card"}
-            >
-              <div className="fact-copy">
-                <div className="fact-head">
-                  <p className="type-t1">{fact.title}</p>
-                  {fact.tournament ? (
-                    <span className="live-flag">
-                      <span className="dot-live" />
-                      <span className="type-t1">{fact.tournament}</span>
-                    </span>
-                  ) : null}
-                </div>
-                <FactRow value={fact.value} text={fact.text} />
+        <div className="row-facts-split home-facts-grid">
+          <article className="fact-card fact-card--fill home-story-club">
+            <div className="fact-copy">
+              <div className="fact-head">
+                <p className="type-t1">{clubFact.title}</p>
               </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <article className="ds-card discussion-card">
-        <div className="card-top" style={{ padding: 0 }}>
-          <div className="year-team">
-            <span className="live-flag">
-              <span className="dot-live" />
-              <span className="type-t1">Live</span>
-            </span>
-            <p className="type-t1">{catalog.live.place}</p>
-          </div>
-          <IconButton label="Open discussion" href="/forum/match-discussion">
-            <NextArrow />
-          </IconButton>
-        </div>
-        <div className="discussion-body">
-          <div className="discussion-chips">
-            {catalog.live.chips.map((chip) => (
-              <span key={chip} className="discussion-chip type-t3">
-                {chip}
-              </span>
+              <FactRow value={clubFact.value} text={clubFact.text} />
+            </div>
+            {clubFact.dots ? <DotGrid total={clubFact.dots.total} filled={clubFact.dots.filled} columns={clubFact.dots.columns} /> : null}
+          </article>
+          <div className="col-stack home-facts-extra">
+            {packedFacts.map((fact) => (
+              <article key={`${fact.title}-${fact.value}`} className="fact-card">
+                <div className="fact-copy">
+                  <div className="fact-head">
+                    <p className="type-t1">{fact.title}</p>
+                    {fact.tournament ? (
+                      <span className="live-flag">
+                        <span className="dot-live" />
+                        <span className="type-t1">{fact.tournament}</span>
+                      </span>
+                    ) : null}
+                  </div>
+                  <FactRow value={fact.value} text={fact.text} />
+                </div>
+              </article>
             ))}
           </div>
-          <span className="live-flag">
-            <span className="dot-live" />
-            <span className="type-t1">{catalog.live.fans}</span>
-          </span>
         </div>
-      </article>
 
-      <div className="row-facts-split">
-        <GraphicHoverCard
-          banner
-          year={catalog.tournament.year}
-          title={catalog.tournament.title}
-          watchHref={watchHref("euro2008")}
-        >
-          <CircleRow stats={catalog.tournament.stats} />
-        </GraphicHoverCard>
-        <div className="col-stack">
-          {catalog.tournamentFacts.map((fact, index) => (
-            <FactBlock key={`${fact.title}-${fact.value}`} fill={index === catalog.tournamentFacts.length - 1} {...fact} />
-          ))}
+        <article className="ds-card discussion-card home-live">
+          <div className="card-top" style={{ padding: 0 }}>
+            <div className="year-team">
+              <span className="live-flag">
+                <span className="dot-live" />
+                <span className="type-t1">Live</span>
+              </span>
+              <p className="type-t1">{catalog.live.place}</p>
+            </div>
+            <IconButton label="Open discussion" href="/forum/match-discussion">
+              <NextArrow />
+            </IconButton>
+          </div>
+          <div className="discussion-body">
+            <div className="discussion-chips">
+              {catalog.live.chips.map((chip) => (
+                <span key={chip} className="discussion-chip type-t3">
+                  {chip}
+                </span>
+              ))}
+            </div>
+            <span className="live-flag">
+              <span className="dot-live" />
+              <span className="type-t1">{catalog.live.fans}</span>
+            </span>
+          </div>
+        </article>
+
+        <div className="row-facts-split home-euro-row">
+          <GraphicHoverCard
+            className="home-story-euro"
+            banner
+            year={catalog.tournament.year}
+            title={catalog.tournament.title}
+            watchHref={watchHref("euro2008")}
+          >
+            <CircleRow stats={catalog.tournament.stats} />
+          </GraphicHoverCard>
+          <div className="col-stack home-facts-euro">
+            {catalog.tournamentFacts.map((fact) => (
+              <FactBlock key={`${fact.title}-${fact.value}`} {...fact} />
+            ))}
+          </div>
         </div>
       </div>
     </AppChrome>

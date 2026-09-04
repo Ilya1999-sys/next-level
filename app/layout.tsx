@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "@/app/globals.css";
 import { MoodProvider } from "@/components/mood/mood-provider";
-import { RouteTransition } from "@/components/motion/route-transition";
+import { HighlightPreload } from "@/components/ui/highlight-preload";
 
 export const metadata: Metadata = {
   title: "Your mood, your match",
@@ -14,20 +14,23 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+const moodBootScript =
+  '(function(){try{var m=localStorage.getItem("ilya-mood");if(m==="drama"||m==="legends"||m==="nostalgia"){document.documentElement.dataset.mood=m;}}catch(e){}})();';
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-mood="nostalgia">
+    <html lang="en" data-mood="nostalgia" suppressHydrationWarning>
       <head>
         <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <script dangerouslySetInnerHTML={{ __html: moodBootScript }} />
+        <HighlightPreload />
       </head>
       <body>
-        <MoodProvider>
-          <RouteTransition>{children}</RouteTransition>
-        </MoodProvider>
+        <MoodProvider>{children}</MoodProvider>
       </body>
     </html>
   );

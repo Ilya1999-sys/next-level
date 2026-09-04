@@ -97,6 +97,7 @@ export function HighlightIframe({
       referrerPolicy="strict-origin-when-cross-origin"
       allowFullScreen
       tabIndex={-1}
+      loading="eager"
       onLoad={handleEmbedLoad}
     />
   );

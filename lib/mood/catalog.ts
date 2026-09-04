@@ -69,7 +69,6 @@ type Catalog = {
   facts: FactCard[];
   extraFacts: FactCard[];
   barcelonaFacts: FactCard[];
-  zidaneFacts: FactCard[];
   tournamentFacts: FactCard[];
   live: { place: string; chips: string[]; fans: string };
   tournament: StoryCard & {
@@ -125,11 +124,6 @@ const BARCELONA_FACTS: FactCard[] = [
   },
 ];
 
-const ZIDANE_FACTS: FactCard[] = [
-  { title: "Legend fact", value: "1", text: "World Cup Zidane won as a player in 1998" },
-  { title: "Club fact", value: "3", text: "Champions League titles in a row as Real Madrid coach" },
-];
-
 const TOURNAMENT_FACTS: FactCard[] = [
   {
     title: "Euro fact",
@@ -138,7 +132,6 @@ const TOURNAMENT_FACTS: FactCard[] = [
     tournament: "EURO—2008",
   },
   { title: "Euro fact", value: "0", text: "matches Spain lost on the way to the Euro 2008 title" },
-  { title: "Euro fact", value: "1", text: "European title for Spain, their first since 1964" },
 ];
 
 const CATALOG: Record<string, Catalog> = {
@@ -160,11 +153,8 @@ const CATALOG: Record<string, Catalog> = {
         text: "years ago, you watched your first Switzerland — Turkey match",
         tournament: "EURO—2008",
       },
-      { title: "Favorite player fact", value: "976", text: "Cristiano Ronaldo has scored the most goals in his career so far" },
-      { title: "Club fact", value: "4", text: "Champions League titles in five seasons, 2014 to 2018" },
     ],
     barcelonaFacts: BARCELONA_FACTS,
-    zidaneFacts: ZIDANE_FACTS,
     tournamentFacts: TOURNAMENT_FACTS,
     live: {
       place: "Barcelona",
@@ -197,11 +187,8 @@ const CATALOG: Record<string, Catalog> = {
         text: "years ago, you watched your first Switzerland — Turkey match",
         tournament: "EURO—2008",
       },
-      { title: "Favorite player fact", value: "976", text: "Cristiano Ronaldo has scored the most goals in his career so far" },
-      { title: "Club fact", value: "4", text: "Champions League titles in five seasons, 2014 to 2018" },
     ],
     barcelonaFacts: BARCELONA_FACTS,
-    zidaneFacts: ZIDANE_FACTS,
     tournamentFacts: TOURNAMENT_FACTS,
     live: {
       place: "Saint-Denis",
@@ -234,11 +221,8 @@ const CATALOG: Record<string, Catalog> = {
         text: "years ago, you watched your first Switzerland — Turkey match",
         tournament: "EURO—2008",
       },
-      { title: "Favorite player fact", value: "976", text: "Cristiano Ronaldo has scored the most goals in his career so far" },
-      { title: "Club fact", value: "4", text: "Champions League titles in five seasons, 2014 to 2018" },
     ],
     barcelonaFacts: BARCELONA_FACTS,
-    zidaneFacts: ZIDANE_FACTS,
     tournamentFacts: TOURNAMENT_FACTS,
     live: {
       place: "Lisbon archive",

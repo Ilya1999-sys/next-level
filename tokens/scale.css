@@ -50,6 +50,7 @@
   --figma-radius-l: 40px;
   --figma-radius-xl: 999px;
 
+  --size-card-pad: var(--figma-space-l);
   --size-page-pad: var(--figma-space-l);
   --size-page-gap: var(--figma-space-l);
   --size-logo-w: 88px;
