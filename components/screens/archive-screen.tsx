@@ -21,6 +21,7 @@ export function FactBlock({
   tournament,
   dots,
   fill,
+  className,
 }: {
   title: string;
   value: string;
@@ -28,9 +29,13 @@ export function FactBlock({
   tournament?: string;
   dots?: { total: number; filled: number; columns?: number };
   fill?: boolean;
+  className?: string;
 }) {
+  const classes = ["fact-card"];
+  if (fill) classes.push("fact-card--fill");
+  if (className) classes.push(className);
   return (
-    <article className={fill ? "fact-card fact-card--fill" : "fact-card"}>
+    <article className={classes.join(" ")}>
       <div className="fact-copy">
         <div className="fact-head">
           <p className="type-t1">{title}</p>
@@ -83,19 +88,28 @@ export function LiveCard({ place, chips, fans, href }: { place: string; chips: s
 export function PlayerStatsScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Stats"]}>
-      <article className="ds-card tournament-hero">
-        <div className="tournament-hero-copy">
-          <p className="type-h2">Your archive stats</p>
-          <p className="type-t3">Favorite players, clubs and watched nights, assembled from the same Nostalgia cards.</p>
-        </div>
-        <CircleRow
-          stats={[
-            { value: "976", label: "Ronaldo goals", accent: true },
-            { value: "5", label: "Mbappe in one match" },
-            { value: "15", label: "Madrid UCL" },
-          ]}
+      <div className="row-hero-split">
+        <article className="ds-card tournament-hero">
+          <div className="tournament-hero-copy">
+            <p className="type-h2">Your archive stats</p>
+            <p className="type-t3">Favorite players, clubs and watched nights, assembled from the same Nostalgia cards.</p>
+          </div>
+          <CircleRow
+            stats={[
+              { value: "976", label: "Ronaldo goals", accent: true },
+              { value: "5", label: "Mbappe in one match" },
+              { value: "15", label: "Madrid UCL" },
+            ]}
+          />
+        </article>
+        <FactBlock
+          className="hero-fact"
+          title="Archive fact"
+          value="976"
+          text="goals recorded across all favorite players in your saved collection"
+          fill
         />
-      </article>
+      </div>
       <div className="row-facts-split">
         <div className="col-stack">
           <FactBlock title="Favorite player fact" value="5" text="Killian Mbappe scored goals in one match" />
@@ -130,19 +144,28 @@ export function PlayerStatsScreen() {
 export function PlayerStatDetailScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Stats", "Mbappe"]}>
-      <article className="ds-card tournament-hero">
-        <div className="tournament-hero-copy">
-          <p className="type-h2">Kylian Mbappe</p>
-          <p className="type-t3">Favorite player file: pace, finishing, and the nights that turned a forward into an archive icon.</p>
-        </div>
-        <CircleRow
-          stats={[
-            { value: "25", label: "goals", accent: true },
-            { value: "15", label: "assists" },
-            { value: "8.7", label: "rating" },
-          ]}
+      <div className="row-hero-split">
+        <article className="ds-card tournament-hero">
+          <div className="tournament-hero-copy">
+            <p className="type-h2">Kylian Mbappe</p>
+            <p className="type-t3">Favorite player file: pace, finishing, and the nights that turned a forward into an archive icon.</p>
+          </div>
+          <CircleRow
+            stats={[
+              { value: "25", label: "goals", accent: true },
+              { value: "15", label: "assists" },
+              { value: "8.7", label: "rating" },
+            ]}
+          />
+        </article>
+        <FactBlock
+          className="hero-fact"
+          title="Player fact"
+          value="25"
+          text="goals scored across all tracked archive seasons in your collection"
+          fill
         />
-      </article>
+      </div>
       <div className="row-facts-split">
         <FactBlock title="Favorite player fact" value="5" text="Goals scored in one match" />
         <FactBlock title="Nostalgia fact" value="48" text="matches tracked in this archive season" dots={{ total: 12, filled: 8 }} />
@@ -154,19 +177,29 @@ export function PlayerStatDetailScreen() {
 export function TeamStatsScreen() {
   return (
     <ArchiveShell crumbs={["Home", "My club"]}>
-      <article className="ds-card tournament-hero">
-        <div className="tournament-hero-copy">
-          <p className="type-h2">Real Madrid</p>
-          <p className="type-t3">Santiago Bernabeu archive: European nights, galacticos, and the 15 cups in the museum.</p>
-        </div>
-        <CircleRow
-          stats={[
-            { value: "15", label: "UCL titles", accent: true },
-            { value: "36", label: "La Liga" },
-            { value: "8", label: "Club World Cups" },
-          ]}
+      <div className="row-hero-split">
+        <article className="ds-card tournament-hero">
+          <div className="tournament-hero-copy">
+            <p className="type-h2">Real Madrid</p>
+            <p className="type-t3">Santiago Bernabeu archive: European nights, galacticos, and the 15 cups in the museum.</p>
+          </div>
+          <CircleRow
+            stats={[
+              { value: "15", label: "UCL titles", accent: true },
+              { value: "36", label: "La Liga" },
+              { value: "8", label: "Club World Cups" },
+            ]}
+          />
+        </article>
+        <FactBlock
+          className="hero-fact"
+          title="Club fact"
+          value="15"
+          text="European Champions Cups displayed in the Bernabeu museum"
+          tournament="UCL"
+          fill
         />
-      </article>
+      </div>
       <div className="row-facts-split">
         <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
         <div className="col-stack">
@@ -199,19 +232,28 @@ export function TeamStatsScreen() {
 export function FavoritesScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Favorites"]}>
-      <article className="ds-card tournament-hero">
-        <div className="tournament-hero-copy">
-          <p className="type-h2">Watchlist matches</p>
-          <p className="type-t3">Only the matches you marked for later rewatch.</p>
-        </div>
-        <CircleRow
-          stats={[
-            { value: "8", label: "saved matches", accent: true },
-            { value: "3", label: "finals" },
-            { value: "2", label: "tournaments" },
-          ]}
+      <div className="row-hero-split">
+        <article className="ds-card tournament-hero">
+          <div className="tournament-hero-copy">
+            <p className="type-h2">Watchlist matches</p>
+            <p className="type-t3">Only the matches you marked for later rewatch.</p>
+          </div>
+          <CircleRow
+            stats={[
+              { value: "8", label: "saved matches", accent: true },
+              { value: "3", label: "finals" },
+              { value: "2", label: "tournaments" },
+            ]}
+          />
+        </article>
+        <FactBlock
+          className="hero-fact"
+          title="Watchlist fact"
+          value="8"
+          text="classic matches pinned for your personal replay sessions"
+          fill
         />
-      </article>
+      </div>
       <div className="cards-compact-grid favorites-grid">
         <GraphicHoverCard year="Match review" title="Portugal 1-0 France (EURO 2016 final)" href="/portugal-2016/france" watchHref={watchHref("france2016")} accent>
           <CircleRow stats={[{ value: "109", label: "Eder goal", accent: true }, { value: "1-0", label: "final score" }]} />
@@ -245,19 +287,28 @@ export function FavoritesScreen() {
 export function ProfileScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Profile"]}>
-      <article className="ds-card tournament-hero">
-        <div className="tournament-hero-copy">
-          <p className="type-h2">Ilya Polikarpov</p>
-          <p className="type-t3">Favorites: Mbappe, Real Madrid, Portugal 2016, Ghana 2010 archive nights.</p>
-        </div>
-        <CircleRow
-          stats={[
-            { value: "840", label: "bonuses", accent: true },
-            { value: "6", label: "unlocked cards" },
-            { value: "12", label: "predictions won" },
-          ]}
+      <div className="row-hero-split">
+        <article className="ds-card tournament-hero">
+          <div className="tournament-hero-copy">
+            <p className="type-h2">Ilya Polikarpov</p>
+            <p className="type-t3">Favorites: Mbappe, Real Madrid, Portugal 2016, Ghana 2010 archive nights.</p>
+          </div>
+          <CircleRow
+            stats={[
+              { value: "840", label: "bonuses", accent: true },
+              { value: "6", label: "unlocked cards" },
+              { value: "12", label: "predictions won" },
+            ]}
+          />
+        </article>
+        <FactBlock
+          className="hero-fact"
+          title="Profile fact"
+          value="840"
+          text="bonus points collected from correct match predictions"
+          fill
         />
-      </article>
+      </div>
       <div className="row-facts-split">
         <FactBlock title="Watch fact" value="31" text="highlights watched this month" fill />
         <FactBlock title="Club fact" value="15" text="Real Madrid European Cups in the museum" tournament="UCL" fill />
@@ -300,19 +351,28 @@ export function ProfileScreen() {
 export function TournamentsScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Cups"]}>
-      <article className="ds-card tournament-hero">
-        <div className="tournament-hero-copy">
-          <p className="type-h2">Cups and tournaments</p>
-          <p className="type-t3">Champions League, UEFA Euro, and the match nights built from the same archive cards.</p>
-        </div>
-        <CircleRow
-          stats={[
-            { value: "15", label: "Madrid UCL", accent: true },
-            { value: "1", label: "Portugal Euro" },
-            { value: "2", label: "UEFA Cups" },
-          ]}
+      <div className="row-hero-split">
+        <article className="ds-card tournament-hero">
+          <div className="tournament-hero-copy">
+            <p className="type-h2">Cups and tournaments</p>
+            <p className="type-t3">Champions League, UEFA Euro, and the match nights built from the same archive cards.</p>
+          </div>
+          <CircleRow
+            stats={[
+              { value: "15", label: "Madrid UCL", accent: true },
+              { value: "1", label: "Portugal Euro" },
+              { value: "2", label: "UEFA Cups" },
+            ]}
+          />
+        </article>
+        <FactBlock
+          className="hero-fact"
+          title="Cups fact"
+          value="3"
+          text="major international tournaments featured in the interactive archive"
+          fill
         />
-      </article>
+      </div>
       <div className="row-split">
         <GraphicHoverCard
           year="/2009"
@@ -408,19 +468,28 @@ export function ForumDiscussionScreen() {
 export function MatchesLandingScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Matches"]}>
-      <article className="ds-card tournament-hero">
-        <div className="tournament-hero-copy">
-          <p className="type-h2">Match archive</p>
-          <p className="type-t3">Use the arrow on a card to open the review. Open Portugal 2016 to walk the path to the final.</p>
-        </div>
-        <CircleRow
-          stats={[
-            { value: "8", label: "reviews", accent: true },
-            { value: "3", label: "tournaments" },
-            { value: "1", label: "final night" },
-          ]}
+      <div className="row-hero-split">
+        <article className="ds-card tournament-hero">
+          <div className="tournament-hero-copy">
+            <p className="type-h2">Match archive</p>
+            <p className="type-t3">Use the arrow on a card to open the review. Open Portugal 2016 to walk the path to the final.</p>
+          </div>
+          <CircleRow
+            stats={[
+              { value: "8", label: "reviews", accent: true },
+              { value: "3", label: "tournaments" },
+              { value: "1", label: "final night" },
+            ]}
+          />
+        </article>
+        <FactBlock
+          className="hero-fact"
+          title="Match fact"
+          value="8"
+          text="full match reviews available in the interactive archive library"
+          fill
         />
-      </article>
+      </div>
       <div className="row-goals">
         <GraphicHoverCard
           year="/2016"
@@ -447,19 +516,29 @@ export function MatchesLandingScreen() {
 export function UsaGhanaMatchScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Matches", "USA–Ghana"]}>
-      <article className="ds-card tournament-hero">
-        <div className="tournament-hero-copy">
-          <p className="type-h2">USA vs Ghana 2010</p>
-          <p className="type-t3">World Cup round of 16 in Rustenburg: extra time, one strike, and an archive night that still gets reopened.</p>
-        </div>
-        <CircleRow
-          stats={[
-            { value: "2-1", label: "final", accent: true },
-            { value: "120", label: "minutes" },
-            { value: "2010", label: "South Africa" },
-          ]}
+      <div className="row-hero-split">
+        <article className="ds-card tournament-hero">
+          <div className="tournament-hero-copy">
+            <p className="type-h2">USA vs Ghana 2010</p>
+            <p className="type-t3">World Cup round of 16 in Rustenburg: extra time, one strike, and an archive night that still gets reopened.</p>
+          </div>
+          <CircleRow
+            stats={[
+              { value: "2-1", label: "final", accent: true },
+              { value: "120", label: "minutes" },
+              { value: "2010", label: "South Africa" },
+            ]}
+          />
+        </article>
+        <FactBlock
+          className="hero-fact"
+          title="Drama fact"
+          value="120'"
+          text="extra-time winner in Rustenburg sent Ghana to the quarter-finals"
+          tournament="WC—2010"
+          fill
         />
-      </article>
+      </div>
       <div className="row-facts-split">
         <FactBlock title="Archive fact" value="3" text="Ghana reached a World Cup quarter-final" tournament="WC—2010" />
         <FactBlock title="Drama fact" value="1" text="extra-time goal ended the USA run" />
@@ -490,19 +569,28 @@ export function PauseReplayScreen() {
 export function FifaInterfaceScreen() {
   return (
     <ArchiveShell crumbs={["Home", "Matches", "USA–Ghana", "Angles"]}>
-      <article className="ds-card tournament-hero">
-        <div className="tournament-hero-copy">
-          <p className="type-h2">View modes</p>
-          <p className="type-t3">Player, referee, behind goal and drone — the same HUD language as the Euro 2016 final night.</p>
-        </div>
-        <CircleRow
-          stats={[
-            { value: "4", label: "cameras", accent: true },
-            { value: "2010", label: "Rustenburg" },
-            { value: "16", label: "round" },
-          ]}
+      <div className="row-hero-split">
+        <article className="ds-card tournament-hero">
+          <div className="tournament-hero-copy">
+            <p className="type-h2">View modes</p>
+            <p className="type-t3">Player, referee, behind goal and drone — the same HUD language as the Euro 2016 final night.</p>
+          </div>
+          <CircleRow
+            stats={[
+              { value: "4", label: "cameras", accent: true },
+              { value: "2010", label: "Rustenburg" },
+              { value: "16", label: "round" },
+            ]}
+          />
+        </article>
+        <FactBlock
+          className="hero-fact"
+          title="Camera fact"
+          value="4"
+          text="broadcast angles synchronized for match review"
+          fill
         />
-      </article>
+      </div>
       <div className="row-facts-split">
         <FactBlock title="Angle fact" value="1" text="behind-goal replay that made the winner look even more dramatic" />
         <FactBlock title="Archive fact" value="48" text="minutes of documentary still on the watchlist" />

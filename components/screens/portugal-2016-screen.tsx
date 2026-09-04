@@ -7,26 +7,37 @@ import { CircleRow, GoalTimeline, MixChart, StatBars } from "@/components/ui/car
 import { FactRow } from "@/components/ui/fact-row";
 import { DotGrid } from "@/components/ui/ds";
 import { GraphicHoverCard } from "@/components/ui/hover-player-card";
+import { FactBlock } from "@/components/screens/archive-screen";
 
 export function Portugal2016Screen() {
   return (
     <AppChrome crumbs={["Home", "Portugal-2016"]}>
-      <article className="ds-card tournament-hero">
-        <div className="tournament-hero-copy">
-          <p className="type-h2">Portugal win Euro</p>
-          <p className="type-t3">
-            Cristiano Ronaldo was injured and substituted in the final match against France. And the &quot;golden goal&quot; was
-            scored by the striker of the Russian championship.
-          </p>
-        </div>
-        <CircleRow
-          stats={[
-            { value: "9", label: "goals scored", accent: true },
-            { value: "1", label: "wins" },
-            { value: "3", label: "tops scored" },
-          ]}
+      <div className="row-hero-split">
+        <article className="ds-card tournament-hero">
+          <div className="tournament-hero-copy">
+            <p className="type-h2">Portugal win Euro</p>
+            <p className="type-t3">
+              Cristiano Ronaldo was injured and substituted in the final match against France. And the &quot;golden goal&quot; was
+              scored by the striker of the Russian championship.
+            </p>
+          </div>
+          <CircleRow
+            stats={[
+              { value: "9", label: "goals scored", accent: true },
+              { value: "1", label: "wins" },
+              { value: "3", label: "tops scored" },
+            ]}
+          />
+        </article>
+        <FactBlock
+          className="hero-fact"
+          title="Final fact"
+          value="109'"
+          text="Eder scored the extra-time winner against France to secure Portugal's first trophy"
+          tournament="EURO—2016"
+          fill
         />
-      </article>
+      </div>
 
       <div className="row-split tournament-top-grid">
         <div className="tournament-left-stack">

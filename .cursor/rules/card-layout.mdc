@@ -10,6 +10,10 @@ A horizontal row of cards must fill 100% of the content width. Do not leave an e
 
 Cards in the same row share one height. A short text fact next to a taller neighbor stretches to that height. Title stays top-left. Number and description pin to the bottom-left.
 
+Top Hero Cards (`.tournament-hero`):
+- On large screens (desktop), place a fact card (`.hero-fact`) to the right of the top hero card in a horizontal row (`.row-hero-split`, ~65–70% hero / ~30–35% fact). This prevents huge empty gaps between title/description and circular stat badges.
+- On small screens (≤900px), move the hero fact to the bottom of the page (`order: 99`) while keeping the hero card at the top (`order: -1`).
+
 Do not stretch one text-only fact beside a tall story card or chart card. Put two, three, or four facts in a vertical stack (`col-stack`) on the side instead:
 - Home Barcelona: 4 facts stacked vertically on the right of Barcelona story card on desktop.
 - Home Real Madrid 15 Cups: 3 facts stacked vertically on the right on desktop.

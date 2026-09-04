@@ -394,6 +394,22 @@
   align-items: stretch;
 }
 
+.row-hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(280px, 340px);
+  gap: var(--space-s);
+  align-items: stretch;
+  width: 100%;
+}
+
+.row-hero-split > .tournament-hero {
+  height: 100%;
+}
+
+.row-hero-split > .hero-fact {
+  height: 100%;
+}
+
 .home-top-grid {
   grid-template-columns: minmax(var(--size-grid-home-left), 1fr) minmax(0, var(--size-grid-home-right));
 }
@@ -1939,6 +1955,18 @@
 
   .facts-pack {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .row-hero-split {
+    display: contents;
+  }
+
+  .tournament-hero {
+    order: -1;
+  }
+
+  .hero-fact {
+    order: 99;
   }
 
   .home-top-grid,
