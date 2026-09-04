@@ -543,7 +543,8 @@
 }
 
 .col-stack > .fact-card {
-  flex: 0 0 auto;
+  flex: 1 1 0;
+  min-height: 0;
 }
 
 .col-facts {
@@ -889,6 +890,22 @@
   overflow: visible;
   min-height: min-content;
   flex: 1 0 auto;
+}
+
+.home-left-stack > .home-story-zidane.card-link {
+  height: auto;
+  flex: 0 0 auto;
+}
+
+.home-story-zidane .team-card {
+  height: auto;
+}
+
+.home-story-zidane .graphic-slot,
+.home-story-zidane .graphic-slot:has(.circle-row) {
+  flex: 0 0 auto;
+  min-height: 0;
+  align-items: flex-end;
 }
 
 .team-card--featured .graphic-slot,
