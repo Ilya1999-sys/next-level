@@ -23,7 +23,7 @@ Do not stretch one text-only fact beside a tall story card or chart card. Put tw
 Proportional Scaling of Charts & Graphics:
 - When a card with graphics (`MixChart`, `DotGrid`) stretches vertically to match a taller neighbor or stack, the graphic scales proportionally to fill the available space inside the card.
 - `MixChart` bars (Barcelona, Wales) scale height proportionally with available slot height.
-- `DotGrid` dots / grid (Real Madrid cups) scale up proportionally to fill leftover vertical height in the card.
+- `DotGrid` dots / grid (Real Madrid 15 Cups) scale up proportionally (`clamp(24px, 2.8vw, 34px)`) and pin to the bottom-left corner of the card (`align-content: flex-end; margin-top: auto; justify-content: flex-start`) to fill leftover empty space.
 
 Circle Cards & Horizontal Layout:
 - Story cards with circles (Zidane): hug content height. Circles sit on one horizontal row at the bottom (`flex-wrap: nowrap`). Do not stretch empty space under the circles.

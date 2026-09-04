@@ -1168,17 +1168,25 @@
   flex-shrink: 0;
 }
 
+.fact-card:has(.dot-grid) {
+  --size-dot-stat: clamp(24px, 2.8vw, 34px);
+  --size-dot-grid-cell: clamp(24px, 2.8vw, 34px);
+}
+
 .dot-grid {
   display: grid;
   grid-template-columns: repeat(var(--cols, 6), var(--size-dot-grid-cell));
-  gap: var(--space-m);
+  gap: clamp(8px, 1vw, 14px);
   align-self: flex-start;
   justify-items: start;
 }
 
 .fact-card:has(.dot-grid) .dot-grid {
   flex: 1 1 auto;
-  align-content: center;
+  margin-top: auto;
+  align-content: flex-end;
+  justify-content: flex-start;
+  justify-items: start;
 }
 
 .stat-dot {
