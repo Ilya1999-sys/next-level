@@ -22,30 +22,40 @@ export function HomeScreen() {
     <AppChrome crumbs={["Home"]}>
       <div className="row-split home-top-grid">
         <div className="home-left-stack">
-          <GraphicHoverCard
-            year={catalog.barcelona.year}
-            title={catalog.barcelona.title}
-            watchHref={watchHref("barcelona")}
-          >
-            <MixChart groups={BARCELONA_GROUPS} />
-          </GraphicHoverCard>
-          <FactBlock fill {...catalog.barcelonaFact} />
-          <GraphicHoverCard year={catalog.zidane.year} title={catalog.zidane.title} watchHref={watchHref("zidane")}>
-            <CircleRow
-              stats={[
-                { value: "3", label: "Zidane goals", accent: true },
-                { value: "0", label: "France defeats" },
-              ]}
-            />
-          </GraphicHoverCard>
-          <article className="fact-card">
-            <div className="fact-copy">
-              <div className="fact-head">
-                <p className="type-t1">{playerFact.title}</p>
-              </div>
-              <FactRow value={playerFact.value} text={playerFact.text} />
+          <div className="row-facts-split">
+            <GraphicHoverCard
+              year={catalog.barcelona.year}
+              title={catalog.barcelona.title}
+              watchHref={watchHref("barcelona")}
+            >
+              <MixChart groups={BARCELONA_GROUPS} />
+            </GraphicHoverCard>
+            <div className="col-stack">
+              {catalog.barcelonaFacts.map((fact, index) => (
+                <FactBlock key={`${fact.title}-${fact.value}`} fill={index === catalog.barcelonaFacts.length - 1} {...fact} />
+              ))}
             </div>
-          </article>
+          </div>
+          <div className="row-facts-split">
+            <GraphicHoverCard year={catalog.zidane.year} title={catalog.zidane.title} watchHref={watchHref("zidane")}>
+              <CircleRow
+                stats={[
+                  { value: "3", label: "Zidane goals", accent: true },
+                  { value: "0", label: "France defeats" },
+                ]}
+              />
+            </GraphicHoverCard>
+            <div className="col-stack">
+              <FactBlock title={playerFact.title} value={playerFact.value} text={playerFact.text} />
+              {catalog.zidaneFacts.map((fact, index) => (
+                <FactBlock
+                  key={`${fact.title}-${fact.value}`}
+                  fill={index === catalog.zidaneFacts.length - 1}
+                  {...fact}
+                />
+              ))}
+            </div>
+          </div>
         </div>
         <GraphicHoverCard
           featured
@@ -72,8 +82,11 @@ export function HomeScreen() {
           {clubFact.dots ? <DotGrid total={clubFact.dots.total} filled={clubFact.dots.filled} columns={clubFact.dots.columns} /> : null}
         </article>
         <div className="col-stack home-extra-stack">
-          {catalog.extraFacts.map((fact) => (
-            <article key={`${fact.title}-${fact.value}`} className="fact-card">
+          {catalog.extraFacts.map((fact, index) => (
+            <article
+              key={`${fact.title}-${fact.value}`}
+              className={index === catalog.extraFacts.length - 1 ? "fact-card fact-card--fill" : "fact-card"}
+            >
               <div className="fact-copy">
                 <div className="fact-head">
                   <p className="type-t1">{fact.title}</p>
@@ -129,8 +142,9 @@ export function HomeScreen() {
           <CircleRow stats={catalog.tournament.stats} />
         </GraphicHoverCard>
         <div className="col-stack">
-          <FactBlock {...catalog.tournamentFacts[0]} />
-          <FactBlock fill {...catalog.tournamentFacts[1]} />
+          {catalog.tournamentFacts.map((fact, index) => (
+            <FactBlock key={`${fact.title}-${fact.value}`} fill={index === catalog.tournamentFacts.length - 1} {...fact} />
+          ))}
         </div>
       </div>
     </AppChrome>

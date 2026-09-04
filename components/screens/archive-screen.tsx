@@ -169,6 +169,7 @@ export function TeamStatsScreen() {
         <div className="col-stack">
           <FactBlock title="Final fact" value="93'" text="Ramos equalized in added time before La Decima was sealed in extra time." tournament="UCL—2014" />
           <FactBlock title="Final fact" value="3-1" text="Bale's bicycle kick and a late third goal beat Liverpool in Kyiv." tournament="UCL—2018" />
+          <FactBlock title="Final fact" value="3" text="Champions League titles in a row, 2016 to 2018" fill />
         </div>
       </div>
       <div className="row-goals">
@@ -335,7 +336,8 @@ export function TournamentsScreen() {
         </GraphicHoverCard>
         <div className="col-stack">
           <FactBlock title="Club cup fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
-          <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" fill />
+          <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" />
+          <FactBlock title="Club cup fact" value="8" text="Club World Cups in the Real Madrid museum" fill />
         </div>
       </div>
       <div className="row-goals">

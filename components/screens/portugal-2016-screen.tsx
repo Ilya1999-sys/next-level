@@ -81,6 +81,12 @@ export function Portugal2016Screen() {
               />
             </div>
           </article>
+          <article className="fact-card fact-card--fill">
+            <div className="fact-copy">
+              <p className="type-t1">Final fact</p>
+              <FactRow value="0" text="regular-time goals in the final against France" />
+            </div>
+          </article>
         </div>
       </div>
 

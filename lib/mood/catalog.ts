@@ -68,7 +68,8 @@ type Catalog = {
   portugal: StoryCard;
   facts: FactCard[];
   extraFacts: FactCard[];
-  barcelonaFact: FactCard;
+  barcelonaFacts: FactCard[];
+  zidaneFacts: FactCard[];
   tournamentFacts: FactCard[];
   live: { place: string; chips: string[]; fans: string };
   tournament: StoryCard & {
@@ -106,6 +107,40 @@ const SHARED_CARDS = {
   },
 };
 
+const BARCELONA_FACTS: FactCard[] = [
+  {
+    title: "Club fact",
+    value: "6",
+    text: "trophies Barcelona won in 2009, including the Champions League",
+  },
+  {
+    title: "Club fact",
+    value: "9",
+    text: "Champions League goals Messi scored on the path to Rome",
+  },
+  {
+    title: "Club fact",
+    value: "2-6",
+    text: "the Clásico at the Bernabeu in May 2009",
+  },
+];
+
+const ZIDANE_FACTS: FactCard[] = [
+  { title: "Legend fact", value: "1", text: "World Cup Zidane won as a player in 1998" },
+  { title: "Club fact", value: "3", text: "Champions League titles in a row as Real Madrid coach" },
+];
+
+const TOURNAMENT_FACTS: FactCard[] = [
+  {
+    title: "Euro fact",
+    value: "4-1",
+    text: "Russia in extra time in the Euro 2008 semi-final",
+    tournament: "EURO—2008",
+  },
+  { title: "Euro fact", value: "0", text: "matches Spain lost on the way to the Euro 2008 title" },
+  { title: "Euro fact", value: "1", text: "European title for Spain, their first since 1964" },
+];
+
 const CATALOG: Record<string, Catalog> = {
   nostalgia: {
     ...SHARED_CARDS,
@@ -126,21 +161,11 @@ const CATALOG: Record<string, Catalog> = {
         tournament: "EURO—2008",
       },
       { title: "Favorite player fact", value: "976", text: "Cristiano Ronaldo has scored the most goals in his career so far" },
+      { title: "Club fact", value: "4", text: "Champions League titles in five seasons, 2014 to 2018" },
     ],
-    barcelonaFact: {
-      title: "Club fact",
-      value: "6",
-      text: "trophies Barcelona won in 2009, including the Champions League",
-    },
-    tournamentFacts: [
-      {
-        title: "Euro fact",
-        value: "4-1",
-        text: "Russia in extra time in the Euro 2008 semi-final",
-        tournament: "EURO—2008",
-      },
-      { title: "Euro fact", value: "0", text: "matches Spain lost on the way to the Euro 2008 title" },
-    ],
+    barcelonaFacts: BARCELONA_FACTS,
+    zidaneFacts: ZIDANE_FACTS,
+    tournamentFacts: TOURNAMENT_FACTS,
     live: {
       place: "Barcelona",
       chips: [
@@ -173,21 +198,11 @@ const CATALOG: Record<string, Catalog> = {
         tournament: "EURO—2008",
       },
       { title: "Favorite player fact", value: "976", text: "Cristiano Ronaldo has scored the most goals in his career so far" },
+      { title: "Club fact", value: "4", text: "Champions League titles in five seasons, 2014 to 2018" },
     ],
-    barcelonaFact: {
-      title: "Club fact",
-      value: "6",
-      text: "trophies Barcelona won in 2009, including the Champions League",
-    },
-    tournamentFacts: [
-      {
-        title: "Euro fact",
-        value: "4-1",
-        text: "Russia in extra time in the Euro 2008 semi-final",
-        tournament: "EURO—2008",
-      },
-      { title: "Euro fact", value: "0", text: "matches Spain lost on the way to the Euro 2008 title" },
-    ],
+    barcelonaFacts: BARCELONA_FACTS,
+    zidaneFacts: ZIDANE_FACTS,
+    tournamentFacts: TOURNAMENT_FACTS,
     live: {
       place: "Saint-Denis",
       chips: [
@@ -220,21 +235,11 @@ const CATALOG: Record<string, Catalog> = {
         tournament: "EURO—2008",
       },
       { title: "Favorite player fact", value: "976", text: "Cristiano Ronaldo has scored the most goals in his career so far" },
+      { title: "Club fact", value: "4", text: "Champions League titles in five seasons, 2014 to 2018" },
     ],
-    barcelonaFact: {
-      title: "Club fact",
-      value: "6",
-      text: "trophies Barcelona won in 2009, including the Champions League",
-    },
-    tournamentFacts: [
-      {
-        title: "Euro fact",
-        value: "4-1",
-        text: "Russia in extra time in the Euro 2008 semi-final",
-        tournament: "EURO—2008",
-      },
-      { title: "Euro fact", value: "0", text: "matches Spain lost on the way to the Euro 2008 title" },
-    ],
+    barcelonaFacts: BARCELONA_FACTS,
+    zidaneFacts: ZIDANE_FACTS,
+    tournamentFacts: TOURNAMENT_FACTS,
     live: {
       place: "Lisbon archive",
       chips: [
