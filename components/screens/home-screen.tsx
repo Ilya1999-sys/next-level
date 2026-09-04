@@ -11,6 +11,7 @@ import { DotGrid, IconButton, NextArrow } from "@/components/ui/ds";
 import { CircleRow, LineChart, MixChart } from "@/components/ui/card-graphics";
 import { FactRow } from "@/components/ui/fact-row";
 import { GraphicHoverCard } from "@/components/ui/hover-player-card";
+import { FactBlock } from "@/components/screens/archive-screen";
 import { watchHref } from "@/lib/media/highlights";
 
 export function HomeScreen() {
@@ -28,6 +29,7 @@ export function HomeScreen() {
           >
             <MixChart groups={BARCELONA_GROUPS} />
           </GraphicHoverCard>
+          <FactBlock fill {...catalog.barcelonaFact} />
           <GraphicHoverCard year={catalog.zidane.year} title={catalog.zidane.title} watchHref={watchHref("zidane")}>
             <CircleRow
               stats={[
@@ -117,14 +119,20 @@ export function HomeScreen() {
         </div>
       </article>
 
-      <GraphicHoverCard
-        banner
-        year={catalog.tournament.year}
-        title={catalog.tournament.title}
-        watchHref={watchHref("euro2008")}
-      >
-        <CircleRow stats={catalog.tournament.stats} />
-      </GraphicHoverCard>
+      <div className="row-facts-split">
+        <GraphicHoverCard
+          banner
+          year={catalog.tournament.year}
+          title={catalog.tournament.title}
+          watchHref={watchHref("euro2008")}
+        >
+          <CircleRow stats={catalog.tournament.stats} />
+        </GraphicHoverCard>
+        <div className="col-stack">
+          <FactBlock {...catalog.tournamentFacts[0]} />
+          <FactBlock fill {...catalog.tournamentFacts[1]} />
+        </div>
+      </div>
     </AppChrome>
   );
 }

@@ -68,6 +68,8 @@ type Catalog = {
   portugal: StoryCard;
   facts: FactCard[];
   extraFacts: FactCard[];
+  barcelonaFact: FactCard;
+  tournamentFacts: FactCard[];
   live: { place: string; chips: string[]; fans: string };
   tournament: StoryCard & {
     stats: Array<{ value: string; label: string; accent?: boolean }>;
@@ -125,6 +127,20 @@ const CATALOG: Record<string, Catalog> = {
       },
       { title: "Favorite player fact", value: "976", text: "Cristiano Ronaldo has scored the most goals in his career so far" },
     ],
+    barcelonaFact: {
+      title: "Club fact",
+      value: "6",
+      text: "trophies Barcelona won in 2009, including the Champions League",
+    },
+    tournamentFacts: [
+      {
+        title: "Euro fact",
+        value: "4-1",
+        text: "Russia in extra time in the Euro 2008 semi-final",
+        tournament: "EURO—2008",
+      },
+      { title: "Euro fact", value: "0", text: "matches Spain lost on the way to the Euro 2008 title" },
+    ],
     live: {
       place: "Barcelona",
       chips: [
@@ -158,6 +174,20 @@ const CATALOG: Record<string, Catalog> = {
       },
       { title: "Favorite player fact", value: "976", text: "Cristiano Ronaldo has scored the most goals in his career so far" },
     ],
+    barcelonaFact: {
+      title: "Club fact",
+      value: "6",
+      text: "trophies Barcelona won in 2009, including the Champions League",
+    },
+    tournamentFacts: [
+      {
+        title: "Euro fact",
+        value: "4-1",
+        text: "Russia in extra time in the Euro 2008 semi-final",
+        tournament: "EURO—2008",
+      },
+      { title: "Euro fact", value: "0", text: "matches Spain lost on the way to the Euro 2008 title" },
+    ],
     live: {
       place: "Saint-Denis",
       chips: [
@@ -190,6 +220,20 @@ const CATALOG: Record<string, Catalog> = {
         tournament: "EURO—2008",
       },
       { title: "Favorite player fact", value: "976", text: "Cristiano Ronaldo has scored the most goals in his career so far" },
+    ],
+    barcelonaFact: {
+      title: "Club fact",
+      value: "6",
+      text: "trophies Barcelona won in 2009, including the Champions League",
+    },
+    tournamentFacts: [
+      {
+        title: "Euro fact",
+        value: "4-1",
+        text: "Russia in extra time in the Euro 2008 semi-final",
+        tournament: "EURO—2008",
+      },
+      { title: "Euro fact", value: "0", text: "matches Spain lost on the way to the Euro 2008 title" },
     ],
     live: {
       place: "Lisbon archive",

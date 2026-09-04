@@ -398,12 +398,19 @@
   grid-template-columns: minmax(var(--size-grid-home-left), 1fr) minmax(0, var(--size-grid-home-right));
 }
 
+.row-split,
+.row-facts-split,
+.home-facts-grid {
+  width: 100%;
+}
+
 .home-left-stack {
   display: grid;
   grid-template-rows: minmax(0, 1fr) max-content max-content;
   gap: var(--space-s);
   min-height: var(--size-home-stack-min);
   height: 100%;
+  width: 100%;
   min-width: 0;
   align-self: stretch;
   align-items: stretch;
@@ -1870,18 +1877,14 @@
     grid-template-rows: minmax(0, 1fr) auto;
   }
 
-  .home-left-stack > :first-child {
-    grid-column: 1 / -1;
-  }
-
-  .home-left-stack > .card-link:not(:first-child),
+  .home-left-stack > .card-link,
   .home-left-stack > .fact-card {
     height: 100%;
     min-width: 0;
     align-self: stretch;
   }
 
-  .home-left-stack > .card-link:not(:first-child) .team-card {
+  .home-left-stack > .card-link .team-card {
     height: 100%;
   }
 }
