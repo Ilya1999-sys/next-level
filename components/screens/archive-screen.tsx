@@ -97,8 +97,11 @@ export function PlayerStatsScreen() {
         />
       </article>
       <div className="row-facts-split">
-        <FactBlock title="Favorite player fact" value="5" text="Killian Mbappe scored goals in one match" />
-        <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 8, columns: 6 }} />
+        <div className="col-stack">
+          <FactBlock title="Favorite player fact" value="5" text="Killian Mbappe scored goals in one match" />
+          <FactBlock title="Speed fact" value="37 km/h" text="top sprint speed recorded by Mbappe in the tournament" />
+        </div>
+        <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 8, columns: 6 }} fill />
       </div>
       <div className="row-goals">
         <GraphicHoverCard
@@ -209,7 +212,7 @@ export function FavoritesScreen() {
           ]}
         />
       </article>
-      <div className="cards-compact-grid">
+      <div className="cards-compact-grid favorites-grid">
         <GraphicHoverCard year="Match review" title="Portugal 1-0 France (EURO 2016 final)" href="/portugal-2016/france" watchHref={watchHref("france2016")} accent>
           <CircleRow stats={[{ value: "109", label: "Eder goal", accent: true }, { value: "1-0", label: "final score" }]} />
         </GraphicHoverCard>
@@ -256,8 +259,8 @@ export function ProfileScreen() {
         />
       </article>
       <div className="row-facts-split">
-        <FactBlock title="Watch fact" value="31" text="highlights watched this month" />
-        <FactBlock title="Club fact" value="15" text="Real Madrid European Cups in the museum" tournament="UCL" />
+        <FactBlock title="Watch fact" value="31" text="highlights watched this month" fill />
+        <FactBlock title="Club fact" value="15" text="Real Madrid European Cups in the museum" tournament="UCL" fill />
       </div>
       <div className="row-goals">
         <GraphicHoverCard
@@ -287,8 +290,8 @@ export function ProfileScreen() {
         </GraphicHoverCard>
       </div>
       <div className="row-facts-split">
-        <FactBlock title="Profile fact" value="18" text="years in the archive since the first Switzerland — Turkey night" tournament="EURO—2008" />
-        <FactBlock title="Unlocked fact" value="6" text="story cards opened from the Nostalgia mood" dots={{ total: 12, filled: 6 }} />
+        <FactBlock title="Profile fact" value="18" text="years in the archive since the first Switzerland — Turkey night" tournament="EURO—2008" fill />
+        <FactBlock title="Unlocked fact" value="6" text="story cards opened from the Nostalgia mood" dots={{ total: 12, filled: 6 }} fill />
       </div>
     </ArchiveShell>
   );
@@ -340,11 +343,10 @@ export function TournamentsScreen() {
         </GraphicHoverCard>
         <div className="col-stack">
           <FactBlock title="Club cup fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
-          <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" />
-          <FactBlock title="Club cup fact" value="8" text="Club World Cups in the Real Madrid museum" fill />
+          <FactBlock title="UEFA Cup fact" value="2" text="Europa League titles in the Real Madrid museum" tournament="UEL" fill />
         </div>
       </div>
-      <div className="row-goals">
+      <div className="cards-compact-grid">
         <GraphicHoverCard year="Match review" title="2:0 Wales" watchHref={watchHref("wales")}>
           <CircleRow
             stats={[
@@ -355,6 +357,9 @@ export function TournamentsScreen() {
         </GraphicHoverCard>
         <GraphicHoverCard year="Match review" title="1:0 Croatia" watchHref={watchHref("croatia")}>
           <CircleRow stats={[{ value: "1", label: "extra-time", accent: true }, { value: "0", label: "Croatia" }]} />
+        </GraphicHoverCard>
+        <GraphicHoverCard year="Match review" title="1-0 France" watchHref="/portugal-2016/france">
+          <CircleRow stats={[{ value: "109", label: "Eder goal", accent: true }, { value: "1-0", label: "final score" }]} />
         </GraphicHoverCard>
       </div>
     </ArchiveShell>

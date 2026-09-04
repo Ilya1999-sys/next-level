@@ -122,6 +122,11 @@ const BARCELONA_FACTS: FactCard[] = [
     value: "2-6",
     text: "the Clásico at the Bernabeu in May 2009",
   },
+  {
+    title: "Club fact",
+    value: "105",
+    text: "goals scored by Barcelona in La Liga that season",
+  },
 ];
 
 const TOURNAMENT_FACTS: FactCard[] = [

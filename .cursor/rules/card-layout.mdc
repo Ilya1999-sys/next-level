@@ -4,18 +4,30 @@ globs: components/screens/**/*.tsx,styles/screens.css,tokens/scale.css
 alwaysApply: true
 ---
 
-# Card packing
+# Card packing & responsive rules
 
 A horizontal row of cards must fill 100% of the content width. Do not leave an empty track to the right of the last card (Favorites Wales is the example). If a row would end short, place one or two sibling cards that fit the leftover width, or let the last-row items grow so the row stays full.
 
 Cards in the same row share one height. A short text fact next to a taller neighbor stretches to that height. Title stays top-left. Number and description pin to the bottom-left.
 
-Do not stretch one text-only fact beside a tall story card. Put two or three facts in a stack on the right instead. A chart card (dots / mix-chart) keeps the fact on the title; leftover height goes to the chart, sized to that stack (usually two facts).
+Do not stretch one text-only fact beside a tall story card or chart card. Put two, three, or four facts in a vertical stack (`col-stack`) on the side instead:
+- Home Barcelona: 4 facts stacked vertically on the right of Barcelona story card on desktop.
+- Home Real Madrid 15 Cups: 3 facts stacked vertically on the right on desktop.
+- Player Stats (Mbappe): 2 facts stacked vertically on the left of Real Madrid 15 Cups card.
+- Tournaments (Euro 2008): 2 facts stacked vertically on the right of Euro 2008 banner (Euro 2008 card height reduced to match 2 facts).
 
-Story cards with circles (Zidane): hug the content. Circles sit on one horizontal row at the bottom. Do not stretch empty space under the circles. Drop the sibling fact if it forces the story card taller than its graphic.
+Proportional Scaling of Charts & Graphics:
+- When a card with graphics (`MixChart`, `DotGrid`) stretches vertically to match a taller neighbor or stack, the graphic scales proportionally to fill the available space inside the card.
+- `MixChart` bars (Barcelona, Wales) scale height proportionally with available slot height.
+- `DotGrid` dots / grid (Real Madrid cups) scale up proportionally to fill leftover vertical height in the card.
+
+Circle Cards & Horizontal Layout:
+- Story cards with circles (Zidane): hug content height. Circles sit on one horizontal row at the bottom (`flex-wrap: nowrap`). Do not stretch empty space under the circles.
+- Favorites screen: cards have wider min-width (~340–360px) so circle stats sit side-by-side horizontally in one row without vertical wrapping, fitting 3–4 cards per row on desktop instead of squishing 6 cards.
+- Tournaments screen match row (`2:0 Wales`, `1:0 Croatia`): includes a 3rd match card (`1-0 France`) on desktop to avoid overly wide cards.
 
 Inner inset on every card is `--size-card-pad` (`space/l`, 20px). Do not mix `l` and `xl` on card edges.
 
-On viewports ≤900px, Home story cards stay in reading order. Fact stacks move to the bottom of the page so the screen is not a long vertical list of Barcelona/Zidane facts.
+On viewports ≤900px (tablet/mobile), main story cards stay in reading order. Fact stacks move cleanly to the bottom of the page so the screen is not a long vertical list of interspersed facts.
 
 Do not fade or slide the chrome when switching routes. Tab changes must not flicker.
