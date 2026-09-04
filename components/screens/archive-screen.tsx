@@ -201,7 +201,7 @@ export function TeamStatsScreen() {
         />
       </div>
       <div className="row-facts-split">
-        <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} />
+        <FactBlock title="Club fact" value="15" text="Champions League Cups won by Real Madrid" dots={{ total: 18, filled: 15, columns: 6 }} fill />
         <div className="col-stack">
           <FactBlock title="Final fact" value="93'" text="Ramos equalized in added time before La Decima was sealed in extra time." tournament="UCL—2014" />
           <FactBlock title="Final fact" value="3-1" text="Bale's bicycle kick and a late third goal beat Liverpool in Kyiv." tournament="UCL—2018" />
